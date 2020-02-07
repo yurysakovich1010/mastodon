@@ -111,3 +111,14 @@ else
     url: ENV.fetch('PAPERCLIP_ROOT_URL', '/system') + '/:prefix_url:class/:attachment/:id_partition/:style/:filename',
   )
 end
+
+# In some places in the code, we rescue this exception, but we don't always
+# load the S3 library, so it may be an undefined constant:
+
+unless defined?(Seahorse)
+  module Seahorse
+    module Client
+      class NetworkingError < StandardError; end
+    end
+  end
+end
