@@ -1337,3 +1337,8 @@ en:
   verification:
     explanation_html: 'You can <strong>verify yourself as the owner of the links in your profile metadata</strong>. For that, the linked website must contain a link back to your Mastodon profile. The link back <strong>must</strong> have a <code>rel="me"</code> attribute. The text content of the link does not matter. Here is an example:'
     verification: Verification
+  menu:
+    home: home
+    about: about
+    live_stream: live stream
+    discover_users: discover users

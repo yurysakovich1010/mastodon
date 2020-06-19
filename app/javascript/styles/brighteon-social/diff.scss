@@ -866,4 +866,17 @@ body {
     padding: 25px 0;
     justify-content: start;
   }
+
+  .landing__menu {
+    height: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .menu_item {
+    color: $white;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
 }
