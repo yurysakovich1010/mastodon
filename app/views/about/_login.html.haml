@@ -8,6 +8,6 @@
     = f.input :password, placeholder: t('simple_form.labels.defaults.password'), input_html: { 'aria-label' => t('simple_form.labels.defaults.password') }, hint: false
 
   .actions
-    = f.button :button, t('auth.login'), type: :submit, class: 'button button-primary'
+    = f.button :button, t('auth.login'), type: :submit, class: 'button button-primary button-login'
 
   %p.hint.subtle-hint= link_to t('auth.trouble_logging_in'), new_user_password_path

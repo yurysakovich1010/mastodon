@@ -672,7 +672,7 @@ en:
   auth:
     apply_for_account: Request an invite
     change_password: Password
-    checkbox_agreement_html: I agree to the <a href="%{rules_path}" target="_blank">server rules</a> and <a href="%{terms_path}" target="_blank">terms of service</a>
+    checkbox_agreement_html: I agree to the <a href="%{terms_path}" target="_blank">Terms of Service</a>
     checkbox_agreement_without_rules_html: I agree to the <a href="%{terms_path}" target="_blank">terms of service</a>
     delete_account: Delete account
     delete_account_html: If you wish to delete your account, you can <a href="%{path}">proceed here</a>. You will be asked for confirmation.
@@ -707,7 +707,7 @@ en:
       functional: Your account is fully operational.
       pending: Your application is pending review by our staff. This may take some time. You will receive an e-mail if your application is approved.
       redirecting_to: Your account is inactive because it is currently redirecting to %{acct}.
-    trouble_logging_in: Trouble logging in?
+    trouble_logging_in: Forgot your password?
   authorize_follow:
     already_following: You are already following this account
     already_requested: You have already sent a follow request to that account

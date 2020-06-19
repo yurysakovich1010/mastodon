@@ -19,7 +19,7 @@
       = f.input :agreement, as: :boolean, wrapper: :with_label, label: t('auth.checkbox_agreement_html', rules_path: about_more_path, terms_path: terms_path), disabled: closed_registrations?
 
     .actions
-      = f.button :button, sign_up_message, type: :submit, class: 'button button-primary', disabled: closed_registrations?
+      = f.button :button, sign_up_message, type: :submit, class: 'button button-primary button-signup', disabled: closed_registrations?
 
   - if closed_registrations? && @instance_presenter.closed_registrations_message.present?
     .simple_form__overlay-area__overlay

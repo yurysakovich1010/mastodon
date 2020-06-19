@@ -6,7 +6,8 @@ module InstanceHelper
   end
 
   def site_hostname
-    @site_hostname ||= Addressable::URI.parse("//#{Rails.configuration.x.local_domain}").display_uri.host
+#     @site_hostname ||= Addressable::URI.parse("//#{Rails.configuration.x.local_domain}").display_uri.host
+    @site_hostname = 'brighteon.social'
   end
 
   def description_for_sign_up
