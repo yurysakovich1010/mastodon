@@ -5,7 +5,7 @@
   %link{ rel: 'canonical', href: about_url }/
   = render partial: 'shared/og'
 
-.landing
+.landing.about
   .landing__brand
     = link_to root_url, class: 'brand' do
       = svg_logo_full
@@ -56,7 +56,7 @@
             = @instance_presenter.site_short_description.html_safe.presence || t('about.about_mastodon_html')
             = link_to about_more_path do
               = t('about.learn_more')
-              = fa_icon 'angle-double-right'
+              = fa_icon 'angle-right'
 
         .hero-widget__footer
           .hero-widget__footer__column

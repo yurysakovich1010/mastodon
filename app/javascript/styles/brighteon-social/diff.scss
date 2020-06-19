@@ -5,17 +5,6 @@ html {
   scrollbar-color: $ui-base-color rgba($ui-base-color, 0.25);
 }
 
-body {
-  font-family: mastodon-font-display;
-  background-image: url('../images/brighteon-social/about/bg_pattern.png'), -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#000000));
-  background-image: url('../images/brighteon-social/about/bg_pattern.png'), -moz-linear-gradient(#ffffff, #000000);
-  background-image: url('../images/brighteon-social/about/bg_pattern.png');
-  background-color: #2040a4;
-  background-blend-mode: screen;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
 // Change the colors of button texts
 .button {
   color: $white;
@@ -494,7 +483,7 @@ body {
 .contact-widget,
 .landing .hero-widget__text,
 .landing-page__information.contact-widget {
-  background: transparent;
+  background: $white;
   border: 1px solid lighten($ui-base-color, 8%);
 
   @media screen and (max-width: $no-gap-breakpoint) {
@@ -539,7 +528,7 @@ body {
   &:hover,
   &:active,
   &:focus {
-    // background: $ui-base-color;
+    background: $ui-base-color;
   }
 
   @media screen and (max-width: $no-gap-breakpoint) {
@@ -669,8 +658,6 @@ body {
 }
 
 .public-layout {
-  background: linear-gradient(transparent 80%, #000a3d);
-
   .account__section-headline {
     border: 1px solid lighten($ui-base-color, 8%);
 
@@ -790,33 +777,83 @@ body {
 
 // ------------------------------- customize ---------------------------------------
 
-.button.button-login {
-  background: #08083f;
+body {
+  font-family: mastodon-font-display;
+  background-image: url('../images/brighteon-social/about/bg_pattern.png'), -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#000000));
+  background-image: url('../images/brighteon-social/about/bg_pattern.png'), -moz-linear-gradient(#ffffff, #000000);
+  background-image: url('../images/brighteon-social/about/bg_pattern.png');
+  background-color: #2040a4;
+  background-blend-mode: screen;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
-.button.button-signup {
-  background: #39b54a;
+.public-layout {
+  background: linear-gradient(transparent 80%, #000a3d);
 }
 
-.box-widget,
-.directory__tag > a {
-  background-color: rgba(8, 8, 63, 0.25);
-}
-
-.simple_form .input.boolean label a,
-.simple_form .hint a {
-  color: $white;
-}
-
-.directory__tag > a {
-  &:hover,
-  &:active,
-  &:focus {
-    background: inherit;
+.about {
+  .hero-widget__text,
+  .hero-widget__footer {
+    background-color: inherit;
   }
-}
 
-.directory__tag h4 {
-  font-size: 16px;
-  color: #ffffff;
+  .hero-widget__text {
+    border-bottom: none;
+  }
+
+  .hero-widget__footer strong {
+    color: white;
+  }
+
+  .hero-widget__counter span {
+    text-transform: capitalize;
+  }
+
+  .box-widget,
+  .directory__tag > a,
+  .hero-widget {
+    background-color: rgba(8, 8, 63, 0.25);
+  }
+
+  .button.button-login {
+    background: #08083f;
+  }
+
+  .button.button-signup {
+    background: #39b54a;
+  }
+
+  .simple_form .input.boolean label a,
+  .simple_form .hint a {
+    color: $white;
+  }
+
+  .simple_form {
+    input[type=text],
+    input[type=number],
+    input[type=email],
+    input[type=password],
+    textarea {
+      color: red;
+    }
+  }
+
+  .directory__tag > a {
+    &:hover,
+    &:active,
+    &:focus {
+      background: inherit;
+    }
+  }
+
+  .directory__tag h4 {
+    font-size: 16px;
+    color: #ffffff;
+  }
+
+  .hero-widget__text a {
+    color: $white;
+    text-decoration: underline;
+  }
 }

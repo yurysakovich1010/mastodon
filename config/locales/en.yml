@@ -2,7 +2,7 @@
 en:
   about:
     about_hashtag_html: These are public toots tagged with <strong>#%{hashtag}</strong>. You can interact with them if you have an account anywhere in the fediverse.
-    about_mastodon_html: 'The social network of the future: No ads, no corporate surveillance, ethical design, and decentralization! Own your data with Mastodon!'
+    about_mastodon_html: 'The Pro-Liberty Social Network.'
     about_this: About
     active_count_after: active
     active_footnote: Monthly Active Users (MAU)
