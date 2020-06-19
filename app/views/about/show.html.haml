@@ -6,9 +6,14 @@
   = render partial: 'shared/og'
 
 .landing.about
-  .landing__brand
-    = link_to root_url, class: 'brand' do
-      = svg_logo_full
+  .landing__grid
+    .landing__grid__column
+      .landing__brand
+        = link_to root_url, class: 'brand' do
+          = image_tag @instance_presenter.hero&.file&.url || @instance_presenter.thumbnail&.file&.url || asset_pack_path('media/images/brighteon-social/logo_horiz.png'), alt: @instance_presenter.site_title
+
+    .landing__grid__column
+      .landing__menu
 
   .landing__grid
     .landing__grid__column.landing__grid__column-registration
@@ -49,7 +54,7 @@
 
       .hero-widget
         .hero-widget__img
-          = image_tag @instance_presenter.hero&.file&.url || @instance_presenter.thumbnail&.file&.url || asset_pack_path('media/images/preview.jpg'), alt: @instance_presenter.site_title
+          = image_tag @instance_presenter.hero&.file&.url || @instance_presenter.thumbnail&.file&.url || asset_pack_path('media/images/brighteon-social/preview.png'), alt: @instance_presenter.site_title
 
         .hero-widget__text
           %p

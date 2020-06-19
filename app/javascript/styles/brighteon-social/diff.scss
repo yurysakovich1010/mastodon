@@ -784,7 +784,7 @@ body {
   background-image: url('../images/brighteon-social/about/bg_pattern.png');
   background-color: #2040a4;
   background-blend-mode: screen;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
@@ -814,6 +814,7 @@ body {
   .directory__tag > a,
   .hero-widget {
     background-color: rgba(8, 8, 63, 0.25);
+    border-color: #6e67bc;
   }
 
   .button.button-login {
@@ -835,8 +836,12 @@ body {
     input[type=email],
     input[type=password],
     textarea {
-      color: red;
+      color: #322947;
     }
+  }
+
+  .simple_form .label_input__append {
+    color: #acacac;
   }
 
   .directory__tag > a {
@@ -855,5 +860,10 @@ body {
   .hero-widget__text a {
     color: $white;
     text-decoration: underline;
+  }
+
+  .landing__brand {
+    padding: 25px 0;
+    justify-content: start;
   }
 }
