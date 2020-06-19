@@ -6,18 +6,13 @@
           %table.content-section{ cellspacing: 0, cellpadding: 0 }
             %tbody
               %tr
-                %td.content-cell.hero
+                %td.content-cell.hero.verify_title
                   .email-row
                     .col-6
                       %table.column{ cellspacing: 0, cellpadding: 0 }
                         %tbody
                           %tr
-                            %td.column-cell.text-center.padded
-                              %table.hero-icon{ align: 'center', cellspacing: 0, cellpadding: 0 }
-                                %tbody
-                                  %tr
-                                    %td
-                                      = image_tag full_pack_url('media/images/mailer/icon_email.png'), alt: ''
+                            %td.column-cell.text-center
 
                               %h1= t 'devise.mailer.confirmation_instructions.title'
 
@@ -29,7 +24,7 @@
           %table.content-section{ cellspacing: 0, cellpadding: 0 }
             %tbody
               %tr
-                %td.content-cell.content-start
+                %td.content-cell.content-start.verify_description
                   .email-row
                     .col-6
                       %table.column{ cellspacing: 0, cellpadding: 0 }
@@ -54,7 +49,7 @@
                           %table.button{ align: 'center', cellspacing: 0, cellpadding: 0 }
                             %tbody
                               %tr
-                                %td.button-primary
+                                %td.button-primary.verify_button
                                   - if @resource.created_by_application
                                     = link_to confirmation_url(@resource, confirmation_token: @token, redirect_to_app: 'true') do
                                       %span= t 'devise.mailer.confirmation_instructions.action_with_app', app: @resource.created_by_application.name
@@ -76,5 +71,5 @@
                       %table.column{ cellspacing: 0, cellpadding: 0 }
                         %tbody
                           %tr
-                            %td.column-cell.text-center
+                            %td.column-cell.text-center.verify-outer-links
                               %p= t 'devise.mailer.confirmation_instructions.extra_html', terms_path: about_more_url, policy_path: terms_url
