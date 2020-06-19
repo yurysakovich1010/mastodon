@@ -103,7 +103,7 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   end
 
   def set_body_classes
-    @body_classes = %w(edit update).include?(action_name) ? 'admin' : 'lighter'
+    @body_classes = %w(edit update).include?(action_name) ? 'admin' : ''
   end
 
   def set_invite
@@ -112,7 +112,7 @@ class Auth::RegistrationsController < Devise::RegistrationsController
   end
 
   def determine_layout
-    %w(edit update).include?(action_name) ? 'admin' : 'auth'
+    %w(edit update).include?(action_name) ? 'admin' : 'brighteon_social_auth'
   end
 
   def set_sessions

@@ -880,3 +880,14 @@ body {
     text-transform: uppercase;
   }
 }
+
+.auth {
+  .simple_form .input.with_label .label_input > label {
+    color: $white;
+  }
+
+  .simple_form button {
+    background-color: #00c642;
+    text-transform: capitalize;
+  }
+}

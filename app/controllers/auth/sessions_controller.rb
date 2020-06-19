@@ -3,7 +3,7 @@
 class Auth::SessionsController < Devise::SessionsController
   include Devise::Controllers::Rememberable
 
-  layout 'auth'
+  layout 'brighteon_social_auth'
 
   skip_before_action :require_no_authentication, only: [:create]
   skip_before_action :require_functional!
@@ -86,7 +86,7 @@ class Auth::SessionsController < Devise::SessionsController
   end
 
   def set_body_classes
-    @body_classes = 'lighter'
+    @body_classes = ''
   end
 
   def home_paths(resource)
