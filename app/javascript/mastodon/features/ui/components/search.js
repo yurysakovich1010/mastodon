@@ -124,7 +124,7 @@ class Search extends React.PureComponent {
           <span style={{ display: 'none' }}>{intl.formatMessage(messages.placeholder)}</span>
           <input
             ref={this.setRef}
-            className='search__input'
+            className='search__input rounded'
             type='text'
             placeholder={intl.formatMessage(messages.placeholder)}
             value={value}

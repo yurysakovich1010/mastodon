@@ -9,6 +9,7 @@ import TabsBar, { links, getIndex, getLink } from './tabs_bar';
 import { Link } from 'react-router-dom';
 
 import BundleContainer from '../containers/bundle_container';
+import SearchContainer from './search_container';
 import ColumnLoading from './column_loading';
 import DrawerLoading from './drawer_loading';
 import BundleColumnError from './bundle_column_error';
@@ -201,6 +202,9 @@ class ColumnsArea extends ImmutablePureComponent {
           </div>
 
           <div className='columns-area__panels__main'>
+
+            <SearchContainer />
+
             <TabsBar key='tabs' />
             {content}
           </div>

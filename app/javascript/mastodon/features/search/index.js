@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchContainer from 'mastodon/features/compose/containers/search_container';
-import SearchResultsContainer from 'mastodon/features/compose/containers/search_results_container';
+import SearchContainer from 'mastodon/features/ui/components/search_container';
+import SearchResultsContainer from 'mastodon/features/ui/components/search_results_container';
 
 const Search = () => (
   <div className='column search-page'>

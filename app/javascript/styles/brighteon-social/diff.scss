@@ -792,6 +792,27 @@ body {
   background: linear-gradient(transparent 80%, #000a3d);
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-top {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.mb3 {
+  margin-bottom: 1rem;
+}
+
 .about {
   .hero-widget__text,
   .hero-widget__footer {
@@ -897,5 +918,58 @@ body {
   .simple_form button {
     background-color: #00c642;
     text-transform: capitalize;
+  }
+}
+
+.app-body {
+  .getting-started__footer {
+    a {
+      color: $white;
+    }
+    p {
+      color: $white;
+      a {
+        color: $white;
+      }
+    }
+  }
+  .navigation-bar strong {
+    color: $white;
+  }
+  .compose__action-bar-dropdown {
+    .icon-button {
+      color: $white;
+    }
+  }
+  .column-link--transparent {
+    color: $white;
+  }
+  .status__display-name strong {
+    color: inherit;
+  }
+  .status__action-bar {
+    .icon-button {
+      color: $black;
+    }
+  }
+  button.column-header__button[aria-label="Show settings"] {
+    color: $black;
+  }
+  .columns-area__panels__main {
+    border-radius: 0.25rem;
+  }
+  .search {
+    margin-top: 12px;
+  }
+  .search__input {
+    background-color: $white;
+    color: $black;
+    &::placeholder {
+      color: #666666;
+    }
+  }
+  .search__icon .fa.active {
+    color: $black;
+    opacity: 1;
   }
 }

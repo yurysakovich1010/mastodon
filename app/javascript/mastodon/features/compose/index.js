@@ -7,10 +7,7 @@ import { connect } from 'react-redux';
 import { mountCompose, unmountCompose } from '../../actions/compose';
 import { Link } from 'react-router-dom';
 import { injectIntl, defineMessages } from 'react-intl';
-import SearchContainer from './containers/search_container';
-import Motion from '../ui/util/optional_motion';
 import spring from 'react-motion/lib/spring';
-import SearchResultsContainer from './containers/search_results_container';
 import { changeComposing } from '../../actions/compose';
 import { openModal } from 'mastodon/actions/modal';
 import elephantUIPlane from '../../../images/elephant_ui_plane.svg';
@@ -120,8 +117,6 @@ class Compose extends React.PureComponent {
       <div className='drawer' role='region' aria-label={intl.formatMessage(messages.compose)}>
         {header}
 
-        {(multiColumn || isSearchPage) && <SearchContainer /> }
-
         <div className='drawer__pager'>
           {!isSearchPage && <div className='drawer__inner' onFocus={this.onFocus}>
             <NavigationContainer onClose={this.onBlur} />
@@ -132,14 +127,6 @@ class Compose extends React.PureComponent {
               <img alt='' draggable='false' src={mascot || elephantUIPlane} />
             </div>
           </div>}
-
-          <Motion defaultStyle={{ x: isSearchPage ? 0 : -100 }} style={{ x: spring(showSearch || isSearchPage ? 0 : -100, { stiffness: 210, damping: 20 }) }}>
-            {({ x }) => (
-              <div className='drawer__inner darker' style={{ transform: `translateX(${x}%)`, visibility: x === -100 ? 'hidden' : 'visible' }}>
-                <SearchResultsContainer />
-              </div>
-            )}
-          </Motion>
         </div>
       </div>
     );
