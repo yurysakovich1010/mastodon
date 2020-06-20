@@ -621,3 +621,41 @@ ul {
 .verify-preferences p {
   font-size: 12px;
 }
+
+.content-start.welcome_handle {
+  padding-top: 0;
+}
+
+.welcome_handle h5 {
+  color: $white;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.welcome_handle table.input td {
+  background: transparent;
+  font-weight: 700;
+  font-size: 24px;
+  color: $white;
+}
+
+.content-cell.hero.tips {
+  padding-top: 0;
+}
+
+.content-cell.hero.tips p {
+  color: $white;
+}
+
+.tip_contents .tip_detail_content td {
+  color: $white;
+}
+
+.tip_contents .tip_link td {
+  padding: 0 16px;
+}
+
+.tip_contents .tip_link td span {
+  font-weight: 700;
+  text-decoration: underline;
+}

@@ -798,8 +798,9 @@ body {
     background-color: inherit;
   }
 
-  .hero-widget__text {
-    border-bottom: none;
+  .hero-widget__text,
+  .hero-widget__footer {
+    border: none;
   }
 
   .hero-widget__footer strong {
@@ -808,6 +809,10 @@ body {
 
   .hero-widget__counter span {
     text-transform: capitalize;
+  }
+
+  .hero-widget {
+    border: 1px solid;
   }
 
   .box-widget,
@@ -837,6 +842,9 @@ body {
     input[type=password],
     textarea {
       color: #322947;
+      &::placeholder {
+        color: #acacac;
+      }
     }
   }
 
