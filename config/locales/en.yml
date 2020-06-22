@@ -25,7 +25,7 @@ en:
       This account is a virtual actor used to represent the server itself and not any individual user.
       It is used for federation purposes and should not be blocked unless you want to block the whole instance, in which case you should use a domain block.
     learn_more: Learn more
-    privacy_policy: Privacy policy
+    privacy_policy: Privacy Policy
     see_whats_happening: See what's happening
     server_stats: 'Server stats:'
     source_code: Source code
@@ -34,7 +34,7 @@ en:
       other: statuses
     status_count_before: Who authored
     tagline: Follow friends and discover new ones
-    terms: Terms of service
+    terms: Terms of Service
     unavailable_content: Moderated servers
     unavailable_content_description:
       domain: Server
@@ -1345,3 +1345,12 @@ en:
     discover_users: discover users
   home:
     description: 'The tyranny of Big Tech is now on full display. %{instance} is the pro-liberty social network for the freedom-loving citizens of the world.'
+  about_more:
+    content_html:
+      '<p>The tyranny of Big Tech is now on full display in America as Twitter has unleashed an army of so-called “fact-checkers” (i.e. left-wing propagandists) to place fact-check labels on the tweets of President Trump.</p>
+
+      <p>"Fact-checking" is just the excuse for tech giants like Twitter, Google, Wikipedia, YouTube or Facebook to interrupt the communications of conservative or pro-Trump users with radical left-wing propaganda messages. The very idea that a tech company led by communists and radical left-wing socialists could claim a monopoly on “facts” is absurd. No one has a monopoly on facts, and the entire fact-checking fiasco of the Big Tech ecosystem has boiled down to politically targeted censorship run by radical left-wing propagandists who are truly mentally ill in the fact that they actually believe their delusions are an accurate map of reality.</p>
+
+      <p>But it’s more than mere propaganda. It’s a violation of the civil rights of millions of Americans. At Brighteon.social, we believe that...</p>
+
+      <p>Be sure to review our <a href="%{privacy_path}">privacy policy</a> and <a href="%{terms_path}">terms of service</a>.</p>'

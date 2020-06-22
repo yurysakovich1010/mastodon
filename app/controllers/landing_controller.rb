@@ -62,8 +62,4 @@ class LandingController < ApplicationController
   def set_expires_in
     expires_in 0, public: true
   end
-
-  def this_year
-    Time.new.year
-  end
 end

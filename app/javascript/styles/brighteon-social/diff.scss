@@ -793,6 +793,7 @@ body {
   min-height: inherit;
 
   .header {
+    width: 960px;
     background: transparent;
     border: none;
     height: 4rem;
@@ -856,6 +857,10 @@ body {
   .footer {
     width: 960px;
     color: $white;
+
+    a {
+      color: $white;
+    }
   }
 }
 
@@ -984,6 +989,40 @@ body {
     margin-top: 3rem;
     color: $white;
     font-size: 2rem;
+  }
+}
+
+.about-more {
+  .content-overlay {
+    margin: auto;
+    width: 680px;
+    background-color: rgba(8, 8, 63, 0.25);
+    position: relative;
+
+    .overlay {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      opacity: 0.25;
+    }
+
+    .content {
+      padding: 3.5rem 6.5rem;
+      color: white;
+      font-size: 15px;
+
+      img {
+        width: 100%;
+      }
+
+      p {
+        margin: 1rem 0;
+
+        a {
+          color: $white;
+        }
+      }
+    }
   }
 }
 
