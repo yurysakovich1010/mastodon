@@ -841,6 +841,7 @@ en:
     validation_errors:
       one: Something isn't quite right yet! Please review the error below
       other: Something isn't quite right yet! Please review %{count} errors below
+    back_to_link: Back to %{link}
   html_validator:
     invalid_markup: 'contains invalid HTML markup: %{error}'
   identity_proofs:
@@ -1354,3 +1355,4 @@ en:
       <p>But it’s more than mere propaganda. It’s a violation of the civil rights of millions of Americans. At Brighteon.social, we believe that...</p>
 
       <p>Be sure to review our <a href="%{privacy_path}">privacy policy</a> and <a href="%{terms_path}">terms of service</a>.</p>'
+
