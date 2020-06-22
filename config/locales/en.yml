@@ -829,6 +829,7 @@ en:
     more: More…
     resources: Resources
     trending_now: Trending now
+    all_rights_reserved: All rights reserved.
   generic:
     all: All
     changes_saved_msg: Changes successfully saved!
@@ -1342,3 +1343,5 @@ en:
     about: about
     live_stream: live stream
     discover_users: discover users
+  home:
+    description: 'The tyranny of Big Tech is now on full display. %{instance} is the pro-liberty social network for the freedom-loving citizens of the world.'

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class DirectoriesController < ApplicationController
-  layout 'public'
+  layout 'brighteon_social_public'
 
   before_action :authenticate_user!, if: :whitelist_mode?
   before_action :require_enabled!

@@ -779,41 +779,87 @@ html {
 
 body {
   font-family: mastodon-font-display;
-  background-image: url('../images/brighteon-social/about/bg_pattern.png'), -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#000000));
-  background-image: url('../images/brighteon-social/about/bg_pattern.png'), -moz-linear-gradient(#ffffff, #000000);
-  background-image: url('../images/brighteon-social/about/bg_pattern.png');
-  background-color: #2040a4;
+  background-image: url('../images/brighteon-social/about/bg_pattern.png'), -webkit-gradient(linear, 0 0, 0 bottom, from(#2040a4), to(#000a3d));
+  background-image: url('../images/brighteon-social/about/bg_pattern.png'), -moz-linear-gradient(#2040a4, #000a3d);
+  background-image: url('../images/brighteon-social/about/bg_pattern.png'), linear-gradient(#2040a4, rgb(0, 10, 61));
+  background-color: unset;
   background-blend-mode: screen;
   background-size: cover;
   background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 .public-layout {
-  background: linear-gradient(transparent 80%, #000a3d);
+  min-height: inherit;
+
+  .header {
+    background: transparent;
+    border: none;
+    height: 4rem;
+    margin: 0;
+    padding: 20px 0;
+
+    & > div {
+      flex: 1 1 50%;
+    }
+
+    .nav-left {
+      height: 40px;
+      margin-right: 15px;
+
+      .landing__menu {
+        width: 100%;
+        padding-right: 90px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .menu_item {
+          color: $white;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+      }
+    }
+
+    .nav-right {
+      margin-left: 15px;
+
+      .simple_form {
+        .fields-group {
+          margin: 0;
+
+          & > * {
+            width: 30%;
+          }
+
+          .input, .button {
+            margin: 0;
+          }
+
+          input {
+            height: 44px;
+            &::placeholder {
+              color: #acacac;
+            }
+          }
+        }
+        p.hint.subtle-hint {
+          a {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    width: 960px;
+    color: $white;
+  }
 }
 
-.rounded {
-  border-radius: 0.25rem;
-}
-
-.rounded-top {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
-}
-
-.bg-transparent {
-  background-color: transparent;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.mb3 {
-  margin-bottom: 1rem;
-}
-
-.about {
+.about, .home {
   .hero-widget__text,
   .hero-widget__footer {
     background-color: inherit;
@@ -834,6 +880,7 @@ body {
 
   .hero-widget {
     border: 1px solid;
+    border-radius: 4px;
   }
 
   .box-widget,
@@ -907,6 +954,36 @@ body {
     color: $white;
     font-weight: 600;
     text-transform: uppercase;
+  }
+}
+
+.home {
+  .logo-container {
+    margin-top: 30px;
+    margin-right: 90px;
+
+    h1 {
+      justify-content: start;
+
+      a {
+        width: 100%;
+        padding: 0;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .description {
+    color: $white;
+    font-size: 22px;
+    line-height: 32px;
+  }
+  .users_count {
+    margin-top: 3rem;
+    color: $white;
+    font-size: 2rem;
   }
 }
 
