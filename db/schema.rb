@@ -272,6 +272,12 @@ ActiveRecord::Schema.define(version: 2020_06_28_133322) do
     t.index ["status_id"], name: "index_bookmarks_on_status_id"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.string "feedback", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "conversation_mutes", force: :cascade do |t|
     t.bigint "conversation_id", null: false
     t.bigint "account_id", null: false

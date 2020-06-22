@@ -16,6 +16,9 @@ en:
     contact: Contact
     contact_missing: Not set
     contact_unavailable: N/A
+    contact_description:
+      <p>Thank you for your interest in %{host}. Due to the growing volume of comments and questions submitted, we can no longer offer individual replies to each feedback request. Please know that your feedback will be forwarded to the appropriate person and will be given due consideration. We thank you in advance for your comments and suggestions of our users.</p>
+    contact_placeholder: Leave your feedback here
     discover_users: Discover users
     documentation: Documentation
     federation_hint_html: With an account on %{instance} you'll be able to follow people on any Mastodon server and beyond.
