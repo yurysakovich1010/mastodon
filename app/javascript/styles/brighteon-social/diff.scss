@@ -1040,6 +1040,9 @@ body {
         height: 136px;
         border-radius: 0.25rem;
         padding: 10px;
+        &::placeholder {
+          color: #666666;
+        }
       }
 
       button {

@@ -47,6 +47,7 @@
       %div
         = t('about.contact_description', host: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
       %div
-        %textarea{ placeholder: 'Leave your feedback here' }
-        %button.button.button-primary.button-signup
-          = send_message
+        = simple_form_for @contact, url: contacts_path do |f|
+          = f.text_area :feedback, as: :date, placeholder: t('about.contact_placeholder')
+
+          = f.button :button, send_message, type: :submit, class: 'button button-primary button-signup'
