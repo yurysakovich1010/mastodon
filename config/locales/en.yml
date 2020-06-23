@@ -711,6 +711,7 @@ en:
       pending: Your application is pending review by our staff. This may take some time. You will receive an e-mail if your application is approved.
       redirecting_to: Your account is inactive because it is currently redirecting to %{acct}.
     trouble_logging_in: Forgot your password?
+    approval: I confirm I am 18 years of age or older.
   authorize_follow:
     already_following: You are already following this account
     already_requested: You have already sent a follow request to that account

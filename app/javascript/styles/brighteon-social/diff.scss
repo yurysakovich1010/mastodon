@@ -1057,6 +1057,10 @@ body {
 .auth {
   .simple_form .input.with_label .label_input > label {
     color: $white;
+
+    a {
+      color: $white;
+    }
   }
 
   .simple_form button {
