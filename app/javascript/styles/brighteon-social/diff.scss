@@ -1135,4 +1135,16 @@ body {
     color: $black;
     opacity: 1;
   }
+  .compose-form {
+    padding: 0;
+  }
+  .compose-form__autosuggest-wrapper {
+    border: none;
+  }
+  .column-link--transparent {
+    border-radius: 0.25rem;
+  }
+  .column-link--transparent.active {
+    background-color: rgba(8, 8, 63, 0.25);
+  }
 }

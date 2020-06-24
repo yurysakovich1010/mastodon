@@ -27,6 +27,7 @@ import {
   Directory,
 } from '../../ui/util/async-components';
 import Icon from 'mastodon/components/icon';
+import ComposeFormContainer from 'mastodon/features/compose/containers/compose_form_container';
 import ComposePanel from './compose_panel';
 import NavigationPanel from './navigation_panel';
 
@@ -195,9 +196,9 @@ class ColumnsArea extends ImmutablePureComponent {
 
       return (
         <div className='columns-area__panels'>
-          <div className='columns-area__panels__pane columns-area__panels__pane--compositional'>
+          <div className='columns-area__panels__pane columns-area__panels__pane--start columns-area__panels__pane--navigational'>
             <div className='columns-area__panels__pane__inner'>
-              <ComposePanel />
+              <NavigationPanel />
             </div>
           </div>
 
@@ -205,13 +206,15 @@ class ColumnsArea extends ImmutablePureComponent {
 
             <SearchContainer />
 
+            <ComposeFormContainer singleColumn />
+
             <TabsBar key='tabs' />
             {content}
           </div>
 
-          <div className='columns-area__panels__pane columns-area__panels__pane--start columns-area__panels__pane--navigational'>
+          <div className='columns-area__panels__pane columns-area__panels__pane--compositional'>
             <div className='columns-area__panels__pane__inner'>
-              <NavigationPanel />
+              <ComposePanel />
             </div>
           </div>
 
