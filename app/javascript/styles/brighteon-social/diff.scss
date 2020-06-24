@@ -657,6 +657,21 @@ html {
   }
 }
 
+.flash-message.notice {
+  border: none;
+  background: #1c0043;
+  color: $white;
+}
+
+.simple_form p.hint {
+  text-align: center;
+
+  strong {
+    color: #fd9300;
+    font-weight: 700;
+  }
+}
+
 .public-layout {
   .account__section-headline {
     border: 1px solid lighten($ui-base-color, 8%);

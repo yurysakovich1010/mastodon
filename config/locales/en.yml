@@ -702,7 +702,7 @@ en:
     set_new_password: Set new password
     setup:
       email_below_hint_html: If the below e-mail address is incorrect, you can change it here and receive a new confirmation e-mail.
-      email_settings_hint_html: The confirmation e-mail was sent to %{email}. If that e-mail address is not correct, you can change it in account settings.
+      email_settings_hint_html: The confirmation e-mail was sent to <br/>%{email}. If that e-mail address is not <br/>correct, you can change it in account settings.
       title: Setup
     status:
       account_status: Account status

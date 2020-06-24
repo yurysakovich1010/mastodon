@@ -30,6 +30,7 @@ $light-text-color: #444b5d;
 
 //Newly added colors
 $account-background-color: $white !default;
+$theme-color: #2040a4;
 
 //Invert darkened and lightened colors
 @function darken($color, $amount) {
