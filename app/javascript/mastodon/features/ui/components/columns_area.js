@@ -33,6 +33,7 @@ import NavigationPanel from './navigation_panel';
 
 import detectPassiveEvents from 'detect-passive-events';
 import { scrollRight } from '../../../scroll';
+import horizontalLogo from 'mastodon/../images/brighteon-social/logo_horiz.png';
 
 const componentMap = {
   'COMPOSE': Compose,
@@ -198,6 +199,9 @@ class ColumnsArea extends ImmutablePureComponent {
         <div className='columns-area__panels'>
           <div className='columns-area__panels__pane columns-area__panels__pane--start columns-area__panels__pane--navigational'>
             <div className='columns-area__panels__pane__inner'>
+              <div style={{margin: '12px 0 10px', height: '50px', display: 'flex', alignItems: 'center'}}>
+                <img src={horizontalLogo} style={{width: '100%'}}/>
+              </div>
               <NavigationPanel />
             </div>
           </div>
@@ -212,8 +216,8 @@ class ColumnsArea extends ImmutablePureComponent {
             {content}
           </div>
 
-          <div className='columns-area__panels__pane columns-area__panels__pane--compositional'>
-            <div className='columns-area__panels__pane__inner'>
+          <div className='columns-area__panels__pane columns-area__panels__pane--compositional relative-fill'>
+            <div className='columns-area__panels__pane__inner absolute-fill'>
               <ComposePanel />
             </div>
           </div>

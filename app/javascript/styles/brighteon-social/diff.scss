@@ -1147,4 +1147,8 @@ body {
   .column-link--transparent.active {
     background-color: rgba(8, 8, 63, 0.25);
   }
+  .columns-area__panels {
+    min-height: unset;
+//     flex: 1;
+  }
 }

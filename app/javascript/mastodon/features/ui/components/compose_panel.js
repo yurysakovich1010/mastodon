@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import NavigationContainer from 'mastodon/features/compose/containers/navigation_container';
 import LinkFooter from './link_footer';
 import { changeComposing } from 'mastodon/actions/compose';
-import horizontalLogo from 'mastodon/../images/brighteon-social/logo_horiz.png';
 
 export default @connect()
 class ComposePanel extends React.PureComponent {
@@ -17,18 +15,10 @@ class ComposePanel extends React.PureComponent {
     this.props.dispatch(changeComposing(true));
   }
 
-  onBlur = () => {
-    this.props.dispatch(changeComposing(false));
-  }
-
   render() {
     return (
       <div className='compose-panel' onFocus={this.onFocus}>
-        <div>
-          <img src={horizontalLogo} style={{margin: '14px 0', width: '100%'}}/>
-        </div>
-        <NavigationContainer onClose={this.onBlur} />
-
+        <div className='spacer' />
         <LinkFooter withHotkeys />
       </div>
     );

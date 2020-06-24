@@ -35,12 +35,25 @@
   display: flex !important;
 }
 
-.flex-auto {
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-fill {
   flex: 1;
 }
 
-.flex-column {
-  flex-direction: column;
+.relative-fill {
+  position: relative;
+  height: 100%;
+}
+
+.absolute-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .text-capitalize {

@@ -10,7 +10,7 @@ import LoadingBarContainer from './containers/loading_bar_container';
 import ModalContainer from './containers/modal_container';
 import { isMobile } from '../../is_mobile';
 import { debounce } from 'lodash';
-import { uploadCompose, resetCompose, changeComposeSpoilerness } from '../../actions/compose';
+import { uploadCompose, resetCompose, changeComposeSpoilerness, changeComposing } from '../../actions/compose';
 import { expandHomeTimeline } from '../../actions/timelines';
 import { expandNotifications } from '../../actions/notifications';
 import { fetchFilters } from '../../actions/filters';
@@ -19,6 +19,7 @@ import { focusApp, unfocusApp } from 'mastodon/actions/app';
 import { synchronouslySubmitMarkers } from 'mastodon/actions/markers';
 import { WrappedSwitch, WrappedRoute } from './util/react_router_helpers';
 import UploadArea from './components/upload_area';
+import NavigationContainer from 'mastodon/features/compose/containers/navigation_container';
 import ColumnsAreaContainer from './containers/columns_area_container';
 import DocumentTitle from './components/document_title';
 import {
@@ -512,6 +513,10 @@ class UI extends React.PureComponent {
     this.context.router.history.push('/follow_requests');
   }
 
+  onBlur = () => {
+    this.props.dispatch(changeComposing(false));
+  }
+
   render () {
     const { draggingOver } = this.state;
     const { children, isComposing, location, dropdownMenuIsOpen } = this.props;
@@ -540,16 +545,21 @@ class UI extends React.PureComponent {
 
     return (
       <HotKeys keyMap={keyMap} handlers={handlers} ref={this.setHotkeysRef} attach={window} focused>
-        <div className={classNames('ui', { 'is-composing': isComposing })} ref={this.setRef} style={{ pointerEvents: dropdownMenuIsOpen ? 'none' : null }}>
-          <SwitchingColumnsArea location={location} onLayoutChange={this.handleLayoutChange}>
-            {children}
-          </SwitchingColumnsArea>
+        <div className={classNames('ui absolute-fill', { 'is-composing': isComposing })} ref={this.setRef} style={{ pointerEvents: dropdownMenuIsOpen ? 'none' : null }}>
+          <div className="relative-fill">
+            <div className="absolute-fill d-flex flex-column">
+              <NavigationContainer onClose={this.onBlur} />
+              <SwitchingColumnsArea location={location} onLayoutChange={this.handleLayoutChange}>
+                {children}
+              </SwitchingColumnsArea>
 
-          <NotificationsContainer />
-          <LoadingBarContainer className='loading-bar' />
-          <ModalContainer />
-          <UploadArea active={draggingOver} onClose={this.closeUploadModal} />
-          <DocumentTitle />
+              <NotificationsContainer />
+              <LoadingBarContainer className='loading-bar' />
+              <ModalContainer />
+              <UploadArea active={draggingOver} onClose={this.closeUploadModal} />
+              <DocumentTitle />
+            </div>
+          </div>
         </div>
       </HotKeys>
     );
