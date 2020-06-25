@@ -198,11 +198,18 @@ class ColumnsArea extends ImmutablePureComponent {
       return (
         <div className='columns-area__panels'>
           <div className='columns-area__panels__pane columns-area__panels__pane--start columns-area__panels__pane--navigational'>
-            <div className='columns-area__panels__pane__inner'>
+            <div className='columns-area__panels__pane__inner d-flex flex-column'>
               <div style={{margin: '12px 0 10px', height: '50px', display: 'flex', alignItems: 'center'}}>
                 <img src={horizontalLogo} style={{width: '100%'}}/>
               </div>
-              <NavigationPanel />
+              <div className='flex-fill'>
+                <div className='relative-fill'>
+                  <div className='absolute-fill overflow-y-auto'>
+                    <NavigationPanel />
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 

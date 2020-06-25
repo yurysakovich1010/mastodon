@@ -1192,5 +1192,30 @@ body {
       color: $white;
     }
   }
+  .column-menu {
+    padding: 15px;
+    font-size: 16px;
+    color: #888;
+  }
+  .column-link {
+    padding: 12.5px 15px;
+  }
+  .dropdown-menu {
+    background-color: #2040a4;
 
+    .dropdown-menu__item {
+      a {
+        background-color: rgba(8, 8, 63, 0.25);
+      }
+    }
+  }
+  .columns-area__panels__pane__inner {
+    position: static;
+  }
+  .navigation-panel {
+    padding-top: 10px;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
 }
