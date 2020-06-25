@@ -214,17 +214,30 @@ class ColumnsArea extends ImmutablePureComponent {
           </div>
 
           <div className='columns-area__panels__main'>
+            <div className='flex-fill'>
+              <div className='relative-fill'>
+                <div className='absolute-fill d-flex flex-column'>
+                  <SearchContainer />
 
-            <SearchContainer />
+                  {
+                    columnIndex !== 1 && columnIndex !== -1 && (
+                      <ComposeFormContainer singleColumn />
+                    )
+                  }
 
-            {
-              columnIndex !== 1 && columnIndex !== -1 && (
-                <ComposeFormContainer singleColumn />
-              )
-            }
-
-            <TabsBar key='tabs' />
-            {content}
+                  <TabsBar key='tabs' />
+                  <div className='flex-fill'>
+                    <div className='relative-fill'>
+                      <div className='absolute-fill mb2 overflow-y-auto rounded-bottom'>
+                        <div>
+                          {content}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className='columns-area__panels__pane columns-area__panels__pane--compositional relative-fill'>

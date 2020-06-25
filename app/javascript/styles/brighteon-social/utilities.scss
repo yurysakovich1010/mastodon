@@ -7,12 +7,21 @@
   border-top-right-radius: 0.25rem !important;
 }
 
+.rounded-bottom {
+  border-bottom-left-radius: 0.25rem !important;
+  border-bottom-right-radius: 0.25rem !important;
+}
+
 .bg-transparent {
   background-color: transparent !important;
 }
 
 .overflow-hidden {
   overflow: hidden !important;
+}
+
+.mb2 {
+  margin-bottom: 0.5rem !important;
 }
 
 .mb3 {

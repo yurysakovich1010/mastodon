@@ -1118,9 +1118,6 @@ body {
   button.column-header__button[aria-label="Show settings"] {
     color: $black;
   }
-  .columns-area__panels__main {
-    border-radius: 0.25rem;
-  }
   .search {
     margin-top: 12px;
   }
@@ -1217,5 +1214,8 @@ body {
   }
   .overflow-y-auto {
     overflow-y: auto;
+  }
+  .navigation-bar {
+    background-color: rgba(8, 8, 63, 0.25);
   }
 }
