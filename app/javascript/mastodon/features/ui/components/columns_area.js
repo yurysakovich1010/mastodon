@@ -210,7 +210,11 @@ class ColumnsArea extends ImmutablePureComponent {
 
             <SearchContainer />
 
-            <ComposeFormContainer singleColumn />
+            {
+              columnIndex !== 1 && columnIndex !== -1 && (
+                <ComposeFormContainer singleColumn />
+              )
+            }
 
             <TabsBar key='tabs' />
             {content}
