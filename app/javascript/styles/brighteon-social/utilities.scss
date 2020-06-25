@@ -27,6 +27,14 @@
   margin-top: 0.25rem !important;
 }
 
+.mt2 {
+  margin-top: 0.5rem !important;
+}
+
+.mt3 {
+  margin-top: 1rem !important;
+}
+
 .mt5 {
   margin-top: 2rem !important;
 }
@@ -68,12 +76,24 @@
   text-transform: lowercase !important;
 }
 
+.text-align-center {
+  text-align: center;
+}
+
 .decoration-none {
   text-decoration: none !important;
 }
 
 .justify-content-space-between {
   justify-content: space-between !important;
+}
+
+.justify-content-space-around {
+  justify-content: space-around !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
 }
 
 .w-50 {
