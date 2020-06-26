@@ -884,6 +884,23 @@ body {
   }
 }
 
+.head-logo {
+  display: table-cell;
+  width: 160px;
+  vertical-align: middle;
+  padding-left: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (min-width: 500px) {
+  .head-logo {
+    width: 300px;
+  }
+}
+
+// page by page
+
 .about, .home {
   .hero-widget__text,
   .hero-widget__footer {

@@ -7,6 +7,7 @@ import Permalink from '../../../components/permalink';
 import IconButton from '../../../components/icon_button';
 import { FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
+import horizontalLogo from 'mastodon/../images/brighteon-social/logo_horiz.png';
 
 export default class NavigationBar extends ImmutablePureComponent {
 
@@ -19,6 +20,10 @@ export default class NavigationBar extends ImmutablePureComponent {
   render () {
     return (
       <div className='navigation-bar'>
+        <div className='head-logo'>
+          <img src={horizontalLogo} style={{width: '100%'}}/>
+        </div>
+
         <Permalink href={this.props.account.get('url')} to={`/accounts/${this.props.account.get('id')}`}>
           <span style={{ display: 'none' }}>{this.props.account.get('acct')}</span>
           <Avatar account={this.props.account} size={48} />
