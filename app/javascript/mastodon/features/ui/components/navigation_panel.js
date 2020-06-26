@@ -33,7 +33,7 @@ const NavigationPanel = () => (
       Explore
     </div>
     <NavLink className='column-link column-link--transparent' to='/trends' target='_blank' rel='noopener noreferrer'><Icon className='column-link__icon' id='bar-chart' fixedWidth /><FormattedMessage id='navigation_bar.trends' defaultMessage='Trends' /></NavLink>
-    <a className='column-link column-link--transparent' href='http://brighteon.store' target='_blank' rel='noopener noreferrer'><Icon className='column-link__icon' id='tags' fixedWidth /><FormattedMessage id='navigation_bar.shop' defaultMessage='Shop' /></a>
+    <a className='column-link column-link--transparent' href='http://www.brighteonstore.com' target='_blank' rel='noopener noreferrer'><Icon className='column-link__icon' id='tags' fixedWidth /><FormattedMessage id='navigation_bar.shop' defaultMessage='Shop' /></a>
     <a className='column-link column-link--transparent' href='https://www.brighteon.com' target='_blank' rel='noopener noreferrer'><Icon className='column-link__icon' id='rocket' fixedWidth /><FormattedMessage id='navigation_bar.brighteon_company' defaultMessage='Brighteon.com' /></a>
     <a className='column-link column-link--transparent' href='http://naturalNews.com' target='_blank' rel='noopener noreferrer'><Icon className='column-link__icon' id='rocket' fixedWidth /><FormattedMessage id='navigation_bar.natural_news_company' defaultMessage='NaturalNews.com' /></a>
     <a className='column-link column-link--transparent' href='https://newstarget.com' target='_blank' rel='noopener noreferrer'><Icon className='column-link__icon' id='rocket' fixedWidth /><FormattedMessage id='navigation_bar.newstarget' defaultMessage='Newstarget.com' /></a>
