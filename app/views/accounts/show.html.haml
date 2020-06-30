@@ -16,6 +16,30 @@
   = opengraph 'og:type', 'profile'
   = render 'og', account: @account, url: short_account_url(@account, only_path: false)
 
+- content_for :header do
+  .navigation-bar.mb3
+    .navigation-bar__inner
+      .d-flex
+        .head-logo
+          = image_tag full_pack_url('media/images/brighteon-social/logo_horiz.png'), alt: ''
+
+        .search-container.flex-fill
+          %form.search
+            %input.search__input(placeholder='Search')
+            %div.search__icon
+              = fa_icon 'search'
+              = fa_icon 'times-circle'
+
+        .spacer
+
+        .d-flex
+          %button.donate.standard.mr1
+            Donate
+          = link_to '/auth/sign_in', class: 'decoration-none' do
+            %button.standard.mr1= t('auth.login')
+          = link_to '/auth/sign_up', class: 'decoration-none' do
+            %button.standard.register= t('auth.register')
+
 
 = render 'header', account: @account, with_bio: true
 

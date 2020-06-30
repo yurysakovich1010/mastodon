@@ -5,8 +5,7 @@
 - content_for :content do
   .public-layout.d-flex.flex-column
     - unless @hide_navbar
-      .container
-        %nav.header= yield :header
+      %div= yield :header
 
     .container.flex-fill= yield
 

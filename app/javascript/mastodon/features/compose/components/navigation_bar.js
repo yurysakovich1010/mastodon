@@ -47,7 +47,7 @@ export default class NavigationBar extends ImmutablePureComponent {
             <div className='spacer' />
 
             <div className='d-flex'>
-              <button className='donate mr3'>
+              <button className='donate standard mr3'>
                 Donate
               </button>
 

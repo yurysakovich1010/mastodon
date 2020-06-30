@@ -7,6 +7,8 @@ class AccountsController < ApplicationController
   include AccountControllerConcern
   include SignatureAuthentication
 
+  layout 'brighteon_social_public'
+
   before_action :require_signature!, if: -> { request.format == :json && authorized_fetch_mode? }
   before_action :set_cache_headers
   before_action :set_body_classes

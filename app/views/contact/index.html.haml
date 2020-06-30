@@ -6,16 +6,18 @@
   = render partial: 'shared/og'
 
 - content_for :header do
-  .nav-left
-    %ul.landing__menu
-      %li.menu_item= t('menu.home')
-      %li.menu_item= t('menu.about')
-      %li.menu_item= t('menu.live_stream')
-      %li.menu_item= t('menu.discover_users')
+  .container
+    %nav.header
+      .nav-left
+        %ul.landing__menu
+          %li.menu_item= t('menu.home')
+          %li.menu_item= t('menu.about')
+          %li.menu_item= t('menu.live_stream')
+          %li.menu_item= t('menu.discover_users')
 
-  .nav-right
-    = link_to root_path, class: 'btn button button-primary back-to-landing' do
-      = t('generic.back_to_link', link: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
+      .nav-right
+        = link_to root_path, class: 'btn button button-primary back-to-landing' do
+          = t('generic.back_to_link', link: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
 
 - content_for :footer do
   .d-flex
