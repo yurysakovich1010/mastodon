@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
   include AccountControllerConcern
   include SignatureAuthentication
 
-  layout 'brighteon_social_public'
+  layout 'brighteon_social_profile'
 
   before_action :require_signature!, if: -> { request.format == :json && authorized_fetch_mode? }
   before_action :set_cache_headers
@@ -32,6 +32,9 @@ class AccountsController < ApplicationController
 
         @pinned_statuses = cache_collection(@account.pinned_statuses, Status) if show_pinned_statuses?
         @statuses        = filtered_status_page
+        puts('filtered_status_page-----------------------------------------------------start ------------------------')
+        puts(filtered_status_page)
+        puts('filtered_status_page--------------------------------------------------- end ---------------------------')
         @statuses        = cache_collection(@statuses, Status)
         @rss_url         = rss_url
 
@@ -60,16 +63,28 @@ class AccountsController < ApplicationController
   private
 
   def set_body_classes
-    @body_classes = 'with-modals'
+    @body_classes = 'with-modals profile'
   end
 
   def show_pinned_statuses?
-    [replies_requested?, media_requested?, tag_requested?, params[:max_id].present?, params[:min_id].present?].none?
+    [replies_requested?, media_requested?, photos_requested?, videos_requested?, tag_requested?, params[:max_id].present?, params[:min_id].present?].none?
   end
 
   def filtered_statuses
+    puts('tag_requested?')
+    puts(tag_requested?)
+    puts('videos_requested??')
+    puts(videos_requested?)
+    puts('photos_requested??')
+    puts(photos_requested?)
+    puts('media_requested??')
+    puts(media_requested?)
+    puts('replies_requested??')
+    puts(replies_requested?)
     default_statuses.tap do |statuses|
       statuses.merge!(hashtag_scope)    if tag_requested?
+      statuses.merge!(only_videos_scope) if videos_requested?
+      statuses.merge!(only_photos_scope) if photos_requested?
       statuses.merge!(only_media_scope) if media_requested?
       statuses.merge!(no_replies_scope) unless replies_requested?
     end
@@ -83,12 +98,32 @@ class AccountsController < ApplicationController
     Status.where(id: account_media_status_ids)
   end
 
+  def only_photos_scope
+    Status.where(id: account_photos_status_ids)
+  end
+
+  def only_videos_scope
+    Status.where(id: account_videos_status_ids)
+  end
+
   def account_media_status_ids
     @account.media_attachments.attached.reorder(nil).select(:status_id).distinct
   end
 
+  def account_photos_status_ids
+    @account.media_attachments.image_type.attached.reorder(nil).select(:status_id).distinct
+  end
+
+  def account_videos_status_ids
+    @account.media_attachments.video_type.attached.reorder(nil).select(:status_id).distinct
+  end
+
   def no_replies_scope
     Status.without_replies
+  end
+
+  def replies_scope
+    Status.with_replies
   end
 
   def hashtag_scope
@@ -135,6 +170,14 @@ class AccountsController < ApplicationController
 
   def media_requested?
     request.path.split('.').first.ends_with?('/media') && !tag_requested?
+  end
+
+  def videos_requested?
+    request.path.split('.').first.ends_with?('/videos') && !tag_requested?
+  end
+
+  def photos_requested?
+    request.path.split('.').first.ends_with?('/photos') && !tag_requested?
   end
 
   def replies_requested?

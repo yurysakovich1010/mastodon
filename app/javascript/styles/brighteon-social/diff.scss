@@ -812,7 +812,7 @@ body {
     background: transparent;
     border: none;
     height: 4rem;
-    margin: 0;
+    margin: auto;
     padding: 20px 0;
 
     & > div {
@@ -1035,6 +1035,12 @@ body {
 
     .mobile-search-container {
       margin-top: 10px;
+    }
+  }
+
+  &.signed_in {
+    .spacer {
+      max-width: unset;
     }
   }
 }
@@ -1368,5 +1374,113 @@ body {
   }
   .overflow-y-auto {
     overflow-y: auto;
+  }
+}
+
+.profile {
+  .public-account-header__bar {
+    display: block;
+    background-color: $white;
+    margin-top: 0;
+
+    a.avatar {
+      margin-top: -60px;
+    }
+  }
+  .public-account-header__tabs__name {
+    h1 {
+      color: $black;
+      text-shadow: none;
+
+      small {
+        color: $black;
+      }
+    }
+  }
+  .public-account-header__tabs__tab {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+    padding: 5px 15px;
+
+    &.active {
+      border-bottom: 4px solid #08083f;
+    }
+  }
+  .public-account-header__tabs__edit-profile {
+    button {
+      padding: 0.75em 1.5em;
+      border-radius: 1.5em;
+      color: #08083f;
+      border: 1px solid #08083f;
+      background-color: transparent;
+    }
+  }
+
+  .public-layout .grid {
+    grid-template-columns: minmax(298px, 1fr) minmax(300px, 3fr);
+  }
+
+  .public-account-bio__extra {
+    color: var(--text_color_primary);
+  }
+
+  .public-account-bio {
+    &__title {
+      font-size: 19px;
+      font-weight: 500;
+      color: $black;
+      padding: 15px 15px 0;
+      font-family: var(--font_family);
+    }
+    .account__header__content {
+      font-size: 14px;
+      line-height: 1.3125;
+      padding: 10px 15px;
+
+      p {
+
+      }
+    }
+    hr {
+      margin: 0 15px;
+    }
+    &__extra {
+      padding: 10px 15px;
+    }
+  }
+
+  .public-account-counts {
+    background-color: $white;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+
+    .details-counters {
+      .counter {
+        flex: 1 1 auto;
+
+        .counter-number {
+          color: var(--color_brand);
+          font-size: 19px;
+          font-weight: 600;
+        }
+        .counter-label {
+          color: $black;
+          font-size: 13px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .placeholder-widget {
+    border-color: $white;
+  }
+
+  .activity-stream {
+    .status__avatar {
+      border-radius: 50%;
+      overflow: hidden;
+    }
   }
 }

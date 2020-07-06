@@ -194,6 +194,8 @@ class MediaAttachment < ApplicationRecord
   scope :local,      -> { where(remote_url: '') }
   scope :remote,     -> { where.not(remote_url: '') }
   scope :cached,     -> { remote.where.not(file_file_name: nil) }
+  scope :image_type, -> { where(type: :image) }
+  scope :video_type, -> { where(type: :video) }
 
   default_scope { order(id: :asc) }
 

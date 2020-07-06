@@ -87,6 +87,8 @@ Rails.application.routes.draw do
 
   get '/@:username', to: 'accounts#show', as: :short_account
   get '/@:username/with_replies', to: 'accounts#show', as: :short_account_with_replies
+  get '/@:username/photos', to: 'accounts#show', as: :short_account_photos
+  get '/@:username/videos', to: 'accounts#show', as: :short_account_videos
   get '/@:username/media', to: 'accounts#show', as: :short_account_media
   get '/@:username/tagged/:tag', to: 'accounts#show', as: :short_account_tag
   get '/@:account_username/:id', to: 'statuses#show', as: :short_account_status

@@ -1,7 +1,9 @@
 - proofs = account.identity_proofs.active
 - fields = account.fields
 
-.public-account-bio
+.public-account-bio.br1
+  .public-account-bio__title
+    = t('accounts.about')
   - unless fields.empty? && proofs.empty?
     .account__header__fields
       - proofs.each do |proof|
@@ -24,6 +26,7 @@
 
   - if account.note.present?
     .account__header__content.emojify= Formatter.instance.simplified_format(account, custom_emojify: true)
+    %hr
 
   .public-account-bio__extra
     = t 'accounts.joined', date: l(account.created_at, format: :month)

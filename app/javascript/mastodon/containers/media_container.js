@@ -8,6 +8,7 @@ import { getScrollbarWidth } from 'mastodon/utils/scrollbar';
 import MediaGallery from 'mastodon/components/media_gallery';
 import Poll from 'mastodon/components/poll';
 import Hashtag from 'mastodon/components/hashtag';
+import ExternalTrend from 'mastodon/components/external_trend';
 import ModalRoot from 'mastodon/components/modal_root';
 import MediaModal from 'mastodon/features/ui/components/media_modal';
 import Video from 'mastodon/features/video';
@@ -17,7 +18,7 @@ import Audio from 'mastodon/features/audio';
 const { localeData, messages } = getLocale();
 addLocaleData(localeData);
 
-const MEDIA_COMPONENTS = { MediaGallery, Video, Card, Poll, Hashtag, Audio };
+const MEDIA_COMPONENTS = { MediaGallery, Video, Card, Poll, Hashtag, Audio, ExternalTrend };
 
 export default class MediaContainer extends PureComponent {
 
@@ -64,13 +65,14 @@ export default class MediaContainer extends PureComponent {
           {[].map.call(components, (component, i) => {
             const componentName = component.getAttribute('data-component');
             const Component = MEDIA_COMPONENTS[componentName];
-            const { media, card, poll, hashtag, ...props } = JSON.parse(component.getAttribute('data-props'));
+            const { media, card, poll, hashtag, trends, ...props } = JSON.parse(component.getAttribute('data-props'));
 
             Object.assign(props, {
               ...(media   ? { media:   fromJS(media)   } : {}),
               ...(card    ? { card:    fromJS(card)    } : {}),
               ...(poll    ? { poll:    fromJS(poll)    } : {}),
               ...(hashtag ? { hashtag: fromJS(hashtag) } : {}),
+              ...(trends  ? { trends:  fromJS(trends) } : {}),
 
               ...(componentName === 'Video' ? {
                 onOpenVideo: this.handleOpenVideo,

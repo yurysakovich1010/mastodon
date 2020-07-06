@@ -55,6 +55,7 @@ en:
     user_count_before: Home to
     what_is_mastodon: What is Mastodon?
   accounts:
+    about: About
     choices_html: "%{name}'s choices:"
     endorsements_hint: You can endorse people you follow from the web interface, and they will show up here.
     featured_tags_hint: You can feature specific hashtags that will be displayed here.
@@ -63,7 +64,7 @@ en:
       one: Follower
       other: Followers
     following: Following
-    joined: Joined %{date}
+    joined: Member since %{date}
     last_active: last active
     link_verified_on: Ownership of this link was checked on %{date}
     media: Media
@@ -76,8 +77,8 @@ en:
     pin_errors:
       following: You must be already following the person you want to endorse
     posts:
-      one: Toot
-      other: Toots
+      one: Post
+      other: Posts
     posts_tab_heading: Toots
     posts_with_replies: Toots and replies
     reserved_username: The username is reserved
@@ -88,6 +89,11 @@ en:
       moderator: Mod
     unavailable: Profile unavailable
     unfollow: Unfollow
+    timeline: Timeline
+    comments: Comments
+    photos: Photos
+    videos: Videos
+    edit_profile: Edit Profile
   admin:
     account_actions:
       action: Perform action
