@@ -21,7 +21,7 @@ class Auth::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def set_body_classes
-    @body_classes = 'lighter'
+    @body_classes = ''
   end
 
   def after_resending_confirmation_instructions_path_for(_resource_name)
