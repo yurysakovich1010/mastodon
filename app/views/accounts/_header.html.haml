@@ -37,16 +37,18 @@
 
       .d-flex
         .public-account-header__tabs__tabs
-          .public-account-header__tabs__tab.active{ class: active_nav_class(short_account_url(account)) }
-            = t('accounts.timeline')
+          .public-account-header__tabs__tab{ class: active_nav_class(short_account_url(account)) }
+            = link_to short_account_url(account), class: 'decoration-none' do
+              = t('accounts.timeline')
           .public-account-header__tabs__tab{ class: active_nav_class(short_account_with_replies_url(account)) }
-            = t('accounts.comments')
-          .public-account-header__tabs__tab
-            /{ class: active_nav_class(account_photos_url(account)) }
-            = t('accounts.photos')
-          .public-account-header__tabs__tab
-            /{ class: active_nav_class(account_videos_url(account)) }
-            = t('accounts.videos')
+            = link_to short_account_with_replies_url(account), class: 'decoration-none' do
+              = t('accounts.comments')
+          .public-account-header__tabs__tab{ class: active_nav_class(short_account_photos_url(account)) }
+            = link_to short_account_photos_url(account), class: 'decoration-none' do
+              = t('accounts.photos')
+          .public-account-header__tabs__tab{ class: active_nav_class(short_account_videos_url(account)) }
+            = link_to short_account_videos_url(account), class: 'decoration-none' do
+              = t('accounts.videos')
         .spacer
         - if user_signed_in?
           .public-account-header__tabs__edit-profile.d-flex.align-items-center.mr2

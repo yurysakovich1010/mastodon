@@ -1402,9 +1402,14 @@ body {
     align-items: center;
     margin-right: 5px;
     padding: 5px 15px;
+    border-bottom: 4px solid transparent;
 
     &.active {
-      border-bottom: 4px solid #08083f;
+      border-color: #08083f;
+    }
+
+    a {
+      color: inherit;
     }
   }
   .public-account-header__tabs__edit-profile {

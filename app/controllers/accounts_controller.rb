@@ -32,9 +32,6 @@ class AccountsController < ApplicationController
 
         @pinned_statuses = cache_collection(@account.pinned_statuses, Status) if show_pinned_statuses?
         @statuses        = filtered_status_page
-        puts('filtered_status_page-----------------------------------------------------start ------------------------')
-        puts(filtered_status_page)
-        puts('filtered_status_page--------------------------------------------------- end ---------------------------')
         @statuses        = cache_collection(@statuses, Status)
         @rss_url         = rss_url
 
@@ -71,21 +68,12 @@ class AccountsController < ApplicationController
   end
 
   def filtered_statuses
-    puts('tag_requested?')
-    puts(tag_requested?)
-    puts('videos_requested??')
-    puts(videos_requested?)
-    puts('photos_requested??')
-    puts(photos_requested?)
-    puts('media_requested??')
-    puts(media_requested?)
-    puts('replies_requested??')
-    puts(replies_requested?)
     default_statuses.tap do |statuses|
       statuses.merge!(hashtag_scope)    if tag_requested?
       statuses.merge!(only_videos_scope) if videos_requested?
       statuses.merge!(only_photos_scope) if photos_requested?
       statuses.merge!(only_media_scope) if media_requested?
+      statuses.merge!(replies_scope) if replies_requested?
       statuses.merge!(no_replies_scope) unless replies_requested?
     end
   end
@@ -161,6 +149,10 @@ class AccountsController < ApplicationController
       short_account_tag_url(@account, params[:tag], max_id: max_id, min_id: min_id)
     elsif media_requested?
       short_account_media_url(@account, max_id: max_id, min_id: min_id)
+    elsif photos_requested?
+      short_account_photos_url(@account, max_id: max_id, min_id: min_id)
+    elsif videos_requested?
+      short_account_videos_url(@account, max_id: max_id, min_id: min_id)
     elsif replies_requested?
       short_account_with_replies_url(@account, max_id: max_id, min_id: min_id)
     else
