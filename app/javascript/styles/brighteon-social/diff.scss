@@ -1375,6 +1375,46 @@ body {
   .overflow-y-auto {
     overflow-y: auto;
   }
+  .introduction {
+    background: unset;
+
+    .react-swipeable-view-container > * {
+      align-items: stretch;
+      height: unset;
+    }
+
+    .introduction__dots {
+      .introduction__dot {
+        background-color: #1c4994;
+
+        &.active {
+          background-color: $white;
+        }
+      }
+    }
+
+    .introduction__action {
+      button {
+        background-color: #39b54a;
+      }
+    }
+
+    .introduction__text {
+      border: none;
+
+      h3 {
+        text-transform: uppercase;
+      }
+
+      h3, p {
+        color: #333333;
+      }
+    }
+
+    .introduction__text--columnized > div {
+      padding: 25px 25px 10px;
+    }
+  }
 }
 
 .profile {
