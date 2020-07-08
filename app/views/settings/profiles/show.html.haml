@@ -2,7 +2,7 @@
   = t('settings.edit_profile')
 
 - content_for :heading_actions do
-  = button_tag t('generic.save_changes'), class: 'button', form: 'edit_profile'
+  = button_tag t('generic.save_changes'), class: 'button primary-button', form: 'edit_profile'
 
 = simple_form_for @account, url: settings_profile_path, html: { method: :put, id: 'edit_profile' } do |f|
   = render 'shared/error_messages', object: @account
@@ -53,10 +53,10 @@
       .input-copy
         .input-copy__wrapper
           %input{ type: :text, maxlength: '999', spellcheck: 'false', readonly: 'true', value: link_to('Mastodon', ActivityPub::TagManager.instance.url_for(@account), rel: 'me').to_str }
-        %button{ type: :button }= t('generic.copy')
+        %button{ type: :button, class: 'primary-button' }= t('generic.copy')
 
   .actions
-    = f.button :button, t('generic.save_changes'), type: :submit
+    = f.button :button, t('generic.save_changes'), type: :submit, class: 'button primary-button'
 
 %hr/
 

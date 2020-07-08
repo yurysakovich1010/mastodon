@@ -792,7 +792,7 @@ html {
 
 // ------------------------------- customize ---------------------------------------
 
-body {
+body, body.admin {
   font-family: mastodon-font-display;
   background-image: url('../images/brighteon-social/about/bg_pattern.png'), -webkit-gradient(linear, 0 0, 0 bottom, from(#2040a4), to(#000a3d));
   background-image: url('../images/brighteon-social/about/bg_pattern.png'), -moz-linear-gradient(#2040a4, #000a3d);
@@ -802,6 +802,51 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
+}
+
+.block-button.primary-button, button.primary-button, .button.primary-button {
+  background-color: #39b54a;
+
+  &:hover {
+    background-color: lighten(#39b54a, 5%);
+  }
+}
+
+.simple_form {
+  .input.with_label {
+    .label_input > label {
+      color: $white;
+    }
+  }
+
+  .hint code {
+    color: $ui-highlight-color;
+  }
+}
+
+body .muted-hint a, .admin-wrapper .content .muted-hint a {
+  color: #fd9300;
+}
+
+.card__bar {
+  background-color: #08083f;
+
+  .display-name strong {
+    color: $white;
+  }
+}
+
+.card > a:hover .card__bar {
+  background-color: #050528;
+}
+
+.table th, .table td {
+  background-color: #2a53d2;
+  color: $white;
+}
+
+.table > tbody > tr:nth-child(odd) > td, .table > tbody > tr:nth-child(odd) > th {
+  background: lighten(#2a53d2, 5%);
 }
 
 .public-layout {
@@ -1393,12 +1438,6 @@ body {
       }
     }
 
-    .introduction__action {
-      button {
-        background-color: #39b54a;
-      }
-    }
-
     .introduction__text {
       border: none;
 
@@ -1413,6 +1452,67 @@ body {
 
     .introduction__text--columnized > div {
       padding: 25px 25px 10px;
+    }
+  }
+}
+
+.admin {
+  .admin-wrapper {
+    .sidebar-wrapper__inner {
+      background: unset;
+    }
+
+    .sidebar {
+      & > ul > li > a.selected {
+        background-color: #2a53d2;
+
+        & + ul {
+          border-radius: 0;
+          background-color: #2a53d2;
+
+          & > li.selected > a {
+            background-color: #3366ff;
+          }
+        }
+      }
+
+      ul a:hover {
+        background-color: #3366ff;
+        color: $white;
+      }
+    }
+
+    .content {
+      .fields-group h6 {
+        color: $white;
+      }
+      p strong {
+        color: $white;
+      }
+      .filters {
+        .filter-subset {
+          strong, a.selected {
+            color: $white;
+            border-color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  .simple_form {
+    .recommended {
+      color: $white;
+      border-color: $white;
+      background-color: transparent;
+    }
+
+    .input.with_floating_label .label_input > label,
+    .input.radio_buttons .radio label,
+    .input.with_label.file .label_input__wrapper > input,
+    .hint a,
+    .input.with_block_label label {
+      color: $white;
     }
   }
 }
