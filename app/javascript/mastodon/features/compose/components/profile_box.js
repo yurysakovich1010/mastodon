@@ -1,20 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { defineMessages, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import Avatar from '../../../components/avatar';
 import Permalink from '../../../components/permalink';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { makeGetAccount } from 'mastodon/selectors';
 import { shortNumberFormat } from 'mastodon/utils/numbers';
-
-const messages = defineMessages({
-  edit_profile: { id: 'account.edit_profile', defaultMessage: 'Edit profile' },
-  followers: { id: 'account.followers', defaultMessage: 'Followers' },
-  followers: { id: 'account.following', defaultMessage: 'Following' },
-});
-
 
 const makeMapStateToProps = () => {
   const getAccount = makeGetAccount();
@@ -31,6 +24,7 @@ class ProfileBox extends ImmutablePureComponent {
 
   static propTypes = {
     account: ImmutablePropTypes.map.isRequired,
+    fullAccount: ImmutablePropTypes.map.isRequired,
   };
 
   render () {
@@ -58,7 +52,7 @@ class ProfileBox extends ImmutablePureComponent {
                 <FormattedMessage id='account.followers' defaultMessage='Followers' />
               </div>
               <div>
-                { shortNumberFormat(this.props.fullAccount.get('followers_count')) }
+                {/*{ shortNumberFormat(this.props.fullAccount.get('followers_count')) }*/}
               </div>
             </div>
             <div className='text-align-center'>
@@ -66,7 +60,7 @@ class ProfileBox extends ImmutablePureComponent {
                 <FormattedMessage id='account.following' defaultMessage='Following' />
               </div>
               <div>
-                { shortNumberFormat(this.props.fullAccount.get('following_count')) }
+                {/*{ shortNumberFormat(this.props.fullAccount.get('following_count')) }*/}
               </div>
             </div>
           </div>

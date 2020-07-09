@@ -1,0 +1,44 @@
+- content_for :page_title do
+  = t('privacy.title', instance: site_hostname)
+
+- content_for :header_tags do
+  = javascript_pack_tag 'public', integrity: true, crossorigin: 'anonymous'
+  = render partial: 'shared/og'
+
+- content_for :header do
+  .header.m-auto
+    .nav-left
+      %ul.landing__menu
+        %li.menu_item= t('menu.home')
+        %li.menu_item= t('menu.about')
+        %li.menu_item= t('menu.live_stream')
+        %li.menu_item= t('menu.discover_users')
+
+    .nav-right
+      = link_to root_path, class: 'btn button button-primary back-to-landing' do
+        = t('generic.back_to_link', link: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
+
+- content_for :footer do
+  .d-flex
+    %div
+      %span
+        = Time.new.year
+      %span.text-capitalize.mr3
+        = site_hostname
+      %span.text-capitalize
+        = t 'footer.all_rights_reserved'
+    .spacer
+    %div
+      %span.mr3
+        = link_to t('about.privacy_policy'), privacy_path, class: 'decoration-none'
+      %span
+        = link_to t('about.terms'), terms_path, class: 'decoration-none'
+
+.about-more
+  .content-overlay.br1
+    %div.overlay
+    %div.content
+      %div
+        = image_tag @instance_presenter.hero&.file&.url || @instance_presenter.thumbnail&.file&.url || asset_pack_path('media/images/brighteon-social/logo.png'), alt: @instance_presenter.site_title
+      %div
+        = t('privacy.body_html', privacy_path: privacy_path, terms_path: terms_path)
