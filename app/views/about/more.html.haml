@@ -30,7 +30,7 @@
     .spacer
     %div
       %span.mr3
-        = link_to t('about.privacy_policy'), terms_path, class: 'decoration-none'
+        = link_to t('about.privacy_policy'), privacy_path, class: 'decoration-none'
       %span
         = link_to t('about.terms'), terms_path, class: 'decoration-none'
 
@@ -41,4 +41,4 @@
       %div
         = image_tag @instance_presenter.hero&.file&.url || @instance_presenter.thumbnail&.file&.url || asset_pack_path('media/images/brighteon-social/logo.png'), alt: @instance_presenter.site_title
       %div
-        = t('about_more.content_html', privacy_path: terms_path, terms_path: terms_path)
+        = t('about_more.content_html', privacy_path: privacy_path, terms_path: terms_path)

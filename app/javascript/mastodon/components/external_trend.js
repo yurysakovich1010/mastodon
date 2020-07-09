@@ -4,9 +4,17 @@ import { FormattedMessage } from 'react-intl';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Permalink from './permalink';
 import { shortNumberFormat } from '../utils/numbers';
+import axios from 'axios';
 
 const ExternalTrend = ({ trends }) => {
   const url = trends.get('url');
+  axios.get(url)
+    .then(function(data) {
+      console.log('data', data);
+    })
+    .catch(function (error) {
+      console.log('error', error);
+    })
 
   // Adding the script tag to the head as suggested before
   let head = document.head;

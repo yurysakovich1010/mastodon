@@ -24,6 +24,8 @@ class AboutController < ApplicationController
 
   def terms; end
 
+  def privacy; end
+
   helper_method :display_blocks?
   helper_method :display_blocks_rationale?
   helper_method :public_fetch_mode?

@@ -498,6 +498,7 @@ Rails.application.routes.draw do
   get '/about',        to: 'about#show'
   get '/about/more',   to: 'about#more'
   get '/terms',        to: 'about#terms'
+  get '/privacy',      to: 'about#privacy'
 
   get '/landing',      to: 'landing#show'
   get '/contact',      to: 'contact#index'

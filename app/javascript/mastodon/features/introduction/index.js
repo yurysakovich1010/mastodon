@@ -18,7 +18,7 @@ const FrameWelcome = ({ domain, onNext }) => (
     </div>
 
     <div className='introduction__action'>
-      <button className='button' onClick={onNext}><FormattedMessage id='introduction.welcome.action' defaultMessage="Let's go!" /></button>
+      <button className='button primary-button' onClick={onNext}><FormattedMessage id='introduction.welcome.action' defaultMessage="Let's go!" /></button>
     </div>
   </div>
 );
@@ -50,7 +50,7 @@ const FrameFederation = ({ onNext }) => (
     </div>
 
     <div className='introduction__action'>
-      <button className='button' onClick={onNext}><FormattedMessage id='introduction.federation.action' defaultMessage='Next' /></button>
+      <button className='button primary-button' onClick={onNext}><FormattedMessage id='introduction.federation.action' defaultMessage='Next' /></button>
     </div>
   </div>
 );
@@ -81,7 +81,7 @@ const FrameInteractions = ({ onNext }) => (
     </div>
 
     <div className='introduction__action'>
-      <button className='button' onClick={onNext}><FormattedMessage id='introduction.interactions.action' defaultMessage='Finish toot-orial!' /></button>
+      <button className='button primary-button' onClick={onNext}><FormattedMessage id='introduction.interactions.action' defaultMessage='Finish toot-orial!' /></button>
     </div>
   </div>
 );
