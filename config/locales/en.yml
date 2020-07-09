@@ -1185,9 +1185,9 @@ en:
     does_not_match_previous_name: does not match the previous name
   terms:
     body_html: |
-      <h1 class="text-uppercase">Terms of use</h1>
-      <strong>Last updated: 6/23/2020</h3>
-      <h3 class="text-uppercase">Agreement to terms</h3>
+      <h1 class="text-uppercase mb3 mt5">Terms of use</h1>
+      <h3 class="mb5">Last updated: 6/23/2020</h3>
+      <h2 class="text-uppercase mb3">Agreement to terms</h3>
 
       <p>
         These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and Brighteon Media Inc. ("Company", “we”, “us”, or “our”), concerning your access to and use of the https://brighteon.social/ website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”). You agree that by accessing the Site, you have read, understood, and agreed to be bound by all of these Terms of Use. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS OF USE, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.
@@ -1203,7 +1203,7 @@ en:
 
       <hr class="spacer" />
 
-      <h3 class="text-uppercase">User representations</h3>
+      <h2 class="text-uppercase">User representations</h2>
 
       <p>
         By using the Site, you represent and warrant that:  (1) you have the legal capacity and you agree to comply with these Terms of Use; (2) you are not a minor in the jurisdiction in which you reside; (3) you will not access the Site through automated or non-human means, whether through a bot, script, or otherwise; (4) you will not use the Site for any illegal or unauthorized purpose; and (5) your use of the Site will not violate any applicable law or regulation.
@@ -1215,76 +1215,443 @@ en:
 
       <hr class="spacer" />
 
-      <h4>
+      <h3>
         Disallowed content on Brighteon.Social
+      </h3>
+
+      <p>
+        Content that is subject to being delisted or banned includes (but is not limited to):
+      </p>
+
+      <hr class="spacer" />
+
+      <h4>
+        1) CONTENT WHICH VIOLATES FEDERAL LAW
       </h4>
 
+      <p>
+        Because Brighteon.Social operates inside the United States, it must abide by U.S. laws concerning the legality of content. Brighteon.Social disallows content which promotes or advocates criminal acts such as bomb-making, terrorism, death threats, arson, child porn and so on. This is not a complete list.
+      </p>
 
+      <p>
+        Where federal law is unconstitutional or stands in violation of basic human rights -- such as federal prohibition of cannabis -- Brighteon.Social sides with Natural Law, which supersedes artificial government laws. In other words, Brighteon.Social welcomes -- but does not specifically recruit or call for -- videos depicting the hydroponic production of cannabis, for example, even in regions where federal law prohibits possession of cannabis. This is because such federal laws stand in violation of basic human rights (access to natural plant medicine).
+      </p>
+
+      <p>
+        Similarly, because the right to self-defense is a Natural Law reflected throughout Mother Nature, Brighteon.Social welcomes -- but does not specifically recruit or call for -- videos depicting the possession of firearms for the purpose of self-defense, even if filmed or uploaded from regions where such possession may be deemed illegal by applicable law.
+      </p>
+
+      <hr class="spacer" />
+
+      <h4>
+        2) CONTENT WHICH VIOLATES LOCAL LAW IN THE LOCAL JURISDICTION
+      </h4>
+
+      <p>
+        Brighteon.Social geo-restricts content which has been deemed illegal in local jurisdictions. For example, "Holocaust denial" videos -- a term which is not well defined even by those who ban such videos -- are geo-restricted in 15 countries where denial of the Holocaust has been deemed a criminal offense.
+      </p>
+
+      <p>
+        Other countries have blasphemy laws against mocking religious leaders, and for that reason, such videos are geo-restricted in those countries.
+      </p>
+
+      <p>
+        In order for the Brighteon.Social platform to continue to exist in these countries. Brighteon.Social takes active steps to geo-restrict videos that are believed to violate local or national laws.
+      </p>
+
+      <hr class="spacer" />
+
+      <h4>
+        3) CONTENT WHICH ADVOCATES VIOLENT AGGRESSION - OR GROUPS ESPOUSING VIOLENT AGGRESSION - TOWARD PEOPLE OR ORGANIZATIONS THAT DON'T DESERVE IT
+      </h4>
+
+      <p>
+        Brighteon.Social supports freedom of speech with reasonable limits. For example, content which promotes racist KKK activities or organizations with a history of advocating violent aggression (such as Antifa or the DEA) are not allowed, unless posted in the context of news, criticism or public commentary on such activities (subject to review and interpretation by Brighteon.Social).
+      </p>
+
+      <p>
+        In contrast to the above, depictions of violence in the context of protecting life or liberty is allowed. For example, a video of citizen shooting an attacker in self-defense is allowed.
+      </p>
+
+      <p>
+        Similarly, if a violent Antifa terrorist is caught on video bashing people on their skulls using a bike lock (their favorite weapon), and an armed patriot shoots the Antifa terrorist in the face with a .45 auto in an act of self-defense, that video will certainly be allowed.
+      </p>
+
+      <hr class="spacer" />
+
+      <h4>
+        4) CONTENT WHICH PROMOTES OR DEPICTS CRUELTY AGAINST LIVING BEINGS
+      </h4>
+
+      <p>
+        No content is allowed which depicts cruelty against living beings, including unjustified animal cruelty or human torture. These acts are widely considered to be criminal acts, and videos depicting such acts are not allowed on Brighteon.Social. Hunting videos are allowed if they do not depict the suffering of animals. Self-defense shooting videos are allowed if the defensive shooting is justified to halt violence or for purposes of public education to help teach individuals how to defend their life, liberty and property against violent aggressors.
+      </p>
+
+      <p>
+        This section also covers content which promotes suicide, mass shootings, etc. For example, if a disturbed teenager posts a video claiming he is taking antidepressant drugs and feels like shooting up his local school with a shotgun, such a video would be disallowed. The interpretation of this is up to Brighteon.Social personnel and may be subject to change, depending on a variety of factors, including compliance with local laws.
+      </p>
+
+      <hr class="spacer" />
+
+      <h4>
+        5) CONTENT DEEMED GENOCIDAL / ANTI-HUMAN / EXTREMELY DANGEROUS TO SOCIETY
+      </h4>
+
+      <p>
+        Content that promotes harmful ideologies that have historically lead to genocide or mass murder is not allowed. For this reason, content promoting Marxism, socialism, Satanism, communism and other harmful belief systems is not allowed on Brighteon.Social. (Such ideologies have resulted in the deaths of over 262 million people worldwide in the last century.)
+      </p>
+
+      <p>
+        The interpretation of this rule will be in the sole discretion of Brighteon.Social, which strives to protect speech to the fullest. Nevertheless, use of the Brighteon.Social platform to promote anti-human, genocidal or extremely harmful ideologies that have been historically tied to mass human suffering and murder is not allowed.
+      </p>
+
+      <h4>
+        NOTE: POLICY ON CRYPTOCURRENCY CONTENT:
+      </h4>
+
+      <p>
+        Brighteon.Social supports "decentralization" innovation, which includes cryptocurrencies. Brighteon.Social’s overall policy is to allow open discussion of cryptocurrencies, ICOs and the decentralization of money, and it is generally our belief that end users bear the burden of taking responsibility for their own actions when it comes to making financial decisions. At the same time, Brighteon.Social reserves the right to ban or de-list videos which are deemed to be promoting a fraudulent scam of any kind, which in the interpretation of Brighteon.Social may subject its public viewers to risk of being defrauded or scammed. For example, videos posted by "Nigerian inheritance scammers" would of course be banned.
+      </p>
+
+      <hr class="spacer" />
+
+      <h4>
+        6) CONTENT WHICH ATTACKS, SLANDERS OR SMEARS OTHER MEMBERS OF BRIGHTEON.SOCIAL
+      </h4>
+
+      <p>
+        In the interests of civility, we aim to provide a platform from which independent media personalities may post videos without fear of being unfairly attacked or defamed by others on the same platform. In essence, we aim to provide a platform where each individual has a right to speak without being viciously attacked, shouted down or heckled by other members on the platform who seemingly don't have their own ideas (but have plenty of time to attack everyone else).
+      </p>
+
+      <p>
+        In addition, we fully recognize that government-run operatives will attempt to launch thousands of sock puppet accounts and post videos to smear indy media personalities and sow discord.
+      </p>
+
+      <p>
+        In order to help halt sock puppet "slander videos" targeting indy media, we are launching Brighteon.Social with an unusual rule, which is that no content may attack, by name, other members of Brighteon.Social except in limited circumstances in which the person being attacked is irrefutably involved in disinfo, fraud, criminal behavior or other egregious activities that harm society as a whole (this is all subject to interpretation by Brighteon.Social moderators).
+      </p>
+
+      <p>
+        In addition, videos which sharply criticize big government bureaucrats, the fake news media, corrupt lawmakers and other elements of the "establishment" are welcomed, but not specifically encouraged. This includes education, science, medicine, law, Wall Street and more.
+      </p>
+
+      <hr class="spacer" />
+
+      <h4>
+        7) CONTENT FROM ANONYMOUS SOURCES*
+      </h4>
+
+      <p>
+        The point of this rule, which is of course subject to change, is to halt anonymous troll videos which are primarily posted by government-funded operatives attempting to discredit independent media and decentralized technology companies they don't control.
+      </p>
+
+      <p>
+        We also believe that an individual who is accused of something should be able to face their accuser and identify them. Thus, anonymous accusations are generally disallowed except in very limited circumstances.
+      </p>
+
+      <p>
+        * Certain accounts may be granted whistleblower status via a process we are not making public. This is reserved for truly anonymous sources in the vein of Wikileaks or similar organizations whose lives would be jeopardized by their identities being known.
+      </p>
+
+      <hr class="spacer" />
+
+      <h4>
+        8) CONTENT BELIEVED TO BE POSTED BY DEEP STATE OPERATIVES FOR THE PURPOSE OF SPREADING DISINFORMATION
+      </h4>
+
+      <p>
+        For obvious reasons, this category of disallowed content is difficult to define. Essentially, Brighteon.Social recognizes that deep state operators running "sock puppet" accounts will attempt to infiltrate and exploit the Brighteon.Social platform to sow chaos, distrust and paranoia across independent media. Any videos which Brighteon.Social believes to be engaged in such tactics may be subject to being de-listed or banned.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        USER GENERATED CONTRIBUTIONS
+      </h3>
+
+      <p>
+        Contributions may be viewable by other users of the Site and through third-party websites. As such, any Contributions you transmit may be treated in accordance with the Site Privacy Policy. When you create or make available any Contributions, you thereby represent and warrant that:
+      </p>
+
+      <p>
+        <ul class="numeric-list">
+          <li>
+            The creation, distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.
+          </li>
+          <li>
+            You are the creator and owner of or have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, the Site, and other users of the Site to use your Contributions in any manner contemplated by the Site and these Terms of Use.
+          </li>
+          <li>
+            You have the written consent, release, and/or permission of each and every identifiable individual person in your Contributions to use the name or likeness of each and every such identifiable individual person to enable inclusion and use of your Contributions in any manner contemplated by the Site and these Terms of Use.
+          </li>
+          <li>
+            Your Contributions are not false, inaccurate, or misleading.
+          </li>
+          <li>
+            Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.
+          </li>
+          <li>
+            Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable (as determined by us).
+          </li>
+          <li>
+            Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.
+          </li>
+          <li>
+            Your Contributions do not advocate the violent overthrow of any government or incite, encourage, or threaten physical harm against another.
+          </li>
+          <li>
+            Your Contributions do not violate any applicable law, regulation, or rule.
+          </li>
+          <li>
+            Your Contributions do not violate the privacy or publicity rights of any third party.
+          </li>
+          <li>
+            Your Contributions do not contain any material that solicits personal information from anyone under the age of 18 or exploits people under the age of 18 in a sexual or violent manner.
+          </li>
+          <li>
+            Your Contributions do not violate any applicable law concerning child pornography, or otherwise intended to protect the health or well-being of minors;
+          </li>
+          <li>
+            Your Contributions do not include any offensive comments that are connected to race, national origin, gender, sexual preference, or physical handicap.
+          </li>
+          <li>
+            Your Contributions do not otherwise violate, or link to material that violates, any provision of these Terms of Use, or any applicable law or regulation.
+          </li>
+        </ul>
+      </p>
+
+      <p>
+        Any use of the Site in violation of the foregoing violates these Terms of Use and may result in, among other things, termination or suspension of your rights to use the Site.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        CONTRIBUTION LICENSE
+      </h3>
+
+      <p>
+        You and the Site agree that we may access, store, process, and use any information and personal data that you provide following the terms of the Privacy Policy and your choices (including settings).
+      </p>
+
+      <p>
+        By submitting suggestions or other feedback regarding the Site, you agree that we can use and share such feedback for any purpose without compensation to you.
+      </p>
+
+      <p>
+        We do not assert any ownership over your Contributions. You retain full ownership of all of your Contributions and any intellectual property rights or other proprietary rights associated with your Contributions. We are not liable for any statements or representations in your Contributions provided by you in any area on the Site. You are solely responsible for your Contributions to the Site and you expressly agree to exonerate us from any and all responsibility and to refrain from any legal action against us regarding your Contributions.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        SUBMISSIONS
+      </h3>
+
+      <p>
+        You acknowledge and agree that any questions, comments, suggestions, ideas, feedback, or other information regarding the Site ("Submissions") provided by you to us are non-confidential and shall become our sole property. We shall own exclusive rights, including all intellectual property rights, and shall be entitled to the unrestricted use and dissemination of these Submissions for any lawful purpose, commercial or otherwise, without acknowledgment or compensation to you. You hereby waive all moral rights to any such Submissions, and you hereby warrant that any such Submissions are original with you or that you have the right to submit such Submissions. You agree there shall be no recourse against us for any alleged or actual infringement or misappropriation of any proprietary right in your Submissions.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        SITE MANAGEMENT
+      </h3>
+
+      <p>
+        We reserve the right, but not the obligation, to: (1) monitor the Site for violations of these Terms of Use; (2) take appropriate legal action against anyone who, in our sole discretion, violates the law or these Terms of Use, including without limitation, reporting such user to law enforcement authorities; (3) in our sole discretion and without limitation, refuse, restrict access to, limit the availability of, or disable (to the extent technologically feasible) any of your Contributions or any portion thereof; (4) in our sole discretion and without limitation, notice, or liability, to remove from the Site or otherwise disable all files and content that are excessive in size or are in any way burdensome to our systems; and (5) otherwise manage the Site in a manner designed to protect our rights and property and to facilitate the proper functioning of the Site.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        TERM AND TERMINATION
+      </h3>
+
+      <p>
+        These terms of use shall remain in full force and effect while you use the site. Without limiting any other provision of these terms of use, we reserve the right to, in our sole discretion and without notice or liability, deny access to and use of the site (including blocking certain ip addresses), to any person for any reason or for no reason, including without limitation for breach of any representation, warranty, or covenant contained in these terms of use or of any applicable law or regulation. We may terminate your use or participation in the site or delete any content or information that you posted at any time, without warning, in our sole discretion.
+      </p>
+
+      <p>
+        If we terminate or suspend your account for any reason, you are prohibited from registering and creating a new account under your name, a fake or borrowed name, or the name of any third party, even if you may be acting on behalf of the third party. In addition to terminating or suspending your account, we reserve the right to take appropriate legal action, including without limitation pursuing civil, criminal, and injunctive redress.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        MODIFICATIONS AND INTERRUPTIONS
+      </h3>
+
+      <p>
+        We reserve the right to change, modify, or remove the contents of the Site at any time or for any reason at our sole discretion without notice. However, we have no obligation to update any information on our Site. We also reserve the right to modify or discontinue all or part of the Site without notice at any time. We will not be liable to you or any third party for any modification, price change, suspension, or discontinuance of the Site.
+      </p>
+
+      <p>
+        We cannot guarantee the Site will be available at all times. We may experience hardware, software, or other problems or need to perform maintenance related to the Site, resulting in interruptions, delays, or errors. We reserve the right to change, revise, update, suspend, discontinue, or otherwise modify the Site at any time or for any reason without notice to you. You agree that we have no liability whatsoever for any loss, damage, or inconvenience caused by your inability to access or use the Site during any downtime or discontinuance of the Site. Nothing in these Terms of Use will be construed to obligate us to maintain and support the Site or to supply any corrections, updates, or releases in connection therewith.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        GOVERNING LAW
+      </h3>
+
+      <p>
+        Brighteon.Social stores and maintains user information as described in our Privacy Policy and our User Terms of Service.
+      </p>
+
+      <p>
+        We can't guarantee that the information described in the Privacy Policy or Terms of Service will be available for any given user. Brighteon.Social doesn't necessarily maintain a copy of the video or other information a user saves to Brighteon.Social.
+      </p>
+
+      <p>
+        What does Brighteon.Social require to produce user information?
+      </p>
+
+      <p>
+        For U.S. Law Enforcement: You must obtain a valid subpoena, court order or search warrant ("Law Enforcement Request") to compel Brighteon.Social to provide any user's information. To compel Brighteon.Social to provide any user's content, you must obtain a valid search warrant. Brighteon.Social will verify all such warrants before acting on them.
+      </p>
+
+      <p>
+        For Non-U.S. Law Enforcement: You can't compel Brighteon.Social to provide any user information unless you obtain a valid U.S. court order.
+      </p>
+
+      <p>
+        What does Brighteon.Social need law enforcement to share user information?
+      </p>
+
+      <p>
+        To respond to your Law Enforcement Request(s), we will need:
+      </p>
+
+      <p>
+        The applicable Law Enforcement Request we described above
+        <br />
+        The username (Brighteon.Social.com/[username]) and/or email address used to create their Brighteon.Social account
+        <br />
+        A valid return email address from an official government domain
+        <br />
+        In order to make sure your Law Enforcement Request is narrow and does not seek more information than necessary (potentially at additional cost and time), we ask for the following:
+        <br />
+        A sufficiently narrow/defined time period of the content in question;
+        <br />
+        A specific event or action that the subject is alleged to have carried out that would involve content or other information held by Brighteon.Social;
+        <br />
+        A specific reference number of your request.
+      </p>
+
+      <p>
+        Do you notify users of a Law Enforcement Request?
+      </p>
+
+      <p>
+        Yes, our policy is to notify users of Law Enforcement Requests by providing them with a complete copy of the request before producing their information to law enforcement. We may make exceptions to this policy where:
+      </p>
 
       <ul>
-        <li>To provide the core functionality of Mastodon. You can only interact with other people's content and post your own content when you are logged in. For example, you may follow other people to view their combined posts in your own personalized home timeline.</li>
-        <li>To aid moderation of the community, for example comparing your IP address with other known ones to determine ban evasion or other violations.</li>
-        <li>The email address you provide may be used to send you information, notifications about other people interacting with your content or sending you messages, and to respond to inquiries, and/or other requests or questions.</li>
+        <li>
+          we are legally prohibited from providing notice (e.g. by an order under 18 U.S.C. § 2705(b));
+        </li>
+        <li>
+          an emergency situation exists involving a danger of death or serious physical injury to a person;
+        </li>
+        <li>
+          we have reason to believe notice wouldn't go to the actual account holder (e.g. an account has been hijacked)
+        </li>
       </ul>
 
-      <hr class="spacer" />
+      <p>
+        If we receive a National Security Letter (NSL) from the U.S. government that includes an indefinite non-disclosure order, our policy is to ask the government to seek judicial review of the order pursuant to the USA FREEDOM Act.
+      </p>
 
-      <h3 id="protect">How do we protect your information?</h3>
+      <p>
+        In cases where notice isn't provided because of a court order or emergency situation, our policy is to provide notice to the user once the court order or emergency situation has expired.
+      </p>
 
-      <p>We implement a variety of security measures to maintain the safety of your personal information when you enter, submit, or access your personal information. Among other things, your browser session, as well as the traffic between your applications and the API, are secured with SSL, and your password is hashed using a strong one-way algorithm. You may enable two-factor authentication to further secure access to your account.</p>
-
-      <hr class="spacer" />
-
-      <h3 id="data-retention">What is our data retention policy?</h3>
-
-      <p>We will make a good faith effort to:</p>
-
-      <ul>
-        <li>Retain server logs containing the IP address of all requests to this server, in so far as such logs are kept, no more than 90 days.</li>
-        <li>Retain the IP addresses associated with registered users no more than 12 months.</li>
-      </ul>
-
-      <p>You can request and download an archive of your content, including your posts, media attachments, profile picture, and header image.</p>
-
-      <p>You may irreversibly delete your account at any time.</p>
-
-      <hr class="spacer"/>
-
-      <h3 id="cookies">Do we use cookies?</h3>
-
-      <p>Yes. Cookies are small files that a site or its service provider transfers to your computer's hard drive through your Web browser (if you allow). These cookies enable the site to recognize your browser and, if you have a registered account, associate it with your registered account.</p>
-
-      <p>We use cookies to understand and save your preferences for future visits.</p>
+      <p>
+        Note: Officer authored affidavits, descriptions, cover letters or similar statements are not sufficient to preclude notice to our users. You must provide a court order issued in accordance with 18 U.S.C. § 2705(b) or cite an applicable statute if you wish to prohibit user notice of your Law Enforcement Request.
+      </p>
 
       <hr class="spacer" />
 
-      <h3 id="disclose">Do we disclose any information to outside parties?</h3>
+      <h3>
+        CORRECTIONS
+      </h3>
 
-      <p>We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information. This does not include trusted third parties who assist us in operating our site, conducting our business, or servicing you, so long as those parties agree to keep this information confidential. We may also release your information when we believe release is appropriate to comply with the law, enforce our site policies, or protect ours or others rights, property, or safety.</p>
-
-      <p>Your public content may be downloaded by other servers in the network. Your public and followers-only posts are delivered to the servers where your followers reside, and direct messages are delivered to the servers of the recipients, in so far as those followers or recipients reside on a different server than this.</p>
-
-      <p>When you authorize an application to use your account, depending on the scope of permissions you approve, it may access your public profile information, your following list, your followers, your lists, all your posts, and your favourites. Applications can never access your e-mail address or password.</p>
-
-      <hr class="spacer" />
-
-      <h3 id="children">Site usage by children</h3>
-
-      <p>If this server is in the EU or the EEA: Our site, products and services are all directed to people who are at least 16 years old. If you are under the age of 16, per the requirements of the GDPR (<a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">General Data Protection Regulation</a>) do not use this site.</p>
-
-      <p>If this server is in the USA: Our site, products and services are all directed to people who are at least 13 years old. If you are under the age of 13, per the requirements of COPPA (<a href="https://en.wikipedia.org/wiki/Children%27s_Online_Privacy_Protection_Act">Children's Online Privacy Protection Act</a>) do not use this site.</p>
-
-      <p>Law requirements can be different if this server is in another jurisdiction.</p>
+      <p>
+        There may be information on the Site that contains typographical errors, inaccuracies, or omissions, including descriptions, pricing, availability, and various other information. We reserve the right to correct any errors, inaccuracies, or omissions and to change or update the information on the Site at any time, without prior notice.
+      </p>
 
       <hr class="spacer" />
 
-      <h3 id="changes">Changes to our Privacy Policy</h3>
+      <h3>
+        DISCLAIMER
+      </h3>
 
-      <p>If we decide to change our privacy policy, we will post those changes on this page.</p>
+      <p>
+        The site is provided on an as-is and as-available basis. You agree that your use of the site and our services will be at your sole risk. To the fullest extent permitted by law, we disclaim all warranties, express or implied, in connection with the site and your use thereof, including, without limitation, the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We make no warranties or representations about the accuracy or completeness of the site’s content or the content of any websites linked to the site and we will assume no liability or responsibility for any (1) errors, mistakes, or inaccuracies of content and materials, (2) personal injury or property damage, of any nature whatsoever, resulting from your access to and use of the site, (3) any unauthorized access to or use of our secure servers and/or any and all personal information and/or financial information stored therein, (4) any interruption or cessation of transmission to or from the site, (5) any bugs, viruses, trojan horses, or the like which may be transmitted to or through the site by any third party, and/or (6) any errors or omissions in any content and materials or for any loss or damage of any kind incurred as a result of the use of any content posted, transmitted, or otherwise made available via the site. We do not warrant, endorse, guarantee, or assume responsibility for any product or service advertised or offered by a third party through the site, any hyperlinked website, or any website or mobile application featured in any banner or other advertising, and we will not be a party to or in any way be responsible for monitoring any transaction between you and any third-party providers of products or services. As with the purchase of a product or service through any medium or in any environment, you should use your best judgment and exercise caution where appropriate.
+      </p>
 
-      <p>This document is CC-BY-SA. It was last updated March 7, 2018.</p>
+      <hr class="spacer" />
 
-      <p>Originally adapted from the <a href="https://github.com/discourse/discourse">Discourse privacy policy</a>.</p>
+      <h3>
+        LIMITATIONS OF LIABILITY
+      </h3>
+
+      <p>
+        In no event will we or our directors, employees, or agents be liable to you or any third party for any direct, indirect, consequential, exemplary, incidental, special, or punitive damages, including lost profit, lost revenue, loss of data, or other damages arising from your use of the site, even if we have been advised of the possibility of such damages. Notwithstanding anything to the contrary contained herein, our liability to you for any cause whatsoever and regardless of the form of the action, will at all times be limited to the lesser of the amount paid, if any, by you to us. Certain us state laws and international laws do not allow limitations on implied warranties or the exclusion or limitation of certain damages. If these laws apply to you, some or all of the above disclaimers or limitations may not apply to you, and you may have additional rights.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        INDEMNIFICATION
+      </h3>
+
+      <p>
+        You agree to defend, indemnify, and hold us harmless, including our subsidiaries, affiliates, and all of our respective officers, agents, partners, and employees, from and against any loss, damage, liability, claim, or demand, including reasonable attorneys’ fees and expenses, made by any third party due to or arising out of: (1) use of the Site; (2) breach of these Terms of Use; (3) any breach of your representations and warranties set forth in these Terms of Use; (4) your violation of the rights of a third party, including but not limited to intellectual property rights; or (5) any overt harmful act toward any other user of the Site with whom you connected via the Site. Notwithstanding the foregoing, we reserve the right, at your expense, to assume the exclusive defense and control of any matter for which you are required to indemnify us, and you agree to cooperate, at your expense, with our defense of such claims. We will use reasonable efforts to notify you of any such claim, action, or proceeding which is subject to this indemnification upon becoming aware of it.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        USER DATA
+      </h3>
+
+      <p>
+        We will maintain certain data that you transmit to the Site for the purpose of managing the performance of the Site, as well as data relating to your use of the Site. Although we perform regular routine backups of data, you are solely responsible for all data that you transmit or that relates to any activity you have undertaken using the Site. You agree that we shall have no liability to you for any loss or corruption of any such data, and you hereby waive any right of action against us arising from any such loss or corruption of such data.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        ELECTRONIC COMMUNICATIONS, TRANSACTIONS, AND SIGNATURES
+      </h3>
+
+      <p>
+        Visiting the Site, sending us emails, and completing online forms constitute electronic communications. You consent to receive electronic communications, and you agree that all agreements, notices, disclosures, and other communications we provide to you electronically, via email and on the Site, satisfy any legal requirement that such communication be in writing. YOU HEREBY AGREE TO THE USE OF ELECTRONIC SIGNATURES, CONTRACTS, ORDERS, AND OTHER RECORDS, AND TO ELECTRONIC DELIVERY OF NOTICES, POLICIES, AND RECORDS OF TRANSACTIONS INITIATED OR COMPLETED BY US OR VIA THE SITE. You hereby waive any rights or requirements under any statutes, regulations, rules, ordinances, or other laws in any jurisdiction which require an original signature or delivery or retention of non-electronic records, or to payments or the granting of credits by any means other than electronic means.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        MISCELLANEOUS
+      </h3>
+
+      <p>
+        These Terms of Use and any policies or operating rules posted by us on the Site or in respect to the Site constitute the entire agreement and understanding between you and us. Our failure to exercise or enforce any right or provision of these Terms of Use shall not operate as a waiver of such right or provision. These Terms of Use operate to the fullest extent permissible by law. We may assign any or all of our rights and obligations to others at any time. We shall not be responsible or liable for any loss, damage, delay, or failure to act caused by any cause beyond our reasonable control. If any provision or part of a provision of these Terms of Use is determined to be unlawful, void, or unenforceable, that provision or part of the provision is deemed severable from these Terms of Use and does not affect the validity and enforceability of any remaining provisions. There is no joint venture, partnership, employment or agency relationship created between you and us as a result of these Terms of Use or use of the Site. You agree that these Terms of Use will not be construed against us by virtue of having drafted them. You hereby waive any and all defenses you may have based on the electronic form of these Terms of Use and the lack of signing by the parties hereto to execute these Terms of Use.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>
+        CONTACT US
+      </h3>
+
+      <p>
+        In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at: https://support.Brighteon.Social/
+      </p>
+
     title: "%{instance} Terms of Service"
   privacy:
     body_html: |

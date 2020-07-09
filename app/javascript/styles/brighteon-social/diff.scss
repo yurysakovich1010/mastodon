@@ -849,6 +849,11 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   background: lighten(#2a53d2, 5%);
 }
 
+.numeric-list {
+  list-style: decimal;
+  padding-left: 20px;
+}
+
 .public-layout {
   min-height: inherit;
 
