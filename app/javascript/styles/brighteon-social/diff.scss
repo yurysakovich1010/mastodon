@@ -854,6 +854,15 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   padding-left: 20px;
 }
 
+.dot-list {
+  list-style: disc;
+  padding-left: 20px;
+
+  & > li {
+    margin-bottom: 8px;
+  }
+}
+
 .public-layout {
   min-height: inherit;
 

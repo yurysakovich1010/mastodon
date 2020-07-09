@@ -1187,7 +1187,7 @@ en:
     body_html: |
       <h1 class="text-uppercase mb3 mt5">Terms of use</h1>
       <h3 class="mb5">Last updated: 6/23/2020</h3>
-      <h2 class="text-uppercase mb3">Agreement to terms</h3>
+      <h2 class="text-uppercase mb3">Agreement to terms</h2>
 
       <p>
         These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity (“you”) and Brighteon Media Inc. ("Company", “we”, “us”, or “our”), concerning your access to and use of the https://brighteon.social/ website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise connected thereto (collectively, the “Site”). You agree that by accessing the Site, you have read, understood, and agreed to be bound by all of these Terms of Use. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS OF USE, THEN YOU ARE EXPRESSLY PROHIBITED FROM USING THE SITE AND YOU MUST DISCONTINUE USE IMMEDIATELY.
@@ -1649,92 +1649,292 @@ en:
       </h3>
 
       <p>
-        In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at: https://support.Brighteon.Social/
+        In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at: <a href="mailto:https://support.brighteon.social/">https://support.brighteon.social/</a>
       </p>
 
     title: "%{instance} Terms of Service"
   privacy:
     body_html: |
-      <h2>Privacy Policy</h2>
-      <h3 id="collect">What information do we collect?</h3>
+      <h1 class="text-uppercase mb3 mt5">PRIVACY NOTICE</h1>
+      <h3 class="mb5">Last updated June 18, 2020</h3>
 
-      <ul>
-        <li><em>Basic account information</em>: If you register on this server, you may be asked to enter a username, an e-mail address and a password. You may also enter additional profile information such as a display name and biography, and upload a profile picture and header image. The username, display name, biography, profile picture and header image are always listed publicly.</li>
-        <li><em>Posts, following and other public information</em>: The list of people you follow is listed publicly, the same is true for your followers. When you submit a message, the date and time is stored as well as the application you submitted the message from. Messages may contain media attachments, such as pictures and videos. Public and unlisted posts are available publicly. When you feature a post on your profile, that is also publicly available information. Your posts are delivered to your followers, in some cases it means they are delivered to different servers and copies are stored there. When you delete posts, this is likewise delivered to your followers. The action of reblogging or favouriting another post is always public.</li>
-        <li><em>Direct and followers-only posts</em>: All posts are stored and processed on the server. Followers-only posts are delivered to your followers and users who are mentioned in them, and direct posts are delivered only to users mentioned in them. In some cases it means they are delivered to different servers and copies are stored there. We make a good faith effort to limit the access to those posts only to authorized persons, but other servers may fail to do so. Therefore it's important to review servers your followers belong to. You may toggle an option to approve and reject new followers manually in the settings. <em>Please keep in mind that the operators of the server and any receiving server may view such messages</em>, and that recipients may screenshot, copy or otherwise re-share them. <em>Do not share any dangerous information over Mastodon.</em></li>
-        <li><em>IPs and other metadata</em>: When you log in, we record the IP address you log in from, as well as the name of your browser application. All the logged in sessions are available for your review and revocation in the settings. The latest IP address used is stored for up to 12 months. We also may retain server logs which include the IP address of every request to our server.</li>
+      <p>
+        Thank you for choosing to be part of our community at Brighteon Media Inc., doing business as Brighteon ("<span class="font-weight-bold">Brighteon</span>", "<span class="font-weight-bold">we</span>", "<span class="font-weight-bold">us</span>", or "<span class="font-weight-bold">our</span>"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our notice, or our practices with regards to your personal information, please contact us at <a mailto="support@brighteon.com">support@brighteon.com</a>.
+      </p>
+
+      <p>
+        When you visit our website <a href="https://brighteon.social/">https://brighteon.social/</a>, and use our services, you trust us with your personal information. We take your privacy very seriously. In this privacy notice, we seek to explain to you in the clearest way possible what information we collect, how we use it and what rights you have in relation to it. We hope you take some time to read through it carefully, as it is important. If there are any terms in this privacy notice that you do not agree with, please discontinue use of our Sites and our services.
+      </p>
+
+      <p>
+        This privacy notice applies to all information collected through our website (such as <a href="https://brighteon.social/">https://brighteon.social/</a>), and/or any related services, sales, marketing or events (we refer to them collectively in this privacy notice as the "<span class="font-weight-bold">Services</span>").
+      </p>
+
+      <p class="font-weight-bold">
+        Please read this privacy notice carefully as it will help you make informed decisions about sharing your personal information with us.
+      </p>
+
+      <hr class="spacer" />
+
+      <h2 class="text-uppercase mb3">
+        1. WHAT INFORMATION DO WE COLLECT?
+      </h2>
+
+      <ul class="dot-list">
+        <li>
+          <span class="font-style-italic">Basic account information</span>: If you register on this server, you may be asked to enter a username, an e-mail address and a password. You may also enter additional profile information such as a display name and biography, and upload a profile picture and header image. The username, display name, biography, profile picture and header image are always listed publicly.
+        </li>
+        <li>
+          <span class="font-style-italic">Posts, following and other public information</span>: The list of people you follow is listed publicly, the same is true for your followers. When you submit a message, the date and time is stored as well as the application you submitted the message from. Messages may contain media attachments, such as pictures and videos. Public and unlisted posts are available publicly. When you feature a post on your profile, that is also publicly available information. Your posts are delivered to your followers, in some cases it means they are delivered to different servers and copies are stored there. When you delete posts, this is likewise delivered to your followers. The action of reblogging or favouriting another post is always public.
+        </li>
+        <li>
+          <span class="font-style-italic">Direct and followers-only posts</span>: All posts are stored and processed on the server. Followers-only posts are delivered to your followers and users who are mentioned in them, and direct posts are delivered only to users mentioned in them. In some cases it means they are delivered to different servers and copies are stored there. We make a good faith effort to limit the access to those posts only to authorized persons, but other servers may fail to do so. Therefore it's important to review servers your followers belong to. You may toggle an option to approve and reject new followers manually in the settings. <span class="font-style-italic">Please keep in mind that the operators of the server and any receiving server may view such messages, and that recipients may screenshot, copy or otherwise re-share them. Do not share any dangerous information over Brighteon.Social</span>
+        </li>
+        <li>
+          <span class="font-style-italic">IPs and other metadata</span>: When you log in, we record the IP address you log in from, as well as the name of your browser application. All the logged in sessions are available for your review and revocation in the settings. The latest IP address used is stored for up to 12 months. We also may retain server logs which include the IP address of every request to our server.
+        </li>
       </ul>
 
       <hr class="spacer" />
 
-      <h3 id="use">What do we use your information for?</h3>
+      <h2 class="text-uppercase mb3">
+        2. HOW DO WE USE YOUR INFORMATION?
+      </h2>
 
-      <p>Any of the information we collect from you may be used in the following ways:</p>
+      <p>
+        <span class="font-style-italic font-weight-bold">In Short:</span> <span class="font-style-italic">We process your information for purposes based on legitimate business interests, the fulfillment of our contract with you, compliance with our legal obligations, and/or your consent.</span>
+      </p>
 
-      <ul>
-        <li>To provide the core functionality of Mastodon. You can only interact with other people's content and post your own content when you are logged in. For example, you may follow other people to view their combined posts in your own personalized home timeline.</li>
-        <li>To aid moderation of the community, for example comparing your IP address with other known ones to determine ban evasion or other violations.</li>
-        <li>The email address you provide may be used to send you information, notifications about other people interacting with your content or sending you messages, and to respond to inquiries, and/or other requests or questions.</li>
+      <p>
+        We use personal information collected via our Services for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations. We indicate the specific processing grounds we rely on next to each purpose listed below.
+      </p>
+
+      <p>
+        We use the information we collect or receive:
+      </p>
+
+      <ul class="dot-list">
+        <li>
+          <span class="font-weight-bold">To send administrative information to you.</span> We may use your personal information to send you product, service and new feature information and/or information about changes to our terms, conditions, and policies.
+        </li>
+        <li>
+          <span class="font-weight-bold">To protect our Services.</span>: We may use your information as part of our efforts to keep our Services safe and secure (for example, for fraud monitoring and prevention).
+        </li>
+        <li>
+          <span class="font-weight-bold">To enforce our terms, conditions and policies for Business Purposes, Legal Reasons and Contractual.</span>
+        </li>
+        <li>
+          <span class="font-weight-bold">To respond to legal requests and prevent harm.</span> If we receive a subpoena or other legal request, we may need to inspect the data we hold to determine how to respond.
+        </li>
+        <li>
+          <span class="font-weight-bold">To manage user accounts.</span> We may use your information for the purposes of managing our account and keeping it in working order.
+        </li>
+        <li>
+          <span class="font-weight-bold">To respond to user inquiries/offer support to users.</span> We may use your information to respond to your inquiries and solve any potential issues you might have with the use of our Services.
+        </li>
       </ul>
 
       <hr class="spacer" />
 
-      <h3 id="protect">How do we protect your information?</h3>
+      <h2 class="text-uppercase mb3">
+        3. WILL YOUR INFORMATION BE SHARED WITH ANYONE?
+      </h2>
 
-      <p>We implement a variety of security measures to maintain the safety of your personal information when you enter, submit, or access your personal information. Among other things, your browser session, as well as the traffic between your applications and the API, are secured with SSL, and your password is hashed using a strong one-way algorithm. You may enable two-factor authentication to further secure access to your account.</p>
+      <p>
+        <span class="font-style-italic font-weight-bold">In Short:</span> <span class="font-style-italic">We only share information with your consent, to comply with laws, to provide you with services, to protect your rights, or to fulfill business obligations.</span>
+      </p>
 
-      <hr class="spacer" />
+      <p>
+        We may process or share data based on the following legal basis:
+      </p>
 
-      <h3 id="data-retention">What is our data retention policy?</h3>
-
-      <p>We will make a good faith effort to:</p>
-
-      <ul>
-        <li>Retain server logs containing the IP address of all requests to this server, in so far as such logs are kept, no more than 90 days.</li>
-        <li>Retain the IP addresses associated with registered users no more than 12 months.</li>
+      <ul class="dot-list">
+        <li>
+          <span class="font-weight-bold">Consent: </span>We may process your data if you have given us specific consent to use your personal information in a specific purpose.
+        </li>
+        <li>
+          <span class="font-weight-bold">Legal Obligations: </span>We may use your information as part of our efforts to keep our Services safe and secure (for example, for fraud monitoring and prevention).
+        </li>
+        <li>
+          <span class="font-weight-bold">Vital Interests: </span>We may disclose your information where we believe it is necessary to investigate, prevent, or take action regarding potential violations of our policies, suspected fraud, situations involving potential threats to the safety of any person and illegal activities, or as evidence in litigation in which we are involved.
+        </li>
       </ul>
 
-      <p>You can request and download an archive of your content, including your posts, media attachments, profile picture, and header image.</p>
+      <p>
+        More specifically, we may need to process your data or share your personal information in the following situations:
+      </p>
 
-      <p>You may irreversibly delete your account at any time.</p>
-
-      <hr class="spacer"/>
-
-      <h3 id="cookies">Do we use cookies?</h3>
-
-      <p>Yes. Cookies are small files that a site or its service provider transfers to your computer's hard drive through your Web browser (if you allow). These cookies enable the site to recognize your browser and, if you have a registered account, associate it with your registered account.</p>
-
-      <p>We use cookies to understand and save your preferences for future visits.</p>
+      <ul class="dot-list">
+        <li>
+          <span class="font-weight-bold">Other Users. </span>When you share personal information (for example, by posting comments, contributions or other content to the Services) or otherwise interact with public areas of the Services, such personal information may be viewed by all users and may be publicly distributed outside the Services in perpetuity. Similarly, other users will be able to view descriptions of your activity, communicate with you within our Services, and view your profile.
+        </li>
+      </ul>
 
       <hr class="spacer" />
 
-      <h3 id="disclose">Do we disclose any information to outside parties?</h3>
+      <h2 class="text-uppercase mb3">
+        4. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
+      </h2>
 
-      <p>We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information. This does not include trusted third parties who assist us in operating our site, conducting our business, or servicing you, so long as those parties agree to keep this information confidential. We may also release your information when we believe release is appropriate to comply with the law, enforce our site policies, or protect ours or others rights, property, or safety.</p>
+      <p>
+        <span class="font-style-italic font-weight-bold">In Short: </span><span class="font-style-italic">Yes. Cookies are small files that a site or its service provider transfers to your computer's hard drive through your Web browser (if you allow). These cookies enable the site to recognize your browser and, if you have a registered account, associate it with your registered account.</span>
+      </p>
 
-      <p>Your public content may be downloaded by other servers in the network. Your public and followers-only posts are delivered to the servers where your followers reside, and direct messages are delivered to the servers of the recipients, in so far as those followers or recipients reside on a different server than this.</p>
-
-      <p>When you authorize an application to use your account, depending on the scope of permissions you approve, it may access your public profile information, your following list, your followers, your lists, all your posts, and your favourites. Applications can never access your e-mail address or password.</p>
-
-      <hr class="spacer" />
-
-      <h3 id="children">Site usage by children</h3>
-
-      <p>If this server is in the EU or the EEA: Our site, products and services are all directed to people who are at least 16 years old. If you are under the age of 16, per the requirements of the GDPR (<a href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">General Data Protection Regulation</a>) do not use this site.</p>
-
-      <p>If this server is in the USA: Our site, products and services are all directed to people who are at least 13 years old. If you are under the age of 13, per the requirements of COPPA (<a href="https://en.wikipedia.org/wiki/Children%27s_Online_Privacy_Protection_Act">Children's Online Privacy Protection Act</a>) do not use this site.</p>
-
-      <p>Law requirements can be different if this server is in another jurisdiction.</p>
+      <p>
+        We use cookies to understand and save your preferences for future visits.
+      </p>
 
       <hr class="spacer" />
 
-      <h3 id="changes">Changes to our Privacy Policy</h3>
+      <h2 class="text-uppercase mb3">
+        5. HOW LONG DO WE KEEP YOUR INFORMATION?
+      </h2>
 
-      <p>If we decide to change our privacy policy, we will post those changes on this page.</p>
+      <p>
+        <span class="font-style-italic font-weight-bold">In Short: </span><span class="font-style-italic">We keep your information for as long as necessary to fulfill the purposes outlined in this privacy notice unless otherwise required by law.</span>
+      </p>
 
-      <p>This document is CC-BY-SA. It was last updated March 7, 2018.</p>
+      <p>
+        We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period is required or permitted by law (such as tax, accounting or other legal requirements). No purpose in this policy will require us keeping your personal information for longer than the period of time in which users have an account with us.
+      </p>
 
-      <p>Originally adapted from the <a href="https://github.com/discourse/discourse">Discourse privacy policy</a>.</p>
+      <p>
+        When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize it, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.
+      </p>
+
+      <hr class="spacer" />
+
+      <h2 class="text-uppercase mb3">
+        6. HOW DO WE KEEP YOUR INFORMATION SAFE?
+      </h2>
+
+      <p>
+        <span class="font-style-italic font-weight-bold">In Short: </span><span class="font-style-italic">We aim to protect your personal information through a system of organizational and technical security measures.</span>
+      </p>
+
+      <p>
+        We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, please also remember that we cannot guarantee that the internet itself is 100% secure. Although we will do our best to protect your personal information, transmission of personal information to and from our Services is at your own risk. You should only access the services within a secure environment.
+      </p>
+
+      <hr class="spacer" />
+
+      <h2 class="text-uppercase mb3">
+        7. WHAT ARE YOUR PRIVACY RIGHTS?
+      </h2>
+
+      <p>
+        <span class="font-style-italic font-weight-bold">In Short: </span><span class="font-style-italic">You may review, change, or terminate your account at any time.</span>
+      </p>
+
+      <p>
+        If you are resident in the European Economic Area and you believe we are unlawfully processing your personal information, you also have the right to complain to your local data protection supervisory authority. You can find their contact details here: <a href="http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm" target="_blank" rel="noreferrer">http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm</a>.
+      </p>
+
+      <p>
+        If you have questions or comments about your privacy rights, you may email us at <a href="mailto:support@brighteon.com" target="_blank" rel="noreferrer">support@brighteon.com</a>.
+      </p>
+
+      <h3>
+        Account Information
+      </h3>
+
+      <p>
+        If you would at any time like to review or change the information in your account or terminate your account, you can:
+      </p>
+
+      <ul class="dot-list">
+        <li>
+          Log into your account settings and update your user account.
+        </li>
+      </ul>
+
+      <p>
+        Upon your request to terminate your account, we will deactivate or delete your account and information from our active databases. However, some information may be retained in our files to prevent fraud, troubleshoot problems, assist with any investigations, enforce our Terms of Use and/or comply with legal requirements.
+      </p>
+
+      <p>
+        <span class="font-weight-bold">Cookies and similar technologies:</span> Most Web browsers are set to accept cookies by default. If you prefer, you can usually choose to set your browser to remove cookies and to reject cookies. If you choose to remove cookies or reject cookies, this could affect certain features or services of our Services. To opt-out of interest-based advertising by advertisers on our Services visit <a href="http://www.aboutads.info/choices/" rel="noreferrer">http://www.aboutads.info/choices/</a>.
+      </p>
+
+      <p>
+        <span class="font-weight-bold">Opting out of email marketing:</span> You can unsubscribe from our marketing email list at any time by clicking on the unsubscribe link in the emails that we send or by contacting us using the details provided below. You will then be removed from the marketing email list – however, we will still need to send you service-related emails that are necessary for the administration and use of your account. To otherwise opt-out, you may:
+      </p>
+
+      <ul class="dot-list">
+        <li>
+          Access your account settings and update preferences.
+        </li>
+      </ul>
+
+      <hr class="spacer" />
+
+      <h2 class="text-uppercase mb3">
+        8. CONTROLS FOR DO-NOT-TRACK FEATURES
+      </h2>
+
+      <p>
+        Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track (“DNT”) feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. No uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this privacy notice.
+      </p>
+
+      <hr class="spacer" />
+
+      <h2 class="text-uppercase mb3">
+        9. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
+      </h2>
+
+      <p>
+        <span class="font-style-italic font-weight-bold">In Short: </span><span class="font-style-italic">Yes, if you are a resident of California, you are granted specific rights regarding access to your personal information.</span>
+      </p>
+
+      <p>
+        California Civil Code Section 1798.83, also known as the "Shine The Light" law, permits our users who are California residents to request and obtain from us, once a year and free of charge, information about categories of personal information (if any) we disclosed to third parties for direct marketing purposes and the names and addresses of all third parties with which we shared personal information in the immediately preceding calendar year. If you are a California resident and would like to make such a request, please submit your request in writing to us using the contact information provided below.
+      </p>
+
+      <p>
+        If you are under 18 years of age, reside in California, and have a registered account with the Services, you have the right to request removal of unwanted data that you publicly post on the Services. To request removal of such data, please contact us using the contact information provided below, and include the email address associated with your account and a statement that you reside in California. We will make sure the data is not publicly displayed on the Services, but please be aware that the data may not be completely or comprehensively removed from our systems.
+      </p>
+
+      <hr class="spacer" />
+
+      <h2 class="text-uppercase mb3">
+        10. DO WE MAKE UPDATES TO THIS POLICY?
+      </h2>
+
+      <p>
+        <span class="font-style-italic font-weight-bold">In Short: </span><span class="font-style-italic">Yes, we will update this policy as necessary to stay compliant with relevant laws.</span>
+      </p>
+
+      <p>
+        We may update this privacy notice from time to time. The updated version will be indicated by an updated “Revised” date and the updated version will be effective as soon as it is accessible. If we make material changes to this privacy notice, we may notify you either by prominently posting a notice of such changes or by directly sending you a notification. We encourage you to review this privacy notice frequently to be informed of how we are protecting your information.
+      </p>
+
+      <hr class="spacer" />
+
+      <h2 class="text-uppercase mb3">
+        11. HOW CAN YOU CONTACT US ABOUT THIS POLICY?
+      </h2>
+
+      <p>
+        If you have questions or comments about this policy, you may email us at <a href="mailto:support@brighteon.com">support@brighteon.com</a> or by post to:
+      </p>
+
+      Brighteon Media Inc.
+      <hr />
+      3820 Central Avenue Unit #109
+      <br />
+      Cheyenne, WY 82001
+      <br />
+      United States
+
+      <hr class="spacer" />
+
+      <h2 class="text-uppercase mb3">
+        HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
+      </h2>
+
+      <p>
+        Based on the laws of some countries, you may have the right to request access to the personal information we collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete your personal information, please submit a request form by clicking here. We will respond to your request within 30 days.
+      </p>
     title: "%{instance} Privacy Policy"
   themes:
     contrast: Mastodon (High contrast)

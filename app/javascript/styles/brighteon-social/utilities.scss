@@ -147,6 +147,10 @@
   color: #333333;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.5;
+}
+
 h1 {
   font-size: 2rem;
 }
@@ -159,6 +163,14 @@ h3 {
 h5 {
   font-size: 0.83em;
 }
-h5 {
+h6 {
   font-size: 0.67em;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+.font-style-italic {
+  font-style: italic;
 }
