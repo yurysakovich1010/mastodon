@@ -13,11 +13,7 @@
           = image_tag @instance_presenter.hero&.file&.url || @instance_presenter.thumbnail&.file&.url || asset_pack_path('media/images/brighteon-social/logo_horiz.png'), alt: @instance_presenter.site_title
 
     .landing__grid__column
-      %ul.landing__menu
-        %li.menu_item= t('menu.home')
-        %li.menu_item= t('menu.about')
-        %li.menu_item= t('menu.live_stream')
-        %li.menu_item= t('menu.discover_users')
+      = render 'application/top_menu'
 
   .landing__grid
     .landing__grid__column.landing__grid__column-registration

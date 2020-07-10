@@ -897,6 +897,11 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
           color: $white;
           font-weight: 600;
           text-transform: uppercase;
+
+          a {
+            color: inherit;
+            text-decoration: none;
+          }
         }
       }
     }
@@ -1214,6 +1219,11 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     color: $white;
     font-weight: 600;
     text-transform: uppercase;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 }
 

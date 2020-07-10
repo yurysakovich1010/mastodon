@@ -9,11 +9,7 @@
   .container
     %nav.header
       .nav-left
-        %ul.landing__menu
-          %li.menu_item= t('menu.home')
-          %li.menu_item= t('menu.about')
-          %li.menu_item= t('menu.live_stream')
-          %li.menu_item= t('menu.discover_users')
+        = render 'application/top_menu'
 
       .nav-right
         = link_to root_path, class: 'btn button button-primary back-to-landing' do

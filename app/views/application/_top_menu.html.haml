@@ -1,0 +1,13 @@
+%ul.landing__menu
+  %li.menu_item
+    = link_to root_url do
+      = t('menu.home')
+  %li.menu_item
+    = link_to about_more_url do
+      = t('menu.about')
+  %li.menu_item
+    = link_to 'web/timelines/public' do
+      = t('menu.live_stream')
+  %li.menu_item
+    = link_to 'web/directory' do
+      = t('menu.discover_users')
