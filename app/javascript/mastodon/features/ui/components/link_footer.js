@@ -52,7 +52,8 @@ class LinkFooter extends React.PureComponent {
           <li><a href='/auth/edit'><FormattedMessage id='getting_started.security' defaultMessage='Security' /></a> · </li>
           <li><a href='/about' target='_blank'><FormattedMessage id='navigation_bar.info' defaultMessage='About' /></a> · </li>
           <li><a href='/terms' target='_blank'><FormattedMessage id='getting_started.terms' defaultMessage='Terms of service' /></a> · </li>
-          <li><a href='/privacy' target='_blank'><FormattedMessage id='getting_started.privacy' defaultMessage='Privacy and Policy' /></a> · </li>
+          <li><a href='/privacy' target='_blank'><FormattedMessage id='getting_started.privacy' defaultMessage='Privacy Policy' /></a> · </li>
+          <li><a href='/help' target='_blank'><FormattedMessage id='getting_started.help' defaultMessage='Help' /></a> · </li>
           <li><a href='/auth/sign_out' onClick={this.handleLogoutClick}><FormattedMessage id='navigation_bar.logout' defaultMessage='Logout' /></a></li>
         </ul>
 

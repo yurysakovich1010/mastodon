@@ -501,7 +501,7 @@ Rails.application.routes.draw do
   get '/privacy',      to: 'about#privacy'
 
   get '/landing',      to: 'landing#show'
-  get '/contact',      to: 'contact#index'
+  get '/help',      to: 'contact#index'
   post '/contacts',    to: 'contact#create'
 
   match '/', via: [:post, :put, :patch, :delete], to: 'application#raise_not_found', format: false
