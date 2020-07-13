@@ -1115,6 +1115,14 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       max-width: unset;
     }
   }
+
+  .account__avatar {
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 36px;
+    height: 36px;
+    background-size: 36px 36px;
+  }
 }
 
 // page by page

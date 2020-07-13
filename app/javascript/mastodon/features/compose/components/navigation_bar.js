@@ -51,7 +51,7 @@ export default class NavigationBar extends ImmutablePureComponent {
                 Donate
               </button>
 
-              <a target='_blank' rel='noopener noreferrer' href='/landing' className='decoration-none'>
+              <a target='_blank' rel='noopener noreferrer' href='/' className='decoration-none'>
                 <div className='icon mr2'>
                   <Icon id='home' fixedWidth />
                 </div>
