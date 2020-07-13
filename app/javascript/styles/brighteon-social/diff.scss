@@ -867,6 +867,10 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   width: 150px;
 }
 
+.status-card__title {
+  color: $ui-highlight-color;
+}
+
 .public-layout {
   min-height: inherit;
 
