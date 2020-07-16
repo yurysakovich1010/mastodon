@@ -140,6 +140,10 @@
   align-items: center;
 }
 
+.align-items-start {
+  align-items: flex-start;
+}
+
 .w-50 {
   width: 50%;
 }
@@ -177,4 +181,8 @@ h6 {
 
 .font-style-italic {
   font-style: italic;
+}
+
+.padded-container {
+  padding: 15px;
 }

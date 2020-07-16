@@ -3,7 +3,7 @@
     .public-account-header__image
       = image_tag (current_account&.user&.setting_auto_play_gif ? account.header_original_url : account.header_static_url), class: 'parallax'
     .public-account-header__bar
-      .d-flex
+      .d-flex.align-items-start
         = link_to short_account_url(account), class: 'avatar' do
           = image_tag (current_account&.user&.setting_auto_play_gif ? account.avatar_original_url : account.avatar_static_url), id: 'profile_page_avatar', data: {original: full_asset_url(account.avatar_original_url), static: full_asset_url(account.avatar_static_url), autoplay: current_account&.user&.setting_auto_play_gif}
         .public-account-header__tabs
@@ -13,6 +13,8 @@
               %small
                 = acct(account)
                 = fa_icon('lock') if account.locked?
+        .public-account-header__tabs__tabs__buttons
+          = account_action_button(account)
 
       -#.public-account-header__tabs__tabs
       -#  .details-counters
@@ -36,25 +38,20 @@
           = account_action_button(account)
 
       .d-flex
+        .spacer
         .public-account-header__tabs__tabs
           .public-account-header__tabs__tab{ class: active_nav_class(short_account_url(account)) }
-            = link_to short_account_url(account), class: 'decoration-none' do
+            = link_to short_account_url(account), class: 'font-weight-bold' do
               = t('accounts.timeline')
           .public-account-header__tabs__tab{ class: active_nav_class(short_account_with_replies_url(account)) }
-            = link_to short_account_with_replies_url(account), class: 'decoration-none' do
+            = link_to short_account_with_replies_url(account), class: 'font-weight-bold' do
               = t('accounts.comments')
           .public-account-header__tabs__tab{ class: active_nav_class(short_account_photos_url(account)) }
-            = link_to short_account_photos_url(account), class: 'decoration-none' do
+            = link_to short_account_photos_url(account), class: 'font-weight-bold' do
               = t('accounts.photos')
           .public-account-header__tabs__tab{ class: active_nav_class(short_account_videos_url(account)) }
-            = link_to short_account_videos_url(account), class: 'decoration-none' do
+            = link_to short_account_videos_url(account), class: 'font-weight-bold' do
               = t('accounts.videos')
-        .spacer
-        - if user_signed_in?
-          .public-account-header__tabs__edit-profile.d-flex.align-items-center.mr2
-            = link_to settings_profile_url do
-              %button.edit-profile
-                = t('accounts.edit_profile')
 
     .public-account-header__extra
       = render 'accounts/bio', account: account

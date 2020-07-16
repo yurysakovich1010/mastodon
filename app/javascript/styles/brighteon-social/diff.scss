@@ -957,18 +957,15 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
 }
 
 .navigation-bar {
-  background-color: rgba(8, 8, 63, 0.25);
-
   .navigation-bar__inner {
     display: block;
-    width: 1220px;
+    width: 1240px;
     margin: auto;
 
     .head-logo {
       display: flex;
       width: 160px;
       align-items: center;
-      padding-left: 5px;
       cursor: pointer;
       user-select: none;
 
@@ -1054,6 +1051,11 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         &:hover {
           background-color: #3AC64D;
         }
+      }
+
+      &.primary-button {
+        background-color: #39b54a;
+        border: none;
       }
     }
 
@@ -1558,16 +1560,67 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
 }
 
 .profile {
+  .container {
+    max-width: 1240px;
+    padding: 0;
+  }
+  .public-account-header {
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+
+    @media screen and (max-width: 1240px) {
+      border-radius: 0;
+    }
+  }
+  .public-account-header__image {
+    border-radius: 0;
+  }
   .public-account-header__bar {
     display: block;
     background-color: $white;
     margin-top: 0;
 
     a.avatar {
-      margin-top: -60px;
+      margin-top: -30px;
+      margin-bottom: -30px;
+      display: block;
+      width: 150px;
+      height: 150px;
+      flex: 0 0 auto;
+      padding: 0;
+      margin-left: 15px;
+
+      img {
+        width: 134px;
+        height: 134px;
+        border: 8px solid $white;
+      }
+    }
+
+    .button.logo-button {
+      svg {
+        display: none;
+      }
+
+      margin: 15px;
+      border-radius: 1.5em;
+      color: #08083f;
+      border: 1px solid #08083f;
+      background-color: transparent;
+    }
+
+    .public-account-header__tabs__tabs {
+      margin-right: 60px;
     }
   }
+  .public-account-header__tabs {
+    margin-left: 10px;
+  }
   .public-account-header__tabs__name {
+    padding-top: 15px;
+    padding-bottom: 15px;
+
     h1 {
       color: $black;
       text-shadow: none;
@@ -1581,15 +1634,20 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     display: flex;
     align-items: center;
     margin-right: 5px;
-    padding: 5px 15px;
-    border-bottom: 4px solid transparent;
-
-    &.active {
-      border-color: #08083f;
-    }
+    padding: 5px 35px;
 
     a {
-      color: inherit;
+      color: $black;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent
+    }
+
+    &.active a {
+      color: #0000EE;
+      border-color: #0000EE;
     }
   }
   .public-account-header__tabs__edit-profile {
@@ -1602,43 +1660,49 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     }
   }
 
+  .public-account-body {
+    background-color: $white;
+    border-radius: 10px;
+    overflow: hidden;
+
+    @media screen and (max-width: 1000px) {
+      border-radius: 0;
+    }
+
+    hr {
+      margin: 0;
+    }
+  }
+
   .public-layout .grid {
     grid-template-columns: minmax(298px, 1fr) minmax(300px, 3fr);
   }
 
-  .public-account-bio__extra {
-    color: var(--text_color_primary);
-  }
-
   .public-account-bio {
+    margin: 0;
+    border: none;
+
     &__title {
       font-size: 19px;
       font-weight: 500;
       color: $black;
-      padding: 15px 15px 0;
+      padding: 15px 0 0;
       font-family: var(--font_family);
     }
     .account__header__content {
       font-size: 14px;
       line-height: 1.3125;
-      padding: 10px 15px;
-
-      p {
-
-      }
-    }
-    hr {
-      margin: 0 15px;
+      padding: 15px 0;
     }
     &__extra {
-      padding: 10px 15px;
+      padding: 15px 0;
+      color: var(--text_color_primary);
     }
   }
 
   .public-account-counts {
     background-color: $white;
     padding: 10px 15px;
-    margin-bottom: 10px;
 
     .details-counters {
       .counter {
@@ -1646,13 +1710,15 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
 
         .counter-number {
           color: var(--color_brand);
-          font-size: 19px;
-          font-weight: 600;
+          font-size: 22px;
+          font-weight: 400;
+          letter-spacing: -1px;
+          margin-bottom: 5px;
         }
         .counter-label {
           color: $black;
-          font-size: 13px;
-          font-weight: 500;
+          font-size: 12px;
+          font-weight: 700;
         }
       }
     }

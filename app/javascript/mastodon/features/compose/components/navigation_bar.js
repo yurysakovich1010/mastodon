@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import ActionBar from './action_bar';
 import Avatar from '../../../components/avatar';
-import Permalink from '../../../components/permalink';
 import Icon from '../../../components/icon';
-import IconButton from '../../../components/icon_button';
-import { FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import SearchContainer from 'mastodon/features/ui/components/search_container';
 import horizontalLogo from 'mastodon/../images/brighteon-social/logo_horiz.png';
