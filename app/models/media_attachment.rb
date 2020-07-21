@@ -157,7 +157,7 @@ class MediaAttachment < ApplicationRecord
   MAX_VIDEO_FRAME_RATE   = 60
 
   belongs_to :account,          inverse_of: :media_attachments, optional: true
-  belongs_to :status,           inverse_of: :media_attachments, optional: true
+  belongs_to :status, counter_cache: true, inverse_of: :media_attachments, optional: true
   belongs_to :scheduled_status, inverse_of: :media_attachments, optional: true
 
   has_attached_file :file,
