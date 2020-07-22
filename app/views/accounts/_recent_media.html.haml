@@ -5,7 +5,7 @@
     .public-account-recent-media__avatars
       - @statuses_with_recent_media.each do |status|
         .public-account-recent-media__avatar
-          = link_to(short_account_status_url(account, status), target: '_blank', rel: 'noopener noreferrer') do
+          = link_to(short_account_status_url(status.account, status), target: '_blank', rel: 'noopener noreferrer') do
             - if status.account.avatar_original_url
               = image_tag status.account.avatar_original_url, alt: '', class: 'u-photo account__avatar'
             - else
