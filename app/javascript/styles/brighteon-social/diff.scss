@@ -1400,11 +1400,19 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     overflow: hidden;
 
     .profile_box-header {
-      max-height: 62.5%;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
       position: relative;
+      padding-top: 62.5%;
+
+      &__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+      }
 
       img {
         width: 100%;
