@@ -322,6 +322,7 @@ Rails.application.routes.draw do
       namespace :timelines do
         resource :home, only: :show, controller: :home
         resource :public, only: :show, controller: :public
+        resource :trend, only: :show, controller: :trend
         resources :tag, only: :show
         resources :list, only: :show
       end

@@ -18,6 +18,10 @@ export function PublicTimeline () {
   return import(/* webpackChunkName: "features/public_timeline" */'../../public_timeline');
 }
 
+export function TrendTimeline () {
+  return import(/* webpackChunkName: "features/trend_timeline" */'../../trend_timeline');
+}
+
 export function CommunityTimeline () {
   return import(/* webpackChunkName: "features/community_timeline" */'../../community_timeline');
 }

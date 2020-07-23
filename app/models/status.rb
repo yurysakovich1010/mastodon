@@ -81,9 +81,8 @@ class Status < ApplicationRecord
 
   accepts_nested_attributes_for :poll
 
-  default_scope { recent.kept }
-
   scope :recent, -> { reorder(id: :desc) }
+  scope :trend,  -> { left_joins(:status_stat).reorder('status_stats.favourites_count DESC NULLS LAST') }
   scope :remote, -> { where(local: false).where.not(uri: nil) }
   scope :local,  -> { where(local: true).or(where(uri: nil)) }
 
