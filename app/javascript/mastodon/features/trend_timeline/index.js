@@ -11,7 +11,7 @@ import ColumnSettingsContainer from './containers/column_settings_container';
 import { connectPublicStream } from '../../actions/streaming';
 
 const messages = defineMessages({
-  title: { id: 'column.public', defaultMessage: 'Federated timeline' },
+  title: { id: 'column.trend', defaultMessage: 'Trend' },
 });
 
 const mapStateToProps = (state, { columnId }) => {
