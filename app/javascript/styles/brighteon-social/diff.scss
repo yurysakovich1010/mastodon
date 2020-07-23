@@ -1409,9 +1409,9 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         left: 0;
         right: 0;
         bottom: 0;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
       }
 
       img {
