@@ -32,9 +32,11 @@ export default class UnsignedNavigationBar extends ImmutablePureComponent {
             <div className='spacer' />
 
             <div className='d-flex'>
-              <button className='donate standard mr3'>
-                Donate
-              </button>
+              <a href='https://support.brighteon.com/donate.html' className='decoration-none'>
+                <button className='donate standard mr3'>
+                  Donate
+                </button>
+              </a>
 
               <a rel='noopener noreferrer' href='/auth/sign_in' className='decoration-none'>
                 <button className='standard mr3'>

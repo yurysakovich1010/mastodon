@@ -29,7 +29,9 @@ export default class NavigationBar extends ImmutablePureComponent {
         <div className='navigation-bar__inner'>
           <div className='d-flex'>
             <div className='head-logo'>
-              <img src={horizontalLogo} style={{width: '100%'}}/>
+              <a href='/' >
+                <img src={horizontalLogo} style={{width: '100%'}}/>
+              </a>
             </div>
 
             {
@@ -43,11 +45,13 @@ export default class NavigationBar extends ImmutablePureComponent {
             <div className='spacer' />
 
             <div className='d-flex'>
-              <button className='donate standard mr3'>
-                Donate
-              </button>
+              <a href='https://support.brighteon.com/donate.html' className='decoration-none'>
+                <button className='donate standard mr3'>
+                  Donate
+                </button>
+              </a>
 
-              <a target='_blank' rel='noopener noreferrer' href='/' className='decoration-none'>
+              <a href='/' className='decoration-none'>
                 <div className='icon mr2'>
                   <Icon id='home' fixedWidth />
                 </div>
@@ -59,13 +63,13 @@ export default class NavigationBar extends ImmutablePureComponent {
                 </div>
               </a>
 
-              <a target='_blank' rel='noopener noreferrer' href='/settings/preferences' className='decoration-none'>
+              <a href='/settings/preferences' className='decoration-none'>
                 <div className='icon mr2'>
                   <Icon id='gear' fixedWidth />
                 </div>
               </a>
 
-              <a target='_blank' rel='noopener noreferrer' href='/settings/profile'>
+              <a target='_blank' rel='noopener noreferrer' href={this.props.account.get('url')}>
                 <span style={{ display: 'none' }}>{this.props.account.get('acct')}</span>
                 <Avatar account={this.props.account} size={36} style={avatarStyle} />
               </a>

@@ -1,13 +1,10 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { FormattedMessage } from 'react-intl';
 import Avatar from '../../../components/avatar';
-import Permalink from '../../../components/permalink';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { makeGetAccount } from 'mastodon/selectors';
-import { shortNumberFormat } from 'mastodon/utils/numbers';
 
 const makeMapStateToProps = () => {
   const getAccount = makeGetAccount();
@@ -28,6 +25,8 @@ class ProfileBox extends ImmutablePureComponent {
   };
 
   render () {
+    console.log('this.props.account', this.props.account);
+    console.log('this.props.fullAccount', this.props.fullAccount);
     return (
       <div className='profile_box'>
         <div className='profile_box-header'>
@@ -39,9 +38,9 @@ class ProfileBox extends ImmutablePureComponent {
           </a>
         </div>
         <div className='profile_box-avatar'>
-          <Permalink href={this.props.account.get('url')} to={`/accounts/${this.props.account.get('id')}`}>
+          <a href={this.props.account.get('url')}>
             <Avatar account={this.props.account} size={48} />
-          </Permalink>
+          </a>
         </div>
         <div className='profile_box-body'>
           <div className='d-flex justify-content-center'>{this.props.account.get('display_name_html')}</div>
@@ -52,7 +51,7 @@ class ProfileBox extends ImmutablePureComponent {
                 <FormattedMessage id='account.followers' defaultMessage='Followers' />
               </div>
               <div>
-                {/*{ shortNumberFormat(this.props.fullAccount.get('followers_count')) }*/}
+                { this.props.fullAccount.get('followers_count') }
               </div>
             </div>
             <div className='text-align-center'>
@@ -60,7 +59,7 @@ class ProfileBox extends ImmutablePureComponent {
                 <FormattedMessage id='account.following' defaultMessage='Following' />
               </div>
               <div>
-                {/*{ shortNumberFormat(this.props.fullAccount.get('following_count')) }*/}
+                { this.props.fullAccount.get('following_count') }
               </div>
             </div>
           </div>
