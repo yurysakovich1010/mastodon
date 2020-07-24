@@ -4,9 +4,12 @@
   - unless statuses_with_recent_media.empty?
     .public-account-recent-media__avatars
       - statuses_with_recent_media.each do |status|
-        .public-account-recent-media__avatar
-          = link_to(short_account_status_url(status.account, status), target: '_blank', rel: 'noopener noreferrer') do
-            - if status.account.avatar_original_url
-              = image_tag status.account.avatar_original_url, alt: '', class: 'u-photo account__avatar'
+        = link_to(short_account_status_url(status.account, status), target: '_blank', rel: 'noopener noreferrer') do
+          .public-account-recent-media__avatar
+            - attachment = ActiveModelSerializers::SerializableResource.new(status.media_attachments.first, serializer: REST::MediaAttachmentSerializer).as_json
+            - if attachment[:preview_remote_url]
+              %div
+                = image_tag attachment[:preview_url], alt: '', class: 'u-photo account__avatar'
             - else
-              = image_tag status.account.avatar_static_url, alt: '', class: 'u-photo account__avatar'
+              %div
+                = image_tag attachment[:url], alt: '', class: 'u-photo account__avatar'
