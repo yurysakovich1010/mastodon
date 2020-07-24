@@ -33,7 +33,6 @@ class AccountsController < ApplicationController
         @pinned_statuses = cache_collection(@account.pinned_statuses, Status) if show_pinned_statuses?
         @statuses        = filtered_status_page
         @statuses        = cache_collection(@statuses, Status)
-        @statuses_with_recent_media = statuses_with_recent_media
         @rss_url         = rss_url
 
         unless @statuses.empty?
@@ -77,10 +76,6 @@ class AccountsController < ApplicationController
       statuses.merge!(replies_scope) if replies_requested?
       statuses.merge!(no_replies_scope) unless replies_requested?
     end
-  end
-
-  def statuses_with_recent_media
-    Status.where(visibility: [:public, :unlisted]).where("media_attachments_count > 0").limit(8)
   end
 
   def default_statuses

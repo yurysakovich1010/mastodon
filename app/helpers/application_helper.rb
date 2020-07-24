@@ -164,4 +164,8 @@ module ApplicationHelper
     json = ActiveModelSerializers::SerializableResource.new(InitialStatePresenter.new(state_params), serializer: InitialStateSerializer).to_json
     content_tag(:script, json_escape(json).html_safe, id: 'initial-state', type: 'application/json')
   end
+
+  def statuses_with_recent_media
+    Status.where(visibility: [:public, :unlisted]).where("media_attachments_count > 0").limit(8)
+  end
 end

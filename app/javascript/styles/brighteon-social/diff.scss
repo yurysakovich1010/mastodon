@@ -872,6 +872,15 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   color: $ui-highlight-color;
 }
 
+.status__relative-time,
+.status__visibility-icon {
+  float: none;
+}
+
+.status-card__image {
+  flex: 0 0 50%;
+}
+
 .public-layout {
   min-height: inherit;
 
@@ -1568,7 +1577,8 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 }
 
-.profile {
+.profile,
+.statuses {
   .container {
     max-width: 1240px;
     padding: 0;
@@ -1608,18 +1618,6 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       }
     }
 
-    .button.logo-button {
-      svg {
-        display: none;
-      }
-
-      margin: 15px;
-      border-radius: 1.5em;
-      color: #08083f;
-      border: 1px solid #08083f;
-      background-color: transparent;
-    }
-
     @media screen and (min-width: 751px) {
       .public-account-header__tabs__tabs {
         margin-right: 60px;
@@ -1647,7 +1645,23 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         }
       }
     }
+
+    .button.logo-button {
+      margin: 15px;
+    }
   }
+
+  .button.logo-button {
+    svg {
+      display: none;
+    }
+
+    border-radius: 1.5em;
+    color: #08083f;
+    border: 1px solid #08083f;
+    background-color: transparent;
+  }
+
   .compose-form {
     padding: 0;
     margin-bottom: 10px;

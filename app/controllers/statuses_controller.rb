@@ -6,7 +6,7 @@ class StatusesController < ApplicationController
   include Authorization
   include AccountOwnedConcern
 
-  layout 'public'
+  layout 'brighteon_social_status'
 
   before_action :require_signature!, only: :show, if: -> { request.format == :json && authorized_fetch_mode? }
   before_action :set_status
@@ -57,7 +57,7 @@ class StatusesController < ApplicationController
   private
 
   def set_body_classes
-    @body_classes = 'with-modals'
+    @body_classes = 'statuses with-modals'
   end
 
   def set_link_headers

@@ -16,9 +16,35 @@
   = render 'og_description', activity: @status
   = render 'og_image', activity: @status, account: @account
 
-.grid
-  .column-0
-    .activity-stream.h-entry
-      = render partial: 'status', locals: { status: @status, include_threads: true }
-  .column-1
-    = render 'application/sidebar'
+- if !user_signed_in?
+  - content_for :header do
+    #mastodon-unsigned-navigation{ data: { props: Oj.dump(default_props) }}
+- else
+  - content_for :header do
+    #mastodon-navigation{ data: { props: Oj.dump(default_props) }}
+
+.container
+  .public-account-body
+    .originally-grid
+      .column-0
+        .column-container
+          .activity-stream.h-entry
+            = render partial: 'status', locals: { status: @status, include_threads: true }
+      .column-1
+        .column-container
+          .public-account-header__image.mb3
+            = image_tag (@account.header_original_url ? @account.header_original_url : @account.header_static_url), class: 'parallax'
+
+          = render 'accounts/counts', account: @account
+
+          %hr
+
+          = render 'accounts/bio', account: @account
+
+          %hr
+
+          = render 'accounts/recent_media', account: @account
+
+          %hr
+
+          = render 'application/trending_now'

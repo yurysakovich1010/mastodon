@@ -51,7 +51,7 @@ class DropdownMenu extends React.PureComponent {
     this.setState({ mounted: true });
   }
 
-  componentWillUnmount () {
+  componentWillUnmount ()   {
     document.removeEventListener('click', this.handleDocumentClick, false);
     document.removeEventListener('keydown', this.handleKeyDown, false);
     document.removeEventListener('touchend', this.handleDocumentClick, listenerOptions);

@@ -1,0 +1,18 @@
+- content_for :header_tags do
+  = render_initial_state
+  = javascript_pack_tag 'public', integrity: true, crossorigin: 'anonymous'
+  = javascript_pack_tag 'share', integrity: true, crossorigin: 'anonymous'
+  = javascript_pack_tag 'navigation', integrity: true, crossorigin: 'anonymous'
+  = javascript_pack_tag 'unsigned_navigation', integrity: true, crossorigin: 'anonymous'
+
+- content_for :content do
+  .public-layout.d-flex.flex-column
+    - unless @hide_navbar
+      %div= yield :header
+
+    %div= yield
+
+    .container
+      .footer= yield :footer
+
+= render template: 'layouts/application'
