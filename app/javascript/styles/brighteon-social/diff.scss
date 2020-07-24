@@ -1514,6 +1514,34 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       padding: 25px 25px 10px;
     }
   }
+
+  .scrollable-directory {
+    .account__header__content {
+      color: #737373;
+    }
+    .accounts-table__count small {
+      color: $black;
+    }
+    .directory__card__extra .accounts-table__count,
+    .directory__card__bar .display-name span,
+    .icon-button {
+      color: #2040a4;
+    }
+    .radio-button__input.checked {
+      border-color: #2040a4;
+      background: #2040a4;
+    }
+    .directory__list {
+      grid-gap: 10px 2px;
+    }
+    .load-more {
+      border: 1px solid #c0cdd9;
+      margin: 1rem;
+      width: calc(100% - 2rem);
+      font-weight: bold;
+      color: #2040a4;
+    }
+  }
 }
 
 .admin {

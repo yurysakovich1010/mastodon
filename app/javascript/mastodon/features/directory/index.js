@@ -130,7 +130,7 @@ class Directory extends React.PureComponent {
     const pinned = !!columnId;
 
     const scrollableArea = (
-      <div className='scrollable' style={{ background: 'transparent' }}>
+      <div className='scrollable scrollable-directory'>
         <div className='filter-form'>
           <div className='filter-form__column' role='group'>
             <RadioButton name='order' value='active' label={intl.formatMessage(messages.recentlyActive)} checked={order === 'active'} onChange={this.handleChangeOrder} />
