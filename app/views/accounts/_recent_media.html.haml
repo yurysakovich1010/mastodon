@@ -1,7 +1,7 @@
-.public-account-recent-media
-  .public-account-recent-media__title
-    = t('accounts.recent_media')
-  - unless statuses_with_recent_media.empty?
+- unless statuses_with_recent_media.empty?
+  .public-account-recent-media
+    .public-account-recent-media__title
+      = t('accounts.recent_media')
     .public-account-recent-media__avatars
       - statuses_with_recent_media.each do |status|
         = link_to(short_account_status_url(status.account, status), target: '_blank', rel: 'noopener noreferrer') do
@@ -13,3 +13,4 @@
             - else
               %div
                 = image_tag attachment[:url], alt: '', class: 'u-photo account__avatar'
+  %hr

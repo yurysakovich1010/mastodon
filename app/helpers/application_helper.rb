@@ -166,6 +166,6 @@ module ApplicationHelper
   end
 
   def statuses_with_recent_media
-    Status.where(visibility: [:public, :unlisted]).where("media_attachments_count > 0").limit(8)
+    Status.where(account_id: [@account.id]).where(visibility: [:public, :unlisted]).where("media_attachments_count > 0").limit(8)
   end
 end
