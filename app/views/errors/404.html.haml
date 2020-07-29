@@ -38,8 +38,5 @@
       %div.d-flex
         %div
           %p= t('errors.page_not_found_content')
-          %button.button.primary-button
-            = t('errors.contact_us')
+          = link_to t('errors.contact_us'), '/help', class: 'button primary-button'
         = image_tag asset_pack_path('media/images/brighteon-social/dog.png'), alt: t('errors.404')
-      -#%div
-      -#  = t('about_more.content_html', privacy_path: privacy_path, terms_path: terms_path)
