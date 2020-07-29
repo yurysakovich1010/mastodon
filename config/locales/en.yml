@@ -734,7 +734,12 @@ en:
     confirm: Continue
     hint_html: "<strong>Tip:</strong> We won't ask you for your password again for the next hour."
     invalid_password: Invalid password
-    prompt: Confirm password to continue
+    prompt: Confirm password to
+  send_message: Send
+  contact_mailer:
+    new_contact:
+      subject: "New help request"
+      body: "This is message from user: '%{content}'"
   crypto:
     errors:
       invalid_key: is not a valid Ed25519 or Curve25519 key

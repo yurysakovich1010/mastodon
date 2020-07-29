@@ -48,4 +48,4 @@
         = simple_form_for @contact, url: contacts_path do |f|
           = f.text_area :feedback, as: :date, placeholder: t('about.contact_placeholder')
 
-          = f.button :button, send_message, type: :submit, class: 'button button-primary button-signup'
+          = f.button :button, t('send_message'), type: :submit, class: 'button button-primary button-signup'
