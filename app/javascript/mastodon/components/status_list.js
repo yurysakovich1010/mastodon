@@ -84,8 +84,17 @@ export default class StatusList extends ImmutablePureComponent {
       return <RegenerationIndicator />;
     }
 
+    // console.log('statusIds', statusIds);
+    // workaround for duplicated status ids
+    const newStatusIds = statusIds.reduce((n, statusId) => {
+      if (!n.includes(statusId)) n.push(statusId);
+
+      return n;
+    }, []);
+    // console.log('newStatusIds', newStatusIds);
+
     let scrollableContent = (isLoading || statusIds.size > 0) ? (
-      statusIds.map((statusId, index) => statusId === null ? (
+      newStatusIds.map((statusId, index) => statusId === null ? (
         <LoadGap
           key={'gap:' + statusIds.get(index + 1)}
           disabled={isLoading}
