@@ -1568,6 +1568,15 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       color: #2040a4;
     }
   }
+  .regeneration-indicator {
+    flex-direction: row;
+  }
+
+  .regeneration-indicator__figure,
+  .regeneration-indicator__figure img {
+    width: 260px;
+    height: auto;
+  }
 }
 
 .admin {
