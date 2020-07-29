@@ -1,5 +1,45 @@
 - content_for :page_title do
   = t('errors.404')
 
-- content_for :content do
-  = t('errors.404')
+- content_for :header do
+  .header.m-auto
+    .nav-left
+      = render 'application/top_menu'
+
+    .nav-right
+      = link_to root_path, class: 'btn button button-primary back-to-landing' do
+        = t('generic.back_to_link', link: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
+
+- content_for :footer do
+  .d-flex
+    %div
+      %span
+        = Time.new.year
+      %span.text-capitalize.mr3
+        = site_hostname
+      %span.text-capitalize
+        = t 'footer.all_rights_reserved'
+    .spacer
+    %div
+      %span.mr3
+        = link_to t('about.privacy_policy'), privacy_path, class: 'decoration-none'
+      %span
+        = link_to t('about.terms'), terms_path, class: 'decoration-none'
+
+
+.about-more
+  .content-overlay.br1
+    %div.overlay
+    %div.content
+      %div
+        = image_tag asset_pack_path('media/images/brighteon-social/logo.png')
+      %h1.text-uppercase
+        = t('errors.page_not_found')
+      %div.d-flex
+        %div
+          %p= t('errors.page_not_found_content')
+          %button.button.primary-button
+            = t('errors.contact_us')
+        = image_tag asset_pack_path('media/images/brighteon-social/dog.png'), alt: t('errors.404')
+      -#%div
+      -#  = t('about_more.content_html', privacy_path: privacy_path, terms_path: terms_path)

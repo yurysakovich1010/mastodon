@@ -1354,6 +1354,14 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       }
     }
   }
+
+  // for errors especially
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 3rem;
+  }
 }
 
 .auth {

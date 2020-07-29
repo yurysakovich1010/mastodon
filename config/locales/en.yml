@@ -794,6 +794,9 @@ en:
       title: This page is not correct
     '503': The page could not be served due to a temporary server failure.
     noscript_html: To use the Mastodon web application, please enable JavaScript. Alternatively, try one of the <a href="%{apps_path}">native apps</a> for Mastodon for your platform.
+    page_not_found: Page not found
+    page_not_found_content: The page you're looking for cannot be found. If you still cannot find the page you're looking for, please contact us for assistance.
+    contact_us: Contact Us
   existing_username_validator:
     not_found: could not find a local user with that username
     not_found_multiple: could not find %{usernames}
