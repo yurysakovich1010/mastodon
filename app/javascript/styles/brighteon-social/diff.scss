@@ -1638,6 +1638,22 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       color: $white;
     }
   }
+
+  .batch-table__toolbar, .batch-table__row {
+    background-color: $dark-text-color;
+    border-color: transparent;
+    margin-bottom: 1px;
+
+    .account__display-name strong {
+      color: $white;
+    }
+    .accounts-table__count {
+      color: $white;
+    }
+    .display-name__account {
+      color: #3366ff;
+    }
+  }
 }
 
 .profile,
