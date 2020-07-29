@@ -1138,6 +1138,26 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     .mobile-search-container {
       margin-top: 10px;
     }
+    .drawer__pager {
+      overflow: visible;
+      .drawer__inner {
+        height: 300px;
+        z-index: 3;
+        background-color: $white;
+        border: 0;
+        border-radius: 0.25rem;
+
+        .search-results__header,
+        .search-results__section,
+        .search-results__section h5{
+          background-color: #2040a4;
+          color: $white;
+        }
+        button {
+          color: $white;
+        }
+      }
+    }
   }
 
   &.signed_in {
