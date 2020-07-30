@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PublicTimelinesController < ApplicationController
-  layout 'public'
+  layout 'brighteon_social_public'
 
   before_action :authenticate_user!, if: :whitelist_mode?
   before_action :require_enabled!
@@ -17,7 +17,7 @@ class PublicTimelinesController < ApplicationController
   end
 
   def set_body_classes
-    @body_classes = 'with-modals'
+    @body_classes = 'with-modals public'
   end
 
   def set_instance_presenter

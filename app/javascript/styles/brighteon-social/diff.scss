@@ -1600,6 +1600,18 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 }
 
+.public {
+  .header {
+    height: auto;
+    margin: 0;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .page-header p {
+    color: $black;
+  }
+}
+
 .admin {
   .admin-wrapper {
     .sidebar-wrapper__inner {

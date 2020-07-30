@@ -5,6 +5,16 @@
   %meta{ name: 'robots', content: 'noindex' }/
   = javascript_pack_tag 'about', integrity: true, crossorigin: 'anonymous'
 
+- content_for :header do
+  .container
+    %nav.header
+      .nav-left
+        = render 'application/top_menu'
+
+      .nav-right
+        = link_to root_path, class: 'btn button button-primary back-to-landing' do
+          = t('generic.back_to_link', link: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
+
 .page-header
   %h1= t('about.see_whats_happening')
 
