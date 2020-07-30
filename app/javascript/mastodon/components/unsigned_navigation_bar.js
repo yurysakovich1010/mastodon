@@ -1,6 +1,7 @@
 import React from 'react';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import SearchContainer from 'mastodon/features/ui/components/search_container';
+import SearchResultsContainer from 'mastodon/features/ui/components/search_results_container';
 import horizontalLogo from 'mastodon/../images/brighteon-social/logo_horiz.png';
 import { isMobile } from 'mastodon/is_mobile';
 
@@ -25,6 +26,8 @@ export default class UnsignedNavigationBar extends ImmutablePureComponent {
               !deviceIsMobile && (
                 <div className='search-container flex-fill'>
                   <SearchContainer />
+
+                  <SearchResultsContainer />
                 </div>
               )
             }
@@ -56,6 +59,8 @@ export default class UnsignedNavigationBar extends ImmutablePureComponent {
             deviceIsMobile && (
               <div className='mobile-search-container'>
                 <SearchContainer />
+
+                <SearchResultsContainer />
               </div>
             )
           }

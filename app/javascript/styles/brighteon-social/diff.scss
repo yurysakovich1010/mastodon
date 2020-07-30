@@ -1411,7 +1411,8 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       }
     }
   }
-  .navigation-bar strong {
+  .navigation-bar strong,
+  .navigation-bar span {
     color: $white;
   }
   .compose__action-bar-dropdown {
