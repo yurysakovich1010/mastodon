@@ -9,7 +9,7 @@ class ContactMailer < ApplicationMailer
     # @instance = Rails.configuration.x.local_domain
 
     I18n.with_locale(@me.locale || I18n.default_locale) do
-      mail to: @me.email, subject: I18n.t('contact_mailer.new_contact.subject'), content: @content
+      mail to: 'support@brighteon.com', subject: I18n.t('contact_mailer.new_contact.subject'), content: @content
     end
   end
 end
