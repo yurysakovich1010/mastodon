@@ -5,16 +5,38 @@
   %meta{ name: 'robots', content: 'noindex' }/
   = render 'accounts/og', account: @account, url: account_followers_url(@account, only_path: false)
 
-= render 'accounts/header', account: @account
+- content_for :header do
+  .container
+    %nav.header
+      .nav-left
+        = render 'application/top_menu'
+
+      .nav-right
+        = link_to root_path, class: 'btn button button-primary back-to-landing' do
+          = t('generic.back_to_link', link: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
+
+= render 'relationships/header', account: @account
+
+.container
+  .d-flex.bar
+    .public-account-header__tabs__tabs.m-auto
+      .public-account-header__tabs__tab{ class: active_nav_class(account_followers_url(@account)) }
+        = link_to account_followers_url(@account), class: 'font-weight-bold' do
+          = t('accounts.followers.other')
+      .public-account-header__tabs__tab{ class: active_nav_class(account_following_index_url(@account)) }
+        = link_to account_following_index_url(@account), class: 'font-weight-bold' do
+          = t('accounts.following')
 
 - if @account.user_hides_network?
   .nothing-here= t('accounts.network_hidden')
 - elsif user_signed_in? && @account.blocking?(current_account)
   .nothing-here= t('accounts.unavailable')
 - elsif @follows.empty?
-  = nothing_here
+  .container.cards-container
+    = nothing_here
 - else
-  .card-grid
-    = render partial: 'application/card', collection: @follows.map(&:account), as: :account
+  .container.cards-container
+    .card-grid
+      = render partial: 'application/card', collection: @follows.map(&:account), as: :account
 
   = paginate @follows

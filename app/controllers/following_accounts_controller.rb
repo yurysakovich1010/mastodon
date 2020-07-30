@@ -4,8 +4,11 @@ class FollowingAccountsController < ApplicationController
   include AccountControllerConcern
   include SignatureVerification
 
+  layout 'brighteon_social_profile'
+
   before_action :require_signature!, if: -> { request.format == :json && authorized_fetch_mode? }
   before_action :set_cache_headers
+  before_action :set_body_classes, only: :index
 
   skip_around_action :set_locale, if: -> { request.format == :json }
   skip_before_action :require_functional!, unless: :whitelist_mode?
@@ -79,5 +82,9 @@ class FollowingAccountsController < ApplicationController
     else
       %i(id type totalItems)
     end
+  end
+
+  def set_body_classes
+    @body_classes = 'relationships'
   end
 end
