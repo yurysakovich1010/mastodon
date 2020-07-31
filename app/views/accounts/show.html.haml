@@ -31,7 +31,8 @@
     .originally-grid
       .column-0
         .column-container
-          #mastodon-compose{ data: { props: Oj.dump(default_props) }}
+          - if user_signed_in? && current_account.id === @account.id
+            #mastodon-compose{ data: { props: Oj.dump(default_props) }}
           .h-feed
             %data.p-name{ value: "#{@account.username} on #{site_hostname}" }/
 
