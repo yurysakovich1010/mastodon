@@ -33,30 +33,32 @@
         .column-container
           - if user_signed_in? && current_account.id === @account.id
             #mastodon-compose{ data: { props: Oj.dump(default_props) }}
-          .h-feed
-            %data.p-name{ value: "#{@account.username} on #{site_hostname}" }/
-
-            -#.account__section-headline
-            -#  = active_link_to t('accounts.posts_tab_heading'), short_account_url(@account)
-            -#  = active_link_to t('accounts.posts_with_replies'), short_account_with_replies_url(@account)
-            -#  = active_link_to t('accounts.media'), short_account_media_url(@account)
-
-            - if user_signed_in? && @account.blocking?(current_account)
-              .nothing-here.nothing-here--under-tabs= t('accounts.unavailable')
-            - elsif @statuses.empty?
-              .br1= nothing_here 'nothing-here'
-            - else
-              .activity-stream
-                - if params[:page].to_i.zero?
-                  = render partial: 'statuses/status', collection: @pinned_statuses, as: :status, locals: { pinned: true }
-
-                - if @newer_url
-                  .entry= link_to_more @newer_url
-
-                = render partial: 'statuses/status', collection: @statuses, as: :status
-
-                - if @older_url
-                  .entry= link_to_more @older_url
+          #mastodon-statuses{ data: { props: Oj.dump(default_props.merge(username: @account.username)) }}
+            -#.col.w-50
+            -#  .h-feed
+            -#    %data.p-name{ value: "#{@account.username} on #{site_hostname}" }/
+            -#
+            -#    -#.account__section-headline
+            -#    -#  = active_link_to t('accounts.posts_tab_heading'), short_account_url(@account)
+            -#    -#  = active_link_to t('accounts.posts_with_replies'), short_account_with_replies_url(@account)
+            -#    -#  = active_link_to t('accounts.media'), short_account_media_url(@account)
+            -#
+            -#    - if user_signed_in? && @account.blocking?(current_account)
+            -#      .nothing-here.nothing-here--under-tabs= t('accounts.unavailable')
+            -#    - elsif @statuses.empty?
+            -#      .br1= nothing_here 'nothing-here'
+            -#    - else
+            -#      .activity-stream
+            -#        - if params[:page].to_i.zero?
+            -#          = render partial: 'statuses/status', collection: @pinned_statuses, as: :status, locals: { pinned: true }
+            -#
+            -#        - if @newer_url
+            -#          .entry= link_to_more @newer_url
+            -#
+            -#        = render partial: 'statuses/status', collection: @statuses, as: :status
+            -#
+            -#        - if @older_url
+            -#          .entry= link_to_more @older_url
 
       .column-1
         .column-container
@@ -117,3 +119,5 @@
                   = react_component :hashtag, hashtag: ActiveModelSerializers::SerializableResource.new(tag, serializer: REST::TagSerializer).as_json
 
           = render 'application/trending_now'
+
+#modal-container

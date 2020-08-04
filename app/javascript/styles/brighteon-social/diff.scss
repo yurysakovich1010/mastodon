@@ -1147,6 +1147,8 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         border: 0;
         border-radius: 0.25rem;
 
+        .trends__header,
+        .trends .account,
         .search-results__header,
         .search-results__section,
         .search-results__section h5{
@@ -1685,6 +1687,34 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     }
     .display-name__account {
       color: #3366ff;
+    }
+  }
+}
+
+.profile {
+  .dropdown-menu {
+    background-color: #2040a4;
+    &__item a {
+      background-color: rgba(8, 8, 63, 0.25);
+    }
+  }
+  #mastodon-statuses {
+    .status {
+      border-left: 1px solid #c0cdd9;
+      border-right: 1px solid #c0cdd9;
+    }
+    & > div:first-child {
+      .status {
+        border-top: 1px solid #c0cdd9;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+      }
+    }
+    & > div:last-child {
+      .status {
+        border-bottom-left-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+      }
     }
   }
 }
