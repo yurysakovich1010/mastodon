@@ -1691,7 +1691,8 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 }
 
-.profile {
+.profile,
+.statuses {
   .dropdown-menu {
     background-color: #2040a4;
     &__item a {
@@ -1721,10 +1722,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       }
     }
   }
-}
 
-.profile,
-.statuses {
   .container {
     max-width: 1240px;
     padding: 0;
