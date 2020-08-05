@@ -99,7 +99,7 @@ class StatusActionBar extends ImmutablePureComponent {
 
   handleReplyClick = () => {
     if (me) {
-      this.props.onReply(this.props.status, this.context.router.history);
+      this.props.onReply();
     } else {
       this._openInteractionDialog('reply');
     }
@@ -195,7 +195,7 @@ class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleOpen = () => {
-    this.context.router.history.push(`/statuses/${this.props.status.get('id')}`);
+    window.location = `/web/statuses/${this.props.status.get('id')}`
   }
 
   handleEmbed = () => {
@@ -262,9 +262,9 @@ class StatusActionBar extends ImmutablePureComponent {
       menu.push({ text: intl.formatMessage(messages.delete), action: this.handleDeleteClick });
       menu.push({ text: intl.formatMessage(messages.redraft), action: this.handleRedraftClick });
     } else {
-      menu.push({ text: intl.formatMessage(messages.mention, { name: account.get('username') }), action: this.handleMentionClick });
-      menu.push({ text: intl.formatMessage(messages.direct, { name: account.get('username') }), action: this.handleDirectClick });
-      menu.push(null);
+      // menu.push({ text: intl.formatMessage(messages.mention, { name: account.get('username') }), action: this.handleMentionClick });
+      // menu.push({ text: intl.formatMessage(messages.direct, { name: account.get('username') }), action: this.handleDirectClick });
+      // menu.push(null);
 
       if (relationship && relationship.get('muting')) {
         menu.push({ text: intl.formatMessage(messages.unmute, { name: account.get('username') }), action: this.handleMuteClick });
