@@ -96,6 +96,8 @@ class Status extends ImmutablePureComponent {
     cachedMediaWidth: PropTypes.number,
     scrollKey: PropTypes.string,
     username: PropTypes.string,
+    avatar: PropTypes.string,
+    statusId: PropTypes.any,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -262,13 +264,31 @@ class Status extends ImmutablePureComponent {
     this.node = c;
   }
 
+  handleReply = () => {
+    // this.setState({ showReplyBox: true });
+  }
+
+  reply = () => {
+    // merge compose component here
+
+    // return {
+    //   in_reply_to_id: "104449302194432661",
+    //   media_ids: [],
+    //   poll: null,
+    //   sensitive: false,
+    //   spoiler_text: "",
+    //   status: "ssssssssssssssssssssssssss",
+    //   visibility: "public"
+    // }
+  }
+
   render () {
     let media = null;
     let statusAvatar, prepend, rebloggedByText;
 
     const { intl, hidden, featured, otherAccounts, unread, showThread, scrollKey } = this.props;
 
-    let { status, account, username, ...other } = this.props;
+    let { status, account, username, avatar, statusId, ...other } = this.props;
 
     if (status === null) {
       return null;
@@ -438,40 +458,59 @@ class Status extends ImmutablePureComponent {
     const visibilityIcon = visibilityIconInfo[status.get('visibility')];
 
     const acct = status.getIn(['account', 'acct']);
-    console.log('acct', acct);
-    if (acct === username) {
-      return (
-        <HotKeys handlers={handlers}>
-          <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
-            {prepend}
+    const avatarStyle = {
+      width: '36px',
+      height: '36px',
+      backgroundSize: '36px 36px',
+      backgroundImage: `url(${avatar})`
+    };
+    if (acct === username) { // filter status by user
+      if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
+        return (
+          <HotKeys handlers={handlers}>
+            <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
+              {prepend}
 
-            <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
-              <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
-              <div className='status__info'>
-                <div>
-                  <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
-                    <div className='status__avatar'>
-                      {statusAvatar}
-                    </div>
+              <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
+                <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
+                <div className='status__info'>
+                  <div>
+                    <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
+                      <div className='status__avatar'>
+                        {statusAvatar}
+                      </div>
 
-                    <DisplayName account={status.get('account')} others={otherAccounts} />
-                  </a>
+                      <DisplayName account={status.get('account')} others={otherAccounts} />
+                    </a>
+                  </div>
+                  <div>
+                    <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>
+                    {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
+                  </div>
                 </div>
-                <div>
-                  <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>
-                  {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
+
+                <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} showThread={showThread} onExpandedToggle={this.handleExpandedToggle} collapsable onCollapsedToggle={this.handleCollapsedToggle} />
+
+                {media}
+
+                <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} />
+
+                <div className='status__reply'>
+                  <div className="status__avatar">
+                    <div className="account__avatar" style={avatarStyle} />
+                  </div>
+
+                  <div className="status__reply-box">
+                    <textarea placeholder='Write a reply' rows='1' />
+
+                    <button className='button btn-post' onClick={this.reply}>Post</button>
+                  </div>
                 </div>
               </div>
-
-              <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} showThread={showThread} onExpandedToggle={this.handleExpandedToggle} collapsable onCollapsedToggle={this.handleCollapsedToggle} />
-
-              {media}
-
-              <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} />
             </div>
-          </div>
-        </HotKeys>
-      );
+          </HotKeys>
+        );
+      }
     }
 
     return null;

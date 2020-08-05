@@ -27,6 +27,8 @@ export default class AccountTimelineContainer extends React.PureComponent {
     hashtag: PropTypes.string,
     local: PropTypes.bool,
     username: PropTypes.string,
+    avatar: PropTypes.string,
+    statusId: PropTypes.any,
   };
 
   static defaultProps = {
@@ -34,14 +36,14 @@ export default class AccountTimelineContainer extends React.PureComponent {
   };
 
   render () {
-    const { locale, hashtag, local, username } = this.props;
+    const { locale, hashtag, local, username, avatar, statusId } = this.props;
 
     let timeline;
 
     if (hashtag) {
       timeline = <HashtagTimeline hashtag={hashtag} local={local} />;
     } else {
-      timeline = <AccountTimeline local={local} username={username} />;
+      timeline = <AccountTimeline local={local} username={username} avatar={avatar} statusId={statusId} />;
     }
 
     return (

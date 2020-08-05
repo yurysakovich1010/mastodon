@@ -32,6 +32,8 @@ class AccountTimeline extends React.PureComponent {
     hasMore: PropTypes.bool.isRequired,
     local: PropTypes.bool,
     username: PropTypes.string.isRequired,
+    avatar: PropTypes.string,
+    statusId: PropTypes.any,
   };
 
   componentDidMount () {
@@ -60,7 +62,7 @@ class AccountTimeline extends React.PureComponent {
   }
 
   render () {
-    const { statusIds, username } = this.props;
+    const { statusIds, username, avatar, statusId: statusIdProp } = this.props;
 
     return (
       <Fragment>
@@ -73,6 +75,8 @@ class AccountTimeline extends React.PureComponent {
               onMoveDown={() => {}}
               contextType={'public'}
               username={username}
+              avatar={avatar}
+              statusId={statusIdProp}
             />
           ))
         }

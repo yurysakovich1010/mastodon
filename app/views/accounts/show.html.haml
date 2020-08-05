@@ -33,7 +33,7 @@
         .column-container
           - if user_signed_in? && current_account.id === @account.id
             #mastodon-compose{ data: { props: Oj.dump(default_props) }}
-          #mastodon-statuses{ data: { props: Oj.dump(default_props.merge(username: @account.username)) }}
+          #mastodon-statuses{ data: { props: Oj.dump(default_props.merge(username: @account.username, avatar: current_account&.user&.setting_auto_play_gif ? current_account.avatar_original_url : current_account.avatar_static_url)) }}
             -#.col.w-50
             -#  .h-feed
             -#    %data.p-name{ value: "#{@account.username} on #{site_hostname}" }/

@@ -1699,19 +1699,23 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     }
   }
   #mastodon-statuses {
-    .status {
+    .status__wrapper {
       border-left: 1px solid #c0cdd9;
       border-right: 1px solid #c0cdd9;
+      border-bottom: 1px solid #c0cdd9;
+      .status {
+        border: 0;
+      }
     }
     & > div:first-child {
-      .status {
+      .status__wrapper {
         border-top: 1px solid #c0cdd9;
         border-top-left-radius: 0.25rem;
         border-top-right-radius: 0.25rem;
       }
     }
     & > div:last-child {
-      .status {
+      .status__wrapper {
         border-bottom-left-radius: 0.25rem;
         border-bottom-right-radius: 0.25rem;
       }
@@ -1997,7 +2001,47 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     font-size: 19px;
     font-weight: 500;
     color: $black;
-    padding: 15px 0 ;
+    padding: 15px 0;
+  }
+  .status__reply {
+    position: relative;
+    padding: 15px 0 0;
+    .status__avatar {
+      left: -51px;
+      top: 15px;
+    }
+    &-box {
+      border-radius: 0.25rem;
+      overflow: hidden;
+
+      textarea {
+        background-color: #ECECEC;
+        color: #454545;
+        width: calc(100% - 24px);
+        font-size: 16px;
+        line-height: 24px;
+        padding: 6px 12px;
+        border: 0;
+        &:focus {
+          outline: 0;
+        }
+
+        &:placeholder-shown + button {
+          display: none;
+        }
+      }
+      .btn-post {
+        position: absolute;
+        right: 3px;
+        bottom: 3px;
+        height: 30px;
+        border-radius: 14px;
+        background-color: #2040a4;
+        font-size: 12px;
+        line-height: 14px;
+        color: #FFFFFF;
+      }
+    }
   }
 }
 
