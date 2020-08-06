@@ -60,6 +60,7 @@ class Notifications extends React.PureComponent {
     multiColumn: PropTypes.bool,
     hasMore: PropTypes.bool,
     numPending: PropTypes.number,
+    onPopup: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -147,7 +148,7 @@ class Notifications extends React.PureComponent {
   }
 
   render () {
-    const { intl, notifications, shouldUpdateScroll, isLoading, isUnread, columnId, multiColumn, hasMore, numPending, showFilterBar } = this.props;
+    const { intl, notifications, shouldUpdateScroll, isLoading, isUnread, columnId, multiColumn, hasMore, numPending, showFilterBar, onPopup } = this.props;
     const pinned = !!columnId;
     const emptyMessage = <FormattedMessage id='empty_column.notifications' defaultMessage="You don't have any notifications yet. Interact with others to start the conversation." />;
 
@@ -181,6 +182,10 @@ class Notifications extends React.PureComponent {
     }
 
     this.scrollableContent = scrollableContent;
+
+    if (onPopup) {
+      return scrollableContent;
+    }
 
     const scrollContainer = (
       <ScrollableList

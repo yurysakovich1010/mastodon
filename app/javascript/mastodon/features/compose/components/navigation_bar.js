@@ -8,6 +8,8 @@ import SearchContainer from 'mastodon/features/ui/components/search_container';
 import SearchResultsContainer from 'mastodon/features/ui/components/search_results_container';
 import horizontalLogo from 'mastodon/../images/brighteon-social/logo_horiz.png';
 import { isMobile } from 'mastodon/is_mobile';
+import NotificationsCounterIcon from "../../ui/components/notifications_counter_icon";
+import Notifications from "../../notifications";
 
 export default class NavigationBar extends ImmutablePureComponent {
 
@@ -17,11 +19,32 @@ export default class NavigationBar extends ImmutablePureComponent {
     onClose: PropTypes.func,
   };
 
+  state = {
+    popupVisible: false,
+  };
+
+  openNotificationsPopup = (e) => {
+    e.stopPropagation();
+    this.setState({popupVisible: true});
+  };
+
+  closeNotificationsPopup = () => {
+    this.setState({popupVisible: false});
+  };
+
+  componentDidMount() {
+    window.addEventListener('click', this.closeNotificationsPopup);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.closeNotificationsPopup);
+  }
+
   render () {
     const avatarStyle = {
       borderRadius: '50%',
       border: '2px solid white',
-    }
+    };
 
     const deviceIsMobile = isMobile(window.innerWidth);
 
@@ -60,11 +83,24 @@ export default class NavigationBar extends ImmutablePureComponent {
                 </div>
               </a>
 
-              <a target='_blank' rel='noopener noreferrer' href='/web/notifications' className='decoration-none'>
-                <div className='icon mr2'>
-                  <Icon id='bell' fixedWidth />
-                </div>
-              </a>
+              <div className='notification-bell'>
+                {/*<a target='_blank' rel='noopener noreferrer' href='/web/notifications' className='decoration-none'>*/}
+                  <div className='icon mr2' onClick={this.openNotificationsPopup}>
+                    <NotificationsCounterIcon className='column-link__icon' />
+                  </div>
+                {/*</a>*/}
+
+                {
+                  this.state.popupVisible && (
+                    <div className="drawer__pager">
+                      <div className="drawer__inner darker">
+                        <Notifications onPopup />
+                      </div>
+                    </div>
+                  )
+                }
+
+              </div>
 
               <a href='/settings/preferences' className='decoration-none'>
                 <div className='icon mr2'>
@@ -105,5 +141,4 @@ export default class NavigationBar extends ImmutablePureComponent {
       </div>
     );
   }
-
 }

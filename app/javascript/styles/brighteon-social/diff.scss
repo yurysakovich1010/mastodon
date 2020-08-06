@@ -895,7 +895,18 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   -webkit-box-orient: vertical;
 }
 
-.setting-toggle__label {
+.setting-toggle__label,
+.column-settings__section,
+.column-settings__row .text-btn,
+.notification__filter-bar button.active,
+.notification__filter-bar a.active,
+.account__section-headline button.active,
+.account__section-headline a.active,
+.notification__filter-bar button,
+.notification__filter-bar a,
+.account__section-headline button,
+.account__section-headline a,
+.notification__message {
   color: $ui-highlight-color;
 }
 
@@ -1174,6 +1185,21 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     width: 36px;
     height: 36px;
     background-size: 36px 36px;
+  }
+
+  .notification-bell {
+    position: relative;
+    overflow: visible;
+
+    .drawer__pager {
+      position: absolute;
+      left: -240px;
+      right: 0;
+
+      .drawer__inner {
+        background-color: #2040a4;
+      }
+    }
   }
 }
 
