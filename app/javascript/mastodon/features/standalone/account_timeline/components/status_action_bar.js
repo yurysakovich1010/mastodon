@@ -139,11 +139,11 @@ class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleDeleteClick = () => {
-    this.props.onDelete(this.props.status, this.context.router.history);
+    this.props.onDelete(this.props.status);
   }
 
   handleRedraftClick = () => {
-    this.props.onDelete(this.props.status, this.context.router.history, true);
+    this.props.onDelete(this.props.status, null, true);
   }
 
   handlePinClick = () => {

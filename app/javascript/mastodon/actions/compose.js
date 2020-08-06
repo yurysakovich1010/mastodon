@@ -72,7 +72,9 @@ const COMPOSE_PANEL_BREAKPOINT = 600 + (285 * 1) + (10 * 1);
 
 export const ensureComposeIsVisible = (getState, routerHistory) => {
   if (!getState().getIn(['compose', 'mounted']) && window.innerWidth < COMPOSE_PANEL_BREAKPOINT) {
-    routerHistory.push('/statuses/new');
+    if (routerHistory) {
+      routerHistory.push('/statuses/new');
+    }
   }
 };
 
