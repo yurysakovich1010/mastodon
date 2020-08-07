@@ -1200,6 +1200,19 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         background-color: #2040a4;
       }
     }
+    i.icon-with-badge__badge {
+      background-color: red;
+      border-radius: 50%;
+      border: 2px solid $white;
+      color: white;
+      font-size: 0.75rem;
+      height: 1rem;
+      width: 1rem;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 
@@ -2038,7 +2051,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       border-radius: 0.25rem;
       overflow: hidden;
 
-      textarea {
+      .textarea {
         background-color: #ECECEC;
         color: #454545;
         width: calc(100% - 24px);

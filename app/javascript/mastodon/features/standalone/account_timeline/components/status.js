@@ -17,6 +17,7 @@ import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../../../../initial_state';
+// import ComposeFormContainer from '../../../compose/containers/compose_form_container';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
@@ -501,7 +502,7 @@ class Status extends ImmutablePureComponent {
                   </div>
 
                   <div className="status__reply-box">
-                    <textarea placeholder='Write a reply' rows='1' />
+                    {/*<ComposeFormContainer />*/}
 
                     <button className='button btn-post' onClick={this.reply}>Post</button>
                   </div>
