@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import IconWithBadge from 'mastodon/components/icon_with_badge';
 import {createSelector} from "reselect";
 import {List as ImmutableList} from "immutable";
-import {expandNotifications} from "../../../actions/notifications";
+import {clearNotifications, expandNotifications} from "../../../actions/notifications";
 
 const getNotifications = createSelector([
   state => state.getIn(['settings', 'notifications', 'quickFilter', 'show']),
@@ -58,6 +58,9 @@ class NavigationBar extends ImmutablePureComponent {
 
   closeNotificationsPopup = () => {
     this.setState({popupVisible: false});
+    if (this.props.count > 0) {
+      this.props.cleanNotifications();
+    }
   };
 
   componentDidMount() {
@@ -175,7 +178,10 @@ class NavigationBar extends ImmutablePureComponent {
 const mapDispatchToProps = (dispatch) => ({
   fetchNotifications() {
     dispatch(expandNotifications());
+  },
+  cleanNotifications() {
+    dispatch(clearNotifications());
   }
 });
 
-export default connect(null, mapDispatchToProps)(NavigationBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
