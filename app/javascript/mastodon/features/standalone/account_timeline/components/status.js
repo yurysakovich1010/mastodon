@@ -17,6 +17,7 @@ import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../../../../initial_state';
+import api from 'mastodon/api';
 // import ComposeFormContainer from '../../../compose/containers/compose_form_container';
 
 // We use the component (and not the container) since we do not want
@@ -279,15 +280,25 @@ class Status extends ImmutablePureComponent {
   reply = () => {
     // merge compose component here
 
-    return {
-      in_reply_to_id: this.props.status.id,
+    console.log('this.props.status', this.props.status);
+    console.log('this.props.status.id', this.props.status.id);
+    console.log('this.props.status.get(\'id\')', this.props.status.get('id'));
+
+    api().post('/api/v1/statuses', {
+      in_reply_to_id: this.props.status.get('id'),
       media_ids: [],
       poll: null,
       sensitive: false,
       spoiler_text: "",
       status: this.state.replyText,
       visibility: "public"
-    }
+    })
+      .then(({data}) => {
+        if (data && data.id) {
+          console.log('data', data);
+
+        }
+      });
   }
 
   render () {
