@@ -113,6 +113,7 @@ class Status extends ImmutablePureComponent {
   state = {
     showMedia: defaultMediaVisibility(this.props.status),
     statusId: undefined,
+    replyText: '',
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -269,18 +270,24 @@ class Status extends ImmutablePureComponent {
     // this.setState({ showReplyBox: true });
   }
 
+  updateReply = (e) => {
+    this.setState({
+      replyText: e.target.value
+    })
+  }
+
   reply = () => {
     // merge compose component here
 
-    // return {
-    //   in_reply_to_id: "104449302194432661",
-    //   media_ids: [],
-    //   poll: null,
-    //   sensitive: false,
-    //   spoiler_text: "",
-    //   status: "ssssssssssssssssssssssssss",
-    //   visibility: "public"
-    // }
+    return {
+      in_reply_to_id: this.props.status.id,
+      media_ids: [],
+      poll: null,
+      sensitive: false,
+      spoiler_text: "",
+      status: this.state.replyText,
+      visibility: "public"
+    }
   }
 
   render () {
@@ -502,6 +509,7 @@ class Status extends ImmutablePureComponent {
                   </div>
 
                   <div className="status__reply-box">
+                    <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText}/>
                     {/*<ComposeFormContainer />*/}
 
                     <button className='button btn-post' onClick={this.reply}>Post</button>
