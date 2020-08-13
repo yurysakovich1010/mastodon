@@ -115,7 +115,8 @@ class Status extends ImmutablePureComponent {
     showMedia: defaultMediaVisibility(this.props.status),
     statusId: undefined,
     replyText: '',
-    descendants: []
+    descendants: [],
+    repliesAcctCount: 0
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -296,28 +297,6 @@ class Status extends ImmutablePureComponent {
 
         }
       });
-  }
-
-  componentDidMount() {
-    const { status, username, statusId } = this.props;
-    const acct = status.getIn(['account', 'acct']);
-
-    if (acct === username) { // filter status by user
-      if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
-        const repliesCount = status.get('replies_count');
-        if (repliesCount > 0) {
-          api().get(`/api/v1/statuses/${status.get('id')}/context`)
-            .then(({data}) => {
-              console.log('data', data);
-              if (data.descendants.length === repliesCount) {
-                this.setState({
-                  descendants: data.descendants
-                })
-              }
-            });
-        }
-      }
-    }
   }
 
   render () {
@@ -504,6 +483,20 @@ class Status extends ImmutablePureComponent {
     };
     if (acct === username) { // filter status by user
       if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
+
+        const { repliesAcctCount } = this.state;
+
+        const updatedRepliesAcctCount = status.get('replies_count');
+        if (updatedRepliesAcctCount > repliesAcctCount) {
+          api().get(`/api/v1/statuses/${status.get('id')}/context`)
+            .then(({data}) => {
+              this.setState({
+                descendants: data.descendants,
+                repliesAcctCount: updatedRepliesAcctCount
+              })
+            });
+        }
+
         return (
           <HotKeys handlers={handlers}>
             <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
@@ -534,7 +527,9 @@ class Status extends ImmutablePureComponent {
                 <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} />
 
                 {
-                  this.state.descendants.map((descendant) => (
+                  this.state.descendants.filter(
+                    (d, idx) => (idx < 3)
+                  ).map((descendant) => (
                     <div className='status__reply' key={descendant.id}>
                       <div className="status__avatar">
                         <div className="account__avatar" style={{

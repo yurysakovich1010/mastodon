@@ -112,7 +112,8 @@ class Status extends ImmutablePureComponent {
     statusId: undefined,
     replyText: '',
     descendants: [],
-    showReplyBox: false
+    showReplyBox: true,
+    repliesAcctCount: 0
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -266,7 +267,7 @@ class Status extends ImmutablePureComponent {
   }
 
   handleReply = () => {
-    this.setState({ showReplyBox: !this.state.showReplyBox });
+    // this.setState({ showReplyBox: !this.state.showReplyBox });
   }
 
   updateReply = (e) => {
@@ -293,22 +294,6 @@ class Status extends ImmutablePureComponent {
 
         }
       });
-  }
-
-  componentDidMount() {
-    const { status } = this.props;
-    const repliesCount = status.get('replies_count');
-    if (repliesCount > 0) {
-      api().get(`/api/v1/statuses/${status.get('id')}/context`)
-        .then(({data}) => {
-          console.log('data', data);
-          if (data.descendants.length === repliesCount) {
-            this.setState({
-              descendants: data.descendants
-            })
-          }
-        });
-    }
   }
 
   render () {
@@ -493,6 +478,21 @@ class Status extends ImmutablePureComponent {
       backgroundImage: `url(${account && (account.get('avatar') || account.get('avatar_static'))})`
     };
 
+    console.log('status.get(\'replies_count\')', status.get('replies_count'));
+
+    const { repliesAcctCount } = this.state;
+    const updatedRepliesAcctCount = status.get('replies_count');
+    console.log('repliesAcctCount', repliesAcctCount);
+    if (updatedRepliesAcctCount > repliesAcctCount) {
+      api().get(`/api/v1/statuses/${status.get('id')}/context`)
+        .then(({data}) => {
+          this.setState({
+            descendants: data.descendants,
+            repliesAcctCount: updatedRepliesAcctCount,
+          })
+        });
+    }
+
     return (
       <HotKeys handlers={handlers}>
         <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
@@ -523,7 +523,9 @@ class Status extends ImmutablePureComponent {
             <StatusActionBar scrollKey={scrollKey} status={status} {...other} onReply={this.handleReply} />
 
             {
-              this.state.descendants.map((descendant) => (
+              this.state.descendants.filter(
+                (d, idx) => (idx < 3)
+              ).map((descendant) => (
                 <div className='status__reply' key={descendant.id}>
                   <div className="status__avatar">
                     <div className="account__avatar" style={{

@@ -327,6 +327,8 @@ class StatusActionBar extends ImmutablePureComponent {
       <IconButton className='status__action-bar-button' title={intl.formatMessage(messages.share)} icon='share-alt' onClick={this.handleShareClick} />
     );
 
+    console.log('status.get(\'replies_count\') in bar', status.get('replies_count'));
+
     return (
       <div className='status__action-bar'>
         <div className='status__action-bar__counter'><IconButton className='status__action-bar-button' title={replyTitle} icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'reply' : replyIcon} onClick={this.handleReplyClick} /><span className='status__action-bar__counter__label' >{obfuscatedCount(status.get('replies_count'))}</span></div>
