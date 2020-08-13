@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { expandPublicTimeline, expandCommunityTimeline } from 'mastodon/actions/timelines';
+import { expandAccountTimeline, expandPublicTimeline, expandCommunityTimeline } from 'mastodon/actions/timelines';
 import Masonry from 'react-masonry-infinite';
 import { List as ImmutableList, Map as ImmutableMap } from 'immutable';
 import DetailedStatusContainer from 'mastodon/features/status/containers/detailed_status_container';
@@ -12,8 +12,8 @@ import {FormattedMessage} from "react-intl";
 import StatusList from "../../../components/status_list";
 import StatusContainer from "./containers/status_container";
 
-const mapStateToProps = (state, { local }) => {
-  const timeline = state.getIn(['timelines', local ? 'community' : 'public'], ImmutableMap());
+const mapStateToProps = (state, { accountId }) => {
+  const timeline = state.getIn(['timelines', `account:${accountId}`], ImmutableMap());
 
   return {
     statusIds: timeline.get('items', ImmutableList()),
@@ -47,17 +47,17 @@ class AccountTimeline extends React.PureComponent {
   }
 
   _connect () {
-    const { dispatch, local } = this.props;
+    const { dispatch, accountId } = this.props;
 
-    dispatch(local ? expandCommunityTimeline() : expandPublicTimeline());
+    dispatch(expandAccountTimeline(accountId));
   }
 
   handleLoadMore = () => {
-    const { dispatch, statusIds, local } = this.props;
+    const { dispatch, statusIds } = this.props;
     const maxId = statusIds.last();
 
     if (maxId) {
-      dispatch(local ? expandCommunityTimeline({ maxId }) : expandPublicTimeline({ maxId }));
+      dispatch(expandAccountTimeline({ maxId }));
     }
   }
 

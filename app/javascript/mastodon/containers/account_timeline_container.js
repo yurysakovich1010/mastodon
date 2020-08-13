@@ -7,7 +7,6 @@ import { hydrateStore } from '../actions/store';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { getLocale } from '../locales';
 import AccountTimeline from '../features/standalone/account_timeline';
-import HashtagTimeline from '../features/standalone/hashtag_timeline';
 import ModalContainer from '../features/ui/containers/modal_container';
 import initialState from '../initial_state';
 
@@ -23,6 +22,7 @@ if (initialState) {
 export default class AccountTimelineContainer extends React.PureComponent {
 
   static propTypes = {
+    accountId: PropTypes.number.isRequired,
     locale: PropTypes.string.isRequired,
     hashtag: PropTypes.string,
     local: PropTypes.bool,
@@ -36,15 +36,9 @@ export default class AccountTimelineContainer extends React.PureComponent {
   };
 
   render () {
-    const { locale, hashtag, local, username, avatar, statusId } = this.props;
+    const { locale, username, accountId, avatar, statusId } = this.props;
 
-    let timeline;
-
-    if (hashtag) {
-      timeline = <HashtagTimeline hashtag={hashtag} local={local} />;
-    } else {
-      timeline = <AccountTimeline local={local} username={username} avatar={avatar} statusId={statusId} />;
-    }
+    let timeline = <AccountTimeline username={username} avatar={avatar} statusId={statusId} accountId={accountId} />;
 
     return (
       <IntlProvider locale={locale} messages={messages}>
