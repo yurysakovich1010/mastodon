@@ -8,7 +8,6 @@ import { getScrollbarWidth } from 'mastodon/utils/scrollbar';
 import MediaGallery from 'mastodon/components/media_gallery';
 import Poll from 'mastodon/components/poll';
 import Hashtag from 'mastodon/components/hashtag';
-import ExternalTrend from 'mastodon/components/external_trend';
 import ModalRoot from 'mastodon/components/modal_root';
 import MediaModal from 'mastodon/features/ui/components/media_modal';
 import Video from 'mastodon/features/video';
@@ -18,7 +17,7 @@ import Audio from 'mastodon/features/audio';
 const { localeData, messages } = getLocale();
 addLocaleData(localeData);
 
-const MEDIA_COMPONENTS = { MediaGallery, Video, Card, Poll, Hashtag, Audio, ExternalTrend };
+const MEDIA_COMPONENTS = { MediaGallery, Video, Card, Poll, Hashtag, Audio };
 
 export default class MediaContainer extends PureComponent {
 

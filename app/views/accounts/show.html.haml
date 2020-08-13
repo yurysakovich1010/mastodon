@@ -4,7 +4,6 @@
 - content_for :header_tags do
   - if @account.user&.setting_noindex
     %meta{ name: 'robots', content: 'noindex, noarchive' }/
-  %meta{ 'http-equiv': 'Content-Security-Policy', content: 'script-src \'self\' \'unsafe-inline\' \'unsafe-eval\'; script-src-elem \'self\' http://*.brighteon.social;' }/
 
   %link{ rel: 'alternate', type: 'application/rss+xml', href: @rss_url }/
   %link{ rel: 'alternate', type: 'application/activity+json', href: ActivityPub::TagManager.instance.uri_for(@account) }/
@@ -117,7 +116,5 @@
 
                 - trends.each do |tag|
                   = react_component :hashtag, hashtag: ActiveModelSerializers::SerializableResource.new(tag, serializer: REST::TagSerializer).as_json
-
-          = render 'application/trending_now'
 
 #modal-container
