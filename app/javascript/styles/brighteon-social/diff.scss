@@ -2040,9 +2040,15 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     color: $black;
     padding: 15px 0;
   }
+}
+
+.profile,
+.statuses,
+.app-body {
   .status__reply {
     position: relative;
     padding: 15px 0 0;
+    height: 40px;
     .status__avatar {
       left: -51px;
       top: 15px;

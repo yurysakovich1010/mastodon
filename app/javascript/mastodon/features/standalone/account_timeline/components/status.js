@@ -115,6 +115,7 @@ class Status extends ImmutablePureComponent {
     showMedia: defaultMediaVisibility(this.props.status),
     statusId: undefined,
     replyText: '',
+    descendants: []
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -280,10 +281,6 @@ class Status extends ImmutablePureComponent {
   reply = () => {
     // merge compose component here
 
-    console.log('this.props.status', this.props.status);
-    console.log('this.props.status.id', this.props.status.id);
-    console.log('this.props.status.get(\'id\')', this.props.status.get('id'));
-
     api().post('/api/v1/statuses', {
       in_reply_to_id: this.props.status.get('id'),
       media_ids: [],
@@ -299,6 +296,28 @@ class Status extends ImmutablePureComponent {
 
         }
       });
+  }
+
+  componentDidMount() {
+    const { status, username, statusId } = this.props;
+    const acct = status.getIn(['account', 'acct']);
+
+    if (acct === username) { // filter status by user
+      if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
+        const repliesCount = status.get('replies_count');
+        if (repliesCount > 0) {
+          api().get(`/api/v1/statuses/${status.get('id')}/context`)
+            .then(({data}) => {
+              console.log('data', data);
+              if (data.descendants.length === repliesCount) {
+                this.setState({
+                  descendants: data.descendants
+                })
+              }
+            });
+        }
+      }
+    }
   }
 
   render () {
@@ -513,6 +532,25 @@ class Status extends ImmutablePureComponent {
                 {media}
 
                 <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} />
+
+                {
+                  this.state.descendants.map((descendant) => (
+                    <div className='status__reply' key={descendant.id}>
+                      <div className="status__avatar">
+                        <div className="account__avatar" style={{
+                          width: '36px',
+                          height: '36px',
+                          backgroundSize: '36px 36px',
+                          backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`
+                        }} />
+                      </div>
+
+                      <div className="status__reply-box">
+                        <div dangerouslySetInnerHTML={{__html: descendant.content}} />
+                      </div>
+                    </div>
+                  ))
+                }
 
                 <div className='status__reply'>
                   <div className="status__avatar">

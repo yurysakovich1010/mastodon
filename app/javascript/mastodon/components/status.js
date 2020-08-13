@@ -17,6 +17,7 @@ import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../initial_state';
+import api from 'mastodon/api';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
@@ -109,6 +110,9 @@ class Status extends ImmutablePureComponent {
   state = {
     showMedia: defaultMediaVisibility(this.props.status),
     statusId: undefined,
+    replyText: '',
+    descendants: [],
+    showReplyBox: false
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -259,6 +263,52 @@ class Status extends ImmutablePureComponent {
 
   handleRef = c => {
     this.node = c;
+  }
+
+  handleReply = () => {
+    this.setState({ showReplyBox: !this.state.showReplyBox });
+  }
+
+  updateReply = (e) => {
+    this.setState({
+      replyText: e.target.value
+    })
+  }
+
+  reply = () => {
+    // merge compose component here
+
+    api().post('/api/v1/statuses', {
+      in_reply_to_id: this.props.status.get('id'),
+      media_ids: [],
+      poll: null,
+      sensitive: false,
+      spoiler_text: "",
+      status: this.state.replyText,
+      visibility: "public"
+    })
+      .then(({data}) => {
+        if (data && data.id) {
+          console.log('data', data);
+
+        }
+      });
+  }
+
+  componentDidMount() {
+    const { status } = this.props;
+    const repliesCount = status.get('replies_count');
+    if (repliesCount > 0) {
+      api().get(`/api/v1/statuses/${status.get('id')}/context`)
+        .then(({data}) => {
+          console.log('data', data);
+          if (data.descendants.length === repliesCount) {
+            this.setState({
+              descendants: data.descendants
+            })
+          }
+        });
+    }
   }
 
   render () {
@@ -419,13 +469,13 @@ class Status extends ImmutablePureComponent {
       );
     }
 
-    if (otherAccounts && otherAccounts.size > 0) {
-      statusAvatar = <AvatarComposite accounts={otherAccounts} size={48} />;
-    } else if (account === undefined || account === null) {
+    // if (otherAccounts && otherAccounts.size > 0) {
+    //   statusAvatar = <AvatarComposite accounts={otherAccounts} size={48} />;
+    // } else if (account === undefined || account === null) {
       statusAvatar = <Avatar account={status.get('account')} size={48} />;
-    } else {
-      statusAvatar = <AvatarOverlay account={status.get('account')} friend={account} />;
-    }
+    // } else {
+    //   statusAvatar = <AvatarOverlay account={status.get('account')} friend={account} />;
+    // }
 
     const visibilityIconInfo = {
       'public': { icon: 'globe', text: intl.formatMessage(messages.public_short) },
@@ -435,6 +485,13 @@ class Status extends ImmutablePureComponent {
     };
 
     const visibilityIcon = visibilityIconInfo[status.get('visibility')];
+
+    const avatarStyle = {
+      width: '36px',
+      height: '36px',
+      backgroundSize: '36px 36px',
+      backgroundImage: `url(${account && (account.get('avatar') || account.get('avatar_static'))})`
+    };
 
     return (
       <HotKeys handlers={handlers}>
@@ -463,7 +520,43 @@ class Status extends ImmutablePureComponent {
 
             {media}
 
-            <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} />
+            <StatusActionBar scrollKey={scrollKey} status={status} {...other} onReply={this.handleReply} />
+
+            {
+              this.state.descendants.map((descendant) => (
+                <div className='status__reply' key={descendant.id}>
+                  <div className="status__avatar">
+                    <div className="account__avatar" style={{
+                      width: '36px',
+                      height: '36px',
+                      backgroundSize: '36px 36px',
+                      backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`
+                    }} />
+                  </div>
+
+                  <div className="status__reply-box">
+                    <div dangerouslySetInnerHTML={{__html: descendant.content}} />
+                  </div>
+                </div>
+              ))
+            }
+
+            {
+              this.state.showReplyBox && (
+                <div className='status__reply'>
+                  <div className="status__avatar">
+                    <div className="account__avatar" style={avatarStyle} />
+                  </div>
+
+                  <div className="status__reply-box">
+                    <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText}/>
+                    {/*<ComposeFormContainer />*/}
+
+                    <button className='button btn-post' onClick={this.reply}>Post</button>
+                  </div>
+                </div>
+              )
+            }
           </div>
         </div>
       </HotKeys>
