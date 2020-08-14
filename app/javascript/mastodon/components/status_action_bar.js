@@ -88,6 +88,8 @@ class StatusActionBar extends ImmutablePureComponent {
     withDismiss: PropTypes.bool,
     scrollKey: PropTypes.string,
     intl: PropTypes.object.isRequired,
+    showAllReplies: PropTypes.any,
+    toggleShowAllReplies: PropTypes.func.isRequired,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -230,6 +232,10 @@ class StatusActionBar extends ImmutablePureComponent {
     }
   }
 
+  toggleShowAllReplies = () => {
+    this.props.toggleShowAllReplies();
+  }
+
   render () {
     const { status, relationship, intl, withDismiss, scrollKey } = this.props;
 
@@ -248,6 +254,9 @@ class StatusActionBar extends ImmutablePureComponent {
     }
 
     menu.push({ text: intl.formatMessage(status.get('bookmarked') ? messages.removeBookmark : messages.bookmark), action: this.handleBookmarkClick });
+    menu.push(null);
+
+    menu.push({ text: 'Show all or only 3 replies', action: this.toggleShowAllReplies });
     menu.push(null);
 
     if (status.getIn(['account', 'id']) === me || withDismiss) {

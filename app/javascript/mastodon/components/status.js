@@ -13,7 +13,6 @@ import Card from '../features/status/components/card';
 import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { MediaGallery, Video, Audio } from '../features/ui/util/async-components';
-import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../initial_state';
@@ -113,7 +112,9 @@ class Status extends ImmutablePureComponent {
     replyText: '',
     descendants: [],
     showReplyBox: true,
-    repliesAcctCount: 0
+    repliesCount: 0,
+    repliesCountUpdated: false,
+    showAllReplies: false
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -291,10 +292,19 @@ class Status extends ImmutablePureComponent {
     })
       .then(({data}) => {
         if (data && data.id) {
-          console.log('data', data);
-
+          this.setState({
+            replyText: '',
+            repliesCount: this.state.repliesCount + 1,
+            repliesCountUpdated: true
+          });
         }
       });
+  }
+
+  toggleShowAllReplies = () => {
+    this.setState({
+      showAllReplies: !this.state.showAllReplies
+    })
   }
 
   render () {
@@ -325,12 +335,10 @@ class Status extends ImmutablePureComponent {
 
     if (hidden) {
       return (
-        <HotKeys handlers={handlers}>
-          <div ref={this.handleRef} className={classNames('status__wrapper', { focusable: !this.props.muted })} tabIndex='0'>
-            {status.getIn(['account', 'display_name']) || status.getIn(['account', 'username'])}
-            {status.get('content')}
-          </div>
-        </HotKeys>
+        <div ref={this.handleRef} className={classNames('status__wrapper', { focusable: !this.props.muted })} tabIndex='0'>
+          {status.getIn(['account', 'display_name']) || status.getIn(['account', 'username'])}
+          {status.get('content')}
+        </div>
       );
     }
 
@@ -341,11 +349,9 @@ class Status extends ImmutablePureComponent {
       };
 
       return (
-        <HotKeys handlers={minHandlers}>
-          <div className='status__wrapper status__wrapper--filtered focusable' tabIndex='0' ref={this.handleRef}>
-            <FormattedMessage id='status.filtered' defaultMessage='Filtered' />
-          </div>
-        </HotKeys>
+        <div className='status__wrapper status__wrapper--filtered focusable' tabIndex='0' ref={this.handleRef}>
+          <FormattedMessage id='status.filtered' defaultMessage='Filtered' />
+        </div>
       );
     }
 
@@ -479,15 +485,22 @@ class Status extends ImmutablePureComponent {
       backgroundImage: `url(${account && (account.get('avatar') || account.get('avatar_static'))})`
     };
 
-    const { repliesAcctCount } = this.state;
-    const updatedRepliesAcctCount = status.get('replies_count');
-    if (updatedRepliesAcctCount > repliesAcctCount) {
+    if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
+      this.setState({
+        repliesCount: status.get('replies_count')
+      });
+    }
+
+    const { repliesCountUpdated } = this.state;
+    if (repliesCountUpdated || (this.state.descendants.length === 0 && status.get('replies_count') > 0)) {
       api().get(`/api/v1/statuses/${status.get('id')}/context`)
         .then(({data}) => {
-          this.setState({
-            descendants: data.descendants,
-            repliesAcctCount: updatedRepliesAcctCount,
-          })
+          if (this.state.descendants.length < data.descendants.length) {
+            this.setState({
+              descendants: data.descendants,
+              repliesCountUpdated: false,
+            });
+          }
         });
     }
 
@@ -517,11 +530,11 @@ class Status extends ImmutablePureComponent {
 
           {media}
 
-          <StatusActionBar scrollKey={scrollKey} status={status} {...other} onReply={this.handleReply} />
+          <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
 
           {
             this.state.descendants.filter(
-              (d, idx) => (idx < 3)
+              (d, idx) => (idx < 3 || this.state.showAllReplies)
             ).map((descendant) => (
               <div className='status__reply' key={descendant.id}>
                 <div className="status__avatar">

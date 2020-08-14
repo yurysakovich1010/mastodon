@@ -13,12 +13,10 @@ import Card from '../../../../features/status/components/card';
 import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { MediaGallery, Video, Audio } from '../../../../features/ui/util/async-components';
-import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../../../../initial_state';
 import api from 'mastodon/api';
-// import ComposeFormContainer from '../../../compose/containers/compose_form_container';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
@@ -116,7 +114,9 @@ class Status extends ImmutablePureComponent {
     statusId: undefined,
     replyText: '',
     descendants: [],
-    repliesAcctCount: 0
+    repliesCount: 0,
+    repliesCountUpdated: false,
+    showAllReplies: false
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -293,10 +293,19 @@ class Status extends ImmutablePureComponent {
     })
       .then(({data}) => {
         if (data && data.id) {
-          console.log('data', data);
-
+          this.setState({
+            replyText: '',
+            repliesCount: this.state.repliesCount + 1,
+            repliesCountUpdated: true
+          });
         }
       });
+  }
+
+  toggleShowAllReplies = () => {
+    this.setState({
+      showAllReplies: !this.state.showAllReplies
+    })
   }
 
   render () {
@@ -453,13 +462,13 @@ class Status extends ImmutablePureComponent {
       );
     }
 
-    if (otherAccounts && otherAccounts.size > 0) {
-      statusAvatar = <AvatarComposite accounts={otherAccounts} size={48} />;
-    } else if (account === undefined || account === null) {
+    // if (otherAccounts && otherAccounts.size > 0) {
+    //   statusAvatar = <AvatarComposite accounts={otherAccounts} size={48} />;
+    // } else if (account === undefined || account === null) {
       statusAvatar = <Avatar account={status.get('account')} size={48} />;
-    } else {
-      statusAvatar = <AvatarOverlay account={status.get('account')} friend={account} />;
-    }
+    // } else {
+    //   statusAvatar = <AvatarOverlay account={status.get('account')} friend={account} />;
+    // }
 
     const visibilityIconInfo = {
       'public': { icon: 'globe', text: intl.formatMessage(messages.public_short) },
@@ -479,17 +488,22 @@ class Status extends ImmutablePureComponent {
     };
     if (acct === username) { // filter status by user
       if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
+        if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
+          this.setState({
+            repliesCount: status.get('replies_count')
+          });
+        }
 
-        const { repliesAcctCount } = this.state;
-
-        const updatedRepliesAcctCount = status.get('replies_count');
-        if (updatedRepliesAcctCount > repliesAcctCount) {
+        const { repliesCountUpdated } = this.state;
+        if (repliesCountUpdated || (this.state.descendants.length === 0 && status.get('replies_count') > 0)) {
           api().get(`/api/v1/statuses/${status.get('id')}/context`)
             .then(({data}) => {
-              this.setState({
-                descendants: data.descendants,
-                repliesAcctCount: updatedRepliesAcctCount
-              })
+              if (this.state.descendants.length < data.descendants.length) {
+                this.setState({
+                  descendants: data.descendants,
+                  repliesCountUpdated: false,
+                });
+              }
             });
         }
 
@@ -519,11 +533,11 @@ class Status extends ImmutablePureComponent {
 
               {media}
 
-              <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} />
+              <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
 
               {
                 this.state.descendants.filter(
-                  (d, idx) => (idx < 3)
+                  (d, idx) => (idx < 3 || this.state.showAllReplies)
                 ).map((descendant) => (
                   <div className='status__reply' key={descendant.id}>
                     <div className="status__avatar">
