@@ -538,12 +538,17 @@ class Status extends ImmutablePureComponent {
             ).map((descendant) => (
               <div className='status__reply' key={descendant.id}>
                 <div className="status__avatar">
-                  <div className="account__avatar" style={{
-                    width: '36px',
-                    height: '36px',
-                    backgroundSize: '36px 36px',
-                    backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`
-                  }} />
+                  <a
+                    className="account__avatar"
+                    style={{
+                      width: '36px',
+                      height: '36px',
+                      backgroundSize: '36px 36px',
+                      backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`
+                    }}
+                    href={descendant.account.url}
+                    target="_blank"
+                  />
                 </div>
 
                 <div className="status__reply-box">
