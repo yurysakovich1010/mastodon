@@ -67,6 +67,7 @@ class NavigationBar extends ImmutablePureComponent {
   markAsRead = () => {
     if (this.props.count > 0) {
       this.props.cleanNotifications();
+      this.props.fetchNotifications();
     }
   };
 
