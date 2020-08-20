@@ -70,8 +70,17 @@ class NavigationBar extends ImmutablePureComponent {
     }
   };
 
+  stopPropagation = (e) => {
+    e.stopPropagation();
+  };
+
   componentDidMount() {
     this.props.fetchNotifications();
+    window.addEventListener('click', this.closeNotificationsPopup.bind(this))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', this.closeNotificationsPopup)
   }
 
   render () {
@@ -126,11 +135,14 @@ class NavigationBar extends ImmutablePureComponent {
 
                 {
                   this.state.popupVisible && (
-                    <div className="drawer__pager">
+                    <div className="drawer__pager" onClick={this.stopPropagation}>
                       <div className="drawer__inner darker">
-                        <button className="mark_as_read" onClick={this.markAsRead}>
-                          Mark all as read
-                        </button>
+                        <div className="notifications-header">
+                          <div>NOTIFICATIONS</div>
+                          <button className="mark_as_read" onClick={this.markAsRead}>
+                            Mark All as Read
+                          </button>
+                        </div>
                         <Notifications onPopup />
                       </div>
                     </div>

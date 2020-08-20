@@ -551,8 +551,12 @@ class Status extends ImmutablePureComponent {
                     </div>
 
                     <div className="status__reply-box">
-                      <div dangerouslySetInnerHTML={{__html: descendant.content}} />
-                      <div>{ descendant.created_at.slice(0, 10) }</div>
+                      <div className='display-name'>
+                        <strong className='display-name__html' dangerouslySetInnerHTML={{ __html: descendant.account.display_name }} />&nbsp;
+                        <span className='display-name__account'>@{descendant.account.acct}</span>
+                      </div>
+                      <a href={descendant.url} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={descendant.created_at} /></a>
+                      <div className="status__content" dangerouslySetInnerHTML={{__html: descendant.content}} />
                     </div>
                   </div>
                 ))
