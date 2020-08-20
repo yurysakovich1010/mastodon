@@ -27,7 +27,6 @@ export const NOTIFICATIONS_EXPAND_FAIL    = 'NOTIFICATIONS_EXPAND_FAIL';
 export const NOTIFICATIONS_FILTER_SET = 'NOTIFICATIONS_FILTER_SET';
 
 export const NOTIFICATIONS_CLEAR        = 'NOTIFICATIONS_CLEAR';
-export const NOTIFICATIONS_CLEAN        = 'NOTIFICATIONS_CLEAN';
 export const NOTIFICATIONS_SCROLL_TOP   = 'NOTIFICATIONS_SCROLL_TOP';
 export const NOTIFICATIONS_LOAD_PENDING = 'NOTIFICATIONS_LOAD_PENDING';
 
@@ -209,11 +208,9 @@ export function clearNotifications() {
 
 export function cleanNotifications() {
   return (dispatch, getState) => {
-    dispatch({
-      type: NOTIFICATIONS_CLEAN,
+    api(getState).post('/api/v1/notifications/mark_as_read').then(response => {
+      dispatch(expandNotificationsSuccess(response.data, null, false, false, false));
     });
-
-    api(getState).post('/api/v1/notifications/mark_as_read');
   };
 };
 
