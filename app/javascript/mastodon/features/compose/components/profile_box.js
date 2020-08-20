@@ -25,8 +25,6 @@ class ProfileBox extends ImmutablePureComponent {
   };
 
   render () {
-    console.log('this.props.account', this.props.account);
-    console.log('this.props.fullAccount', this.props.fullAccount);
     return (
       <div className='profile_box'>
         <div className='profile_box-header'>

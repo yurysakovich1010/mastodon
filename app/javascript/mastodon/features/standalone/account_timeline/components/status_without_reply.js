@@ -57,7 +57,7 @@ const messages = defineMessages({
 });
 
 export default @injectIntl
-class Status extends ImmutablePureComponent {
+class StatusWithoutReply extends ImmutablePureComponent {
 
   static contextTypes = {
     router: PropTypes.object,
@@ -534,46 +534,7 @@ class Status extends ImmutablePureComponent {
 
               {media}
 
-              {
-                this.state.descendants.filter(
-                  (d, idx) => (idx < 3 || this.state.showAllReplies)
-                ).map((descendant) => (
-                  <div className='status__reply' key={descendant.id}>
-                    <div className="status__avatar">
-                      <a
-                        className="account__avatar"
-                        style={{
-                          width: '36px',
-                          height: '36px',
-                          backgroundSize: '36px 36px',
-                          backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`
-                        }}
-                        href={descendant.account.url}
-                        target="_blank"
-                      />
-                    </div>
-
-                    <div className="status__reply-box">
-                      <div dangerouslySetInnerHTML={{__html: descendant.content}} />
-                    </div>
-                  </div>
-                ))
-              }
-
               <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
-
-              <div className='status__reply'>
-                <div className="status__avatar">
-                  <div className="account__avatar" style={avatarStyle} />
-                </div>
-
-                <div className="status__reply-box">
-                  <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText}/>
-                  {/*<ComposeFormContainer />*/}
-
-                  <button className='button btn-post' onClick={this.reply}>Post</button>
-                </div>
-              </div>
             </div>
           </div>
         );

@@ -23,6 +23,11 @@ class Api::V1::NotificationsController < Api::BaseController
     render_empty
   end
 
+  def mark_as_read
+    current_account.notifications.update_all(read: true)
+    index
+  end
+
   def dismiss
     current_account.notifications.find_by!(id: params[:id]).destroy!
     render_empty

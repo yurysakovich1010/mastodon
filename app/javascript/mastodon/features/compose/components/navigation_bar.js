@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import IconWithBadge from 'mastodon/components/icon_with_badge';
 import {createSelector} from "reselect";
 import {List as ImmutableList} from "immutable";
-import {clearNotifications, expandNotifications} from "../../../actions/notifications";
+import {cleanNotifications, expandNotifications} from "../../../actions/notifications";
 
 const getNotifications = createSelector([
   state => state.getIn(['settings', 'notifications', 'quickFilter', 'show']),
@@ -26,9 +26,9 @@ const getNotifications = createSelector([
     // used if user changed the notification settings after loading the notifications from the server
     // otherwise a list of notifications will come pre-filtered from the backend
     // we need to turn it off for FilterBar in order not to block ourselves from seeing a specific category
-    return notifications.filterNot(item => item !== null && excludedTypes.includes(item.get('type')));
+    return notifications.filter(item => item.get('read') !== true).filterNot(item => item !== null && excludedTypes.includes(item.get('type')));
   }
-  return notifications.filter(item => item !== null && allowedType === item.get('type'));
+  return notifications.filter(item => item.get('read') !== true).filter(item => item !== null && allowedType === item.get('type'));
 });
 
 const mapStateToProps = state => ({
@@ -51,25 +51,23 @@ class NavigationBar extends ImmutablePureComponent {
     popupVisible: false,
   };
 
-  openNotificationsPopup = (e) => {
+  toggleNotificationsPopup = (e) => {
     e.stopPropagation();
-    this.setState({popupVisible: true});
+    this.setState({popupVisible: !this.state.popupVisible});
   };
 
   closeNotificationsPopup = () => {
     this.setState({popupVisible: false});
+  };
+
+  markAsRead = () => {
     if (this.props.count > 0) {
       this.props.cleanNotifications();
     }
   };
 
   componentDidMount() {
-    window.addEventListener('click', this.closeNotificationsPopup);
     this.props.fetchNotifications();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('click', this.closeNotificationsPopup);
   }
 
   render () {
@@ -117,7 +115,7 @@ class NavigationBar extends ImmutablePureComponent {
 
               <div className='notification-bell'>
                 {/*<a target='_blank' rel='noopener noreferrer' href='/web/notifications' className='decoration-none'>*/}
-                  <div className='icon mr2' onClick={this.openNotificationsPopup}>
+                  <div className='icon mr2' onClick={this.toggleNotificationsPopup}>
                     <NotificationsCounterIcon className='column-link__icon' />
                   </div>
                 {/*</a>*/}
@@ -126,6 +124,9 @@ class NavigationBar extends ImmutablePureComponent {
                   this.state.popupVisible && (
                     <div className="drawer__pager">
                       <div className="drawer__inner darker">
+                        <button className="mark_as_read" onClick={this.markAsRead}>
+                          Mark all as read
+                        </button>
                         <Notifications onPopup />
                       </div>
                     </div>
@@ -180,7 +181,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(expandNotifications());
   },
   cleanNotifications() {
-    dispatch(clearNotifications());
+    dispatch(cleanNotifications());
   }
 });
 

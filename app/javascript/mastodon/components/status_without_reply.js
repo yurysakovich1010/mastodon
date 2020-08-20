@@ -1,24 +1,24 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import Avatar from '../../../../components/avatar';
-import RelativeTimestamp from '../../../../components/relative_timestamp';
-import DisplayName from '../../../../components/display_name';
-import StatusContent from '../../../../components/status_content';
+import Avatar from './avatar';
+import RelativeTimestamp from './relative_timestamp';
+import DisplayName from './display_name';
+import StatusContent from './status_content';
 import StatusActionBar from './status_action_bar';
-import AttachmentList from '../../../../components/attachment_list';
-import Card from '../../../../features/status/components/card';
+import AttachmentList from './attachment_list';
+import Card from '../features/status/components/card';
 import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { MediaGallery, Video, Audio } from '../../../../features/ui/util/async-components';
+import { MediaGallery, Video, Audio } from '../features/ui/util/async-components';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
-import { displayMedia } from '../../../../initial_state';
+import { displayMedia } from '../initial_state';
 import api from 'mastodon/api';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
-import Bundle from '../../../../features/ui/components/bundle';
+import Bundle from '../features/ui/components/bundle';
 
 export const textForScreenReader = (intl, status, rebloggedByText = false) => {
   const displayName = status.getIn(['account', 'display_name']);
@@ -57,7 +57,7 @@ const messages = defineMessages({
 });
 
 export default @injectIntl
-class Status extends ImmutablePureComponent {
+class StatusWithoutReply extends ImmutablePureComponent {
 
   static contextTypes = {
     router: PropTypes.object,
@@ -93,9 +93,6 @@ class Status extends ImmutablePureComponent {
     cacheMediaWidth: PropTypes.func,
     cachedMediaWidth: PropTypes.number,
     scrollKey: PropTypes.string,
-    username: PropTypes.string,
-    avatar: PropTypes.string,
-    statusId: PropTypes.any,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -112,6 +109,7 @@ class Status extends ImmutablePureComponent {
     statusId: undefined,
     replyText: '',
     descendants: [],
+    showReplyBox: true,
     repliesCount: 0,
     repliesCountUpdated: false,
     showAllReplies: false
@@ -268,10 +266,11 @@ class Status extends ImmutablePureComponent {
   }
 
   handleReply = () => {
-    // this.setState({ showReplyBox: true });
+    // this.setState({ showReplyBox: !this.state.showReplyBox });
   }
 
   updateReply = (e) => {
+    e.stopPropagation();
     this.setState({
       replyText: e.target.value
     })
@@ -312,7 +311,7 @@ class Status extends ImmutablePureComponent {
 
     const { intl, hidden, featured, otherAccounts, unread, showThread, scrollKey } = this.props;
 
-    let { status, account, username, avatar, statusId, ...other } = this.props;
+    let { status, account, ...other } = this.props;
 
     if (status === null) {
       return null;
@@ -477,110 +476,65 @@ class Status extends ImmutablePureComponent {
 
     const visibilityIcon = visibilityIconInfo[status.get('visibility')];
 
-    const acct = status.getIn(['account', 'acct']);
     const avatarStyle = {
       width: '36px',
       height: '36px',
       backgroundSize: '36px 36px',
-      backgroundImage: `url(${avatar})`
+      backgroundImage: `url(${account && (account.get('avatar') || account.get('avatar_static'))})`
     };
-    if (acct === username) { // filter status by user
-      if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
-        if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
-          this.setState({
-            repliesCount: status.get('replies_count')
-          });
-        }
 
-        const { repliesCountUpdated } = this.state;
-        if (repliesCountUpdated || (this.state.descendants.length === 0 && status.get('replies_count') > 0)) {
-          api().get(`/api/v1/statuses/${status.get('id')}/context`)
-            .then(({data}) => {
-              if (this.state.descendants.length < data.descendants.length) {
-                this.setState({
-                  descendants: data.descendants,
-                  repliesCountUpdated: false,
-                });
-              }
-            });
-        }
-
-        const postDate = new Date(status.get('created_at'));
-
-        return (
-          <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
-            {prepend}
-
-            <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
-              <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
-              <div className='status__info'>
-                <div>
-                  <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
-                    <div className='status__avatar'>
-                      {statusAvatar}
-                    </div>
-
-                    <DisplayName account={status.get('account')} others={otherAccounts} />
-                  </a>
-                </div>
-                <div>
-                  <span>{ postDate.getFullYear() }/{ postDate.getMonth() + 1 }/{ postDate.getDate() } </span>
-                  (<a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>)
-                  {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
-                </div>
-              </div>
-
-              <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} showThread={showThread} onExpandedToggle={this.handleExpandedToggle} collapsable onCollapsedToggle={this.handleCollapsedToggle} />
-
-              {media}
-
-              {
-                this.state.descendants.filter(
-                  (d, idx) => (idx < 3 || this.state.showAllReplies)
-                ).map((descendant) => (
-                  <div className='status__reply' key={descendant.id}>
-                    <div className="status__avatar">
-                      <a
-                        className="account__avatar"
-                        style={{
-                          width: '36px',
-                          height: '36px',
-                          backgroundSize: '36px 36px',
-                          backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`
-                        }}
-                        href={descendant.account.url}
-                        target="_blank"
-                      />
-                    </div>
-
-                    <div className="status__reply-box">
-                      <div dangerouslySetInnerHTML={{__html: descendant.content}} />
-                    </div>
-                  </div>
-                ))
-              }
-
-              <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
-
-              <div className='status__reply'>
-                <div className="status__avatar">
-                  <div className="account__avatar" style={avatarStyle} />
-                </div>
-
-                <div className="status__reply-box">
-                  <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText}/>
-                  {/*<ComposeFormContainer />*/}
-
-                  <button className='button btn-post' onClick={this.reply}>Post</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      }
+    if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
+      this.setState({
+        repliesCount: status.get('replies_count')
+      });
     }
 
-    return null;
+    const { repliesCountUpdated } = this.state;
+    if (repliesCountUpdated || (this.state.descendants.length === 0 && status.get('replies_count') > 0)) {
+      api().get(`/api/v1/statuses/${status.get('id')}/context`)
+        .then(({data}) => {
+          if (this.state.descendants.length < data.descendants.length) {
+            this.setState({
+              descendants: data.descendants,
+              repliesCountUpdated: false,
+            });
+          }
+        });
+    }
+
+    const postDate = new Date(status.get('created_at'));
+
+    return (
+      <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
+        {prepend}
+
+        <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
+          <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
+          <div className='status__info'>
+            <div>
+              <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
+                <div className='status__avatar'>
+                  {statusAvatar}
+                </div>
+
+                <DisplayName account={status.get('account')} others={otherAccounts} />
+              </a>
+            </div>
+            <div>
+              <span>{ postDate.getFullYear() }/{ postDate.getMonth() + 1 }/{ postDate.getDate() } </span>
+              (<a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>)
+              {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
+            </div>
+          </div>
+
+          <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} showThread={showThread} onExpandedToggle={this.handleExpandedToggle} collapsable onCollapsedToggle={this.handleCollapsedToggle} />
+
+          {media}
+
+          <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
+        </div>
+      </div>
+    );
   }
 
 }

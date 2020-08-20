@@ -10,6 +10,7 @@
 #  updated_at      :datetime         not null
 #  account_id      :bigint(8)        not null
 #  from_account_id :bigint(8)        not null
+#  read            :boolean
 #
 
 class Notification < ApplicationRecord
