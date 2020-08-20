@@ -26,9 +26,9 @@ const getNotifications = createSelector([
     // used if user changed the notification settings after loading the notifications from the server
     // otherwise a list of notifications will come pre-filtered from the backend
     // we need to turn it off for FilterBar in order not to block ourselves from seeing a specific category
-    return notifications.filter(item => item.get('read') !== true).filterNot(item => item !== null && excludedTypes.includes(item.get('type')));
+    return notifications.filter(item => item => item !== null && item.get('read') !== true).filterNot(item => item !== null && excludedTypes.includes(item.get('type')));
   }
-  return notifications.filter(item => item.get('read') !== true).filter(item => item !== null && allowedType === item.get('type'));
+  return notifications.filter(item => item => item !== null && item.get('read') !== true).filter(item => item !== null && allowedType === item.get('type'));
 });
 
 const mapStateToProps = state => ({
