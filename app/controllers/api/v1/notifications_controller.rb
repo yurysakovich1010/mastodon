@@ -26,6 +26,7 @@ class Api::V1::NotificationsController < Api::BaseController
   def mark_as_read
     current_account.notifications.update_all(read: true)
     @notifications = paginated_notifications
+    cache_collection [], Notification
     render json: @notifications, each_serializer: REST::NotificationSerializer, relationships: StatusRelationshipsPresenter.new(target_statuses_from_notifications, current_user&.account_id)
   end
 
