@@ -530,8 +530,6 @@ class Status extends ImmutablePureComponent {
 
           {media}
 
-          <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
-
           {
             this.state.descendants.filter(
               (d, idx) => (idx < 3 || this.state.showAllReplies)
@@ -553,7 +551,10 @@ class Status extends ImmutablePureComponent {
 
                 <div className="status__reply-box">
                   <div className='display-name'>
-                    <strong className='display-name__html' dangerouslySetInnerHTML={{ __html: descendant.account.display_name }} />&nbsp;
+                    <a href={descendant.account.url} target='_blank' rel='noopener noreferrer'>
+                      <strong className='display-name__html' dangerouslySetInnerHTML={{ __html: descendant.account.display_name || descendant.account.username }} />
+                    </a>
+                    &nbsp;
                     <span className='display-name__account'>@{descendant.account.acct}</span>
                   </div>
                   <a href={descendant.url} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={descendant.created_at} /></a>
@@ -562,6 +563,8 @@ class Status extends ImmutablePureComponent {
               </div>
             ))
           }
+
+          <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
 
           {
             this.state.showReplyBox && (
