@@ -2104,6 +2104,16 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         line-height: 14px;
         color: #FFFFFF;
       }
+      div {
+        height: 36px;
+        display: inline-block;
+        &:first-child {
+          width: calc(100% - 80px);
+        }
+        &:last-child {
+          width: 80px;
+        }
+      }
     }
   }
 }

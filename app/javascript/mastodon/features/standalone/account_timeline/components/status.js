@@ -505,8 +505,6 @@ class Status extends ImmutablePureComponent {
             });
         }
 
-        const postDate = new Date(status.get('created_at'));
-
         return (
           <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
             {prepend}
@@ -524,8 +522,7 @@ class Status extends ImmutablePureComponent {
                   </a>
                 </div>
                 <div>
-                  <span>{ postDate.getFullYear() }/{ postDate.getMonth() + 1 }/{ postDate.getDate() } </span>
-                  (<a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>)
+                  <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>
                   {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
                 </div>
               </div>
@@ -555,6 +552,7 @@ class Status extends ImmutablePureComponent {
 
                     <div className="status__reply-box">
                       <div dangerouslySetInnerHTML={{__html: descendant.content}} />
+                      <div>{ descendant.created_at.slice(0, 10) }</div>
                     </div>
                   </div>
                 ))
