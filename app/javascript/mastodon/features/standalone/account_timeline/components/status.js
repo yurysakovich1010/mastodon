@@ -531,6 +531,8 @@ class Status extends ImmutablePureComponent {
 
               {media}
 
+              <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
+
               {
                 this.state.descendants.filter(
                   (d, idx) => (idx < 3 || this.state.showAllReplies)
@@ -565,7 +567,21 @@ class Status extends ImmutablePureComponent {
                 ))
               }
 
-              <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
+              {
+                !this.state.showAllReplies && this.state.descendants.length > 3 && (
+                  <button className="status__content__read-more-button" onClick={this.toggleShowAllReplies}>
+                    <span>Show All Replies</span>
+                  </button>
+                )
+              }
+
+              {
+                this.state.showAllReplies && this.state.descendants.length > 3 && (
+                  <button className="status__content__read-more-button" onClick={this.toggleShowAllReplies}>
+                    <span>Show Top 3 Replies</span>
+                  </button>
+                )
+              }
 
               <div className='status__reply'>
                 <div className="status__avatar">
