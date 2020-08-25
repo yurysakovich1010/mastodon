@@ -6,7 +6,7 @@
     .logo-container
       %h1
         = link_to root_path do
-          = image_tag @instance_presenter.hero&.file&.url || @instance_presenter.thumbnail&.file&.url || asset_pack_path('media/images/brighteon-social/logo.png'), alt: @instance_presenter.site_title
+          = image_tag @instance_presenter?.hero&.file&.url || @instance_presenter?.thumbnail&.file&.url || asset_pack_path('media/images/brighteon-social/logo.png'), alt: @instance_presenter.site_title
 
     .form-container
       = render 'flashes'
