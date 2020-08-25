@@ -44,7 +44,7 @@ module SignInTokenAuthenticationConcern
 
     set_locale do
       session[:attempt_user_id] = user.id
-      @body_classes = 'lighter'
+      @body_classes = ''
       render :sign_in_token
     end
   end
