@@ -41,8 +41,8 @@ const NavigationPanel = () => (
     <div className='mb3' />
     <a className='column-link column-link--transparent' href='/settings/preferences'><Icon className='column-link__icon' id='cog' fixedWidth /><FormattedMessage id='navigation_bar.preferences' defaultMessage='Preferences' /></a>
 
-    {<div className='flex-spacer' />}
-    {<TrendsContainer />}
+    <div className='flex-spacer' />
+    <TrendsContainer />
   </div>
 );
 
