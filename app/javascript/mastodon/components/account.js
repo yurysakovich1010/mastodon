@@ -110,10 +110,10 @@ class Account extends ImmutablePureComponent {
     return (
       <div className='account'>
         <div className='account__wrapper'>
-          <Permalink key={account.get('id')} className='account__display-name' title={account.get('acct')} href={account.get('url')} to={`/accounts/${account.get('id')}`}>
+          <a target='_blank' key={account.get('id')} className='account__display-name' title={account.get('acct')} href={account.get('url')}>
             <div className='account__avatar-wrapper'><Avatar account={account} size={36} /></div>
             <DisplayName account={account} />
-          </Permalink>
+          </a>
 
           <div className='account__relationship'>
             {buttons}
