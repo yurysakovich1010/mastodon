@@ -1372,7 +1372,7 @@
         "id": "tabs_bar.notifications"
       },
       {
-        "defaultMessage": "Federated timeline",
+        "defaultMessage": "Live Stream",
         "id": "navigation_bar.public_timeline"
       },
       {
@@ -1687,7 +1687,7 @@
         "id": "tabs_bar.notifications"
       },
       {
-        "defaultMessage": "Federated timeline",
+        "defaultMessage": "Live Stream",
         "id": "navigation_bar.public_timeline"
       },
       {
@@ -2371,7 +2371,7 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "Federated timeline",
+        "defaultMessage": "Live Stream",
         "id": "column.public"
       },
       {
