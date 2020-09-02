@@ -4,13 +4,14 @@
       = t('accounts.recent_media')
     .public-account-recent-media__avatars
       - statuses_with_recent_media.each do |status|
-        = link_to(short_account_status_url(status.account, status), target: '_blank', rel: 'noopener noreferrer') do
-          .public-account-recent-media__avatar
-            - attachment = ActiveModelSerializers::SerializableResource.new(status.media_attachments.first, serializer: REST::MediaAttachmentSerializer).as_json
-            - if attachment[:preview_remote_url]
-              %div
-                = image_tag attachment[:preview_url], alt: '', class: 'u-photo account__avatar'
-            - else
-              %div
-                = image_tag attachment[:url], alt: '', class: 'u-photo account__avatar'
+        - if status.media_attachments.first.type === 'image'
+          = link_to(short_account_status_url(status.account, status), target: '_blank', rel: 'noopener noreferrer', class: 'decoration-none') do
+            .public-account-recent-media__avatar
+              - attachment = ActiveModelSerializers::SerializableResource.new(status.media_attachments.first, serializer: REST::MediaAttachmentSerializer).as_json
+              - if attachment[:preview_remote_url]
+                %div
+                  = image_tag attachment[:preview_url], alt: '', class: 'u-photo account__avatar'
+              - else
+                %div
+                  = image_tag attachment[:url], alt: '', class: 'u-photo account__avatar'
   %hr
