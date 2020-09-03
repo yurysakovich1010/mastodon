@@ -39,6 +39,7 @@ class TrendTimeline extends React.PureComponent {
 
   static defaultProps = {
     onlyMedia: false,
+    onlyLocal: true,
   };
 
   static propTypes = {
@@ -72,18 +73,18 @@ class TrendTimeline extends React.PureComponent {
   }
 
   componentDidMount () {
-    const { dispatch, onlyMedia, onlyRemote } = this.props;
+    const { dispatch, onlyMedia, onlyRemote, onlyLocal } = this.props;
 
-    dispatch(expandTrendTimeline({ onlyMedia, onlyRemote }));
+    dispatch(expandTrendTimeline({ onlyMedia, onlyRemote, onlyLocal }));
     this.disconnect = dispatch(connectCommunityStream({ onlyMedia, onlyRemote }));
   }
 
   componentDidUpdate (prevProps) {
     if (prevProps.onlyMedia !== this.props.onlyMedia || prevProps.onlyRemote !== this.props.onlyRemote) {
-      const { dispatch, onlyMedia, onlyRemote } = this.props;
+      const { dispatch, onlyMedia, onlyRemote, onlyLocal } = this.props;
 
       this.disconnect();
-      dispatch(expandTrendTimeline({ onlyMedia, onlyRemote }));
+      dispatch(expandTrendTimeline({ onlyMedia, onlyRemote, onlyLocal }));
       this.disconnect = dispatch(connectCommunityStream({ onlyMedia, onlyRemote }));
     }
   }
@@ -100,13 +101,13 @@ class TrendTimeline extends React.PureComponent {
   }
 
   handleLoadMore = maxId => {
-    const { dispatch, onlyMedia, onlyRemote } = this.props;
+    const { dispatch, onlyMedia, onlyRemote, onlyLocal } = this.props;
 
-    dispatch(expandTrendTimeline({ maxId, onlyMedia, onlyRemote }));
+    dispatch(expandTrendTimeline({ maxId, onlyMedia, onlyRemote, onlyLocal }));
   }
 
   render () {
-    const { intl, shouldUpdateScroll, columnId, hasUnread, multiColumn, onlyMedia, onlyRemote } = this.props;
+    const { intl, shouldUpdateScroll, columnId, hasUnread, multiColumn, onlyMedia, onlyRemote, onlyLocal } = this.props;
     const pinned = !!columnId;
 
     return (
@@ -125,7 +126,7 @@ class TrendTimeline extends React.PureComponent {
         </ColumnHeader>
 
         <StatusListContainer
-          timelineId={`trend${onlyRemote ? ':remote' : ''}${onlyMedia ? ':media' : ''}`}
+          timelineId={`trend${onlyRemote ? ':remote' : ''}${onlyMedia ? ':media' : ''}${onlyLocal ? ':local' : ''}`}
           onLoadMore={this.handleLoadMore}
           trackScroll={!pinned}
           scrollKey={`community_timeline-${columnId}`}
