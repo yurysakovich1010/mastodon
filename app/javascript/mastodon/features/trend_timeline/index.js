@@ -8,7 +8,7 @@ import ColumnHeader from '../../components/column_header';
 import { expandTrendTimeline } from '../../actions/timelines';
 import { addColumn, removeColumn, moveColumn } from '../../actions/columns';
 import ColumnSettingsContainer from './containers/column_settings_container';
-import { connectPublicStream } from '../../actions/streaming';
+import { connectCommunityStream } from '../../actions/streaming';
 
 const messages = defineMessages({
   title: { id: 'column.trends', defaultMessage: 'Trends' },
@@ -20,7 +20,7 @@ const mapStateToProps = (state, { columnId }) => {
   const index = columns.findIndex(c => c.get('uuid') === uuid);
   const onlyMedia = (columnId && index >= 0) ? columns.get(index).getIn(['params', 'other', 'onlyMedia']) : state.getIn(['settings', 'public', 'other', 'onlyMedia']);
   const onlyRemote = (columnId && index >= 0) ? columns.get(index).getIn(['params', 'other', 'onlyRemote']) : state.getIn(['settings', 'public', 'other', 'onlyRemote']);
-  const timelineState = state.getIn(['timelines', `public${onlyMedia ? ':media' : ''}`]);
+  const timelineState = state.getIn(['timelines', `community${onlyMedia ? ':media' : ''}`]);
 
   return {
     hasUnread: !!timelineState && timelineState.get('unread') > 0,
@@ -75,7 +75,7 @@ class TrendTimeline extends React.PureComponent {
     const { dispatch, onlyMedia, onlyRemote } = this.props;
 
     dispatch(expandTrendTimeline({ onlyMedia, onlyRemote }));
-    this.disconnect = dispatch(connectPublicStream({ onlyMedia, onlyRemote }));
+    this.disconnect = dispatch(connectCommunityStream({ onlyMedia, onlyRemote }));
   }
 
   componentDidUpdate (prevProps) {
@@ -84,7 +84,7 @@ class TrendTimeline extends React.PureComponent {
 
       this.disconnect();
       dispatch(expandTrendTimeline({ onlyMedia, onlyRemote }));
-      this.disconnect = dispatch(connectPublicStream({ onlyMedia, onlyRemote }));
+      this.disconnect = dispatch(connectCommunityStream({ onlyMedia, onlyRemote }));
     }
   }
 
@@ -128,8 +128,8 @@ class TrendTimeline extends React.PureComponent {
           timelineId={`trend${onlyRemote ? ':remote' : ''}${onlyMedia ? ':media' : ''}`}
           onLoadMore={this.handleLoadMore}
           trackScroll={!pinned}
-          scrollKey={`public_timeline-${columnId}`}
-          emptyMessage={<FormattedMessage id='empty_column.public' defaultMessage='There is nothing here! Write something publicly, or manually follow users from other servers to fill it up' />}
+          scrollKey={`community_timeline-${columnId}`}
+          emptyMessage={<FormattedMessage id='empty_column.community' defaultMessage='There is nothing here! Write something publicly, or manually follow users from other servers to fill it up' />}
           shouldUpdateScroll={shouldUpdateScroll}
           bindToDocument={!multiColumn}
         />
