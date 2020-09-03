@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import StatusListContainer from '../ui/containers/status_list_container';
 import Column from '../../components/column';
 import ColumnHeader from '../../components/column_header';
-import { expandPublicTimeline } from '../../actions/timelines';
+import { expandCommunityTimeline } from '../../actions/timelines';
 import { addColumn, removeColumn, moveColumn } from '../../actions/columns';
 import ColumnSettingsContainer from './containers/column_settings_container';
-import { connectPublicStream } from '../../actions/streaming';
+import { connectCommunityStream } from '../../actions/streaming';
 
 const messages = defineMessages({
   title: { id: 'column.public', defaultMessage: 'Live Stream' },
@@ -74,8 +74,8 @@ class PublicTimeline extends React.PureComponent {
   componentDidMount () {
     const { dispatch, onlyMedia, onlyRemote } = this.props;
 
-    dispatch(expandPublicTimeline({ onlyMedia, onlyRemote }));
-    this.disconnect = dispatch(connectPublicStream({ onlyMedia, onlyRemote }));
+    dispatch(expandCommunityTimeline({ onlyMedia, onlyRemote }));
+    this.disconnect = dispatch(connectCommunityStream({ onlyMedia, onlyRemote }));
   }
 
   componentDidUpdate (prevProps) {
@@ -83,8 +83,8 @@ class PublicTimeline extends React.PureComponent {
       const { dispatch, onlyMedia, onlyRemote } = this.props;
 
       this.disconnect();
-      dispatch(expandPublicTimeline({ onlyMedia, onlyRemote }));
-      this.disconnect = dispatch(connectPublicStream({ onlyMedia, onlyRemote }));
+      dispatch(expandCommunityTimeline({ onlyMedia, onlyRemote }));
+      this.disconnect = dispatch(connectCommunityStream({ onlyMedia, onlyRemote }));
     }
   }
 
@@ -102,7 +102,7 @@ class PublicTimeline extends React.PureComponent {
   handleLoadMore = maxId => {
     const { dispatch, onlyMedia, onlyRemote } = this.props;
 
-    dispatch(expandPublicTimeline({ maxId, onlyMedia, onlyRemote }));
+    dispatch(expandCommunityTimeline({ maxId, onlyMedia, onlyRemote }));
   }
 
   render () {
@@ -125,11 +125,11 @@ class PublicTimeline extends React.PureComponent {
         </ColumnHeader>
 
         <StatusListContainer
-          timelineId={`public${onlyRemote ? ':remote' : ''}${onlyMedia ? ':media' : ''}`}
+          timelineId={`community${onlyRemote ? ':remote' : ''}${onlyMedia ? ':media' : ''}`}
           onLoadMore={this.handleLoadMore}
           trackScroll={!pinned}
-          scrollKey={`public_timeline-${columnId}`}
-          emptyMessage={<FormattedMessage id='empty_column.public' defaultMessage='There is nothing here! Write something publicly, or manually follow users from other servers to fill it up' />}
+          scrollKey={`community_timeline-${columnId}`}
+          emptyMessage={<FormattedMessage id='empty_column.community' defaultMessage='There is nothing here! Write something publicly, or manually follow users from other servers to fill it up' />}
           shouldUpdateScroll={shouldUpdateScroll}
           bindToDocument={!multiColumn}
         />
