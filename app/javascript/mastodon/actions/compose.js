@@ -262,7 +262,12 @@ export function uploadCompose(files) {
             poll();
           }
         });
-      }).catch(error => dispatch(uploadComposeFail(error)));
+      }).catch(error => {
+        if (error.response.status === 413) {
+          error.response.statusText = 'The maximum video file size you can upload is 24 MB. If you need to upload larger video files, please use Brighteon.com';
+        }
+        dispatch(uploadComposeFail(error))
+      });
     };
   };
 };
@@ -370,12 +375,6 @@ export function uploadComposeSuccess(media, file) {
 };
 
 export function uploadComposeFail(error) {
-  console.log('uploadComposeFail', error);
-  console.log(typeof error);
-  console.log(error.message);
-  if (error.message === 'Request failed with status code 413') {
-    error.message = 'The maximum video file size you can upload is 24MB. If you need to upload larger video files, please use Brighteon.com'
-  }
   return {
     type: COMPOSE_UPLOAD_FAIL,
     error: error,
