@@ -269,6 +269,12 @@ html {
   background: $white;
 }
 
+.detailed-status__display-name {
+  span, strong {
+    color: $black;
+  }
+}
+
 // Change the background colors of status__content__spoiler-link
 .reply-indicator__content .status__content__spoiler-link,
 .status__content .status__content__spoiler-link {
