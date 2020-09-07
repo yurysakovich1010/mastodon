@@ -28,7 +28,7 @@
 
 class PreviewCard < ApplicationRecord
   IMAGE_MIME_TYPES = ['image/jpeg', 'image/png', 'image/gif'].freeze
-  LIMIT = 1.megabytes
+  LIMIT = 10.megabytes
 
   BLURHASH_OPTIONS = {
     x_comp: 4,
