@@ -307,29 +307,6 @@ class Status extends ImmutablePureComponent {
   }
 
   render () {
-    if (window.location.pathname.slice(0, 2) === '/@' && window.location.pathname.includes('/with_replies')) {
-      if (!this.props.status.get("replies_count")) {
-        return null;
-      }
-    }
-    if (window.location.pathname.slice(0, 2) === '/@' && window.location.pathname.includes('/photos')) {
-      const mediaAttachments = this.props.status.get("media_attachments");
-      if (!mediaAttachments.size) {
-        return null;
-      }
-      let hasImage = false;
-      mediaAttachments.forEach((m) => { if (m.get('type') === 'image') {hasImage = true;} });
-      if (!hasImage) { return null; }
-    }
-    if (window.location.pathname.slice(0, 2) === '/@' && window.location.pathname.includes('/videos')) {
-      const mediaAttachments = this.props.status.get("media_attachments");
-      if (!mediaAttachments.size) {
-        return null;
-      }
-      let hasVideo = false;
-      mediaAttachments.forEach((m) => { if (m.get('type') === 'video') {hasVideo = true;} });
-      if (!hasVideo) { return null; }
-    }
     let media = null;
     let statusAvatar, prepend, rebloggedByText;
 
@@ -507,6 +484,8 @@ class Status extends ImmutablePureComponent {
       backgroundSize: '36px 36px',
       backgroundImage: `url(${avatar})`
     };
+    console.log('acct', acct);
+    console.log('username', username);
     if (acct === username) { // filter status by user
       if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
         if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {

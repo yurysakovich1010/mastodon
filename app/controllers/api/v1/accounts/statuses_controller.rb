@@ -29,6 +29,9 @@ class Api::V1::Accounts::StatusesController < Api::BaseController
     statuses = truthy_param?(:pinned) ? pinned_scope : permitted_account_statuses
 
     statuses.merge!(only_media_scope) if truthy_param?(:only_media)
+    statuses.merge!(only_video_scope) if truthy_param?(:only_video)
+    statuses.merge!(only_image_scope) if truthy_param?(:only_image)
+    statuses.merge!(only_replies_scope) if truthy_param?(:only_replies)
     statuses.merge!(no_replies_scope) if truthy_param?(:exclude_replies)
     statuses.merge!(no_reblogs_scope) if truthy_param?(:exclude_reblogs)
     statuses.merge!(hashtag_scope)    if params[:tagged].present?
@@ -44,6 +47,14 @@ class Api::V1::Accounts::StatusesController < Api::BaseController
     Status.where(id: account_media_status_ids)
   end
 
+  def only_video_scope
+    Status.where(id: account_video_status_ids)
+  end
+
+  def only_image_scope
+    Status.where(id: account_image_status_ids)
+  end
+
   def account_media_status_ids
     # `SELECT DISTINCT id, updated_at` is too slow, so pluck ids at first, and then select id, updated_at with ids.
     # Also, Avoid getting slow by not narrowing down by `statuses.account_id`.
@@ -54,6 +65,18 @@ class Api::V1::Accounts::StatusesController < Api::BaseController
             .reorder(id: :desc).distinct(:id).pluck(:id)
   end
 
+  def account_image_status_ids
+    @account.statuses.joins(:media_attachments).where(:media_attachments => {:type => :image}).merge(@account.media_attachments).permitted_for(@account, current_account)
+        .paginate_by_max_id(limit_param(DEFAULT_STATUSES_LIMIT), params[:max_id], params[:since_id])
+        .reorder(id: :desc).distinct(:id).pluck(:id)
+  end
+
+  def account_video_status_ids
+    @account.statuses.joins(:media_attachments).where(:media_attachments => {:type => :video}).merge(@account.media_attachments).permitted_for(@account, current_account)
+        .paginate_by_max_id(limit_param(DEFAULT_STATUSES_LIMIT), params[:max_id], params[:since_id])
+        .reorder(id: :desc).distinct(:id).pluck(:id)
+  end
+
   def pinned_scope
     return Status.none if @account.blocking?(current_account)
 
@@ -62,6 +85,10 @@ class Api::V1::Accounts::StatusesController < Api::BaseController
 
   def no_replies_scope
     Status.without_replies
+  end
+
+  def only_replies_scope
+    Status.with_replies
   end
 
   def no_reblogs_scope
