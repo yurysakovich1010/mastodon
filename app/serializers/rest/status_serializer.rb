@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class REST::StatusSerializer < ActiveModel::Serializer
-  attributes :id, :created_at, :in_reply_to_id, :in_reply_to_account_id,
+  attributes :id, :created_at, :in_reply_to_id, :in_reply_to_account_id, :in_reply_to_account_name,
              :sensitive, :spoiler_text, :visibility, :language,
              :uri, :url, :replies_count, :reblogs_count,
              :favourites_count
@@ -37,6 +37,10 @@ class REST::StatusSerializer < ActiveModel::Serializer
 
   def in_reply_to_account_id
     object.in_reply_to_account_id&.to_s
+  end
+
+  def in_reply_to_account_name
+    object.in_reply_to_account&.display_name? || object.in_reply_to_account&.username
   end
 
   def current_user?

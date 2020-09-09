@@ -354,7 +354,15 @@ class Status extends ImmutablePureComponent {
       );
     }
 
-    if (featured) {
+    console.log('status', status);
+    console.log('status.get(\'in_reply_to_account_name\')', status.get('in_reply_to_account_name'));
+    if (status.get('in_reply_to_account_name')) {
+      prepend = (
+        <div className='status__prepend'>
+          Replied to {status.get('in_reply_to_account_name')}'s post
+        </div>
+      );
+    } else if (featured) {
       prepend = (
         <div className='status__prepend'>
           <div className='status__prepend-icon-wrapper'><Icon id='thumb-tack' className='status__prepend-icon' fixedWidth /></div>
