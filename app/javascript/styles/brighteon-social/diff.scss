@@ -1560,9 +1560,9 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         left: 0;
         right: 0;
         bottom: 0;
-        background-size: cover;
+        background-size: contain;
         background-repeat: no-repeat;
-        background-position: center;
+        background-position: bottom;
       }
 
       img {
