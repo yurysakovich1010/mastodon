@@ -484,8 +484,6 @@ class Status extends ImmutablePureComponent {
       backgroundSize: '36px 36px',
       backgroundImage: `url(${avatar})`
     };
-    console.log('acct', acct);
-    console.log('username', username);
     if (acct === username) { // filter status by user
       if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
         if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
