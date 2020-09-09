@@ -40,7 +40,11 @@ class REST::StatusSerializer < ActiveModel::Serializer
   end
 
   def in_reply_to_account_name
-    object.in_reply_to_account&.display_name? || object.in_reply_to_account&.username
+    if object.in_reply_to_account&.display_name?
+      object.in_reply_to_account&.display_name
+    else
+      object.in_reply_to_account&.username
+    end
   end
 
   def current_user?
