@@ -11,6 +11,6 @@ class SharesController < ApplicationController
   private
 
   def set_body_classes
-    @body_classes = 'modal-layout compose-standalone'
+    @body_classes = 'compose-standalone'
   end
 end
