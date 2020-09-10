@@ -12,7 +12,7 @@ en:
     apps_platforms: Use Mastodon from iOS, Android and other platforms
     browse_directory: Browse a profile directory and filter by interests
     browse_local_posts: Browse a live stream of public posts from this server
-    browse_public_posts: Browse a live stream of public posts on Mastodon
+    browse_public_posts: Browse a live stream of public posts on Brighteon.social
     contact: Contact
     contact_missing: Not set
     contact_unavailable: N/A
@@ -1657,7 +1657,7 @@ en:
       </h3>
 
       <p>
-        In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at: <a href="mailto:https://support.brighteon.social/">https://support.brighteon.social/</a>
+        In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at: <a href="https://support.brighteon.social/">https://support.brighteon.social/</a>
       </p>
 
     title: "%{instance} Terms of Service"

@@ -219,7 +219,7 @@ class ColumnsArea extends ImmutablePureComponent {
                   }
 
                   <TabsBar key='tabs' />
-                  <div className='flex-fill'>
+                  <div className='flex-fill' style={{height: '300px'}}>
                     <div className='relative-fill'>
                       <div className='absolute-fill mb2 overflow-y-auto rounded-bottom d-flex flex-column'>
                         <div className='flex-fill'>

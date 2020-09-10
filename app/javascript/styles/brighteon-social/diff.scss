@@ -920,7 +920,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   min-height: inherit;
 
   .header {
-    width: 960px;
+    max-width: 960px;
     background: transparent;
     border: none;
     height: 4rem;
@@ -1013,7 +1013,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 
   .footer {
-    width: 960px;
+    //width: 960px;
     color: $white;
 
     a {
@@ -1417,7 +1417,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
 .about-more, .contact {
   .content-overlay {
     margin: auto;
-    width: 680px;
+    //width: 680px;
     background-color: rgba(8, 8, 63, 0.25);
     position: relative;
 
@@ -1434,6 +1434,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       font-size: 15px;
 
       img {
+        max-width: 100%;
         margin: auto;
         display: block;
       }
@@ -1495,6 +1496,8 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
 }
 
 .app-body {
+  min-height: 730px!important;
+
   .getting-started__footer {
     a {
       color: $white;
