@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import LinkFooter from './link_footer';
 import { changeComposing } from 'mastodon/actions/compose';
 import ProfileBoxContainer from 'mastodon/features/compose/containers/profile_box_container';
+import TrendsContainer from 'mastodon/features/getting_started/containers/trends_container';
+import { showTrends } from 'mastodon/initial_state';
 
 export default @connect()
 class ComposePanel extends React.PureComponent {
@@ -21,6 +23,11 @@ class ComposePanel extends React.PureComponent {
       <div className='compose-panel' onFocus={this.onFocus}>
         <ProfileBoxContainer />
         <div className='spacer' />
+        {
+          showTrends && (
+            <TrendsContainer />
+          )
+        }
         <LinkFooter withHotkeys />
       </div>
     );
