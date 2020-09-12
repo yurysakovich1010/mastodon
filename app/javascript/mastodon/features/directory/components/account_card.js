@@ -388,7 +388,7 @@ class AccountCard extends ImmutablePureComponent {
             {buttons}
           </div>
 
-          <DropdownMenuContainer items={menu} icon='ellipsis-v' size={24} direction='right' />
+          {/*<DropdownMenuContainer items={menu} icon='ellipsis-v' size={24} direction='right' />*/}
         </div>
 
         <div className='directory__card__extra' ref={this.setRef}>
