@@ -2066,6 +2066,14 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     }
   }
 
+  .endorsements-widget.trends-widget {
+    .emojify,
+    .trends__item__name a,
+    .trends__item__current {
+      color: $black;
+    }
+  }
+
   .public-account-recent-media {
     padding-bottom: 15px;
   }
