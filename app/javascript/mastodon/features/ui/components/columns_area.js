@@ -67,6 +67,7 @@ class ColumnsArea extends ImmutablePureComponent {
     isModalOpen: PropTypes.bool.isRequired,
     singleColumn: PropTypes.bool,
     children: PropTypes.node,
+    statusToReply: PropTypes.object,
   };
 
   state = {
@@ -177,10 +178,11 @@ class ColumnsArea extends ImmutablePureComponent {
   }
 
   render () {
-    const { columns, children, singleColumn, isModalOpen, intl } = this.props;
+    const { columns, children, singleColumn, isModalOpen, intl, statusToReply } = this.props;
     const { shouldAnimate } = this.state;
 
     const columnIndex = getIndex(this.context.router.history.location.pathname);
+    const path = this.context.router.history.location.pathname;
 
     if (singleColumn) {
       const floatingActionButton = shouldHideFAB(this.context.router.history.location.pathname) ? null : <Link key='floating-action-button' to='/statuses/new' className='floating-action-button' aria-label={intl.formatMessage(messages.publish)}><Icon id='pencil' /></Link>;
@@ -213,7 +215,10 @@ class ColumnsArea extends ImmutablePureComponent {
               <div className='relative-fill'>
                 <div className='absolute-fill d-flex flex-column'>
                   {
-                    columnIndex !== 1 && columnIndex !== -1 && (
+                    (
+                      (columnIndex !== 1 && columnIndex !== -1)
+                      || (path.includes('/statuses') && statusToReply)
+                    ) && (
                       <ComposeFormContainer singleColumn />
                     )
                   }
