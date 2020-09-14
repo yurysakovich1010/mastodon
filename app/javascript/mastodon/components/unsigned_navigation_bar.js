@@ -47,7 +47,7 @@ export default class UnsignedNavigationBar extends ImmutablePureComponent {
                 </button>
               </a>
 
-              <a rel='noopener noreferrer' href='/auth/sign_in' className='decoration-none'>
+              <a rel='noopener noreferrer' href='/auth/sign_up' className='decoration-none'>
                 <button className='primary-button standard'>
                   Sign Up
                 </button>
