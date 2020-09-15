@@ -2154,6 +2154,11 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       }
     }
   }
+
+  .trends__item__name > span,
+  .trends__item__name > span strong {
+    color: $white;
+  }
 }
 
 .relationships {
