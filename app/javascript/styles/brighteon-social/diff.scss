@@ -1696,6 +1696,11 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     width: 260px;
     height: auto;
   }
+
+  .trends__item__name > span,
+  .trends__item__name > span strong {
+    color: $white;
+  }
 }
 
 .public {
@@ -2153,11 +2158,6 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         color: inherit;
       }
     }
-  }
-
-  .trends__item__name > span,
-  .trends__item__name > span strong {
-    color: $white;
   }
 }
 
