@@ -218,6 +218,7 @@ class ColumnsArea extends ImmutablePureComponent {
                     (
                       (columnIndex !== 1 && columnIndex !== -1)
                       || (path.includes('/statuses') && statusToReply)
+                      || (path === '/timelines/direct')
                     ) && (
                       <ComposeFormContainer singleColumn />
                     )
