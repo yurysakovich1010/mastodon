@@ -2530,6 +2530,11 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         }
       }
     }
+    .pagination {
+      span a {
+        color: $white;
+      }
+    }
   }
 }
 
