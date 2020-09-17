@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   PAGE_SIZE     = 20
   PAGE_SIZE_MAX = 200
 
-  layout 'public'
+  layout 'brighteon_social_public'
 
   before_action :require_signature!, if: -> { request.format == :json && authorized_fetch_mode? }
   before_action :authenticate_user!, if: :whitelist_mode?
