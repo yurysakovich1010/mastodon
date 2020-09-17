@@ -8,6 +8,7 @@ class DirectoriesController < ApplicationController
   before_action :set_instance_presenter
   before_action :set_tag, only: :show
   before_action :set_accounts
+  before_action :set_body_classes
 
   skip_before_action :require_functional!, unless: :whitelist_mode?
 
@@ -38,5 +39,9 @@ class DirectoriesController < ApplicationController
 
   def set_instance_presenter
     @instance_presenter = InstancePresenter.new
+  end
+
+  def set_body_classes
+    @body_classes = 'explore'
   end
 end

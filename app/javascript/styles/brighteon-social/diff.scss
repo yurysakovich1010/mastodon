@@ -766,6 +766,12 @@ html {
       }
     }
   }
+
+  .page-header {
+    p {
+      color: $black;
+    }
+  }
 }
 
 .notification__filter-bar button.active::after,
@@ -1270,6 +1276,41 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 }
 
+.admin-wrapper {
+  .simple_form input[type=text]::placeholder {
+    color: #999;
+  }
+  .dashboard__widgets__features {
+    li {
+      a {
+        color: $white;
+      }
+    }
+  }
+  .dashboard__widgets__versions {
+    li {
+      color: $white;
+    }
+  }
+  .dashboard__widgets__space {
+    li {
+      color: $white;
+    }
+  }
+  .dashboard__widgets__config {
+    li {
+      color: $white;
+    }
+  }
+  .dashboard__widgets__trends {
+    li {
+      color: $white;
+    }
+  }
+  .dashboard__counters__label {
+    color: $black;
+  }
+}
 // page by page
 
 .about, .home {
@@ -2469,6 +2510,26 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     font-weight: 500;
     color: $black;
     padding: 15px 0 ;
+  }
+}
+
+.explore {
+  .public-layout {
+    .directory__card__bar {
+      .display-name span {
+        color: $black;
+      }
+    }
+    .directory__card__extra {
+      .account__header__content {
+        color: $black;
+      }
+      .accounts-table__count {
+        small {
+          color: $black;
+        }
+      }
+    }
   }
 }
 
