@@ -2533,6 +2533,16 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 }
 
+.tag {
+  .public-layout {
+    .page-header {
+      p {
+        color: $black;
+      }
+    }
+  }
+}
+
 .logout-link.icon-button {
   color: #ffffff;
 }

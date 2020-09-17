@@ -8,6 +8,31 @@
   = javascript_pack_tag 'about', integrity: true, crossorigin: 'anonymous'
   = render 'og'
 
+- content_for :header do
+  .header.m-auto
+    .nav-left
+      = render 'application/top_menu'
+
+    .nav-right
+      = link_to root_path, class: 'btn button button-primary back-to-landing' do
+        = t('generic.back_to_link', link: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
+
+- content_for :footer do
+  .d-flex
+    %div
+      %span
+        = Time.new.year
+      %span.text-capitalize.mr3
+        = site_hostname
+      %span.text-capitalize
+        = t 'footer.all_rights_reserved'
+    .spacer
+    %div
+      %span.mr3
+        = link_to t('about.privacy_policy'), privacy_path, class: 'decoration-none'
+      %span
+        = link_to t('about.terms'), terms_path, class: 'decoration-none'
+
 .page-header
   %h1= "##{@tag.name}"
   %p= t('about.about_hashtag_html', hashtag: @tag.name)

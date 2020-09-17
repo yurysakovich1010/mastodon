@@ -55,7 +55,7 @@ class TagsController < ApplicationController
   end
 
   def set_body_classes
-    @body_classes = 'with-modals'
+    @body_classes = 'with-modals tag'
   end
 
   def set_instance_presenter
