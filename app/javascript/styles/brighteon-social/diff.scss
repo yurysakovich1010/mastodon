@@ -1482,6 +1482,10 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       color: white;
       font-size: 15px;
 
+      @media screen and (max-width: 540px) {
+        padding: 2rem;
+      }
+
       img {
         max-width: 100%;
         margin: auto;
