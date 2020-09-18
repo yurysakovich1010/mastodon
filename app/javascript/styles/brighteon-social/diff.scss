@@ -1597,6 +1597,12 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   .columns-area__panels {
     margin-top: 1rem;
     min-height: unset;
+
+    .post-rails {
+      @media screen and (max-width: 415px) {
+        height: 100vh;
+      }
+    }
   }
   .profile_box {
     border-radius: 0.25rem;
