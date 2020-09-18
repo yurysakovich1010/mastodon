@@ -1847,6 +1847,21 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 }
 
+.profile {
+  .public-account-header-right {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    .public-account-header__tabs,
+    .public-account-header__tabs__tabs__buttons {
+      display: inline-block;
+    }
+    @media screen and (max-width: 540px) {
+      display: block;
+    }
+  }
+}
+
 .profile,
 .statuses {
   .dropdown-menu {
