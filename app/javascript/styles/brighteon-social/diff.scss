@@ -923,6 +923,13 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
 }
 
 .public-layout {
+  @media screen and (max-width: 415px) {
+    padding-top: 0;
+    .header {
+      position: static;
+    }
+  }
+
   min-height: inherit;
 
   .header {
