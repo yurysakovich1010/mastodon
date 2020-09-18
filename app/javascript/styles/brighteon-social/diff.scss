@@ -1402,6 +1402,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
 
       img {
         width: 100%;
+        align-self: flex-start; // fix iOS issue
       }
     }
   }
