@@ -98,12 +98,9 @@ export function expandTimeline(timelineId, path, params = {}, done = noOp) {
     const isLoadingRecent = !!params.since_id;
 
     dispatch(expandTimelineRequest(timelineId, isLoadingMore));
-    console.log('timelineId', timelineId);
 
     api(getState).get(path, { params }).then(response => {
-      console.log('response', response);
       const next = getLinks(response).refs.find(link => link.rel === 'next');
-      console.log('next', next);
       dispatch(importFetchedStatuses(response.data));
       dispatch(expandTimelineSuccess(timelineId, response.data, next ? next.uri : null, response.status === 206, isLoadingRecent, isLoadingMore, isLoadingRecent && preferPendingItems));
 

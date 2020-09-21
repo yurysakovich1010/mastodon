@@ -84,7 +84,6 @@ export default class StatusList extends ImmutablePureComponent {
       return <RegenerationIndicator />;
     }
 
-    // console.log('statusIds', statusIds);
     // workaround for duplicated status ids
     const newStatusIds = statusIds.reduce((n, statusId) => {
       if (!n.includes(statusId)) n.push(statusId);

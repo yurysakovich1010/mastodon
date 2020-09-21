@@ -307,6 +307,24 @@ class Status extends ImmutablePureComponent {
     })
   }
 
+  OnInput() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+  }
+
+  componentDidMount() {
+    this.replyBox.style = 'height:' + (this.replyBox.scrollHeight) + 'px;overflow-y:hidden;';
+    this.replyBox.addEventListener("input", this.OnInput);
+  }
+
+  componentWillUnmount() {
+    this.replyBox.removeEventListener("input", this.OnInput);
+  }
+
+  setReplyBox = (c) => {
+    this.replyBox = c;
+  }
+
   render () {
     let media = null;
     let statusAvatar, prepend, rebloggedByText;
@@ -355,8 +373,6 @@ class Status extends ImmutablePureComponent {
       );
     }
 
-    console.log('status', status);
-    console.log('status.get(\'in_reply_to_account_name\')', status.get('in_reply_to_account_name'));
     if (status.get('in_reply_to_account_name')) {
       prepend = (
         <div className='status__prepend'>
@@ -598,7 +614,7 @@ class Status extends ImmutablePureComponent {
                 </div>
 
                 <div className="status__reply-box">
-                  <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText}/>
+                  <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} />
                   {/*<ComposeFormContainer />*/}
 
                   <button className='button btn-post' onClick={this.reply}>Post</button>
