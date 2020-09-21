@@ -1496,6 +1496,10 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         font-size: 25px;
         font-weight: 600;
         margin: 35px 0 25px;
+
+        span {
+          line-height: 1;
+        }
       }
 
       p {
