@@ -1318,6 +1318,15 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     color: $black;
   }
 }
+
+.footer-inner {
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
 // page by page
 
 .about, .home {
