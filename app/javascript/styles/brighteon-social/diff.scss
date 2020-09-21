@@ -1819,6 +1819,17 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
           }
         }
       }
+      .neutral-hint {
+        color: grey;
+      }
+    }
+
+    .batch-table__row {
+      .directory__tag {
+        h4 {
+          color: $white;
+        }
+      }
     }
   }
 
