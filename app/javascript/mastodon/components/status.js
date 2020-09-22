@@ -312,17 +312,18 @@ class Status extends ImmutablePureComponent {
     this.style.height = (this.scrollHeight) + 'px';
   }
 
-  componentDidMount() {
-    this.replyBox.style = 'height:' + (this.replyBox.scrollHeight) + 'px;overflow-y:hidden;';
-    this.replyBox.addEventListener("input", this.OnInput);
-  }
-
   componentWillUnmount() {
-    this.replyBox.removeEventListener("input", this.OnInput);
+    if (this.replyBox) {
+      this.replyBox.removeEventListener("input", this.OnInput);
+    }
   }
 
   setReplyBox = (c) => {
     this.replyBox = c;
+    if (this.replyBox) {
+      this.replyBox.style = 'height:' + (this.replyBox.scrollHeight) + 'px;overflow-y:hidden;';
+      this.replyBox.addEventListener("input", this.OnInput);
+    }
   }
 
   render () {
