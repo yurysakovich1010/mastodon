@@ -10,6 +10,7 @@ import MediaModal from './media_modal';
 import VideoModal from './video_modal';
 import BoostModal from './boost_modal';
 import AudioModal from './audio_modal';
+import ComposeModal from './compose_modal';
 import ConfirmationModal from './confirmation_modal';
 import FocalPointModal from './focal_point_modal';
 import {
@@ -27,6 +28,7 @@ const MODAL_COMPONENTS = {
   'AUDIO': () => Promise.resolve({ default: AudioModal }),
   'BOOST': () => Promise.resolve({ default: BoostModal }),
   'CONFIRM': () => Promise.resolve({ default: ConfirmationModal }),
+  'COMPOSE': () => Promise.resolve({ default: ComposeModal }),
   'MUTE': MuteModal,
   'BLOCK': BlockModal,
   'REPORT': ReportModal,

@@ -16,6 +16,8 @@
                   = fa_icon('lock') if account.locked?
           .public-account-header__tabs__tabs__buttons
             = account_action_button(account)
+            - if user_signed_in?
+              #mastodon-account-action{ data: { props: Oj.dump(default_props), account: account.id }, :class => "action-button"}
 
         -#.public-account-header__tabs__tabs
         -#  .details-counters
