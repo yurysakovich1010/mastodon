@@ -27,6 +27,7 @@ import {directCompose, mentionCompose} from "../../../actions/compose";
 import {pinAccount, unpinAccount} from "../../../actions/accounts";
 import {initReport} from "../../../actions/reports";
 import {blockDomain, unblockDomain} from "../../../actions/domain_blocks";
+import AccountCardActionsContainer from "../containers/account_card_actions_container";
 
 const messages = defineMessages({
   follow: { id: 'account.follow', defaultMessage: 'Follow' },
@@ -389,6 +390,7 @@ class AccountCard extends ImmutablePureComponent {
           </div>
 
           {/*<DropdownMenuContainer items={menu} icon='ellipsis-v' size={24} direction='right' />*/}
+          <AccountCardActionsContainer account={account} />
         </div>
 
         <div className='directory__card__extra' ref={this.setRef}>
