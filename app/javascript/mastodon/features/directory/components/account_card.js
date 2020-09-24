@@ -121,52 +121,6 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
       dispatch(initMuteModal(account));
     }
   },
-
-  onMention (account, router) {
-    dispatch(mentionCompose(account, router));
-  },
-
-  onDirect (account, router) {
-    dispatch(directCompose(account, router));
-  },
-
-  onReblogToggle (account) {
-    if (account.getIn(['relationship', 'showing_reblogs'])) {
-      dispatch(followAccount(account.get('id'), false));
-    } else {
-      dispatch(followAccount(account.get('id'), true));
-    }
-  },
-
-  onEndorseToggle (account) {
-    if (account.getIn(['relationship', 'endorsed'])) {
-      dispatch(unpinAccount(account.get('id')));
-    } else {
-      dispatch(pinAccount(account.get('id')));
-    }
-  },
-
-  onReport (account) {
-    dispatch(initReport(account));
-  },
-
-  onBlockDomain (domain) {
-    dispatch(openModal('CONFIRM', {
-      message: <FormattedMessage id='confirmations.domain_block.message' defaultMessage='Are you really, really sure you want to block the entire {domain}? In most cases a few targeted blocks or mutes are sufficient and preferable. You will not see content from that domain in any public timelines or your notifications. Your followers from that domain will be removed.' values={{ domain: <strong>{domain}</strong> }} />,
-      confirm: intl.formatMessage(messages.blockDomainConfirm),
-      onConfirm: () => dispatch(blockDomain(domain)),
-    }));
-  },
-
-  onUnblockDomain (domain) {
-    dispatch(unblockDomain(domain));
-  },
-
-  onAddToList(account){
-    dispatch(openModal('LIST_ADDER', {
-      accountId: account.get('id'),
-    }));
-  },
 });
 
 export default
@@ -293,78 +247,6 @@ class AccountCard extends ImmutablePureComponent {
       }
     }
 
-    let menu = [];
-
-    if (account.get('id') !== me) {
-      menu.push({ text: intl.formatMessage(messages.mention, { name: account.get('username') }), action: this.props.onMention });
-      menu.push({ text: intl.formatMessage(messages.direct, { name: account.get('username') }), action: this.props.onDirect });
-      menu.push(null);
-    }
-
-    // if ('share' in navigator) {
-    //   menu.push({ text: intl.formatMessage(messages.share, { name: account.get('username') }), action: this.handleShare });
-    //   menu.push(null);
-    // }
-
-    if (account.get('id') === me) {
-      menu.push({ text: intl.formatMessage(messages.edit_profile), href: '/settings/profile' });
-      menu.push({ text: intl.formatMessage(messages.preferences), href: '/settings/preferences' });
-      menu.push({ text: intl.formatMessage(messages.pins), to: '/pinned' });
-      menu.push(null);
-      menu.push({ text: intl.formatMessage(messages.follow_requests), to: '/follow_requests' });
-      menu.push({ text: intl.formatMessage(messages.favourites), to: '/favourites' });
-      menu.push({ text: intl.formatMessage(messages.lists), to: '/lists' });
-      menu.push(null);
-      menu.push({ text: intl.formatMessage(messages.mutes), to: '/mutes' });
-      menu.push({ text: intl.formatMessage(messages.blocks), to: '/blocks' });
-      menu.push({ text: intl.formatMessage(messages.domain_blocks), to: '/domain_blocks' });
-    } else {
-      if (account.getIn(['relationship', 'following'])) {
-        if (!account.getIn(['relationship', 'muting'])) {
-          if (account.getIn(['relationship', 'showing_reblogs'])) {
-            menu.push({ text: intl.formatMessage(messages.hideReblogs, { name: account.get('username') }), action: this.props.onReblogToggle });
-          } else {
-            menu.push({ text: intl.formatMessage(messages.showReblogs, { name: account.get('username') }), action: this.props.onReblogToggle });
-          }
-        }
-
-        menu.push({ text: intl.formatMessage(account.getIn(['relationship', 'endorsed']) ? messages.unendorse : messages.endorse), action: this.props.onEndorseToggle });
-        menu.push({ text: intl.formatMessage(messages.add_or_remove_from_list), action: this.props.onAddToList });
-        menu.push(null);
-      }
-
-      if (account.getIn(['relationship', 'muting'])) {
-        menu.push({ text: intl.formatMessage(messages.unmute, { name: account.get('username') }), action: this.props.onMute });
-      } else {
-        menu.push({ text: intl.formatMessage(messages.mute, { name: account.get('username') }), action: this.props.onMute });
-      }
-
-      if (account.getIn(['relationship', 'blocking'])) {
-        menu.push({ text: intl.formatMessage(messages.unblock, { name: account.get('username') }), action: this.props.onBlock });
-      } else {
-        menu.push({ text: intl.formatMessage(messages.block, { name: account.get('username') }), action: this.props.onBlock });
-      }
-
-      menu.push({ text: intl.formatMessage(messages.report, { name: account.get('username') }), action: this.props.onReport });
-    }
-
-    if (account.get('acct') !== account.get('username')) {
-      const domain = account.get('acct').split('@')[1];
-
-      menu.push(null);
-
-      if (account.getIn(['relationship', 'domain_blocking'])) {
-        menu.push({ text: intl.formatMessage(messages.unblockDomain, { domain }), action: this.props.onUnblockDomain });
-      } else {
-        menu.push({ text: intl.formatMessage(messages.blockDomain, { domain }), action: this.props.onBlockDomain });
-      }
-    }
-
-    if (account.get('id') !== me && isStaff) {
-      menu.push(null);
-      menu.push({ text: intl.formatMessage(messages.admin_account, { name: account.get('username') }), href: `/admin/accounts/${account.get('id')}` });
-    }
-
     return (
       <div className='directory__card'>
         <div className='directory__card__img'>
@@ -389,7 +271,6 @@ class AccountCard extends ImmutablePureComponent {
             {buttons}
           </div>
 
-          {/*<DropdownMenuContainer items={menu} icon='ellipsis-v' size={24} direction='right' />*/}
           <AccountCardActionsContainer account={account} />
         </div>
 
