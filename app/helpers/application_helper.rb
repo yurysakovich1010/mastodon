@@ -157,6 +157,7 @@ module ApplicationHelper
       state_params[:settings]          = state_params[:settings].merge(Web::Setting.find_by(user: current_user)&.data || {})
       state_params[:push_subscription] = current_account.user.web_push_subscription(current_session)
       state_params[:current_account]   = current_account
+      state_params[:account]           = @account
       state_params[:token]             = current_session.token
       state_params[:admin]             = Account.find_local(Setting.site_contact_username.strip.gsub(/\A@/, ''))
     end

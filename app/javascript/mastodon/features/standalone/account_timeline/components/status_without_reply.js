@@ -487,9 +487,9 @@ class StatusWithoutReply extends ImmutablePureComponent {
     if (acct === username) { // filter status by user
       if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
         if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
-          this.setState({
-            repliesCount: status.get('replies_count')
-          });
+          // this.setState({
+          //   repliesCount: status.get('replies_count')
+          // });
         }
 
         const { repliesCountUpdated } = this.state;
@@ -497,10 +497,10 @@ class StatusWithoutReply extends ImmutablePureComponent {
           api().get(`/api/v1/statuses/${status.get('id')}/context`)
             .then(({data}) => {
               if (this.state.descendants.length < data.descendants.length) {
-                this.setState({
-                  descendants: data.descendants,
-                  repliesCountUpdated: false,
-                });
+                // this.setState({
+                //   descendants: data.descendants,
+                //   repliesCountUpdated: false,
+                // });
               }
             });
         }

@@ -68,6 +68,7 @@ class InitialStateSerializer < ActiveModel::Serializer
     store = {}
     store[object.current_account.id.to_s] = ActiveModelSerializers::SerializableResource.new(object.current_account, serializer: REST::AccountSerializer) if object.current_account
     store[object.admin.id.to_s]           = ActiveModelSerializers::SerializableResource.new(object.admin, serializer: REST::AccountSerializer) if object.admin
+    store[object.account.id.to_s]           = ActiveModelSerializers::SerializableResource.new(object.account, serializer: REST::AccountSerializer) if object.account
     store
   end
 

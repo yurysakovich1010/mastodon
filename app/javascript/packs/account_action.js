@@ -1,22 +1,7 @@
 import loadPolyfills from '../mastodon/load_polyfills';
 import { start } from '../mastodon/common';
-import {IntlProvider} from "react-intl";
-import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
-import configureStore from "../mastodon/store/configureStore";
-import initialState from "../mastodon/initial_state";
-import {hydrateStore} from "../mastodon/actions/store";
-import {fetchCustomEmojis} from "../mastodon/actions/custom_emojis";
 
 start();
-
-const store = configureStore();
-
-if (initialState) {
-  store.dispatch(hydrateStore(initialState));
-}
-
-store.dispatch(fetchCustomEmojis());
 
 function loaded() {
   const AccountActionContainer = require('../mastodon/containers/account_action_container').default;
@@ -28,12 +13,7 @@ function loaded() {
     const props = JSON.parse(mountNode.getAttribute('data-props'));
     const accountId = JSON.parse(mountNode.getAttribute('data-account'));
 
-    ReactDOM.render((
-      <IntlProvider locale={props.locale}>
-        <Provider store={store}>
-          <AccountActionContainer {...props} accountId={accountId} />
-        </Provider>
-      </IntlProvider>), mountNode);
+    ReactDOM.render(<AccountActionContainer {...props} accountId={accountId.toString()} />, mountNode);
   }
 }
 
