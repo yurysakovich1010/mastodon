@@ -1310,7 +1310,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
     }
   }
   .dashboard__widgets__trends {
-    li a {
+    ul li a, ul li span {
       color: $white;
     }
   }
