@@ -373,17 +373,19 @@ class Status extends ImmutablePureComponent {
       );
     }
 
-    if (status.get('in_reply_to_account_name')) {
-      prepend = (
-        <div className='status__prepend'>
-          Replied to {status.get('in_reply_to_account_name')}'s post
-        </div>
-      );
-    } else if (featured) {
+    // if (status.get('in_reply_to_account_name')) {
+    //   prepend = (
+    //     <div className='status__prepend'>
+    //       Replied to {status.get('in_reply_to_account_name')}'s post
+    //     </div>
+    //   );
+    // } else
+
+    if (status.get('pinned')) {
       prepend = (
         <div className='status__prepend'>
           <div className='status__prepend-icon-wrapper'><Icon id='thumb-tack' className='status__prepend-icon' fixedWidth /></div>
-          <FormattedMessage id='status.pinned' defaultMessage='Pinned toot' />
+          <FormattedMessage id='status.pinned' defaultMessage='Pinned post' />
         </div>
       );
     } else if (status.get('reblog', null) !== null && typeof status.get('reblog') === 'object') {
