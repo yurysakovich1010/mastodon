@@ -190,10 +190,10 @@ class AccountAction extends ImmutablePureComponent {
       menu.push(null);
     }
 
-    if ('share' in navigator) {
-      menu.push({ text: intl.formatMessage(messages.share, { name: account.get('username') }), action: this.handleShare });
-      menu.push(null);
-    }
+    // if ('share' in navigator) {
+    //   menu.push({ text: intl.formatMessage(messages.share, { name: account.get('username') }), action: this.handleShare });
+    //   menu.push(null);
+    // }
 
     if (account.get('id') === me) {
       menu.push({ text: intl.formatMessage(messages.edit_profile), href: '/settings/profile' });

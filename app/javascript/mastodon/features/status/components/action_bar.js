@@ -247,9 +247,9 @@ class ActionBar extends React.PureComponent {
       }
     }
 
-    const shareButton = ('share' in navigator) && publicStatus && (
-      <div className='detailed-status__button'><IconButton title={intl.formatMessage(messages.share)} icon='share-alt' onClick={this.handleShare} /></div>
-    );
+    // const shareButton = ('share' in navigator) && publicStatus && (
+    //   <div className='detailed-status__button'><IconButton title={intl.formatMessage(messages.share)} icon='share-alt' onClick={this.handleShare} /></div>
+    // );
 
     let replyIcon;
     if (status.get('in_reply_to_id', null) === null) {
