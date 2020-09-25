@@ -547,7 +547,7 @@
         "id": "status.filtered"
       },
       {
-        "defaultMessage": "Pinned toot",
+        "defaultMessage": "Pinned post",
         "id": "status.pinned"
       },
       {
@@ -797,7 +797,7 @@
         "id": "account.show_reblogs"
       },
       {
-        "defaultMessage": "Pinned toots",
+        "defaultMessage": "Pinned posts",
         "id": "navigation_bar.pins"
       },
       {
@@ -951,7 +951,7 @@
         "id": "account.edit_profile"
       },
       {
-        "defaultMessage": "Pinned toots",
+        "defaultMessage": "Pinned posts",
         "id": "navigation_bar.pins"
       },
       {
@@ -1731,7 +1731,7 @@
         "id": "navigation_bar.mutes"
       },
       {
-        "defaultMessage": "Pinned toots",
+        "defaultMessage": "Pinned posts",
         "id": "navigation_bar.pins"
       },
       {
@@ -2045,7 +2045,7 @@
         "id": "keyboard_shortcuts.favourites"
       },
       {
-        "defaultMessage": "to open pinned toots list",
+        "defaultMessage": "to open Pinned posts list",
         "id": "keyboard_shortcuts.pinned"
       },
       {
@@ -2349,7 +2349,7 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "Pinned toot",
+        "defaultMessage": "Pinned post",
         "id": "column.pins"
       }
     ],
