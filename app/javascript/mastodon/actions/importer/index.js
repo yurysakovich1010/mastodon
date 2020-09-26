@@ -56,7 +56,7 @@ export function importFetchedStatus(status) {
   return importFetchedStatuses([status]);
 }
 
-export function importFetchedStatuses(statuses) {
+export function importFetchedStatuses(statuses, withReplyOrigin) {
   return (dispatch, getState) => {
     const accounts = [];
     const normalStatuses = [];
@@ -75,7 +75,14 @@ export function importFetchedStatuses(statuses) {
       }
     }
 
-    statuses.forEach(processStatus);
+    statuses.forEach(
+      status => {
+        processStatus(status);
+        if (withReplyOrigin && status.in_reply_to) {
+          processStatus(status.in_reply_to);
+        }
+      }
+    );
 
     dispatch(importPolls(polls));
     dispatch(importFetchedAccounts(accounts));

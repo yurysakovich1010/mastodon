@@ -101,7 +101,7 @@ export function expandTimeline(timelineId, path, params = {}, done = noOp) {
 
     api(getState).get(path, { params }).then(response => {
       const next = getLinks(response).refs.find(link => link.rel === 'next');
-      dispatch(importFetchedStatuses(response.data));
+      dispatch(importFetchedStatuses(response.data, params.with_reply_origin));
       dispatch(expandTimelineSuccess(timelineId, response.data, next ? next.uri : null, response.status === 206, isLoadingRecent, isLoadingMore, isLoadingRecent && preferPendingItems));
 
       if (timelineId === 'home') {
@@ -119,7 +119,7 @@ export const expandHomeTimeline            = ({ maxId } = {}, done = noOp) => ex
 export const expandPublicTimeline          = ({ maxId, onlyMedia, onlyRemote } = {}, done = noOp) => expandTimeline(`public${onlyRemote ? ':remote' : ''}${onlyMedia ? ':media' : ''}`, '/api/v1/timelines/public', { remote: !!onlyRemote, max_id: maxId, only_media: !!onlyMedia }, done);
 export const expandTrendTimeline           = ({ maxId, onlyMedia, onlyRemote, onlyLocal } = {}, done = noOp) => expandTimeline(`trend${onlyRemote ? ':remote' : ''}${onlyMedia ? ':media' : ''}${onlyLocal ? ':local' : ''}`, '/api/v1/timelines/trend', { remote: !!onlyRemote, max_id: maxId, only_media: !!onlyMedia, local: !!onlyLocal }, done);
 export const expandCommunityTimeline       = ({ maxId, onlyMedia } = {}, done = noOp) => expandTimeline(`community${onlyMedia ? ':media' : ''}`, '/api/v1/timelines/public', { local: true, max_id: maxId, only_media: !!onlyMedia }, done);
-export const expandAccountTimeline         = (accountId, { maxId, withReplies, onlyReplies, onlyImage, onlyVideo } = {}) => expandTimeline(`account:${accountId}${withReplies ? ':with_replies' : ''}${onlyReplies ? ':only_replies' : ''}${onlyImage ? ':only_image' : ''}${onlyVideo ? ':only_video' : ''}`, `/api/v1/accounts/${accountId}/statuses`, { only_replies: !!onlyReplies, only_video: !!onlyVideo, only_image: !!onlyImage, exclude_replies: !withReplies, max_id: maxId });
+export const expandAccountTimeline         = (accountId, { maxId, withReplies, onlyReplies, onlyImage, onlyVideo } = {}) => expandTimeline(`account:${accountId}${withReplies ? ':with_replies' : ''}${onlyReplies ? ':only_replies' : ''}${onlyImage ? ':only_image' : ''}${onlyVideo ? ':only_video' : ''}`, `/api/v1/accounts/${accountId}/statuses`, { only_replies: !!onlyReplies, only_video: !!onlyVideo, only_image: !!onlyImage, exclude_replies: !withReplies, max_id: maxId, with_reply_origin: true });
 export const expandAccountFeaturedTimeline = accountId => expandTimeline(`account:${accountId}:pinned`, `/api/v1/accounts/${accountId}/statuses`, { pinned: true });
 export const expandAccountMediaTimeline    = (accountId, { maxId } = {}) => expandTimeline(`account:${accountId}:media`, `/api/v1/accounts/${accountId}/statuses`, { max_id: maxId, only_media: true, limit: 40 });
 export const expandListTimeline            = (id, { maxId } = {}, done = noOp) => expandTimeline(`list:${id}`, `/api/v1/timelines/list/${id}`, { max_id: maxId }, done);

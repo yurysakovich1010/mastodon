@@ -359,7 +359,7 @@ class StatusActionBar extends ImmutablePureComponent {
         {/*    {status.get('favourites_count')}*/}
         {/*  </span>*/}
         {/*</div>*/}
-        {shareButton}
+        {/*{shareButton}*/}
 
         <div className='status__action-bar-dropdown'>
           <DropdownMenuContainer

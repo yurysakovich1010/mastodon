@@ -25,10 +25,15 @@ class REST::StatusSerializer < ActiveModel::Serializer
   has_many :emojis, serializer: REST::CustomEmojiSerializer
 
   has_one :preview_card, key: :card, serializer: REST::PreviewCardSerializer
+  has_one :in_reply_to, serializer: REST::StatusSerializer, if: :in_reply_to_id
   has_one :preloadable_poll, key: :poll, serializer: REST::PollSerializer
 
   def id
     object.id.to_s
+  end
+
+  def in_reply_to
+    Status.find(object.in_reply_to_id)
   end
 
   def in_reply_to_id

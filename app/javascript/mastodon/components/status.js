@@ -17,6 +17,7 @@ import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../initial_state';
 import api from 'mastodon/api';
+import StatusContainer from "../containers/status_container";
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
@@ -95,6 +96,7 @@ class Status extends ImmutablePureComponent {
     cacheMediaWidth: PropTypes.func,
     cachedMediaWidth: PropTypes.number,
     scrollKey: PropTypes.string,
+    replyOrigin: PropTypes.any,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -328,14 +330,29 @@ class Status extends ImmutablePureComponent {
 
   render () {
     let media = null;
-    let statusAvatar, prepend, rebloggedByText;
+    let statusAvatar, prepend = '', rebloggedByText;
 
     const { intl, hidden, featured, otherAccounts, unread, showThread, scrollKey } = this.props;
 
-    let { status, account, ...other } = this.props;
+    let { status, account, replyOrigin, ...other } = this.props;
 
     if (status === null) {
       return null;
+    }
+
+    if (!replyOrigin && status.get('in_reply_to')) {
+      return (
+        <StatusContainer
+          id={status.get('in_reply_to_id')}
+          contextType={'public'}
+          showThread
+          replyOrigin={status.getIn(['account', 'display_name_html'])}
+        />
+      )
+    }
+
+    if (replyOrigin && status.get('visibility') !== 'public') {
+      return ''
     }
 
     const handlers = this.props.muted ? {} : {
@@ -374,29 +391,37 @@ class Status extends ImmutablePureComponent {
       );
     }
 
-    // if (status.get('in_reply_to_account_name')) {
-    //   prepend = (
-    //     <div className='status__prepend'>
-    //       Replied to {status.get('in_reply_to_account_name')}'s post
-    //     </div>
-    //   );
-    // } else
+    if (replyOrigin) {
+      const display_name_html = { __html: status.getIn(['account', 'display_name_html']) };
+
+      prepend = (
+        <div className='status__prepend'>
+          <FormattedMessage id='status.replied_to' defaultMessage="{origin} replied to {name}'s post" values={{ origin: replyOrigin, name: <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
+        </div>
+      )
+    }
 
     if (status.get('pinned')) {
       prepend = (
-        <div className='status__prepend'>
-          <div className='status__prepend-icon-wrapper'><Icon id='thumb-tack' className='status__prepend-icon' fixedWidth /></div>
-          <FormattedMessage id='status.pinned' defaultMessage='Pinned post' />
-        </div>
+        <>
+          {prepend}
+          <div className='status__prepend'>
+            <div className='status__prepend-icon-wrapper'><Icon id='thumb-tack' className='status__prepend-icon' fixedWidth /></div>
+            <FormattedMessage id='status.pinned' defaultMessage='Pinned post' />
+          </div>
+        </>
       );
     } else if (status.get('reblog', null) !== null && typeof status.get('reblog') === 'object') {
       const display_name_html = { __html: status.getIn(['account', 'display_name_html']) };
 
       prepend = (
-        <div className='status__prepend'>
-          <div className='status__prepend-icon-wrapper'><Icon id='retweet' className='status__prepend-icon' fixedWidth /></div>
-          <FormattedMessage id='status.reblogged_by' defaultMessage='{name} boosted' values={{ name: <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
-        </div>
+        <>
+          {prepend}
+          <div className='status__prepend'>
+            <div className='status__prepend-icon-wrapper'><Icon id='retweet' className='status__prepend-icon' fixedWidth /></div>
+            <FormattedMessage id='status.reblogged_by' defaultMessage='{name} boosted' values={{ name: <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
+          </div>
+        </>
       );
 
       rebloggedByText = intl.formatMessage({ id: 'status.reblogged_by', defaultMessage: '{name} boosted' }, { name: status.getIn(['account', 'acct']) });

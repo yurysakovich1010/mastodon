@@ -1911,6 +1911,9 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       border-left: 1px solid #c0cdd9;
       border-right: 1px solid #c0cdd9;
       border-bottom: 1px solid #c0cdd9;
+      &:first-child {
+        border-top: 1px solid #c0cdd9;
+      }
       .status {
         border: 0;
       }

@@ -19,6 +19,7 @@ import api from 'mastodon/api';
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
 import Bundle from '../../../../features/ui/components/bundle';
+import StatusContainer from "../containers/status_container";
 
 export const textForScreenReader = (intl, status, rebloggedByText = false) => {
   const displayName = status.getIn(['account', 'display_name']);
@@ -96,6 +97,7 @@ class Status extends ImmutablePureComponent {
     username: PropTypes.string,
     avatar: PropTypes.string,
     statusId: PropTypes.any,
+    replyOrigin: PropTypes.any,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -327,14 +329,34 @@ class Status extends ImmutablePureComponent {
 
   render () {
     let media = null;
-    let statusAvatar, prepend, rebloggedByText;
+    let statusAvatar, prepend = '', rebloggedByText;
 
     const { intl, hidden, featured, otherAccounts, unread, showThread, scrollKey } = this.props;
 
-    let { status, account, username, avatar, statusId, ...other } = this.props;
+    let { status, account, username, avatar, statusId, replyOrigin, ...other } = this.props;
 
     if (status === null) {
       return null;
+    }
+
+    if (!replyOrigin && status.get('in_reply_to')) {
+      return (
+        <StatusContainer
+          id={status.get('in_reply_to_id')}
+          onMoveUp={() => {}}
+          onMoveDown={() => {}}
+          contextType={'public'}
+          username={username}
+          avatar={avatar}
+          statusId={statusId}
+          showThread
+          replyOrigin={status.getIn(['account', 'display_name_html'])}
+        />
+      )
+    }
+
+    if (replyOrigin && status.get('visibility') !== 'public') {
+      return ''
     }
 
     const handlers = this.props.muted ? {} : {
@@ -373,30 +395,38 @@ class Status extends ImmutablePureComponent {
       );
     }
 
-    // if (status.get('in_reply_to_account_name')) {
-    //   prepend = (
-    //     <div className='status__prepend'>
-    //       Replied to {status.get('in_reply_to_account_name')}'s post
-    //     </div>
-    //   );
-    // } else
-
-    if (status.get('pinned')) {
-      prepend = (
-        <div className='status__prepend'>
-          <div className='status__prepend-icon-wrapper'><Icon id='thumb-tack' className='status__prepend-icon' fixedWidth /></div>
-          <FormattedMessage id='status.pinned' defaultMessage='Pinned post' />
-        </div>
-      );
-    } else if (status.get('reblog', null) !== null && typeof status.get('reblog') === 'object') {
+    if (replyOrigin) {
       const display_name_html = { __html: status.getIn(['account', 'display_name_html']) };
 
       prepend = (
         <div className='status__prepend'>
-          <div className='status__prepend-icon-wrapper'><Icon id='retweet' className='status__prepend-icon' fixedWidth /></div>
-          <FormattedMessage id='status.reblogged_by' defaultMessage='{name} boosted' values={{ name: <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
+          <FormattedMessage id='status.replied_to' defaultMessage="{origin} replied to {name}'s post" values={{ origin: replyOrigin, name: <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
         </div>
-      );
+      )
+    }
+
+    if (status.get('pinned')) {
+      prepend = (
+        <>
+          {prepend}
+          <div className='status__prepend'>
+            <div className='status__prepend-icon-wrapper'><Icon id='thumb-tack' className='status__prepend-icon' fixedWidth /></div>
+            <FormattedMessage id='status.pinned' defaultMessage='Pinned post' />
+          </div>
+        </>
+      )
+    } else if (status.get('reblog', null) !== null && typeof status.get('reblog') === 'object') {
+      const display_name_html = { __html: status.getIn(['account', 'display_name_html']) };
+
+      prepend = (
+        <>
+          {prepend}
+          <div className='status__prepend'>
+            <div className='status__prepend-icon-wrapper'><Icon id='retweet' className='status__prepend-icon' fixedWidth /></div>
+            <FormattedMessage id='status.reblogged_by' defaultMessage='{name} boosted' values={{ name: <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
+          </div>
+        </>
+      )
 
       rebloggedByText = intl.formatMessage({ id: 'status.reblogged_by', defaultMessage: '{name} boosted' }, { name: status.getIn(['account', 'acct']) });
 
@@ -504,131 +534,126 @@ class Status extends ImmutablePureComponent {
 
     const visibilityIcon = visibilityIconInfo[status.get('visibility')];
 
-    const acct = status.getIn(['account', 'acct']);
     const avatarStyle = {
       width: '36px',
       height: '36px',
       backgroundSize: '36px 36px',
       backgroundImage: `url(${avatar})`
     };
-    if (acct === username) { // filter status by user
-      if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
-        if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
-          this.setState({
-            repliesCount: status.get('replies_count')
+
+    if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
+      if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
+        this.setState({
+          repliesCount: status.get('replies_count')
+        });
+      }
+
+      const { repliesCountUpdated } = this.state;
+      if (repliesCountUpdated || (this.state.descendants.length === 0 && status.get('replies_count') > 0)) {
+        api().get(`/api/v1/statuses/${status.get('id')}/context`)
+          .then(({data}) => {
+            if (this.state.descendants.length < data.descendants.length) {
+              this.setState({
+                descendants: data.descendants,
+                repliesCountUpdated: false,
+              });
+            }
           });
-        }
+      }
 
-        const { repliesCountUpdated } = this.state;
-        if (repliesCountUpdated || (this.state.descendants.length === 0 && status.get('replies_count') > 0)) {
-          api().get(`/api/v1/statuses/${status.get('id')}/context`)
-            .then(({data}) => {
-              if (this.state.descendants.length < data.descendants.length) {
-                this.setState({
-                  descendants: data.descendants,
-                  repliesCountUpdated: false,
-                });
-              }
-            });
-        }
+      return (
+        <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
+          {prepend}
 
-        return (
-          <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
-            {prepend}
+          <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
+            <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
+            <div className='status__info'>
+              <div>
+                <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
+                  <div className='status__avatar'>
+                    {statusAvatar}
+                  </div>
 
-            <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
-              <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
-              <div className='status__info'>
-                <div>
-                  <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
-                    <div className='status__avatar'>
-                      {statusAvatar}
+                  <DisplayName account={status.get('account')} others={otherAccounts} />
+                </a>
+              </div>
+              <div>
+                <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>
+                {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
+              </div>
+            </div>
+
+            <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} showThread={showThread} onExpandedToggle={this.handleExpandedToggle} collapsable onCollapsedToggle={this.handleCollapsedToggle} />
+
+            {media}
+
+            <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
+
+            {
+              this.state.descendants.filter(
+                (d, idx) => (idx < 3 || this.state.showAllReplies)
+              ).map((descendant) => (
+                <div className='status__reply' key={descendant.id}>
+                  <div className="status__avatar">
+                    <a
+                      className="account__avatar"
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        backgroundSize: '36px 36px',
+                        backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`
+                      }}
+                      href={descendant.account.url}
+                      target="_blank"
+                    />
+                  </div>
+
+                  <div className="status__reply-box">
+                    <div className='display-name'>
+                      <a href={descendant.account.url} target='_blank' rel='noopener noreferrer'>
+                        <strong className='display-name__html' dangerouslySetInnerHTML={{ __html: descendant.account.display_name || descendant.account.username }} />
+                      </a>
+                      &nbsp;
+                      <span className='display-name__account'>@{descendant.account.acct}</span>
                     </div>
+                    <a href={descendant.url} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={descendant.created_at} /></a>
+                    <div className="status__content" dangerouslySetInnerHTML={{__html: descendant.content}} />
+                  </div>
+                </div>
+              ))
+            }
 
-                    <DisplayName account={status.get('account')} others={otherAccounts} />
-                  </a>
-                </div>
-                <div>
-                  <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>
-                  {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
-                </div>
+            {
+              !this.state.showAllReplies && this.state.descendants.length > 3 && (
+                <button className="status__content__read-more-button" onClick={this.toggleShowAllReplies}>
+                  <span>Show All Replies</span>
+                </button>
+              )
+            }
+
+            {
+              this.state.showAllReplies && this.state.descendants.length > 3 && (
+                <button className="status__content__read-more-button" onClick={this.toggleShowAllReplies}>
+                  <span>Show Top 3 Replies</span>
+                </button>
+              )
+            }
+
+            <div className='status__reply'>
+              <div className="status__avatar">
+                <div className="account__avatar" style={avatarStyle} />
               </div>
 
-              <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} showThread={showThread} onExpandedToggle={this.handleExpandedToggle} collapsable onCollapsedToggle={this.handleCollapsedToggle} />
+              <div className="status__reply-box">
+                <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} />
+                {/*<ComposeFormContainer />*/}
 
-              {media}
-
-              <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
-
-              {
-                this.state.descendants.filter(
-                  (d, idx) => (idx < 3 || this.state.showAllReplies)
-                ).map((descendant) => (
-                  <div className='status__reply' key={descendant.id}>
-                    <div className="status__avatar">
-                      <a
-                        className="account__avatar"
-                        style={{
-                          width: '36px',
-                          height: '36px',
-                          backgroundSize: '36px 36px',
-                          backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`
-                        }}
-                        href={descendant.account.url}
-                        target="_blank"
-                      />
-                    </div>
-
-                    <div className="status__reply-box">
-                      <div className='display-name'>
-                        <a href={descendant.account.url} target='_blank' rel='noopener noreferrer'>
-                          <strong className='display-name__html' dangerouslySetInnerHTML={{ __html: descendant.account.display_name || descendant.account.username }} />
-                        </a>
-                        &nbsp;
-                        <span className='display-name__account'>@{descendant.account.acct}</span>
-                      </div>
-                      <a href={descendant.url} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={descendant.created_at} /></a>
-                      <div className="status__content" dangerouslySetInnerHTML={{__html: descendant.content}} />
-                    </div>
-                  </div>
-                ))
-              }
-
-              {
-                !this.state.showAllReplies && this.state.descendants.length > 3 && (
-                  <button className="status__content__read-more-button" onClick={this.toggleShowAllReplies}>
-                    <span>Show All Replies</span>
-                  </button>
-                )
-              }
-
-              {
-                this.state.showAllReplies && this.state.descendants.length > 3 && (
-                  <button className="status__content__read-more-button" onClick={this.toggleShowAllReplies}>
-                    <span>Show Top 3 Replies</span>
-                  </button>
-                )
-              }
-
-              <div className='status__reply'>
-                <div className="status__avatar">
-                  <div className="account__avatar" style={avatarStyle} />
-                </div>
-
-                <div className="status__reply-box">
-                  <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} />
-                  {/*<ComposeFormContainer />*/}
-
-                  <button className='button btn-post' onClick={this.reply}>Post</button>
-                </div>
+                <button className='button btn-post' onClick={this.reply}>Post</button>
               </div>
             </div>
           </div>
-        );
-      }
+        </div>
+      );
     }
-
-    return null;
   }
-
 }

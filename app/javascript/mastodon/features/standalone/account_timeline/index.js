@@ -103,6 +103,7 @@ class AccountTimeline extends React.PureComponent {
               username={username}
               avatar={avatar}
               statusId={statusIdProp}
+              showThread
             />
             )
           )
