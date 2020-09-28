@@ -28,7 +28,7 @@
     .originally-grid
       .column-0
         .column-container
-          #mastodon-statuses{ data: { props: Oj.dump(default_props.merge(accountId: @account.id, statusId: params[:id], username: @account.username, avatar: current_account&.user&.setting_auto_play_gif ? current_account.avatar_original_url : current_account.avatar_static_url)) }}
+          #mastodon-statuses{ data: { props: Oj.dump(default_props.merge(accountId: @account.id, statusId: params[:id], username: @account.username, avatar: current_account&.user&.setting_auto_play_gif ? current_account.avatar_original_url : current_account&.avatar_static_url)) }}
       .column-1
         .column-container
           .public-account-header__image.mb3
