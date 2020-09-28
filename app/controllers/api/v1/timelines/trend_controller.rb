@@ -39,7 +39,7 @@ class Api::V1::Timelines::TrendController < Api::BaseController
   end
 
   def public_timeline_statuses
-    Status.as_public_timeline(current_account, truthy_param?(:remote) ? :remote : truthy_param?(:local)).trend
+    Status.as_public_timeline(current_account, truthy_param?(:remote) ? :remote : truthy_param?(:local))
   end
 
   def insert_pagination_headers
