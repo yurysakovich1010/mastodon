@@ -161,6 +161,9 @@ export default class AutosuggestTextarea extends ImmutablePureComponent {
 
   setTextarea = (c) => {
     this.textarea = c;
+    if (this.textarea) {
+      this.textarea.value = this.value;
+    }
   }
 
   onPaste = (e) => {
