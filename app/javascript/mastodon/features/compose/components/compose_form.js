@@ -58,6 +58,7 @@ class ComposeForm extends ImmutablePureComponent {
     onChangeSpoilerText: PropTypes.func.isRequired,
     onPaste: PropTypes.func.isRequired,
     onPickEmoji: PropTypes.func.isRequired,
+    closeComposeModal: PropTypes.func.isRequired,
     showSearch: PropTypes.bool,
     anyMedia: PropTypes.bool,
     singleColumn: PropTypes.bool,
@@ -92,6 +93,7 @@ class ComposeForm extends ImmutablePureComponent {
       return;
     }
 
+    this.props.closeComposeModal(); // for only account card dropdown actions and profile page dropdown actions
     this.props.onSubmit(this.context.router ? this.context.router.history : null);
   }
 

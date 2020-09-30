@@ -10,6 +10,7 @@ import {
   insertEmojiCompose,
   uploadCompose,
 } from '../../../actions/compose';
+import { closeModal } from 'mastodon/actions/modal';
 
 const mapStateToProps = state => ({
   text: state.getIn(['compose', 'text']),
@@ -59,6 +60,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   onPickEmoji (position, data, needsSpace) {
     dispatch(insertEmojiCompose(position, data, needsSpace));
+  },
+
+  closeComposeModal() {
+    dispatch(closeModal('COMPOSE'));
   },
 
 });
