@@ -1326,6 +1326,13 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 }
 
+.account__header__fields dt {
+  color: $black;
+}
+
+.compose-form .compose-form__warning {
+  color: $white;
+}
 
 // page by page
 
