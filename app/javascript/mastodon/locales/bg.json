@@ -82,7 +82,7 @@
   "community.column_settings.local_only": "Local only",
   "community.column_settings.media_only": "Media only",
   "community.column_settings.remote_only": "Remote only",
-  "compose_form.direct_message_warning": "This toot will only be visible to all the mentioned users.",
+  "compose_form.direct_message_warning": "This post will only be visible to all the mentioned users.",
   "compose_form.direct_message_warning_learn_more": "Learn more",
   "compose_form.hashtag_warning": "This toot won't be listed under any hashtag as it is unlisted. Only public toots can be searched by hashtag.",
   "compose_form.lock_disclaimer": "Your account is not {locked}. Anyone can follow you to view your follower-only posts.",

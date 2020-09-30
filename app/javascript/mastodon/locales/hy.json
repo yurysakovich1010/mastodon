@@ -82,7 +82,7 @@
   "community.column_settings.local_only": "Միայն ներքին",
   "community.column_settings.media_only": "Media only",
   "community.column_settings.remote_only": "Միայն հեռակա",
-  "compose_form.direct_message_warning": "This toot will only be visible to all the mentioned users.",
+  "compose_form.direct_message_warning": "This post will only be visible to all the mentioned users.",
   "compose_form.direct_message_warning_learn_more": "Իմանալ ավելին",
   "compose_form.hashtag_warning": "Այս թութը չի հաշվառվի որեւէ պիտակի տակ, քանզի այն ծածուկ է։ Միայն հրապարակային թթերը հնարավոր է որոնել պիտակներով։",
   "compose_form.lock_disclaimer": "Քո հաշիւը {locked} չէ։ Իւրաքանչիւրութիւն ոք կարող է հետեւել քեզ եւ տեսնել միայն հետեւողների համար նախատեսուած գրառումները։",

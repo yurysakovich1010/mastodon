@@ -82,7 +82,7 @@
   "community.column_settings.local_only": "Local only",
   "community.column_settings.media_only": "सिर्फ़ मीडिया",
   "community.column_settings.remote_only": "Remote only",
-  "compose_form.direct_message_warning": "This toot will only be sent to all the mentioned users.",
+  "compose_form.direct_message_warning": "This post will only be sent to all the mentioned users.",
   "compose_form.direct_message_warning_learn_more": "और जानें",
   "compose_form.hashtag_warning": "यह टूट् किसी भी हैशटैग के तहत सूचीबद्ध नहीं होगा क्योंकि यह अनलिस्टेड है। हैशटैग द्वारा केवल सार्वजनिक टूट्स खोजे जा सकते हैं।",
   "compose_form.lock_disclaimer": "आपका खाता {locked} नहीं है। आपको केवल फॉलोवर्स को दिखाई दिए जाने वाले पोस्ट देखने के लिए कोई भी फॉलो कर सकता है।",
