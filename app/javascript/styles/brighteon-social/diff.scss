@@ -1326,7 +1326,8 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 }
 
-.account__header__fields dt {
+.account__header__fields dt,
+.account__header__fields dd {
   color: $black;
 }
 
