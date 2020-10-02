@@ -24,6 +24,8 @@ class AboutController < ApplicationController
 
   def terms; end
 
+  def tutorial; end
+
   def privacy; end
 
   helper_method :display_blocks?

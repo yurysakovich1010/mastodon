@@ -1,0 +1,58 @@
+- content_for :page_title do
+  = t('tutorial.title', instance: site_hostname)
+
+- content_for :header_tags do
+  = javascript_pack_tag 'public', integrity: true, crossorigin: 'anonymous'
+  = render partial: 'shared/og'
+
+- content_for :header do
+  .header.m-auto
+    .nav-left
+      = render 'application/top_menu'
+
+    .nav-right
+      = link_to root_path, class: 'btn button button-primary back-to-landing' do
+        = t('generic.back_to_link', link: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
+
+- content_for :footer do
+  .d-flex.footer-inner
+    %div
+      %span
+        = Time.new.year
+      %span.text-capitalize.mr3
+        = site_hostname
+      %span.text-capitalize
+        = t 'footer.all_rights_reserved'
+    .spacer
+    %div
+      %span.mr3
+        = link_to t('about.privacy_policy'), privacy_path, class: 'decoration-none'
+      %span
+        = link_to t('about.terms'), terms_path, class: 'decoration-none'
+
+.tutorial
+  .content-overlay.br1
+    %div.overlay
+    %div.content
+      %div
+        = image_tag @instance_presenter.hero&.file&.url || @instance_presenter.thumbnail&.file&.url || asset_pack_path('media/images/brighteon-social/logo.png'), alt: @instance_presenter.site_title
+      %div
+        = t('tutorial.body_html',
+          privacy_path: privacy_path,
+          terms_path: terms_path,
+          new_post_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-New-Post.png'),
+          add_attachment_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-New-Post-Attachment.png'),
+          create_poll_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-New-Post-Poll.png'),
+          post_visibility_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-New-Post-Visibility.png'),
+          content_warning_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-New-Post-Warning.png'),
+          reply_box_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Post-Reply-Box.png'),
+          post_boost_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Post-Boost.png'),
+          post_favorite_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Post-Favorite.png'),
+          more_options_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Post-More-Options.png'),
+          direct_messages_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Direct-Message.png'),
+          direct_message_box_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Direct-Message-Box.png'),
+          notifications_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Notifications.png'),
+          configure_notifications_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Configure-Notifications.png'),
+          notifications_settigs_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Notifications-Settings.png'),
+          connect_profiles_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Connect-Profiles.png'),
+          follow_src: asset_pack_path('media/images/brighteon-social/tutorial/Brighteon-Social-Follow-Health-Ranger-600.jpg'))

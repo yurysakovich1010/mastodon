@@ -501,6 +501,7 @@ Rails.application.routes.draw do
   get '/about/more',   to: 'about#more'
   get '/terms',        to: 'about#terms'
   get '/privacy',      to: 'about#privacy'
+  get '/tutorial',     to: 'about#tutorial'
 
   get '/landing',      to: 'landing#show'
   get '/help',         to: 'contact#index'

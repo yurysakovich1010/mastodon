@@ -1661,6 +1661,352 @@ en:
       </p>
 
     title: "%{instance} Terms of Service"
+  tutorial:
+    title: Quick Start Guide
+    body_html: |
+      <hr class="spacer" />
+
+      <h3>
+        - <a href="#Discover" class="decoration-none">Discover Profiles and Content</a>
+      </h3>
+
+      <h3>
+        - <a href="#CreatePost" class="decoration-none">Create a Post</a>
+      </h3>
+
+      <h3>
+        - <a href="#InteractingwithPosts" class="decoration-none">Interacting with Posts</a>
+      </h3>
+
+      <h3>
+        - <a href="#DirectMessages" class="decoration-none">Direct Messages</a>
+      </h3>
+
+      <h3>
+        - <a href="#Notifications" class="decoration-none">Notifications</a>
+      </h3>
+
+      <h3>
+        - <a href="#FollowingProfiles" class="decoration-none">Following Profiles</a>
+      </h3>
+
+      <h3>
+        - <a href="#EditProfile" class="decoration-none">Edit Your Profile</a>
+      </h3>
+
+      <h3>
+        - <a href="#SendingInvites" class="decoration-none">Sending Invites</a>
+      </h3>
+
+      <h3>
+        - <a href="#MobileApps" class="decoration-none">Mobile Apps</a>
+      </h3>
+
+      <hr class="spacer" />
+
+      <a name="Discover"></a>
+
+      <h2>Discover Profiles and Content</h2>
+
+      <p>
+        To discover user profiles and content, use the menu in the left column of the site. The different areas include:
+      </p>
+
+      <h3 class="inline-block">
+        Home:
+      </h3>
+      <p class="inline-block m0">
+         This is a stream of posts from the people you follow.
+      </p>
+      <br />
+
+      <h3 class="inline-block">
+        Connect:
+      </h3>
+      <p class="inline-block m0">
+        This is a profile directory where you can find users and follow them.
+      </p>
+      <br />
+
+      <h3 class="inline-block">
+        Trends:
+      </h3>
+      <p class="inline-block m0">
+        This is a news feed of the most engaged posts of the day.
+      </p>
+      <br />
+
+      <h3 class="inline-block">
+        Live Stream:
+      </h3>
+      <p class="inline-block m0">
+        This is a stream of real time posts from all brighteon.social users.
+      </p>
+      <br />
+
+      <hr class="spacer" />
+
+      <a name="CreatePost"></a>
+
+      <h2>Create a post</h2>
+
+      <p>
+        At the top of your timeline, you'll see a box titled "What's on your mind?" In this box you can say anything you want or paste a url link to a website or article you find interesting. There is a 500-character limit, so choose your words wisely. You can also add hashtags in this area.
+      </p>
+
+      <img class="tutorial-image" src="%{new_post_src}" />
+
+      <hr class="spacer" />
+
+      <h3>Adding Attachments</h2>
+
+      <p>
+        To attach a photo, video or audio file, click the "Attachment" icon. This will open a window on your computer where you can browse to and select the file you want to attach. Once you choose the desired file, it will be uploaded to Brighteon.social, but don't worry, you can review the post and attached file before submitting. You can edit, delete and tag the attachment as "sensitive" if you feel it needs to be tagged as such.
+      </p>
+
+      <img class="tutorial-image" src="%{add_attachment_src}" />
+
+      <hr class="spacer" />
+
+      <h3>Create a Poll</h2>
+
+      <p>
+        To create a poll, click the "Poll" icon. You can now set the choices and the duration of the poll. If you need more than two choices, click the "Add a choice" button to add more.
+      </p>
+
+      <img class="tutorial-image" src="%{create_poll_src}" />
+
+      <hr class="spacer" />
+
+      <h3>Post Visibility</h2>
+
+      <p>
+        Adjusting your post's visibility settings allow you to choose who sees the post. Click the "Privacy" icon. A dropdown will display your choices (Public, Unlisted, etc).
+      </p>
+
+      <img class="tutorial-image" src="%{post_visibility_src}" />
+
+      <hr class="spacer" />
+
+      <h3>Content Warning</h2>
+
+      <p>
+        If you wish to add a content warning to your post, click the "CW" icon. This will add a content warning text box above the post text where you can enter your warning.
+      </p>
+
+      <img class="tutorial-image" src="%{content_warning_src}" />
+
+      <hr class="spacer" />
+
+      <a name="InteractingwithPosts"></a>
+
+      <h2>Interacting with Posts</h2>
+
+      <p>
+        Here are some things you can do with posts on your timeline:
+      </p>
+
+      <h3>Reply to a Post</h3>
+
+      <p>
+        To reply to a post on Brighteon.social, enter your response below any post in the reply box. Please note, replies are also limited to 500 characters.
+      </p>
+
+      <img class="tutorial-image" src="%{reply_box_src}" />
+
+      <hr class="spacer" />
+
+      <h3>Boost a Post</h3>
+
+      <p>
+        To boost a post click the "Boost" icon under the post. This will increase the number of boosts a post has. Once you've boosted a post, your followers will see the post in your account timeline. This is a great way to share posts you think your followers would find interesting. Please note, you can only boost a post once.
+      </p>
+
+      <img class="tutorial-image" src="%{post_boost_src}" />
+
+      <hr class="spacer" />
+
+      <h3>Favorite a Post</h3>
+
+      <p>
+        If you want to save a post as a favorite, click the "Favorite" icon under a post. This will add the post to your list of favorites. This is an easy way to find a post easily at a later time so you don't have to scroll through your timeline to find it again. Soon, people that follow you will be able to see the posts you have added to your favorites and vise vera. If you wish to save something privately, you can bookmark it (under the more options menu).
+      </p>
+
+      <img class="tutorial-image" src="%{post_favorite_src}" />
+
+      <hr class="spacer" />
+
+      <h3>More Options</h3>
+
+      <p>
+        Click the "More Options" icon under the post to open a menu that contains additional options. From this menu, you can direct message, mute, report or block the author of the post. You can also bookmark or copy a link to the post and more.
+      </p>
+
+      <img class="tutorial-image" src="%{more_options_src}" />
+
+      <hr class="spacer" />
+
+      <a name="DirectMessages"></a>
+
+      <h2>Direct Messages</h3>
+
+      <p>
+        To send a direct message to a user, click the "More Options" icon on a post or on the user's profile page. This will open the additional options menu where you can click the "Direct Message..." option.
+      </p>
+
+      <img class="tutorial-image" src="%{direct_messages_src}" />
+
+      <p>
+        This will add their user name to the message box. You can now add the rest of your message.
+      </p>
+
+      <img class="tutorial-image" src="%{direct_message_box_src}" />
+
+      <hr class="spacer" />
+
+      <a name="Notifications"></a>
+
+      <h2>Notifications</h3>
+
+      <p>
+        When other people interact with you or your posts, you will receive a notification depending on the type of the event:
+      </p>
+
+      <img class="tutorial-image" src="%{notifications_src}" />
+
+      <h3 class="inline-block">
+        - Mentions:
+      </h3>
+      <p class="inline-block m0 mt4">
+        Received when someone has mentioned you in a post.
+      </p>
+      <br />
+
+      <h3 class="inline-block">
+        - Favorites:
+      </h3>
+      <p class="inline-block m0">
+        Received when someone has added one of your posts as a favorite.
+      </p>
+      <br />
+
+      <h3 class="inline-block">
+        - Boosts:
+      </h3>
+      <p class="inline-block m0">
+        Received when someone has boosted one of your posts.
+      </p>
+      <br />
+
+      <h3 class="inline-block">
+        - Polls:
+      </h3>
+      <p class="inline-block m0">
+        Received when a poll that you have voted in or created has ended.
+      </p>
+      <br />
+
+      <h3 class="inline-block">
+        - Follows:
+      </h3>
+      <p class="inline-block m0">
+        Received when someone has followed your profile.
+      </p>
+
+      <hr class="spacer" />
+
+      <h3>Notification Settings</h3>
+
+      <p>
+        To configure your notifications settings, go to your notifications page, (link in the left column) then click the "Notification Settings" icon.
+      </p>
+
+      <img class="tutorial-image" src="%{configure_notifications_src}" />
+
+      <p>
+        You should now see the notifications settings menu. From here you can configure your desired settings.
+      </p>
+
+      <img class="tutorial-image" src="%{notifications_settigs_src}" />
+
+      <hr class="spacer" />
+
+      <a name="FollowingProfiles"></a>
+
+      <h2>Following Profiles</h3>
+
+      <p>
+        To find people you'd like to follow, click the "Connect" menu to browse profiles (or visit <a class="decoration-none" href="/web/directory">https://brighteon.social/web/directory</a>).
+      </p>
+
+      <img class="tutorial-image" src="%{connect_profiles_src}" />
+
+      <p>
+        If you find a profile you'd like to follow, click the "Follow" button on their profile page. You will now see their posts in your timeline (until you unfollow or mute them).
+      </p>
+
+      <img class="tutorial-image" src="%{follow_src}" />
+
+      <hr class="spacer" />
+
+      <a name="EditProfile"></a>
+
+      <h2>Edit Your Profile</h2>
+
+      <p>
+        You can change how your profile appears to others by navigating to <a class="font-weight-bold decoration-none" href="/settings/preferences/appearance">Settings > Profile > Appearance</a>.
+      </p>
+
+      <h3>
+        Display name
+      </h3>
+      <p>
+        Your display name is shown to other users before your address. You can set a display name up to 30 characters by default.
+      </p>
+
+      <h3>
+        Bio
+      </h3>
+      <p>
+        Your bio is a short description of yourself that is displayed as a note on your profile. You can set a bio of up to 500 characters by default.
+      </p>
+
+      <h3>
+        Avatar
+      </h3>
+      <p>
+        Your avatar is an icon that is displayed next to your posts and is part of your visual identity. You can upload an avatar as a PNG, GIF, or JPG image up to 2MB in size. This image will be downscaled to 400x400.
+      </p>
+
+      <h3>
+        Header
+      </h3>
+      <p>
+        Your header is a banner image shown at the top of your profile, as well as in profile cards used in follow lists and account directories. You can upload a header as a PNG, GIF, or JPG image up to 2MB in size. This image will be downscaled to 1500x500.
+      </p>
+
+      <h3>
+        Profile directory
+      </h3>
+      <p>Opting in to be listed on the profile directory will make your profile discoverable through a feature that allows browsing through profiles.
+
+      <a name="SendingInvites"></a>
+
+      <h2>Sending Invites</h2>
+      <p>
+        You can send invites to your family and friends at <a class="font-weight-bold decoration-none" href="/invites">https://brighteon.social/invites</a>. This will generate a special link that you can send to them by email or text message.
+      </p>
+
+      <a name="MobileApps"></a>
+
+      <h2>Mobile Apps</h2>
+      <p>
+        You can find a list of mastodon mobile apps that you can use with Brighteon.Social at <a class="font-weight-bold decoration-none" href="https://joinmastodon.org/apps">https://joinmastodon.org/apps</a>
+      </p>
+
+      <p>
+        We recommend <a class="decoration-none" href="https://play.google.com/store/apps/details?id=com.keylesspalace.tusky">Tusky for Android</a> and <a class="decoration-none" href="https://apps.apple.com/us/app/toot/id1229021451">Toot for iOS.</a>
+      </p>
   privacy:
     body_html: |
       <h1 class="text-uppercase mb3 mt5">PRIVACY NOTICE</h1>

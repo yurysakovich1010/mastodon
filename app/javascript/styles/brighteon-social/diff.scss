@@ -1336,6 +1336,10 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   color: $white;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 // page by page
 
 .about, .home {
@@ -1481,7 +1485,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   }
 }
 
-.about-more, .contact {
+.about-more, .contact, .tutorial {
   .content-overlay {
     margin: auto;
     //width: 680px;
@@ -1510,6 +1514,11 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         display: block;
       }
 
+      img.tutorial-image {
+        margin-left: 0;
+        margin-top: 1rem;
+      }
+
       .contact {
         font-size: 25px;
         font-weight: 600;
@@ -1526,6 +1535,10 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         a {
           color: $white;
         }
+      }
+
+      a {
+        color: $white;
       }
 
       textarea {
