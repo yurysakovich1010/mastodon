@@ -1336,8 +1336,8 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   color: $white;
 }
 
-.inline-block {
-  display: inline-block;
+.conversation__content__names > span {
+  color: $black;
 }
 
 // page by page
