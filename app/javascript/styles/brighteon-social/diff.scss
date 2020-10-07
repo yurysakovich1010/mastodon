@@ -275,7 +275,21 @@ html {
   }
 }
 
-// Change the background colors of status__content__spoiler-link
+.batch-table__row__content .status__content,
+.batch-table__row__content .status__content a,
+.batch-table__row__content .detailed-status__meta {
+  color: $white;
+}
+
+.admin button.table-action-link:hover, a.table-action-link:hover {
+  color: $white;
+}
+
+.new_account_moderation_note textarea::placeholder {
+  color: grey;
+}
+
+  // Change the background colors of status__content__spoiler-link
 .reply-indicator__content .status__content__spoiler-link,
 .status__content .status__content__spoiler-link {
   background: $ui-base-color;
