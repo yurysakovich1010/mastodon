@@ -47,6 +47,7 @@ class LinkFooter extends React.PureComponent {
     return (
       <div className='getting-started__footer'>
         <ul>
+          <li><a href='https://help.brighteon.social'><FormattedMessage id='getting_started.quick_start_guide' defaultMessage='Quick Start Guide' /></a> · </li>
           {invitesEnabled && <li><a href='/invites' target='_blank'><FormattedMessage id='getting_started.invite' defaultMessage='Invite people' /></a> · </li>}
           {withHotkeys && <li><Link to='/keyboard-shortcuts'><FormattedMessage id='navigation_bar.keyboard_shortcuts' defaultMessage='Hotkeys' /></Link> · </li>}
           <li><a href='/auth/edit'><FormattedMessage id='getting_started.security' defaultMessage='Security' /></a> · </li>
