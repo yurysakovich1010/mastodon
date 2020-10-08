@@ -2279,7 +2279,7 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
         width: calc(100% - 24px);
         font-size: 16px;
         line-height: 24px;
-        padding: 6px 12px;
+        padding: 12px;
         border: 0;
         &:focus {
           outline: 0;
@@ -2291,18 +2291,27 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
       }
       .btn-post {
         position: absolute;
-        right: 3px;
-        bottom: 3px;
+        right: 56px;
+        bottom: 13px;
         height: 30px;
         border-radius: 14px;
         background-color: #2040a4;
         font-size: 12px;
         line-height: 14px;
         color: #FFFFFF;
+
+        &[disabled] {
+          opacity: 0.5;
+        }
       }
       .display-name a {
         text-decoration: none;
         color: inherit;
+      }
+      .character-counter__wrapper {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
       }
     }
   }

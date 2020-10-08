@@ -22,6 +22,7 @@ import StatusContainer from "../containers/status_container";
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
 import Bundle from '../features/ui/components/bundle';
+import CharacterCounter from "../features/compose/components/character_counter";
 
 export const textForScreenReader = (intl, status, rebloggedByText = false) => {
   const displayName = status.getIn(['account', 'display_name']);
@@ -645,7 +646,8 @@ class Status extends ImmutablePureComponent {
                   <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} />
                   {/*<ComposeFormContainer />*/}
 
-                  <button className='button btn-post' onClick={this.reply}>Post</button>
+                  <button className='button btn-post' onClick={this.reply} disabled={this.state.replyText.length > 500}>Post</button>
+                  <div className='character-counter__wrapper'><CharacterCounter max={500} text={this.state.replyText} /></div>
                 </div>
               </div>
             )
