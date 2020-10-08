@@ -23,6 +23,7 @@ export const loadPending = timeline => ({
   timeline,
 });
 
+let nextCommunityTimelineUpdateStamp;
 export function updateTimeline(timeline, status, accept) {
   return dispatch => {
     if (typeof accept === 'function' && !accept(status)) {
@@ -30,6 +31,26 @@ export function updateTimeline(timeline, status, accept) {
     }
 
     dispatch(importFetchedStatus(status));
+    console.log('nextCommunityTimelineUpdateStamp', nextCommunityTimelineUpdateStamp);
+    if (timeline === 'community') {
+      const now = (new Date()).getTime();
+      console.log('now', now);
+      if (!nextCommunityTimelineUpdateStamp || nextCommunityTimelineUpdateStamp <= now) {
+        nextCommunityTimelineUpdateStamp = now + 150000;
+      } else if (nextCommunityTimelineUpdateStamp > now) {
+        setTimeout(function() {
+          console.log('timed out dispatch');
+          dispatch({
+            type: TIMELINE_UPDATE,
+            timeline,
+            status,
+            usePendingItems: preferPendingItems,
+          });
+        }, nextCommunityTimelineUpdateStamp - now);
+
+        return;
+      }
+    }
 
     dispatch({
       type: TIMELINE_UPDATE,
