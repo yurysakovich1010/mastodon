@@ -15,6 +15,7 @@ const makeGetStatusIds = (pending = false) => createSelector([
     if (id === null) return true;
 
     const statusForId = statuses.get(id);
+    if (!statusForId) return false;
     let showStatus    = true;
 
     if (statusForId.get('account') === me) return true;
