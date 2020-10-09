@@ -36,11 +36,20 @@ class Api::V1::Accounts::StatusesController < Api::BaseController
     statuses.merge!(no_reblogs_scope) if truthy_param?(:exclude_reblogs)
     statuses.merge!(hashtag_scope)    if params[:tagged].present?
 
-    statuses.paginate_by_id(limit_param(DEFAULT_STATUSES_LIMIT), params_slice(:max_id, :since_id, :min_id))
+    statuses = statuses.paginate_by_id(limit_param(DEFAULT_STATUSES_LIMIT), params_slice(:max_id, :since_id, :min_id))
+
+    pinned_statuses = statuses.where(id: pinned_status_ids)
+    unpinned_statuses = statuses.where.not(id: pinned_status_ids)
+
+    Status.from("((#{pinned_statuses.to_sql}) UNION ALL (#{unpinned_statuses.to_sql})) AS statuses")
   end
 
   def permitted_account_statuses
     @account.statuses.permitted_for(@account, current_account)
+  end
+
+  def pinned_status_ids
+    pinned_scope.pluck(:id)
   end
 
   def only_media_scope

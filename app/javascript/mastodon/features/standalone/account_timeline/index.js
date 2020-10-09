@@ -106,7 +106,10 @@ class AccountTimeline extends React.PureComponent {
               showThread
             />
             )
-          )
+          ).filter(com => {
+            console.log('com', com);
+            return !!com;
+          })
         }
         { loadMore }
       </Fragment>
