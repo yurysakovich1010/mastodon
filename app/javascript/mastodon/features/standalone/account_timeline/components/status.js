@@ -328,6 +328,32 @@ class Status extends ImmutablePureComponent {
     }
   }
 
+  checkIfAndroid () {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+      return false;
+    }
+
+    return /android/i.test(userAgent);
+  }
+
+  ensureShowReplyBox = () => {
+    if (this.checkIfAndroid()) {
+      let element = this.replyBox;
+
+      let yPosition = 0;
+      while(element) {
+        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+        element = element.offsetParent;
+      }
+      if (yPosition - window.scrollY > 300) {
+        window.scrollBy(0, 200);
+      }
+    }
+  }
+
   render () {
     let media = null;
     let statusAvatar, prepend = '', rebloggedByText;
@@ -646,7 +672,7 @@ class Status extends ImmutablePureComponent {
               </div>
 
               <div className="status__reply-box">
-                <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} />
+                <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} onFocus={this.ensureShowReplyBox} />
                 {/*<ComposeFormContainer />*/}
 
                 <button className='button btn-post' onClick={this.reply} disabled={this.state.replyText.length > 500}>Post</button>

@@ -329,6 +329,50 @@ class Status extends ImmutablePureComponent {
     }
   }
 
+  checkIfAndroid () {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Windows Phone must come first because its UA also contains "Android"
+    if (/windows phone/i.test(userAgent)) {
+      return false;
+    }
+
+    return /android/i.test(userAgent);
+  }
+
+  showFullRails () {
+    const tabsBarWrappers = document.getElementsByClassName("tabs-bar__wrapper");
+    if (tabsBarWrappers && tabsBarWrappers[0]) {
+      let element = tabsBarWrappers[0];
+
+      let yPosition = 0;
+      while(element) {
+        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+        element = element.offsetParent;
+      }
+      window.scroll(0, yPosition)
+    }
+  }
+
+  ensureShowReplyBox = () => {
+    if (this.checkIfAndroid()) {
+      this.showFullRails();
+      let element = this.replyBox;
+
+      let yPosition = 0;
+      while(element) {
+        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+        element = element.offsetParent;
+      }
+      const postRails = document.getElementsByClassName("post-rails");
+      if (postRails && postRails[0]) {
+        if (yPosition > 800) {
+          postRails[0].children[0].children[0].scrollBy(0, 200);
+        }
+      }
+    }
+  }
+
   render () {
     let media = null;
     let statusAvatar, prepend = '', rebloggedByText;
@@ -643,7 +687,7 @@ class Status extends ImmutablePureComponent {
                 </div>
 
                 <div className="status__reply-box">
-                  <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} />
+                  <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} onFocus={this.ensureShowReplyBox} />
                   {/*<ComposeFormContainer />*/}
 
                   <button className='button btn-post' onClick={this.reply} disabled={this.state.replyText.length > 500}>Post</button>
