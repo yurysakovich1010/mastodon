@@ -15,6 +15,7 @@ import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../../../../initial_state';
 import api from 'mastodon/api';
+import { isIOS } from '../../../../is_mobile';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
@@ -328,19 +329,8 @@ class Status extends ImmutablePureComponent {
     }
   }
 
-  checkIfAndroid () {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-    // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-      return false;
-    }
-
-    return /android/i.test(userAgent);
-  }
-
   ensureShowReplyBox = () => {
-    if (this.checkIfAndroid()) {
+    if (!isIOS()) {
       let element = this.replyBox;
 
       let yPosition = 0;
