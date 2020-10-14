@@ -15,6 +15,7 @@ import IconWithBadge from 'mastodon/components/icon_with_badge';
 import {createSelector} from "reselect";
 import {List as ImmutableList} from "immutable";
 import {cleanNotifications, expandNotifications} from "../../../actions/notifications";
+import AnnouncementsContainer from 'mastodon/features/getting_started/containers/announcements_container';
 
 const getNotifications = createSelector([
   state => state.getIn(['settings', 'notifications', 'quickFilter', 'show']),
@@ -38,6 +39,8 @@ const getNotifications = createSelector([
 const mapStateToProps = state => ({
   count: getNotifications(state).size,
   id: 'bell',
+  hasAnnouncements: !state.getIn(['announcements', 'items']).isEmpty(),
+  unreadAnnouncements: state.getIn(['announcements', 'items']).count(item => !item.get('read')),
 });
 
 const NotificationsCounterIcon = connect(mapStateToProps)(IconWithBadge);
@@ -49,6 +52,8 @@ class NavigationBar extends ImmutablePureComponent {
     onLogout: PropTypes.func.isRequired,
     onClose: PropTypes.func,
     fetchNotifications: PropTypes.func,
+    hasAnnouncements: PropTypes.bool.isRequired,
+    unreadAnnouncements: PropTypes.number.isRequired,
   };
 
   state = {
@@ -90,20 +95,86 @@ class NavigationBar extends ImmutablePureComponent {
     };
 
     const deviceIsMobile = isMobile(window.innerWidth);
+    const {hasAnnouncements, unreadAnnouncements} = this.props;
 
     return (
-      <div className='navigation-bar'>
-        <div className='navigation-bar__inner'>
-          <div className='d-flex'>
-            <div className='head-logo'>
-              <a href='/' >
-                <img src={horizontalLogo} style={{width: '100%'}}/>
-              </a>
+      <>
+        {hasAnnouncements && unreadAnnouncements > 0 && <AnnouncementsContainer />}
+        <div className='navigation-bar'>
+          <div className='navigation-bar__inner'>
+            <div className='d-flex'>
+              <div className='head-logo'>
+                <a href='/' >
+                  <img src={horizontalLogo} style={{width: '100%'}}/>
+                </a>
+              </div>
+
+              {
+                !deviceIsMobile && (
+                  <div className='search-container flex-fill'>
+                    <SearchContainer />
+
+                    <SearchResultsContainer />
+                  </div>
+                )
+              }
+
+              <div className='spacer' />
+
+              <div className='d-flex'>
+                <a href='https://support.brighteon.com/donate.html' className='decoration-none'>
+                  <button className='donate standard mr3'>
+                    Donate
+                  </button>
+                </a>
+
+                <a href='/' className='decoration-none'>
+                  <div className='icon mr2'>
+                    <Icon id='home' fixedWidth />
+                  </div>
+                </a>
+
+                <div className='notification-bell'>
+                  {/*<a target='_blank' rel='noopener noreferrer' href='/web/notifications' className='decoration-none'>*/}
+                    <div className='icon mr2' onClick={this.toggleNotificationsPopup}>
+                      <NotificationsCounterIcon className='column-link__icon' />
+                    </div>
+                  {/*</a>*/}
+
+                  {
+                    this.state.popupVisible && (
+                      <div className="drawer__pager" onClick={this.stopPropagation}>
+                        <div className="drawer__inner darker">
+                          <div className="notifications-header">
+                            <div>NOTIFICATIONS</div>
+                            <button className="mark_as_read" onClick={this.markAsRead}>
+                              Mark All as Read
+                            </button>
+                          </div>
+                          <Notifications onPopup />
+                        </div>
+                      </div>
+                    )
+                  }
+
+                </div>
+
+                <a href='/settings/preferences' className='decoration-none'>
+                  <div className='icon mr2'>
+                    <Icon id='gear' fixedWidth />
+                  </div>
+                </a>
+
+                <a target='_blank' rel='noopener noreferrer' href={this.props.account.get('url')}>
+                  <span style={{ display: 'none' }}>{this.props.account.get('acct')}</span>
+                  <Avatar account={this.props.account} size={36} style={avatarStyle} />
+                </a>
+              </div>
             </div>
 
             {
-              !deviceIsMobile && (
-                <div className='search-container flex-fill'>
+              deviceIsMobile && (
+                <div className='mobile-search-container'>
                   <SearchContainer />
 
                   <SearchResultsContainer />
@@ -111,83 +182,21 @@ class NavigationBar extends ImmutablePureComponent {
               )
             }
 
-            <div className='spacer' />
+            {/*<div className='navigation-bar__profile'>*/}
+              {/*<Permalink href={this.props.account.get('url')} to={`/accounts/${this.props.account.get('id')}`}>*/}
+                {/*<strong className='navigation-bar__profile-account'>@{this.props.account.get('acct')}</strong>*/}
+              {/*</Permalink>*/}
 
-            <div className='d-flex'>
-              <a href='https://support.brighteon.com/donate.html' className='decoration-none'>
-                <button className='donate standard mr3'>
-                  Donate
-                </button>
-              </a>
+              {/*<a href='/settings/profile' className='navigation-bar__profile-edit'><FormattedMessage id='navigation_bar.edit_profile' defaultMessage='Edit profile' /></a>*/}
+            {/*</div>*/}
 
-              <a href='/' className='decoration-none'>
-                <div className='icon mr2'>
-                  <Icon id='home' fixedWidth />
-                </div>
-              </a>
-
-              <div className='notification-bell'>
-                {/*<a target='_blank' rel='noopener noreferrer' href='/web/notifications' className='decoration-none'>*/}
-                  <div className='icon mr2' onClick={this.toggleNotificationsPopup}>
-                    <NotificationsCounterIcon className='column-link__icon' />
-                  </div>
-                {/*</a>*/}
-
-                {
-                  this.state.popupVisible && (
-                    <div className="drawer__pager" onClick={this.stopPropagation}>
-                      <div className="drawer__inner darker">
-                        <div className="notifications-header">
-                          <div>NOTIFICATIONS</div>
-                          <button className="mark_as_read" onClick={this.markAsRead}>
-                            Mark All as Read
-                          </button>
-                        </div>
-                        <Notifications onPopup />
-                      </div>
-                    </div>
-                  )
-                }
-
-              </div>
-
-              <a href='/settings/preferences' className='decoration-none'>
-                <div className='icon mr2'>
-                  <Icon id='gear' fixedWidth />
-                </div>
-              </a>
-
-              <a target='_blank' rel='noopener noreferrer' href={this.props.account.get('url')}>
-                <span style={{ display: 'none' }}>{this.props.account.get('acct')}</span>
-                <Avatar account={this.props.account} size={36} style={avatarStyle} />
-              </a>
-            </div>
+            {/*<div className='navigation-bar__actions'>*/}
+              {/*<IconButton className='close' title='' icon='close' onClick={this.props.onClose} />*/}
+              {/*<ActionBar account={this.props.account} onLogout={this.props.onLogout} />*/}
+            {/*</div>*/}
           </div>
-
-          {
-            deviceIsMobile && (
-              <div className='mobile-search-container'>
-                <SearchContainer />
-
-                <SearchResultsContainer />
-              </div>
-            )
-          }
-
-          {/*<div className='navigation-bar__profile'>*/}
-            {/*<Permalink href={this.props.account.get('url')} to={`/accounts/${this.props.account.get('id')}`}>*/}
-              {/*<strong className='navigation-bar__profile-account'>@{this.props.account.get('acct')}</strong>*/}
-            {/*</Permalink>*/}
-
-            {/*<a href='/settings/profile' className='navigation-bar__profile-edit'><FormattedMessage id='navigation_bar.edit_profile' defaultMessage='Edit profile' /></a>*/}
-          {/*</div>*/}
-
-          {/*<div className='navigation-bar__actions'>*/}
-            {/*<IconButton className='close' title='' icon='close' onClick={this.props.onClose} />*/}
-            {/*<ActionBar account={this.props.account} onLogout={this.props.onLogout} />*/}
-          {/*</div>*/}
         </div>
-      </div>
+      </>
     );
   }
 }

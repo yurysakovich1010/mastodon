@@ -30,6 +30,8 @@ class Content extends ImmutablePureComponent {
 
   static propTypes = {
     announcement: ImmutablePropTypes.map.isRequired,
+    unread: PropTypes.bool.isRequired,
+    markAnnouncementAsRead: PropTypes.func.isRequired,
   };
 
   setRef = c => {
@@ -140,14 +142,17 @@ class Content extends ImmutablePureComponent {
   }
 
   render () {
-    const { announcement } = this.props;
+    const { announcement, unread, markAnnouncementAsRead } = this.props;
 
     return (
-      <div
-        className='announcements__item__content'
-        ref={this.setRef}
-        dangerouslySetInnerHTML={{ __html: announcement.get('contentHtml') }}
-      />
+      <>
+        <div
+          className='announcements__item__content'
+          ref={this.setRef}
+          dangerouslySetInnerHTML={{ __html: announcement.get('contentHtml') }}
+        />
+        {unread && <IconButton className='close' title='' icon='close' onClick={markAnnouncementAsRead} />}
+      </>
     );
   }
 
@@ -314,6 +319,7 @@ class Announcement extends ImmutablePureComponent {
     removeReaction: PropTypes.func.isRequired,
     intl: PropTypes.object.isRequired,
     selected: PropTypes.bool,
+    dismissAnnouncement: PropTypes.func.isRequired,
   };
 
   state = {
@@ -325,6 +331,11 @@ class Announcement extends ImmutablePureComponent {
     if (!selected && this.state.unread !== !announcement.get('read')) {
       this.setState({ unread: !announcement.get('read') });
     }
+  }
+
+  markAnnouncementAsRead = () => {
+    const { dismissAnnouncement, announcement } = this.props;
+    if (!announcement.get('read')) dismissAnnouncement(announcement.get('id'));
   }
 
   render () {
@@ -340,22 +351,22 @@ class Announcement extends ImmutablePureComponent {
 
     return (
       <div className='announcements__item'>
-        <strong className='announcements__item__range'>
-          <FormattedMessage id='announcement.announcement' defaultMessage='Announcement' />
-          {hasTimeRange && <span> · <FormattedDate value={startsAt} hour12={false} year={(skipYear || startsAt.getFullYear() === now.getFullYear()) ? undefined : 'numeric'} month='short' day='2-digit' hour={skipTime ? undefined : '2-digit'} minute={skipTime ? undefined : '2-digit'} /> - <FormattedDate value={endsAt} hour12={false} year={(skipYear || endsAt.getFullYear() === now.getFullYear()) ? undefined : 'numeric'} month={skipEndDate ? undefined : 'short'} day={skipEndDate ? undefined : '2-digit'} hour={skipTime ? undefined : '2-digit'} minute={skipTime ? undefined : '2-digit'} /></span>}
-        </strong>
+        {/*<strong className='announcements__item__range'>*/}
+        {/*  <FormattedMessage id='announcement.announcement' defaultMessage='Announcement' />*/}
+        {/*  {hasTimeRange && <span> · <FormattedDate value={startsAt} hour12={false} year={(skipYear || startsAt.getFullYear() === now.getFullYear()) ? undefined : 'numeric'} month='short' day='2-digit' hour={skipTime ? undefined : '2-digit'} minute={skipTime ? undefined : '2-digit'} /> - <FormattedDate value={endsAt} hour12={false} year={(skipYear || endsAt.getFullYear() === now.getFullYear()) ? undefined : 'numeric'} month={skipEndDate ? undefined : 'short'} day={skipEndDate ? undefined : '2-digit'} hour={skipTime ? undefined : '2-digit'} minute={skipTime ? undefined : '2-digit'} /></span>}*/}
+        {/*</strong>*/}
 
-        <Content announcement={announcement} />
+        <Content announcement={announcement} unread={unread} markAnnouncementAsRead={this.markAnnouncementAsRead} />
 
-        <ReactionsBar
-          reactions={announcement.get('reactions')}
-          announcementId={announcement.get('id')}
-          addReaction={this.props.addReaction}
-          removeReaction={this.props.removeReaction}
-          emojiMap={this.props.emojiMap}
-        />
+        {/*<ReactionsBar*/}
+        {/*  reactions={announcement.get('reactions')}*/}
+        {/*  announcementId={announcement.get('id')}*/}
+        {/*  addReaction={this.props.addReaction}*/}
+        {/*  removeReaction={this.props.removeReaction}*/}
+        {/*  emojiMap={this.props.emojiMap}*/}
+        {/*/>*/}
 
-        {unread && <span className='announcements__item__unread' />}
+        {/*{unread && <span className='announcements__item__unread' />}*/}
       </div>
     );
   }
@@ -387,18 +398,7 @@ class Announcements extends ImmutablePureComponent {
   }
 
   componentDidMount () {
-    this._markAnnouncementAsRead();
-  }
-
-  componentDidUpdate () {
-    this._markAnnouncementAsRead();
-  }
-
-  _markAnnouncementAsRead () {
-    const { dismissAnnouncement, announcements } = this.props;
-    const { index } = this.state;
-    const announcement = announcements.get(index);
-    if (!announcement.get('read')) dismissAnnouncement(announcement.get('id'));
+    this.setState({ index: this.props.announcements.size - 1 });
   }
 
   handleChangeIndex = index => {
@@ -414,7 +414,7 @@ class Announcements extends ImmutablePureComponent {
   }
 
   render () {
-    const { announcements, intl } = this.props;
+    const { announcements, intl, dismissAnnouncement } = this.props;
     const { index } = this.state;
 
     if (announcements.isEmpty()) {
@@ -423,14 +423,13 @@ class Announcements extends ImmutablePureComponent {
 
     return (
       <div className='announcements'>
-        <img className='announcements__mastodon' alt='' draggable='false' src={mascot || elephantUIPlane} />
-
         <div className='announcements__container'>
           <ReactSwipeableViews animateHeight={!reduceMotion} adjustHeight={reduceMotion} index={index} onChangeIndex={this.handleChangeIndex}>
             {announcements.map((announcement, idx) => (
               <Announcement
                 key={announcement.get('id')}
                 announcement={announcement}
+                dismissAnnouncement={dismissAnnouncement}
                 emojiMap={this.props.emojiMap}
                 addReaction={this.props.addReaction}
                 removeReaction={this.props.removeReaction}
