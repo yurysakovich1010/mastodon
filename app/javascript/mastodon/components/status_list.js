@@ -90,7 +90,6 @@ export default class StatusList extends ImmutablePureComponent {
 
       return n;
     }, []);
-    // console.log('newStatusIds', newStatusIds);
 
     let scrollableContent = (isLoading || statusIds.size > 0) ? (
       newStatusIds.map((statusId, index) => statusId === null ? (

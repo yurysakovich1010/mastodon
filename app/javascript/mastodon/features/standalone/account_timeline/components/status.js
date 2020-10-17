@@ -356,6 +356,9 @@ class Status extends ImmutablePureComponent {
       return null;
     }
 
+    console.log('status.id', status.get('id'));
+    console.log('statusId', statusId);
+
     if (!replyOrigin && status.get('in_reply_to')) {
       return (
         <StatusContainer

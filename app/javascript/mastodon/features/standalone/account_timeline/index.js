@@ -8,27 +8,31 @@ import StatusContainer from "./containers/status_container";
 import LoadMore from "../../../components/load_more";
 
 const generateTimelineId = function(accountId) {
-  if (window.location.pathname.slice(0, 2) === '/@' && window.location.pathname.includes('/with_replies')) {
-    return `account:${accountId}:only_replies`;
-  }
-  if (window.location.pathname.slice(0, 2) === '/@' && window.location.pathname.includes('/photos')) {
-    return `account:${accountId}:only_image`;
-  }
-  if (window.location.pathname.slice(0, 2) === '/@' && window.location.pathname.includes('/videos')) {
-    return `account:${accountId}:only_video`;
+  if (window.location.pathname.slice(0, 2) === '/@') {
+    if (window.location.pathname.includes('/with_replies')) {
+      return `account:${accountId}:only_replies`;
+    } else if (window.location.pathname.includes('/photos')) {
+      return `account:${accountId}:only_image`;
+    } else if (window.location.pathname.includes('/videos')) {
+      return `account:${accountId}:only_video`;
+    } else if (window.location.pathname.split('/').length === 3) {
+      return `account:${accountId}:specific`;
+    }
   }
   return `account:${accountId}:with_replies`;
 };
 
 const getParams = function() {
-  if (window.location.pathname.slice(0, 2) === '/@' && window.location.pathname.includes('/with_replies')) {
-    return { onlyReplies: true }
-  }
-  if (window.location.pathname.slice(0, 2) === '/@' && window.location.pathname.includes('/photos')) {
-    return { onlyImage: true }
-  }
-  if (window.location.pathname.slice(0, 2) === '/@' && window.location.pathname.includes('/videos')) {
-    return { onlyVideo: true }
+  if (window.location.pathname.slice(0, 2) === '/@') {
+    if (window.location.pathname.includes('/with_replies')) {
+      return { onlyReplies: true }
+    } else if (window.location.pathname.includes('/photos')) {
+      return { onlyImage: true }
+    } else if (window.location.pathname.includes('/videos')) {
+      return { onlyVideo: true }
+    } else if (window.location.pathname.split('/').length === 3) {
+      return { statusId: window.location.pathname.split('/')[2] }
+    }
   }
   return { withReplies: true }
 };
@@ -106,10 +110,7 @@ class AccountTimeline extends React.PureComponent {
               showThread
             />
             )
-          ).filter(com => {
-            console.log('com', com);
-            return !!com;
-          })
+          )
         }
         { loadMore }
       </Fragment>
