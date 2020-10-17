@@ -301,6 +301,9 @@ class Status extends ImmutablePureComponent {
             repliesCountUpdated: true
           });
         }
+      })
+      .catch(() => {
+        window.location = '/auth/sign_in'
       });
   }
 
@@ -355,9 +358,6 @@ class Status extends ImmutablePureComponent {
     if (status === null) {
       return null;
     }
-
-    console.log('status.id', status.get('id'));
-    console.log('statusId', statusId);
 
     if (!replyOrigin && status.get('in_reply_to')) {
       return (
