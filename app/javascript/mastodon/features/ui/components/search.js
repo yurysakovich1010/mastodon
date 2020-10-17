@@ -114,7 +114,7 @@ class Search extends React.PureComponent {
   }
 
   render () {
-    const { intl, value, submitted } = this.props;
+    const { intl, value, submitted, suggestions } = this.props;
     const { expanded } = this.state;
     const hasValue = value.length > 0 || submitted;
 
@@ -136,8 +136,8 @@ class Search extends React.PureComponent {
         </label>
 
         <div role='button' tabIndex='0' className={ expanded ? 'search__icon expanded' : 'search__icon' } onClick={this.handleClear}>
-          <Icon id='search' className={hasValue ? '' : 'active'} />
-          <Icon id='times-circle' className={hasValue ? 'active' : ''} aria-label={intl.formatMessage(messages.placeholder)} />
+          <Icon id='search' className={(hasValue || suggestions.length > 0) ? '' : 'active'} />
+          <Icon id='times-circle' className={(hasValue || suggestions.length > 0) ? 'active' : ''} aria-label={intl.formatMessage(messages.placeholder)} />
         </div>
 
         <Overlay show={expanded && !hasValue} placement='bottom' target={this}>

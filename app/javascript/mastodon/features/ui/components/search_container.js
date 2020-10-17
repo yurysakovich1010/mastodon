@@ -10,6 +10,7 @@ import Search from './search';
 const mapStateToProps = state => ({
   value: state.getIn(['search', 'value']),
   submitted: state.getIn(['search', 'submitted']),
+  suggestions: state.getIn(['suggestions', 'items']),
 });
 
 const mapDispatchToProps = dispatch => ({
