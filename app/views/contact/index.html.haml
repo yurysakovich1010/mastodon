@@ -32,6 +32,9 @@
         = link_to t('about.terms'), terms_path, class: 'decoration-none'
 
 .contact
+  - if @saved
+    %p.thanks.mb5
+      Thanks for taking the time to give us feedback. Though we can’t review and respond to every submission, we do use feedback like yours to improve the Brighteon.Social experience for everyone.
   .content-overlay.br1
     %div.overlay
     %div.content
@@ -45,7 +48,7 @@
       %div
         = t('about.contact_description', host: content_tag(:span, site_hostname, class: 'text-capitalize')).html_safe
       %div
-        = simple_form_for @contact, url: contacts_path do |f|
+        = simple_form_for @contact, url: help_path do |f|
           = f.text_area :feedback, as: :date, placeholder: t('about.contact_placeholder')
 
           = f.button :button, t('send_message'), type: :submit, class: 'button button-primary button-signup'

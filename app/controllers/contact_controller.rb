@@ -13,7 +13,9 @@ class ContactController < ApplicationController
     @contact = Contact.new(resource_params)
 
     if @contact.save
-      redirect_to help_url
+      @saved = @contact
+      @contact = Contact.new
+      render :index
     else
       render :index
     end

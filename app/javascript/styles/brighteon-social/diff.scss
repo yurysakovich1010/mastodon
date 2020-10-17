@@ -1520,6 +1520,9 @@ button.icon-button i.fa-retweet {
 }
 
 .about-more, .contact, .tutorial {
+  .thanks {
+    color: $white;
+  }
   .content-overlay {
     margin: auto;
     //width: 680px;

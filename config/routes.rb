@@ -505,7 +505,7 @@ Rails.application.routes.draw do
 
   get '/landing',      to: 'landing#show'
   get '/help',         to: 'contact#index'
-  post '/contacts',    to: 'contact#create'
+  post '/help',        to: 'contact#create'
 
   match '/', via: [:post, :put, :patch, :delete], to: 'application#raise_not_found', format: false
   match '*unmatched_route', via: :all, to: 'application#raise_not_found', format: false
