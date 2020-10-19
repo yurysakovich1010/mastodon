@@ -34,6 +34,10 @@ class Content extends ImmutablePureComponent {
     markAnnouncementAsRead: PropTypes.func.isRequired,
   };
 
+  state = {
+    updated: false,
+  };
+
   setRef = c => {
     this.node = c;
   }
@@ -141,8 +145,16 @@ class Content extends ImmutablePureComponent {
     target.src = target.getAttribute('data-static');
   }
 
+  _markAnnouncementAsRead = (e) => {
+    const { markAnnouncementAsRead } = this.props;
+    markAnnouncementAsRead(e);
+    this.setState({
+      updated: true,
+    });
+  }
+
   render () {
-    const { announcement, unread, markAnnouncementAsRead } = this.props;
+    const { announcement, unread } = this.props;
 
     return (
       <>
@@ -151,7 +163,7 @@ class Content extends ImmutablePureComponent {
           ref={this.setRef}
           dangerouslySetInnerHTML={{ __html: announcement.get('contentHtml') }}
         />
-        {unread && <IconButton className='close' title='' icon='close' onClick={markAnnouncementAsRead} />}
+        {unread && !this.state.updated && <IconButton className='close' title='' icon='close' onClick={this._markAnnouncementAsRead} />}
       </>
     );
   }
