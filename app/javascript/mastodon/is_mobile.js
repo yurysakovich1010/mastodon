@@ -25,3 +25,14 @@ export function isUserTouching() {
 export function isIOS() {
   return iOS;
 };
+
+export function checkIfAndroid () {
+  const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  // Windows Phone must come first because its UA also contains "Android"
+  if (/windows phone/i.test(userAgent)) {
+    return false;
+  }
+
+  return /android/i.test(userAgent);
+}

@@ -15,7 +15,7 @@ import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from '../../../../initial_state';
 import api from 'mastodon/api';
-import { isIOS } from '../../../../is_mobile';
+import { checkIfAndroid } from '../../../../is_mobile';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
@@ -333,7 +333,7 @@ class Status extends ImmutablePureComponent {
   }
 
   ensureShowReplyBox = () => {
-    if (!isIOS()) {
+    if (checkIfAndroid()) {
       let element = this.replyBox;
 
       let yPosition = 0;
