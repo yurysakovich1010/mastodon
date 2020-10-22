@@ -37,7 +37,8 @@ class Api::V1::Accounts::StatusesController < Api::BaseController
     statuses.merge!(hashtag_scope)    if params[:tagged].present?
     statuses.merge!(Status.where(id: params[:status_id])) if params[:status_id].present?
 
-    # statuses.paginate_by_id(limit_param(DEFAULT_STATUSES_LIMIT), params_slice(:max_id, :since_id, :min_id))
+    # statuses = statuses.paginate_by_id(limit_param(DEFAULT_STATUSES_LIMIT), params_slice(:max_id, :since_id, :min_id)) unless params[:status_id].present?
+    statuses = statuses.reorder(id: :desc) unless params[:status_id].present?
 
     pinned_statuses = statuses.where(id: pinned_status_ids)
     unpinned_statuses = statuses.where.not(id: pinned_status_ids)
