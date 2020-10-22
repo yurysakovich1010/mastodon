@@ -19,6 +19,9 @@ import { displayMedia } from '../initial_state';
 import api from 'mastodon/api';
 import StatusContainer from "../containers/status_container";
 import { checkIfAndroid } from '../is_mobile';
+import EmojiPickerDropdown from 'mastodon/features/compose/containers/emoji_picker_dropdown_container';
+
+const allowedAroundShortCode = '><\u0085\u0020\u00a0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u202f\u205f\u3000\u2028\u2029\u0009\u000a\u000b\u000c\u000d';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
@@ -363,6 +366,20 @@ class Status extends ImmutablePureComponent {
     }
   }
 
+  handleEmojiPick = (data) => {
+    const { text }     = this.props;
+    const position     = this.replyBox.selectionStart;
+    const needsSpace   = data.custom && position > 0 && !allowedAroundShortCode.includes(text[position - 1]);
+
+    const oldText = this.state.replyText;
+    const emoji = needsSpace ? ' ' + data.native : data.native;
+
+    const newText = `${oldText.slice(0, position)}${emoji} ${oldText.slice(position)}`;
+    this.setState({
+      replyText: newText
+    });
+  }
+
   render () {
     let media = null;
     let statusAvatar, prepend = '', rebloggedByText;
@@ -678,6 +695,7 @@ class Status extends ImmutablePureComponent {
 
                 <div className="status__reply-box">
                   <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} onFocus={this.ensureShowReplyBox} />
+                  <EmojiPickerDropdown onPickEmoji={this.handleEmojiPick} />
                   {/*<ComposeFormContainer />*/}
 
                   <button className='button btn-post' onClick={this.reply} disabled={this.state.replyText.length > 500}>Post</button>
