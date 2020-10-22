@@ -1520,9 +1520,6 @@ button.icon-button i.fa-retweet {
 }
 
 .about-more, .contact, .tutorial {
-  .thanks {
-    color: $white;
-  }
   .content-overlay {
     margin: auto;
     //width: 680px;
@@ -1585,6 +1582,12 @@ button.icon-button i.fa-retweet {
         padding: 10px;
         &::placeholder {
           color: #666666;
+        }
+
+        &.answer {
+          background-color: #08083f;
+          color: $white;
+          border: none;
         }
       }
 
