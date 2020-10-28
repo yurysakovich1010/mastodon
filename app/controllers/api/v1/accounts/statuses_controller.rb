@@ -37,8 +37,9 @@ class Api::V1::Accounts::StatusesController < Api::BaseController
     statuses.merge!(hashtag_scope)    if params[:tagged].present?
     statuses.merge!(Status.where(id: params[:status_id])) if params[:status_id].present?
 
-    # statuses = statuses.paginate_by_id(limit_param(DEFAULT_STATUSES_LIMIT), params_slice(:max_id, :since_id, :min_id)) unless params[:status_id].present?
-    statuses = statuses.reorder(id: :desc) unless params[:status_id].present?
+    statuses = statuses.paginate_by_id(limit_param(DEFAULT_STATUSES_LIMIT), params_slice(:max_id, :since_id, :min_id)) unless params[:status_id].present?
+    # That's not working on live server, makes timeline loading super slow!
+    # statuses = statuses.reorder(id: :desc) unless params[:status_id].present?
 
     pinned_statuses = statuses.where(id: pinned_status_ids)
     unpinned_statuses = statuses.where.not(id: pinned_status_ids)
@@ -72,20 +73,20 @@ class Api::V1::Accounts::StatusesController < Api::BaseController
     # When narrowing down by `statuses.account_id`, `index_statuses_20180106` will be used
     # and the table will be joined by `Merge Semi Join`, so the query will be slow.
     @account.statuses.joins(:media_attachments).merge(@account.media_attachments).permitted_for(@account, current_account)
-            .paginate_by_max_id(limit_param(DEFAULT_STATUSES_LIMIT), params[:max_id], params[:since_id])
-            .reorder(id: :desc).distinct(:id).pluck(:id)
+      .paginate_by_max_id(limit_param(DEFAULT_STATUSES_LIMIT), params[:max_id], params[:since_id])
+      .reorder(id: :desc).distinct(:id).pluck(:id)
   end
 
   def account_image_status_ids
     @account.statuses.joins(:media_attachments).where(:media_attachments => {:type => :image}).merge(@account.media_attachments).permitted_for(@account, current_account)
-        .paginate_by_max_id(limit_param(DEFAULT_STATUSES_LIMIT), params[:max_id], params[:since_id])
-        .reorder(id: :desc).distinct(:id).pluck(:id)
+      .paginate_by_max_id(limit_param(DEFAULT_STATUSES_LIMIT), params[:max_id], params[:since_id])
+      .reorder(id: :desc).distinct(:id).pluck(:id)
   end
 
   def account_video_status_ids
     @account.statuses.joins(:media_attachments).where(:media_attachments => {:type => :video}).merge(@account.media_attachments).permitted_for(@account, current_account)
-        .paginate_by_max_id(limit_param(DEFAULT_STATUSES_LIMIT), params[:max_id], params[:since_id])
-        .reorder(id: :desc).distinct(:id).pluck(:id)
+      .paginate_by_max_id(limit_param(DEFAULT_STATUSES_LIMIT), params[:max_id], params[:since_id])
+      .reorder(id: :desc).distinct(:id).pluck(:id)
   end
 
   def pinned_scope
