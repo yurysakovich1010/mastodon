@@ -29,6 +29,8 @@ export default class AccountTimelineContainer extends React.PureComponent {
     username: PropTypes.string,
     avatar: PropTypes.string,
     statusId: PropTypes.any,
+    pinned: PropTypes.any,
+    unpinned: PropTypes.any,
   };
 
   static defaultProps = {
@@ -36,9 +38,9 @@ export default class AccountTimelineContainer extends React.PureComponent {
   };
 
   render () {
-    const { locale, username, accountId, avatar, statusId } = this.props;
+    const { locale, username, accountId, avatar, statusId, pinned, unpinned } = this.props;
 
-    let timeline = <AccountTimeline username={username} avatar={avatar} statusId={statusId} accountId={accountId} />;
+    let timeline = <AccountTimeline username={username} avatar={avatar} statusId={statusId} accountId={accountId} pinned={pinned} unpinned={unpinned} />;
 
     return (
       <IntlProvider locale={locale} messages={messages}>

@@ -4,41 +4,52 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { expandAccountTimeline } from 'mastodon/actions/timelines';
 import { List as ImmutableList, Map as ImmutableMap } from 'immutable';
-import StatusContainer from "./containers/status_container";
-import LoadMore from "../../../components/load_more";
+import StatusContainer from './containers/status_container';
+import LoadMore from '../../../components/load_more';
 
-const generateTimelineId = function(accountId) {
+const generateTimelineId = function(accountId, pinned, unpinned) {
   if (window.location.pathname.slice(0, 2) === '/@') {
+    let onlyReplies = false, onlyImage = false, onlyVideo = false, specific = false, withReplies = false;
     if (window.location.pathname.includes('/with_replies')) {
-      return `account:${accountId}:only_replies`;
+      onlyReplies = true;
     } else if (window.location.pathname.includes('/photos')) {
-      return `account:${accountId}:only_image`;
+      onlyImage = true;
     } else if (window.location.pathname.includes('/videos')) {
-      return `account:${accountId}:only_video`;
+      onlyVideo = true;
     } else if (window.location.pathname.split('/').length === 3) {
-      return `account:${accountId}:specific`;
+      specific = true;
+    } else {
+      withReplies = true;
     }
+    return `account:${accountId}${onlyReplies ? ':only_replies' : ''}${onlyImage ? ':only_image' : ''}${onlyVideo ? ':only_video' : ''}${specific ? ':specific' : ''}${withReplies ? ':with_replies' : ''}${pinned ? ':pinned' : ''}${unpinned ? ':unpinned' : ''}`;
   }
-  return `account:${accountId}:with_replies`;
+  return '';
 };
 
-const getParams = function() {
+const getParams = function(pinned, unpinned) {
+  const params = {};
   if (window.location.pathname.slice(0, 2) === '/@') {
     if (window.location.pathname.includes('/with_replies')) {
-      return { onlyReplies: true }
+      params.onlyReplies = true;
     } else if (window.location.pathname.includes('/photos')) {
-      return { onlyImage: true }
+      params.onlyImage = true;
     } else if (window.location.pathname.includes('/videos')) {
-      return { onlyVideo: true }
+      params.onlyVideo = true;
     } else if (window.location.pathname.split('/').length === 3) {
-      return { statusId: window.location.pathname.split('/')[2] }
+      params.statusId = window.location.pathname.split('/')[2];
+    } else {
+      params.withReplies = true;
     }
   }
-  return { withReplies: true }
+  return {
+    ...params,
+    pinned,
+    unpinned,
+  };
 };
 
-const mapStateToProps = (state, { accountId }) => {
-  const timelineId = generateTimelineId(accountId);
+const mapStateToProps = (state, { accountId, pinned, unpinned }) => {
+  const timelineId = generateTimelineId(accountId, pinned, unpinned);
   const timeline = state.getIn(['timelines', timelineId], ImmutableMap());
 
   return {
@@ -60,6 +71,9 @@ class AccountTimeline extends React.PureComponent {
     username: PropTypes.string.isRequired,
     avatar: PropTypes.string,
     statusId: PropTypes.any,
+    accountId: PropTypes.any,
+    pinned: PropTypes.any,
+    unpinned: PropTypes.any,
   };
 
   componentDidMount () {
@@ -73,17 +87,17 @@ class AccountTimeline extends React.PureComponent {
   }
 
   _connect () {
-    const { dispatch, accountId } = this.props;
+    const { dispatch, accountId, pinned, unpinned } = this.props;
 
-    let params = getParams();
+    let params = getParams(pinned, unpinned);
 
     dispatch(expandAccountTimeline(accountId, params));
   }
 
   handleLoadMore = () => {
-    const { dispatch, accountId, statusIds } = this.props;
+    const { dispatch, accountId, statusIds, pinned, unpinned } = this.props;
     const maxId = statusIds.last();
-    let params = getParams();
+    let params = getParams(pinned, unpinned);
 
     if (maxId) {
       dispatch(expandAccountTimeline(accountId, { maxId, ...params }));
@@ -91,7 +105,7 @@ class AccountTimeline extends React.PureComponent {
   };
 
   render () {
-    const { statusIds, username, avatar, statusId: statusIdProp, isLoading, hasMore } = this.props;
+    const { statusIds, username, avatar, statusId: statusIdProp, isLoading, hasMore, pinned, unpinned } = this.props;
     const loadMore = hasMore ? <LoadMore visible={!isLoading} onClick={this.handleLoadMore} /> : null;
 
     return (
@@ -101,15 +115,15 @@ class AccountTimeline extends React.PureComponent {
             <StatusContainer
               key={`f-${statusId}`}
               id={statusId}
-              onMoveUp={() => {}}
-              onMoveDown={() => {}}
+              onMoveUp={null}
+              onMoveDown={null}
               contextType={'public'}
               username={username}
               avatar={avatar}
               statusId={statusIdProp}
               showThread
             />
-            )
+          ),
           )
         }
         { loadMore }

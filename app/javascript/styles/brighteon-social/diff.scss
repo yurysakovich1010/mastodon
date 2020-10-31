@@ -1978,29 +1978,22 @@ button.icon-button i.fa-retweet {
       background-color: rgba(8, 8, 63, 0.25);
     }
   }
-  #mastodon-statuses {
+  .compose-form__autosuggest-wrapper {
+    border-radius: 4px 4px 0 0;
+  }
+  #mastodon-statuses,
+  #mastodon-pinned-statuses,
+  #mastodon-unpinned-statuses {
     .status__wrapper {
       border-left: 1px solid #c0cdd9;
       border-right: 1px solid #c0cdd9;
       border-bottom: 1px solid #c0cdd9;
       &:first-child {
         border-top: 1px solid #c0cdd9;
+        margin-top: -1px;
       }
       .status {
         border: 0;
-      }
-    }
-    & > div:first-child {
-      .status__wrapper {
-        border-top: 1px solid #c0cdd9;
-        border-top-left-radius: 0.25rem;
-        border-top-right-radius: 0.25rem;
-      }
-    }
-    & > div:last-child {
-      .status__wrapper {
-        border-bottom-left-radius: 0.25rem;
-        border-bottom-right-radius: 0.25rem;
       }
     }
   }

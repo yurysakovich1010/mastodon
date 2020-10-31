@@ -13,6 +13,20 @@ function loaded() {
     const props = JSON.parse(mountNode.getAttribute('data-props'));
     ReactDOM.render(<AccountTimelineContainer {...props} />, mountNode);
   }
+
+  const mountNodeForPinnedStatuses = document.getElementById('mastodon-pinned-statuses');
+
+  if (mountNodeForPinnedStatuses !== null) {
+    const props = JSON.parse(mountNodeForPinnedStatuses.getAttribute('data-props'));
+    ReactDOM.render(<AccountTimelineContainer {...props} pinned />, mountNodeForPinnedStatuses);
+  }
+
+  const mountNodeForUnpinnedStatuses = document.getElementById('mastodon-unpinned-statuses');
+
+  if (mountNodeForUnpinnedStatuses !== null) {
+    const props = JSON.parse(mountNodeForUnpinnedStatuses.getAttribute('data-props'));
+    ReactDOM.render(<AccountTimelineContainer {...props} unpinned />, mountNodeForUnpinnedStatuses);
+  }
 }
 
 function main() {
