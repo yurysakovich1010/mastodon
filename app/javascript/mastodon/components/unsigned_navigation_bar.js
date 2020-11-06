@@ -6,11 +6,12 @@ import horizontalLogo from 'mastodon/../images/brighteon-social/logo_horiz.png';
 import { isMobile } from 'mastodon/is_mobile';
 
 export default class UnsignedNavigationBar extends ImmutablePureComponent {
+
   render () {
     const avatarStyle = {
       borderRadius: '50%',
       border: '2px solid white',
-    }
+    };
 
     const deviceIsMobile = isMobile(window.innerWidth);
 
@@ -19,7 +20,7 @@ export default class UnsignedNavigationBar extends ImmutablePureComponent {
         <div className='navigation-bar__inner'>
           <div className='d-flex'>
             <div className='head-logo'>
-              <img src={horizontalLogo} style={{width: '100%'}}/>
+              <img src={horizontalLogo} style={{ width: '100%' }} />
             </div>
 
             {

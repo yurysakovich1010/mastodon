@@ -28,7 +28,7 @@ class ProfileBox extends ImmutablePureComponent {
     return (
       <div className='profile_box'>
         <div className='profile_box-header'>
-          <div className='profile_box-header__image' style={{backgroundImage: `url(${this.props.account.get('header_static')})`}} />
+          <div className='profile_box-header__image' style={{ backgroundImage: `url(${this.props.account.get('header_static')})` }} />
           <a href='/settings/profile' target='_blank' rel='noopener noreferrer'>
             <button className='button button-edit-profile'>
               <FormattedMessage id='account.edit_profile' defaultMessage='Edit profile' />
@@ -65,4 +65,5 @@ class ProfileBox extends ImmutablePureComponent {
       </div>
     );
   }
+
 }

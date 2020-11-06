@@ -114,7 +114,7 @@ class StatusWithoutReply extends ImmutablePureComponent {
     descendants: [],
     repliesCount: 0,
     repliesCountUpdated: false,
-    showAllReplies: false
+    showAllReplies: false,
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -273,8 +273,8 @@ class StatusWithoutReply extends ImmutablePureComponent {
 
   updateReply = (e) => {
     this.setState({
-      replyText: e.target.value
-    })
+      replyText: e.target.value,
+    });
   }
 
   reply = () => {
@@ -285,16 +285,16 @@ class StatusWithoutReply extends ImmutablePureComponent {
       media_ids: [],
       poll: null,
       sensitive: false,
-      spoiler_text: "",
+      spoiler_text: '',
       status: this.state.replyText,
-      visibility: "public"
+      visibility: 'public',
     })
-      .then(({data}) => {
+      .then(({ data }) => {
         if (data && data.id) {
           this.setState({
             replyText: '',
             repliesCount: this.state.repliesCount + 1,
-            repliesCountUpdated: true
+            repliesCountUpdated: true,
           });
         }
       });
@@ -302,8 +302,8 @@ class StatusWithoutReply extends ImmutablePureComponent {
 
   toggleShowAllReplies = () => {
     this.setState({
-      showAllReplies: !this.state.showAllReplies
-    })
+      showAllReplies: !this.state.showAllReplies,
+    });
   }
 
   render () {
@@ -463,7 +463,7 @@ class StatusWithoutReply extends ImmutablePureComponent {
     // if (otherAccounts && otherAccounts.size > 0) {
     //   statusAvatar = <AvatarComposite accounts={otherAccounts} size={48} />;
     // } else if (account === undefined || account === null) {
-      statusAvatar = <Avatar account={status.get('account')} size={48} />;
+    statusAvatar = <Avatar account={status.get('account')} size={48} />;
     // } else {
     //   statusAvatar = <AvatarOverlay account={status.get('account')} friend={account} />;
     // }
@@ -482,7 +482,7 @@ class StatusWithoutReply extends ImmutablePureComponent {
       width: '36px',
       height: '36px',
       backgroundSize: '36px 36px',
-      backgroundImage: `url(${avatar})`
+      backgroundImage: `url(${avatar})`,
     };
     if (acct === username) { // filter status by user
       if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
@@ -495,7 +495,7 @@ class StatusWithoutReply extends ImmutablePureComponent {
         const { repliesCountUpdated } = this.state;
         if (repliesCountUpdated || (this.state.descendants.length === 0 && status.get('replies_count') > 0)) {
           api().get(`/api/v1/statuses/${status.get('id')}/context`)
-            .then(({data}) => {
+            .then(({ data }) => {
               if (this.state.descendants.length < data.descendants.length) {
                 // this.setState({
                 //   descendants: data.descendants,

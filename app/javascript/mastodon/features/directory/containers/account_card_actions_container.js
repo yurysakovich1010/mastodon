@@ -96,7 +96,7 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
 
   openComposeModal() {
     dispatch(openModal('COMPOSE'));
-  }
+  },
 });
 
 export default injectIntl(connect(null, mapDispatchToProps)(AccountCardActions));

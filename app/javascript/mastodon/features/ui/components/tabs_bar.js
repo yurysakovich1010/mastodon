@@ -79,7 +79,7 @@ class TabsBar extends React.PureComponent {
           {links.map(link => React.cloneElement(link, { key: link.props.to, onClick: this.handleClick, 'aria-label': formatMessage({ id: link.props['data-preview-title-id'] }) }))}
         </nav>
 
-        <div id='tabs-bar__portal' className='rounded-top overflow-hidden'/>
+        <div id='tabs-bar__portal' className='rounded-top overflow-hidden' />
       </div>
     );
   }

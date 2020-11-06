@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import StatusWithoutReply from '../components/status_without_reply';
-import {makeGetAccount, makeGetStatus} from '../selectors';
+import { makeGetAccount, makeGetStatus } from '../selectors';
 import {
   replyCompose,
   mentionCompose,
@@ -38,7 +38,7 @@ import { initBlockModal } from '../actions/blocks';
 import { initReport } from '../actions/reports';
 import { openModal } from '../actions/modal';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
-import {boostModal, deleteModal, me} from '../initial_state';
+import { boostModal, deleteModal, me } from '../initial_state';
 import { showAlertForError } from '../actions/alerts';
 
 const messages = defineMessages({

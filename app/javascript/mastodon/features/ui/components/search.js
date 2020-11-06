@@ -135,7 +135,7 @@ class Search extends React.PureComponent {
           />
         </label>
 
-        <div role='button' tabIndex='0' className={ expanded ? 'search__icon expanded' : 'search__icon' } onClick={this.handleClear}>
+        <div role='button' tabIndex='0' className={expanded ? 'search__icon expanded' : 'search__icon'} onClick={this.handleClear}>
           <Icon id='search' className={(hasValue || suggestions.length > 0) ? '' : 'active'} />
           <Icon id='times-circle' className={(hasValue || suggestions.length > 0) ? 'active' : ''} aria-label={intl.formatMessage(messages.placeholder)} />
         </div>

@@ -1,12 +1,12 @@
 import loadPolyfills from '../mastodon/load_polyfills';
 import { start } from '../mastodon/common';
-import {Provider} from "react-redux";
-import {IntlProvider} from "react-intl";
-import configureStore from "../mastodon/store/configureStore";
-import initialState from "../mastodon/initial_state";
-import {hydrateStore} from "../mastodon/actions/store";
-import {fetchCustomEmojis} from "../mastodon/actions/custom_emojis";
-import {BrowserRouter} from "react-router-dom";
+import { Provider } from 'react-redux';
+import { IntlProvider } from 'react-intl';
+import configureStore from '../mastodon/store/configureStore';
+import initialState from '../mastodon/initial_state';
+import { hydrateStore } from '../mastodon/actions/store';
+import { fetchCustomEmojis } from '../mastodon/actions/custom_emojis';
+import { BrowserRouter } from 'react-router-dom';
 
 start();
 

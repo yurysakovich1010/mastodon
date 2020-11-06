@@ -81,7 +81,7 @@ export function importFetchedStatuses(statuses, withReplyOrigin) {
         if (withReplyOrigin && status.in_reply_to) {
           processStatus(status.in_reply_to);
         }
-      }
+      },
     );
 
     dispatch(importPolls(polls));

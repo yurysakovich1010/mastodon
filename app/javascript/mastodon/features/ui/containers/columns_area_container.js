@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ColumnsArea from '../components/columns_area';
-import {makeGetStatus} from "../../../selectors";
+import { makeGetStatus } from '../../../selectors';
 
 const mapStateToProps = state => {
   const getStatus = makeGetStatus();

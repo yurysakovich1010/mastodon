@@ -197,7 +197,7 @@ class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleOpen = () => {
-    window.location = `/web/statuses/${this.props.status.get('id')}`
+    window.location = `/web/statuses/${this.props.status.get('id')}`;
   }
 
   handleEmbed = () => {

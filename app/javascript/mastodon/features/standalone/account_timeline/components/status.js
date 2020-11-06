@@ -23,8 +23,8 @@ const allowedAroundShortCode = '><\u0085\u0020\u00a0\u1680\u2000\u2001\u2002\u20
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
 import Bundle from '../../../../features/ui/components/bundle';
-import StatusContainer from "../containers/status_container";
-import CharacterCounter from "../../../compose/components/character_counter";
+import StatusContainer from '../containers/status_container';
+import CharacterCounter from '../../../compose/components/character_counter';
 
 export const textForScreenReader = (intl, status, rebloggedByText = false) => {
   const displayName = status.getIn(['account', 'display_name']);
@@ -121,7 +121,7 @@ class Status extends ImmutablePureComponent {
     descendants: [],
     repliesCount: 0,
     repliesCountUpdated: false,
-    showAllReplies: false
+    showAllReplies: false,
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -280,8 +280,8 @@ class Status extends ImmutablePureComponent {
 
   updateReply = (e) => {
     this.setState({
-      replyText: e.target.value
-    })
+      replyText: e.target.value,
+    });
   }
 
   reply = () => {
@@ -292,28 +292,28 @@ class Status extends ImmutablePureComponent {
       media_ids: [],
       poll: null,
       sensitive: false,
-      spoiler_text: "",
+      spoiler_text: '',
       status: this.state.replyText,
-      visibility: "public"
+      visibility: 'public',
     })
-      .then(({data}) => {
+      .then(({ data }) => {
         if (data && data.id) {
           this.setState({
             replyText: '',
             repliesCount: this.state.repliesCount + 1,
-            repliesCountUpdated: true
+            repliesCountUpdated: true,
           });
         }
       })
       .catch(() => {
-        window.location = '/auth/sign_in'
+        window.location = '/auth/sign_in';
       });
   }
 
   toggleShowAllReplies = () => {
     this.setState({
-      showAllReplies: !this.state.showAllReplies
-    })
+      showAllReplies: !this.state.showAllReplies,
+    });
   }
 
   OnInput() {
@@ -323,7 +323,7 @@ class Status extends ImmutablePureComponent {
 
   componentWillUnmount() {
     if (this.replyBox) {
-      this.replyBox.removeEventListener("input", this.OnInput);
+      this.replyBox.removeEventListener('input', this.OnInput);
     }
   }
 
@@ -331,7 +331,7 @@ class Status extends ImmutablePureComponent {
     this.replyBox = c;
     if (this.replyBox) {
       this.replyBox.style = 'height:' + (this.replyBox.scrollHeight) + 'px;overflow-y:hidden;';
-      this.replyBox.addEventListener("input", this.OnInput);
+      this.replyBox.addEventListener('input', this.OnInput);
     }
   }
 
@@ -360,7 +360,7 @@ class Status extends ImmutablePureComponent {
 
     const newText = `${oldText.slice(0, position)}${emoji} ${oldText.slice(position)}`;
     this.setState({
-      replyText: newText
+      replyText: newText,
     });
   }
 
@@ -389,11 +389,11 @@ class Status extends ImmutablePureComponent {
           showThread
           replyOrigin={status.getIn(['account', 'display_name_html'])}
         />
-      )
+      );
     }
 
     if (replyOrigin && status.get('visibility') !== 'public') {
-      return ''
+      return '';
     }
 
     const handlers = this.props.muted ? {} : {
@@ -439,7 +439,7 @@ class Status extends ImmutablePureComponent {
         <div className='status__prepend'>
           <FormattedMessage id='status.replied_to' defaultMessage="{origin} replied to {name}'s post" values={{ origin: replyOrigin, name: <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
         </div>
-      )
+      );
     }
 
     if (status.get('pinned')) {
@@ -451,7 +451,7 @@ class Status extends ImmutablePureComponent {
             <FormattedMessage id='status.pinned' defaultMessage='Pinned post' />
           </div>
         </>
-      )
+      );
     } else if (status.get('reblog', null) !== null && typeof status.get('reblog') === 'object') {
       const display_name_html = { __html: status.getIn(['account', 'display_name_html']) };
 
@@ -463,7 +463,7 @@ class Status extends ImmutablePureComponent {
             <FormattedMessage id='status.reblogged_by' defaultMessage='{name} boosted' values={{ name: <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
           </div>
         </>
-      )
+      );
 
       rebloggedByText = intl.formatMessage({ id: 'status.reblogged_by', defaultMessage: '{name} boosted' }, { name: status.getIn(['account', 'acct']) });
 
@@ -557,7 +557,7 @@ class Status extends ImmutablePureComponent {
     // if (otherAccounts && otherAccounts.size > 0) {
     //   statusAvatar = <AvatarComposite accounts={otherAccounts} size={48} />;
     // } else if (account === undefined || account === null) {
-      statusAvatar = <Avatar account={status.get('account')} size={48} />;
+    statusAvatar = <Avatar account={status.get('account')} size={48} />;
     // } else {
     //   statusAvatar = <AvatarOverlay account={status.get('account')} friend={account} />;
     // }
@@ -575,20 +575,20 @@ class Status extends ImmutablePureComponent {
       width: '36px',
       height: '36px',
       backgroundSize: '36px 36px',
-      backgroundImage: `url(${avatar})`
+      backgroundImage: `url(${avatar})`,
     };
 
     if (!statusId || (statusId === status.get('id'))) { // filter status by id in status page, not profile page
       if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
         this.setState({
-          repliesCount: status.get('replies_count')
+          repliesCount: status.get('replies_count'),
         });
       }
 
       const { repliesCountUpdated } = this.state;
       if (repliesCountUpdated || (this.state.descendants.length === 0 && status.get('replies_count') > 0)) {
         api().get(`/api/v1/statuses/${status.get('id')}/context`)
-          .then(({data}) => {
+          .then(({ data }) => {
             if (this.state.descendants.length < data.descendants.length) {
               this.setState({
                 descendants: data.descendants,
@@ -628,24 +628,24 @@ class Status extends ImmutablePureComponent {
 
             {
               this.state.descendants.filter(
-                (d, idx) => (idx < 3 || this.state.showAllReplies)
+                (d, idx) => (idx < 3 || this.state.showAllReplies),
               ).map((descendant) => (
                 <div className='status__reply' key={descendant.id}>
-                  <div className="status__avatar">
+                  <div className='status__avatar'>
                     <a
-                      className="account__avatar"
+                      className='account__avatar'
                       style={{
                         width: '36px',
                         height: '36px',
                         backgroundSize: '36px 36px',
-                        backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`
+                        backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`,
                       }}
                       href={descendant.account.url}
-                      target="_blank"
+                      target='_blank'
                     />
                   </div>
 
-                  <div className="status__reply-box">
+                  <div className='status__reply-box'>
                     <div className='display-name'>
                       <a href={descendant.account.url} target='_blank' rel='noopener noreferrer'>
                         <strong className='display-name__html' dangerouslySetInnerHTML={{ __html: descendant.account.display_name || descendant.account.username }} />
@@ -654,7 +654,7 @@ class Status extends ImmutablePureComponent {
                       <span className='display-name__account'>@{descendant.account.acct}</span>
                     </div>
                     <a href={descendant.url} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={descendant.created_at} /></a>
-                    <div className="status__content" dangerouslySetInnerHTML={{__html: descendant.content}} />
+                    <div className='status__content' dangerouslySetInnerHTML={{ __html: descendant.content }} />
                   </div>
                 </div>
               ))
@@ -662,7 +662,7 @@ class Status extends ImmutablePureComponent {
 
             {
               !this.state.showAllReplies && this.state.descendants.length > 3 && (
-                <button className="status__content__read-more-button" onClick={this.toggleShowAllReplies}>
+                <button className='status__content__read-more-button' onClick={this.toggleShowAllReplies}>
                   <span>Show All Replies</span>
                 </button>
               )
@@ -670,19 +670,19 @@ class Status extends ImmutablePureComponent {
 
             {
               this.state.showAllReplies && this.state.descendants.length > 3 && (
-                <button className="status__content__read-more-button" onClick={this.toggleShowAllReplies}>
+                <button className='status__content__read-more-button' onClick={this.toggleShowAllReplies}>
                   <span>Show Top 3 Replies</span>
                 </button>
               )
             }
 
             <div className='status__reply'>
-              <div className="status__avatar">
-                <div className="account__avatar" style={avatarStyle} />
+              <div className='status__avatar'>
+                <div className='account__avatar' style={avatarStyle} />
               </div>
 
-              <div className="status__reply-box">
-                <textarea className="textarea" placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} onFocus={this.ensureShowReplyBox} />
+              <div className='status__reply-box'>
+                <textarea className='textarea' placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} onFocus={this.ensureShowReplyBox} />
                 <EmojiPickerDropdown standalone onPickEmoji={this.handleEmojiPick} />
                 {/*<ComposeFormContainer />*/}
 
@@ -697,4 +697,5 @@ class Status extends ImmutablePureComponent {
 
     return null;
   }
+
 }

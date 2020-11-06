@@ -548,8 +548,8 @@ class UI extends React.PureComponent {
     return (
       <HotKeys keyMap={keyMap} handlers={handlers} ref={this.setHotkeysRef} attach={window} focused>
         <div className={classNames('ui absolute-fill', { 'is-composing': isComposing })} ref={this.setRef} style={{ pointerEvents: dropdownMenuIsOpen ? 'none' : null }}>
-          <div className="relative-fill">
-            <div className="absolute-fill d-flex flex-column">
+          <div className='relative-fill'>
+            <div className='absolute-fill d-flex flex-column'>
               <NavigationContainer onClose={this.onBlur} />
               <SwitchingColumnsArea location={location} onLayoutChange={this.handleLayoutChange}>
                 {children}

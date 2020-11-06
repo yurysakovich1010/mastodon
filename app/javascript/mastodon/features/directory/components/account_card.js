@@ -22,12 +22,12 @@ import {
 import { openModal } from 'mastodon/actions/modal';
 import { initMuteModal } from 'mastodon/actions/mutes';
 import DropdownMenuContainer from 'mastodon/containers/dropdown_menu_container';
-import {initBlockModal} from "../../../actions/blocks";
-import {directCompose, mentionCompose} from "../../../actions/compose";
-import {pinAccount, unpinAccount} from "../../../actions/accounts";
-import {initReport} from "../../../actions/reports";
-import {blockDomain, unblockDomain} from "../../../actions/domain_blocks";
-import AccountCardActionsContainer from "../containers/account_card_actions_container";
+import { initBlockModal } from '../../../actions/blocks';
+import { directCompose, mentionCompose } from '../../../actions/compose';
+import { pinAccount, unpinAccount } from '../../../actions/accounts';
+import { initReport } from '../../../actions/reports';
+import { blockDomain, unblockDomain } from '../../../actions/domain_blocks';
+import AccountCardActionsContainer from '../containers/account_card_actions_container';
 
 const messages = defineMessages({
   follow: { id: 'account.follow', defaultMessage: 'Follow' },

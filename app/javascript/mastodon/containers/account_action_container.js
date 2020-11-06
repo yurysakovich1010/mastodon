@@ -38,4 +38,5 @@ export default class AccountActionContainer extends React.PureComponent {
       </IntlProvider>
     );
   }
+
 }

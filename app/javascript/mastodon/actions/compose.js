@@ -266,7 +266,7 @@ export function uploadCompose(files) {
         if (error.response.status === 413) {
           error.response.statusText = 'The maximum video file size you can upload is 24 MB. If you need to upload larger video files, please use Brighteon.com';
         }
-        dispatch(uploadComposeFail(error))
+        dispatch(uploadComposeFail(error));
       });
     };
   };

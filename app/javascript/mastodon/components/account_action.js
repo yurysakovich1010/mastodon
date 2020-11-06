@@ -5,8 +5,8 @@ import { defineMessages, injectIntl } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { autoPlayGif, me, isStaff } from 'mastodon/initial_state';
 import DropdownMenuContainer from 'mastodon/containers/dropdown_menu_container';
-import ModalContainer from "../features/ui/containers/modal_container";
-import ReactDOM from "react-dom";
+import ModalContainer from '../features/ui/containers/modal_container';
+import ReactDOM from 'react-dom';
 
 const messages = defineMessages({
   unfollow: { id: 'account.unfollow', defaultMessage: 'Unfollow' },

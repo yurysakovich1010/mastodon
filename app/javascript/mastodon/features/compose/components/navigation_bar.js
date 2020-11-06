@@ -8,13 +8,13 @@ import SearchContainer from 'mastodon/features/ui/components/search_container';
 import SearchResultsContainer from 'mastodon/features/ui/components/search_results_container';
 import horizontalLogo from 'mastodon/../images/brighteon-social/logo_horiz.png';
 import { isMobile } from 'mastodon/is_mobile';
-import Notifications from "../../notifications";
+import Notifications from '../../notifications';
 
 import { connect } from 'react-redux';
 import IconWithBadge from 'mastodon/components/icon_with_badge';
-import {createSelector} from "reselect";
-import {List as ImmutableList} from "immutable";
-import {cleanNotifications, expandNotifications} from "../../../actions/notifications";
+import { createSelector } from 'reselect';
+import { List as ImmutableList } from 'immutable';
+import { cleanNotifications, expandNotifications } from '../../../actions/notifications';
 import AnnouncementsContainer from 'mastodon/features/getting_started/containers/announcements_container';
 
 const getNotifications = createSelector([
@@ -62,11 +62,11 @@ class NavigationBar extends ImmutablePureComponent {
 
   toggleNotificationsPopup = (e) => {
     e.stopPropagation();
-    this.setState({popupVisible: !this.state.popupVisible});
+    this.setState({ popupVisible: !this.state.popupVisible });
   };
 
   closeNotificationsPopup = () => {
-    this.setState({popupVisible: false});
+    this.setState({ popupVisible: false });
   };
 
   markAsRead = () => {
@@ -81,11 +81,11 @@ class NavigationBar extends ImmutablePureComponent {
 
   componentDidMount() {
     this.props.fetchNotifications();
-    window.addEventListener('click', this.closeNotificationsPopup.bind(this))
+    window.addEventListener('click', this.closeNotificationsPopup.bind(this));
   }
 
   componentWillUnmount() {
-    window.removeEventListener('click', this.closeNotificationsPopup)
+    window.removeEventListener('click', this.closeNotificationsPopup);
   }
 
   render () {
@@ -95,7 +95,7 @@ class NavigationBar extends ImmutablePureComponent {
     };
 
     const deviceIsMobile = isMobile(window.innerWidth);
-    const {hasAnnouncements, unreadAnnouncements} = this.props;
+    const { hasAnnouncements, unreadAnnouncements } = this.props;
 
     return (
       <>
@@ -105,7 +105,7 @@ class NavigationBar extends ImmutablePureComponent {
             <div className='d-flex'>
               <div className='head-logo'>
                 <a href='/' >
-                  <img src={horizontalLogo} style={{width: '100%'}}/>
+                  <img src={horizontalLogo} style={{ width: '100%' }} />
                 </a>
               </div>
 
@@ -136,18 +136,18 @@ class NavigationBar extends ImmutablePureComponent {
 
                 <div className='notification-bell'>
                   {/*<a target='_blank' rel='noopener noreferrer' href='/web/notifications' className='decoration-none'>*/}
-                    <div className='icon mr2' onClick={this.toggleNotificationsPopup}>
-                      <NotificationsCounterIcon className='column-link__icon' />
-                    </div>
+                  <div className='icon mr2' onClick={this.toggleNotificationsPopup}>
+                    <NotificationsCounterIcon className='column-link__icon' />
+                  </div>
                   {/*</a>*/}
 
                   {
                     this.state.popupVisible && (
-                      <div className="drawer__pager" onClick={this.stopPropagation}>
-                        <div className="drawer__inner darker">
-                          <div className="notifications-header">
+                      <div className='drawer__pager' onClick={this.stopPropagation}>
+                        <div className='drawer__inner darker'>
+                          <div className='notifications-header'>
                             <div>NOTIFICATIONS</div>
-                            <button className="mark_as_read" onClick={this.markAsRead}>
+                            <button className='mark_as_read' onClick={this.markAsRead}>
                               Mark All as Read
                             </button>
                           </div>
@@ -183,22 +183,23 @@ class NavigationBar extends ImmutablePureComponent {
             }
 
             {/*<div className='navigation-bar__profile'>*/}
-              {/*<Permalink href={this.props.account.get('url')} to={`/accounts/${this.props.account.get('id')}`}>*/}
-                {/*<strong className='navigation-bar__profile-account'>@{this.props.account.get('acct')}</strong>*/}
-              {/*</Permalink>*/}
+            {/*<Permalink href={this.props.account.get('url')} to={`/accounts/${this.props.account.get('id')}`}>*/}
+            {/*<strong className='navigation-bar__profile-account'>@{this.props.account.get('acct')}</strong>*/}
+            {/*</Permalink>*/}
 
-              {/*<a href='/settings/profile' className='navigation-bar__profile-edit'><FormattedMessage id='navigation_bar.edit_profile' defaultMessage='Edit profile' /></a>*/}
+            {/*<a href='/settings/profile' className='navigation-bar__profile-edit'><FormattedMessage id='navigation_bar.edit_profile' defaultMessage='Edit profile' /></a>*/}
             {/*</div>*/}
 
             {/*<div className='navigation-bar__actions'>*/}
-              {/*<IconButton className='close' title='' icon='close' onClick={this.props.onClose} />*/}
-              {/*<ActionBar account={this.props.account} onLogout={this.props.onLogout} />*/}
+            {/*<IconButton className='close' title='' icon='close' onClick={this.props.onClose} />*/}
+            {/*<ActionBar account={this.props.account} onLogout={this.props.onLogout} />*/}
             {/*</div>*/}
           </div>
         </div>
       </>
     );
   }
+
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -207,7 +208,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   cleanNotifications() {
     dispatch(cleanNotifications());
-  }
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
