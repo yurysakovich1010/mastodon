@@ -20,7 +20,7 @@ export function connectStream(path, pollingRefresh = null, callbacks = () => ({ 
 
     const setupPolling = () => {
       pollingRefresh(dispatch, () => {
-        polling = setTimeout(() => setupPolling(), 20000 + randomIntUpTo(20000));
+        polling = setTimeout(() => setupPolling(), 150000 + randomIntUpTo(20000));
       });
     };
 
