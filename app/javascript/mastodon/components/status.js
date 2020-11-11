@@ -20,6 +20,7 @@ import api from 'mastodon/api';
 import StatusContainer from '../containers/status_container';
 import { checkIfAndroid } from '../is_mobile';
 import EmojiPickerDropdown from 'mastodon/features/compose/containers/emoji_picker_dropdown_container';
+import { debounce } from 'lodash';
 
 const allowedAroundShortCode = '><\u0085\u0020\u00a0\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u202f\u205f\u3000\u2028\u2029\u0009\u000a\u000b\u000c\u000d';
 
@@ -285,28 +286,30 @@ class Status extends ImmutablePureComponent {
     });
   }
 
-  reply = () => {
+  reply = debounce(() => {
     // merge compose component here
 
-    api().post('/api/v1/statuses', {
-      in_reply_to_id: this.props.status.get('id'),
-      media_ids: [],
-      poll: null,
-      sensitive: false,
-      spoiler_text: '',
-      status: this.state.replyText,
-      visibility: 'public',
-    })
-      .then(({ data }) => {
-        if (data && data.id) {
-          this.setState({
-            replyText: '',
-            repliesCount: this.state.repliesCount + 1,
-            repliesCountUpdated: true,
-          });
-        }
-      });
-  }
+    if (this.state.replyText) {
+      api().post('/api/v1/statuses', {
+        in_reply_to_id: this.props.status.get('id'),
+        media_ids: [],
+        poll: null,
+        sensitive: false,
+        spoiler_text: '',
+        status: this.state.replyText,
+        visibility: 'public',
+      })
+        .then(({ data }) => {
+          if (data && data.id) {
+            this.setState({
+              replyText: '',
+              repliesCount: this.state.repliesCount + 1,
+              repliesCountUpdated: true,
+            });
+          }
+        });
+    }
+  }, 1500)
 
   toggleShowAllReplies = () => {
     this.setState({
