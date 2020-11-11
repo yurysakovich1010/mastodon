@@ -188,7 +188,7 @@ class ColumnsArea extends ImmutablePureComponent {
       const floatingActionButton = shouldHideFAB(this.context.router.history.location.pathname) ? null : <Link key='floating-action-button' to='/statuses/new' className='floating-action-button' aria-label={intl.formatMessage(messages.publish)}><Icon id='pencil' /></Link>;
 
       const content = columnIndex !== -1 ? (
-        <ReactSwipeableViews key='content' hysteresis={0.2} threshold={15} index={columnIndex} onChangeIndex={this.handleSwipe} onTransitionEnd={this.handleAnimationEnd} animateTransitions={shouldAnimate} springConfig={{ duration: '400ms', delay: '0s', easeFunction: 'ease' }} style={{ height: '100%' }}>
+        <ReactSwipeableViews key='content' hysteresis={0.2} threshold={15} index={columnIndex} onChangeIndex={this.handleSwipe} onTransitionEnd={this.handleAnimationEnd} animateTransitions={shouldAnimate} springConfig={{ duration: '400ms', delay: '0s', easeFunction: 'ease' }}>
           {links.map(this.renderView)}
         </ReactSwipeableViews>
       ) : (
@@ -225,14 +225,8 @@ class ColumnsArea extends ImmutablePureComponent {
                   }
 
                   <TabsBar key='tabs' />
-                  <div className='flex-fill post-rails'>
-                    <div className='relative-fill'>
-                      <div className='absolute-fill mb2 overflow-y-auto rounded-bottom d-flex flex-column'>
-                        <div className='flex-fill'>
-                          {content}
-                        </div>
-                      </div>
-                    </div>
+                  <div className='flex-fill post-rails mb2 overflow-y-auto rounded-bottom'>
+                    {content}
                   </div>
                 </div>
               </div>
