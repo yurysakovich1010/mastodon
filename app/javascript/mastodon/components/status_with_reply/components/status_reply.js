@@ -59,7 +59,7 @@ const messages = defineMessages({
 });
 
 export default @injectIntl
-class Status extends ImmutablePureComponent {
+class StatusReply extends ImmutablePureComponent {
 
   static contextTypes = {
     router: PropTypes.object,
@@ -460,7 +460,6 @@ class Status extends ImmutablePureComponent {
 
             {media}
 
-            <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} />
           </div>
         </div>
       </HotKeys>

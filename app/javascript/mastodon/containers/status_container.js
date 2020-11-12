@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Status from '../components/status';
+// import Status from '../components/status';
+import Status from '../components/status_with_reply';
 import { makeGetAccount, makeGetStatus } from '../selectors';
 import {
   replyCompose,
