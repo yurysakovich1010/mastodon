@@ -1,26 +1,26 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import Avatar from './avatar';
-import AvatarOverlay from './avatar_overlay';
-import AvatarComposite from './avatar_composite';
-import RelativeTimestamp from './relative_timestamp';
-import DisplayName from './display_name';
-import StatusContent from './status_content';
-import StatusActionBar from './status_action_bar';
-import AttachmentList from './attachment_list';
-import Card from '../features/status/components/card';
+import Avatar from '../../../avatar';
+import AvatarOverlay from '../../../avatar_overlay';
+import AvatarComposite from '../../../avatar_composite';
+import RelativeTimestamp from '../../../relative_timestamp';
+import DisplayName from '../../../display_name';
+import StatusContent from '../../../status_content';
+import AttachmentList from '../../../attachment_list';
+import Card from '../../../../features/status/components/card';
 import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { MediaGallery, Video, Audio } from '../features/ui/util/async-components';
+import { MediaGallery, Video, Audio } from '../../../../features/ui/util/async-components';
 import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
-import { displayMedia } from '../initial_state';
+import { displayMedia } from '../../../../initial_state';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
-import Bundle from '../features/ui/components/bundle';
+import Bundle from '../../../../features/ui/components/bundle';
+import { StatusActionBar } from './components';
 
 export const textForScreenReader = (intl, status, rebloggedByText = false) => {
   const displayName = status.getIn(['account', 'display_name']);
@@ -419,13 +419,14 @@ class StatusReply extends ImmutablePureComponent {
       );
     }
 
-    if (otherAccounts && otherAccounts.size > 0) {
-      statusAvatar = <AvatarComposite accounts={otherAccounts} size={48} />;
-    } else if (account === undefined || account === null) {
-      statusAvatar = <Avatar account={status.get('account')} size={48} />;
-    } else {
-      statusAvatar = <AvatarOverlay account={status.get('account')} friend={account} />;
-    }
+    // if (otherAccounts && otherAccounts.size > 0) {
+    //   statusAvatar = <AvatarComposite accounts={otherAccounts} size={48} />;
+    // } else if (account === undefined || account === null) {
+    //   statusAvatar = <Avatar account={status.get('account')} size={48} />;
+    // } else {
+    //   statusAvatar = <AvatarOverlay account={status.get('account')} friend={account} />;
+    // }
+    statusAvatar = <Avatar account={status.get('account')} size={36} />;
 
     const visibilityIconInfo = {
       'public': { icon: 'globe', text: intl.formatMessage(messages.public_short) },
@@ -441,25 +442,28 @@ class StatusReply extends ImmutablePureComponent {
         <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
           {prepend}
 
-          <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
-            <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
+          <div className={classNames('status__reply', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
             <div className='status__info'>
-              <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>
-              <span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>
+              <div>
+                <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
+                  <div className='status__avatar'>
+                    {statusAvatar}
+                  </div>
 
-              <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
-                <div className='status__avatar'>
-                  {statusAvatar}
-                </div>
-
-                <DisplayName account={status.get('account')} others={otherAccounts} />
-              </a>
+                  <DisplayName account={status.get('account')} others={otherAccounts} />
+                </a>
+              </div>
+              <div>
+                <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>
+                {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
+              </div>
             </div>
 
             <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} showThread={showThread} onExpandedToggle={this.handleExpandedToggle} collapsable onCollapsedToggle={this.handleCollapsedToggle} />
 
             {media}
 
+            <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} />
           </div>
         </div>
       </HotKeys>

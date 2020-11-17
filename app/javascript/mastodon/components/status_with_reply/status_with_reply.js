@@ -28,6 +28,12 @@ const allowedAroundShortCode = '><\u0085\u0020\u00a0\u1680\u2000\u2001\u2002\u20
 // to use the progress bar to show download progress
 import Bundle from '../../features/ui/components/bundle';
 import CharacterCounter from '../../features/compose/components/character_counter';
+import { importFetchedStatuses } from '../../actions/importer';
+import { submitMarkers } from '../../actions/markers';
+import { expandTimelineSuccess } from '../../actions/timelines';
+
+import { connect } from 'react-redux';
+import { StatusReplyContainer } from './containers';
 
 export const textForScreenReader = (intl, status, rebloggedByText = false) => {
   const displayName = status.getIn(['account', 'display_name']);
@@ -65,7 +71,13 @@ const messages = defineMessages({
   direct_short: { id: 'privacy.direct.short', defaultMessage: 'Direct' },
 });
 
-export default @injectIntl
+const mapDispatchToProps = dispatch => ({
+  importFetchedStatuses: (...args) => dispatch(importFetchedStatuses(...args)),
+  submitMarkers: (...args) => dispatch(submitMarkers(...args)),
+  expandTimelineSuccess: (...args) => dispatch(expandTimelineSuccess(...args)),
+});
+
+export default @connect(null, mapDispatchToProps)@injectIntl
 class Status extends ImmutablePureComponent {
 
   static contextTypes = {
@@ -603,6 +615,11 @@ class Status extends ImmutablePureComponent {
       api().get(`/api/v1/statuses/${status.get('id')}/context`)
         .then(({ data }) => {
           if (this.state.descendants.length < data.descendants.length) {
+            this.props.importFetchedStatuses(data.descendants);
+            this.props.expandTimelineSuccess(this.props.contextType, data.descendants);
+            if (this.props.contextType === 'home') {
+              this.props.submitMarkers();
+            }
             this.setState({
               descendants: data.descendants,
               repliesCountUpdated: false,
@@ -643,33 +660,11 @@ class Status extends ImmutablePureComponent {
             this.state.descendants.filter(
               (d, idx) => (idx < 3 || this.state.showAllReplies),
             ).map((descendant) => (
-              <div className='status__reply' key={descendant.id}>
-                <div className='status__avatar'>
-                  <a
-                    className='account__avatar'
-                    style={{
-                      width: '36px',
-                      height: '36px',
-                      backgroundSize: '36px 36px',
-                      backgroundImage: `url(${descendant.account.avatar || descendant.account.avatar_static})`,
-                    }}
-                    href={descendant.account.url}
-                    target='_blank'
-                  />
-                </div>
-
-                <div className='status__reply-box'>
-                  <div className='display-name'>
-                    <a href={descendant.account.url} target='_blank' rel='noopener noreferrer'>
-                      <strong className='display-name__html' dangerouslySetInnerHTML={{ __html: descendant.account.display_name || descendant.account.username }} />
-                    </a>
-                    &nbsp;
-                    <span className='display-name__account'>@{descendant.account.acct}</span>
-                  </div>
-                  <a href={descendant.url} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={descendant.created_at} /></a>
-                  <div className='status__content' dangerouslySetInnerHTML={{ __html: descendant.content }} />
-                </div>
-              </div>
+              <StatusReplyContainer
+                key={descendant.id}
+                id={descendant.id}
+                contextType={this.props.contextType}
+              />
             ))
           }
 
