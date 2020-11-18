@@ -115,6 +115,9 @@ class Status extends ImmutablePureComponent {
     cacheMediaWidth: PropTypes.func,
     cachedMediaWidth: PropTypes.number,
     scrollKey: PropTypes.string,
+    username: PropTypes.string,
+    avatar: PropTypes.string,
+    statusId: PropTypes.any,
     replyOrigin: PropTypes.any,
   };
 
@@ -317,8 +320,8 @@ class Status extends ImmutablePureComponent {
             this.getDescendants();
           }
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
+          window.location = '/auth/sign_in';
         });
     }
   }, 1500)
@@ -373,23 +376,8 @@ class Status extends ImmutablePureComponent {
     }
   }
 
-  showFullRails () {
-    const tabsBarWrappers = document.getElementsByClassName('tabs-bar__wrapper');
-    if (tabsBarWrappers && tabsBarWrappers[0]) {
-      let element = tabsBarWrappers[0];
-
-      let yPosition = 0;
-      while(element) {
-        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
-        element = element.offsetParent;
-      }
-      window.scroll(0, yPosition);
-    }
-  }
-
   ensureShowReplyBox = () => {
     if (checkIfAndroid()) {
-      this.showFullRails();
       let element = this.replyBox;
 
       let yPosition = 0;
@@ -397,11 +385,8 @@ class Status extends ImmutablePureComponent {
         yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
         element = element.offsetParent;
       }
-      const postRails = document.getElementsByClassName('post-rails');
-      if (postRails && postRails[0]) {
-        if (yPosition > 800) {
-          postRails[0].scrollBy(0, 200);
-        }
+      if (yPosition - window.scrollY > 300) {
+        window.scrollBy(0, 200);
       }
     }
   }
@@ -426,7 +411,7 @@ class Status extends ImmutablePureComponent {
 
     const { intl, hidden, featured, otherAccounts, unread, showThread, scrollKey } = this.props;
 
-    let { status, account, replyOrigin, ...other } = this.props;
+    let { status, account, username, avatar, statusId, replyOrigin, ...other } = this.props;
 
     if (status === null) {
       return null;
@@ -437,6 +422,9 @@ class Status extends ImmutablePureComponent {
         <StatusContainer
           id={status.get('in_reply_to_id')}
           contextType={'public'}
+          username={username}
+          avatar={avatar}
+          statusId={statusId}
           showThread
           replyOrigin={status.getIn(['account', 'display_name_html'])}
         />
@@ -519,7 +507,7 @@ class Status extends ImmutablePureComponent {
       rebloggedByText = intl.formatMessage({ id: 'status.reblogged_by', defaultMessage: '{name} boosted' }, { name: status.getIn(['account', 'acct']) });
 
       account = status.get('account');
-      status  = status.get('reblog');
+      status = status.get('reblog');
     }
 
     if (status.get('media_attachments').size > 0) {
@@ -534,7 +522,7 @@ class Status extends ImmutablePureComponent {
         const attachment = status.getIn(['media_attachments', 0]);
 
         media = (
-          <Bundle fetchComponent={Audio} loading={this.renderLoadingAudioPlayer} >
+          <Bundle fetchComponent={Audio} loading={this.renderLoadingAudioPlayer}>
             {Component => (
               <Component
                 src={attachment.get('url')}
@@ -555,7 +543,7 @@ class Status extends ImmutablePureComponent {
         const attachment = status.getIn(['media_attachments', 0]);
 
         media = (
-          <Bundle fetchComponent={Video} loading={this.renderLoadingVideoPlayer} >
+          <Bundle fetchComponent={Video} loading={this.renderLoadingVideoPlayer}>
             {Component => (
               <Component
                 preview={attachment.get('preview_url')}
@@ -626,90 +614,96 @@ class Status extends ImmutablePureComponent {
       width: '36px',
       height: '36px',
       backgroundSize: '36px 36px',
-      backgroundImage: `url(${account && (account.get('avatar') || account.get('avatar_static'))})`,
+      backgroundImage: `url(${avatar})`,
     };
 
-    const replies = Object.values(this.props.statuses.toJS())
-      .filter(st => st.in_reply_to_id === status.get('id'));
-    const repliesCount = replies.length;
+    if (!statusId || (statusId === status.get('id'))) {
+      const replies = Object.values(this.props.statuses.toJS())
+        .filter(st => st.in_reply_to_id === status.get('id'));
+      const repliesCount = replies.length;
 
-    return (
-      <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
-        {prepend}
+      return (
+        <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
+          {prepend}
 
-        <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false })} data-id={status.get('id')}>
-          <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
-          <div className='status__info'>
-            <div>
-              <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
-                <div className='status__avatar'>
-                  {statusAvatar}
-                </div>
+          <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted, read: unread === false})} data-id={status.get('id')}>
+            <div className='status__expand' onClick={this.handleExpandClick} role='presentation' />
+            <div className='status__info'>
+              <div>
+                <a onClick={this.handleAccountClick} data-id={status.getIn(['account', 'id'])} href={status.getIn(['account', 'url'])} title={status.getIn(['account', 'acct'])} className='status__display-name' target='_blank' rel='noopener noreferrer'>
+                  <div className='status__avatar'>
+                    {statusAvatar}
+                  </div>
 
-                <DisplayName account={status.get('account')} others={otherAccounts} />
-              </a>
-            </div>
-            <div>
-              <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'><RelativeTimestamp timestamp={status.get('created_at')} /></a>
-              {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
-            </div>
-          </div>
-
-          <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} showThread={showThread} onExpandedToggle={this.handleExpandedToggle} collapsable onCollapsedToggle={this.handleCollapsedToggle} />
-
-          {media}
-
-          <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
-
-          {
-            replies.filter(
-              (reply, idx) => (idx < 3 || this.state.showAllReplies),
-            ).map((reply) => (
-              <StatusReplyContainer
-                key={reply.id}
-                id={reply.id}
-                contextType={this.props.contextType}
-              />
-            ))
-          }
-
-          {
-            !this.state.showAllReplies && repliesCount > 3 && (
-              <button className='status__content__read-more-button' onClick={this.toggleShowAllReplies}>
-                <span>Show All Replies</span>
-              </button>
-            )
-          }
-
-          {
-            this.state.showAllReplies && repliesCount > 3 && (
-              <button className='status__content__read-more-button' onClick={this.toggleShowAllReplies}>
-                <span>Show Top 3 Replies</span>
-              </button>
-            )
-          }
-
-          {
-            this.state.showReplyBox && (
-              <div className='status__reply'>
-                <div className='status__avatar'>
-                  <div className='account__avatar' style={avatarStyle} />
-                </div>
-
-                <div className='status__reply-box'>
-                  <textarea className='textarea' placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} onFocus={this.ensureShowReplyBox} />
-                  <EmojiPickerDropdown onPickEmoji={this.handleEmojiPick} />
-                  {/*<ComposeFormContainer />*/}
-
-                  <button className='button btn-post' onClick={this.reply} disabled={this.state.replyText.length > 500}>Post</button>
-                  <div className='character-counter__wrapper'><CharacterCounter max={500} text={this.state.replyText} /></div>
-                </div>
+                  <DisplayName account={status.get('account')} others={otherAccounts} />
+                </a>
               </div>
-            )
-          }
+              <div>
+                <a href={status.get('url')} className='status__relative-time' target='_blank' rel='noopener noreferrer'>
+                  <RelativeTimestamp timestamp={status.get('created_at')} />
+                </a>
+                {/*<span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>*/}
+              </div>
+            </div>
+
+            <StatusContent status={status} onClick={this.handleClick} expanded={!status.get('hidden')} showThread={showThread} onExpandedToggle={this.handleExpandedToggle} collapsable onCollapsedToggle={this.handleCollapsedToggle} />
+
+            {media}
+
+            <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
+
+            {
+              replies.filter(
+                (reply, idx) => (idx < 3 || this.state.showAllReplies),
+              ).map((reply) => (
+                <StatusReplyContainer
+                  key={reply.id}
+                  id={reply.id}
+                  contextType={this.props.contextType}
+                />
+              ))
+            }
+
+            {
+              !this.state.showAllReplies && repliesCount > 3 && (
+                <button className='status__content__read-more-button' onClick={this.toggleShowAllReplies}>
+                  <span>Show All Replies</span>
+                </button>
+              )
+            }
+
+            {
+              this.state.showAllReplies && repliesCount > 3 && (
+                <button className='status__content__read-more-button' onClick={this.toggleShowAllReplies}>
+                  <span>Show Top 3 Replies</span>
+                </button>
+              )
+            }
+
+            {
+              this.state.showReplyBox && (
+                <div className='status__reply'>
+                  <div className='status__avatar'>
+                    <div className='account__avatar' style={avatarStyle} />
+                  </div>
+
+                  <div className='status__reply-box'>
+                    <textarea className='textarea' placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} onFocus={this.ensureShowReplyBox} />
+                    <EmojiPickerDropdown standalone onPickEmoji={this.handleEmojiPick} />
+                    {/*<ComposeFormContainer />*/}
+
+                    <button className='button btn-post' onClick={this.reply} disabled={this.state.replyText.length > 500}>Post</button>
+                    <div className='character-counter__wrapper'><CharacterCounter max={500} text={this.state.replyText} /></div>
+                  </div>
+                </div>
+              )
+            }
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+
+    return null;
   }
 
 }
