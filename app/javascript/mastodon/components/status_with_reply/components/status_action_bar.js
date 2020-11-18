@@ -2,11 +2,11 @@ import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import IconButton from './icon_button';
-import DropdownMenuContainer from '../containers/dropdown_menu_container';
+import IconButton from 'mastodon/components/icon_button';
+import DropdownMenuContainer from 'mastodon/containers/dropdown_menu_container';
 import { defineMessages, injectIntl } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { me, isStaff } from '../initial_state';
+import { me, isStaff } from 'mastodon/initial_state';
 import classNames from 'classnames';
 
 const messages = defineMessages({
@@ -88,6 +88,8 @@ class StatusActionBar extends ImmutablePureComponent {
     withDismiss: PropTypes.bool,
     scrollKey: PropTypes.string,
     intl: PropTypes.object.isRequired,
+    showAllReplies: PropTypes.any,
+    toggleShowAllReplies: PropTypes.func.isRequired,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -230,6 +232,10 @@ class StatusActionBar extends ImmutablePureComponent {
     }
   }
 
+  toggleShowAllReplies = () => {
+    this.props.toggleShowAllReplies();
+  }
+
   render () {
     const { status, relationship, intl, withDismiss, scrollKey } = this.props;
 
@@ -248,6 +254,9 @@ class StatusActionBar extends ImmutablePureComponent {
     }
 
     menu.push({ text: intl.formatMessage(status.get('bookmarked') ? messages.removeBookmark : messages.bookmark), action: this.handleBookmarkClick });
+    menu.push(null);
+
+    menu.push({ text: 'Show all or only 3 replies', action: this.toggleShowAllReplies });
     menu.push(null);
 
     if (status.getIn(['account', 'id']) === me || withDismiss) {
@@ -329,9 +338,18 @@ class StatusActionBar extends ImmutablePureComponent {
 
     return (
       <div className='status__action-bar'>
-        <div className='status__action-bar__counter'><IconButton className='status__action-bar-button' title={replyTitle} icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'reply' : replyIcon} onClick={this.handleReplyClick} /><span className='status__action-bar__counter__label' >{obfuscatedCount(status.get('replies_count'))}</span></div>
-        <IconButton className={classNames('status__action-bar-button', { reblogPrivate })} disabled={!publicStatus && !reblogPrivate}  active={status.get('reblogged')} pressed={status.get('reblogged')} title={reblogTitle} icon='retweet' onClick={this.handleReblogClick} />
-        <IconButton className='status__action-bar-button star-icon' animate active={status.get('favourited')} pressed={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='star' onClick={this.handleFavouriteClick} />
+        <div className='status__action-bar__counter'>
+          <IconButton className='status__action-bar-button' title={replyTitle} icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'reply' : replyIcon} onClick={this.handleReplyClick} />
+          <span className='status__action-bar__counter__label' >{status.get('replies_count')}</span>
+        </div>
+        <div className='status__action-bar__counter'>
+          <IconButton className={classNames('status__action-bar-button', { reblogPrivate })} disabled={!publicStatus && !reblogPrivate}  active={status.get('reblogged')} pressed={status.get('reblogged')} title={reblogTitle} icon='retweet' onClick={this.handleReblogClick} />
+          <span className='status__action-bar__counter__label' >{status.get('reblogs_count')}</span>
+        </div>
+        <div className='status__action-bar__counter'>
+          <IconButton className='status__action-bar-button star-icon' animate active={status.get('favourited')} pressed={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='star' onClick={this.handleFavouriteClick} />
+          <span className='status__action-bar__counter__label' >{status.get('favourites_count')}</span>
+        </div>
         {shareButton}
 
         <div className='status__action-bar-dropdown'>

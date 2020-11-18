@@ -7,7 +7,7 @@ import AvatarComposite from 'mastodon/components/avatar_composite';
 import RelativeTimestamp from 'mastodon/components/relative_timestamp';
 import DisplayName from 'mastodon/components/display_name';
 import StatusContent from 'mastodon/components/status_content';
-import StatusActionBar from 'mastodon/components/status_action_bar';
+import { StatusActionBar } from './components';
 import AttachmentList from 'mastodon/components/attachment_list';
 import Card from 'mastodon/features/status/components/card';
 import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
