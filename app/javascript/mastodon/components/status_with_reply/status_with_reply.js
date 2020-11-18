@@ -1,24 +1,24 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import Avatar from '../avatar';
-import AvatarOverlay from '../avatar_overlay';
-import AvatarComposite from '../avatar_composite';
-import RelativeTimestamp from '../relative_timestamp';
-import DisplayName from '../display_name';
-import StatusContent from '../status_content';
-import StatusActionBar from '../status_action_bar';
-import AttachmentList from '../attachment_list';
-import Card from '../../features/status/components/card';
+import Avatar from 'mastodon/components/avatar';
+import AvatarOverlay from 'mastodon/components/avatar_overlay';
+import AvatarComposite from 'mastodon/components/avatar_composite';
+import RelativeTimestamp from 'mastodon/components/relative_timestamp';
+import DisplayName from 'mastodon/components/display_name';
+import StatusContent from 'mastodon/components/status_content';
+import StatusActionBar from 'mastodon/components/status_action_bar';
+import AttachmentList from 'mastodon/components/attachment_list';
+import Card from 'mastodon/features/status/components/card';
 import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { MediaGallery, Video, Audio } from '../../features/ui/util/async-components';
+import { MediaGallery, Video, Audio } from 'mastodon/features/ui/util/async-components';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
-import { displayMedia } from '../../initial_state';
+import { displayMedia } from 'mastodon/initial_state';
 import api from 'mastodon/api';
-import StatusContainer from '../../containers/status_container';
-import { checkIfAndroid } from '../../is_mobile';
+import StatusContainer from 'mastodon/containers/status_container';
+import { checkIfAndroid } from 'mastodon/is_mobile';
 import EmojiPickerDropdown from 'mastodon/features/compose/containers/emoji_picker_dropdown_container';
 import { debounce } from 'lodash';
 
@@ -26,9 +26,9 @@ const allowedAroundShortCode = '><\u0085\u0020\u00a0\u1680\u2000\u2001\u2002\u20
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
-import Bundle from '../../features/ui/components/bundle';
-import CharacterCounter from '../../features/compose/components/character_counter';
-import { importFetchedStatuses } from '../../actions/importer';
+import Bundle from 'mastodon/features/ui/components/bundle';
+import CharacterCounter from 'mastodon/features/compose/components/character_counter';
+import { importFetchedStatuses } from 'mastodon/actions/importer';
 
 import { connect } from 'react-redux';
 import { StatusReplyContainer } from './containers';

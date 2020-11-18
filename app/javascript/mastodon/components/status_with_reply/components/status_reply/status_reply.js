@@ -1,25 +1,25 @@
 import React from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import PropTypes from 'prop-types';
-import Avatar from '../../../avatar';
-import AvatarOverlay from '../../../avatar_overlay';
-import AvatarComposite from '../../../avatar_composite';
-import RelativeTimestamp from '../../../relative_timestamp';
-import DisplayName from '../../../display_name';
-import StatusContent from '../../../status_content';
-import AttachmentList from '../../../attachment_list';
-import Card from '../../../../features/status/components/card';
+import Avatar from 'mastodon/components/avatar';
+import AvatarOverlay from 'mastodon/components/avatar_overlay';
+import AvatarComposite from 'mastodon/components/avatar_composite';
+import RelativeTimestamp from 'mastodon/components/relative_timestamp';
+import DisplayName from 'mastodon/components/display_name';
+import StatusContent from 'mastodon/components/status_content';
+import AttachmentList from 'mastodon/components/attachment_list';
+import Card from 'mastodon/features/status/components/card';
 import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { MediaGallery, Video, Audio } from '../../../../features/ui/util/async-components';
+import { MediaGallery, Video, Audio } from 'mastodon/features/ui/util/async-components';
 import { HotKeys } from 'react-hotkeys';
 import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
-import { displayMedia } from '../../../../initial_state';
+import { displayMedia } from 'mastodon/initial_state';
 
 // We use the component (and not the container) since we do not want
 // to use the progress bar to show download progress
-import Bundle from '../../../../features/ui/components/bundle';
+import Bundle from 'mastodon/features/ui/components/bundle';
 import { StatusActionBar } from './components';
 
 export const textForScreenReader = (intl, status, rebloggedByText = false) => {
