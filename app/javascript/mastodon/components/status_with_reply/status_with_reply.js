@@ -85,6 +85,7 @@ class Status extends ImmutablePureComponent {
   };
 
   static propTypes = {
+    statuses: ImmutablePropTypes.map,
     status: ImmutablePropTypes.map,
     account: ImmutablePropTypes.map,
     otherAccounts: ImmutablePropTypes.list,
@@ -130,10 +131,7 @@ class Status extends ImmutablePureComponent {
     showMedia: defaultMediaVisibility(this.props.status),
     statusId: undefined,
     replyText: '',
-    descendants: [],
     showReplyBox: true,
-    repliesCount: 0,
-    repliesCountUpdated: false,
     showAllReplies: false,
   };
 
@@ -315,10 +313,12 @@ class Status extends ImmutablePureComponent {
           if (data && data.id) {
             this.setState({
               replyText: '',
-              repliesCount: this.state.repliesCount + 1,
-              repliesCountUpdated: true,
             });
+            this.getDescendants();
           }
+        })
+        .catch(err => {
+          console.log(err);
         });
     }
   }, 1500)
@@ -332,6 +332,31 @@ class Status extends ImmutablePureComponent {
   OnInput() {
     this.style.height = 'auto';
     this.style.height = (this.scrollHeight) + 'px';
+  }
+
+  getDescendants() {
+    const { status, contextType } = this.props;
+    api().get(`/api/v1/statuses/${status.get('id')}/context`)
+      .then(({ data }) => {
+        if (0 < data.descendants.length) {
+          this.props.importFetchedStatuses(data.descendants);
+          this.props.expandTimelineSuccess(contextType, data.descendants);
+          if (contextType === 'home') {
+            this.props.submitMarkers();
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  componentDidMount() {
+    if (this.props.status && this.props.status.get('replies_count') > 0) {
+      if (!this.props.replyOrigin) {
+        this.getDescendants();
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -604,29 +629,9 @@ class Status extends ImmutablePureComponent {
       backgroundImage: `url(${account && (account.get('avatar') || account.get('avatar_static'))})`,
     };
 
-    if (this.state.repliesCount === 0 && status.get('replies_count') > 0) {
-      this.setState({
-        repliesCount: status.get('replies_count'),
-      });
-    }
-
-    const { repliesCountUpdated } = this.state;
-    if (repliesCountUpdated || (this.state.descendants.length === 0 && status.get('replies_count') > 0)) {
-      api().get(`/api/v1/statuses/${status.get('id')}/context`)
-        .then(({ data }) => {
-          if (this.state.descendants.length < data.descendants.length) {
-            this.props.importFetchedStatuses(data.descendants);
-            this.props.expandTimelineSuccess(this.props.contextType, data.descendants);
-            if (this.props.contextType === 'home') {
-              this.props.submitMarkers();
-            }
-            this.setState({
-              descendants: data.descendants,
-              repliesCountUpdated: false,
-            });
-          }
-        });
-    }
+    const replies = Object.values(this.props.statuses.toJS())
+      .filter(st => st.in_reply_to_id === status.get('id'));
+    const repliesCount = replies.length;
 
     return (
       <div className={classNames('status__wrapper', `status__wrapper-${status.get('visibility')}`, { 'status__wrapper-reply': !!status.get('in_reply_to_id'), read: unread === false, focusable: !this.props.muted })} tabIndex={this.props.muted ? null : 0} data-featured={featured ? 'true' : null} aria-label={textForScreenReader(intl, status, rebloggedByText)} ref={this.handleRef}>
@@ -654,22 +659,22 @@ class Status extends ImmutablePureComponent {
 
           {media}
 
-          <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={this.state.repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
+          <StatusActionBar scrollKey={scrollKey} status={status} account={account} {...other} onReply={this.handleReply} repliesCount={repliesCount} showAllReplies={this.state.showAllReplies} toggleShowAllReplies={this.toggleShowAllReplies} />
 
           {
-            this.state.descendants.filter(
-              (d, idx) => (idx < 3 || this.state.showAllReplies),
-            ).map((descendant) => (
+            replies.filter(
+              (reply, idx) => (idx < 3 || this.state.showAllReplies),
+            ).map((reply) => (
               <StatusReplyContainer
-                key={descendant.id}
-                id={descendant.id}
+                key={reply.id}
+                id={reply.id}
                 contextType={this.props.contextType}
               />
             ))
           }
 
           {
-            !this.state.showAllReplies && this.state.descendants.length > 3 && (
+            !this.state.showAllReplies && repliesCount > 3 && (
               <button className='status__content__read-more-button' onClick={this.toggleShowAllReplies}>
                 <span>Show All Replies</span>
               </button>
@@ -677,7 +682,7 @@ class Status extends ImmutablePureComponent {
           }
 
           {
-            this.state.showAllReplies && this.state.descendants.length > 3 && (
+            this.state.showAllReplies && repliesCount > 3 && (
               <button className='status__content__read-more-button' onClick={this.toggleShowAllReplies}>
                 <span>Show Top 3 Replies</span>
               </button>

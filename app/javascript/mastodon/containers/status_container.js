@@ -56,6 +56,7 @@ const makeMapStateToProps = () => {
   const getStatus = makeGetStatus();
 
   const mapStateToProps = (state, props) => ({
+    statuses: state.get('statuses'),
     status: getStatus(state, props),
     account: state.getIn(['accounts', me]),
   });
