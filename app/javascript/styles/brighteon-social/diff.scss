@@ -2004,6 +2004,9 @@ button.icon-button i.fa-retweet {
       .status {
         border: 0;
       }
+      .status__wrapper { // for replies
+        border: 0;
+      }
     }
   }
 
