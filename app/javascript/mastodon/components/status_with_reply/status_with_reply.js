@@ -433,14 +433,16 @@ class Status extends ImmutablePureComponent {
     }
 
     if (!replyOrigin && status.get('in_reply_to')) {
-      return (
-        <StatusContainer
-          id={status.get('in_reply_to_id')}
-          contextType={'public'}
-          showThread
-          replyOrigin={status.getIn(['account', 'display_name_html'])}
-        />
-      );
+      return null;
+      /* hide reply in home, trends and live stream */
+      // return (
+      //   <StatusContainer
+      //     id={status.get('in_reply_to_id')}
+      //     contextType={'public'}
+      //     showThread
+      //     replyOrigin={status.getIn(['account', 'display_name_html'])}
+      //   />
+      // );
     }
 
     if (replyOrigin && status.get('visibility') !== 'public') {
