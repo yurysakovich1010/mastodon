@@ -31,7 +31,7 @@ import CharacterCounter from 'mastodon/features/compose/components/character_cou
 import { importFetchedStatuses } from 'mastodon/actions/importer';
 
 import { connect } from 'react-redux';
-import { StatusReplyContainer } from './containers';
+import { StatusReplyContainer, ComposeFormContainer } from './containers';
 
 export const textForScreenReader = (intl, status, rebloggedByText = false) => {
   const displayName = status.getIn(['account', 'display_name']);
@@ -702,7 +702,7 @@ class Status extends ImmutablePureComponent {
                 <div className='status__reply-box'>
                   <textarea className='textarea' placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} onFocus={this.ensureShowReplyBox} />
                   <EmojiPickerDropdown onPickEmoji={this.handleEmojiPick} />
-                  {/*<ComposeFormContainer />*/}
+                  <ComposeFormContainer />
 
                   <button className='button btn-post' onClick={this.reply} disabled={this.state.replyText.length > 500}>Post</button>
                   <div className='character-counter__wrapper'><CharacterCounter max={500} text={this.state.replyText} /></div>
