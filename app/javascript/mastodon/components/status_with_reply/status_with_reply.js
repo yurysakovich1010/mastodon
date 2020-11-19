@@ -624,7 +624,8 @@ class Status extends ImmutablePureComponent {
     };
 
     const replies = Object.values(this.props.statuses.toJS())
-      .filter(st => st.in_reply_to_id === status.get('id'));
+      .filter(st => st.in_reply_to_id === status.get('id'))
+      .sort((st1, st2) => st1.created_at > st2.created_at ? 1 : -1);
     const repliesCount = replies.length;
 
     return (
