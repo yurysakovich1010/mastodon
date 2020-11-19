@@ -29,8 +29,6 @@ const allowedAroundShortCode = '><\u0085\u0020\u00a0\u1680\u2000\u2001\u2002\u20
 import Bundle from 'mastodon/features/ui/components/bundle';
 import CharacterCounter from 'mastodon/features/compose/components/character_counter';
 import { importFetchedStatuses } from 'mastodon/actions/importer';
-import { submitMarkers } from 'mastodon/actions/markers';
-import { expandTimelineSuccess } from 'mastodon/actions/timelines';
 
 import { connect } from 'react-redux';
 import { StatusReplyContainer } from './containers';
@@ -73,8 +71,6 @@ const messages = defineMessages({
 
 const mapDispatchToProps = dispatch => ({
   importFetchedStatuses: (...args) => dispatch(importFetchedStatuses(...args)),
-  submitMarkers: (...args) => dispatch(submitMarkers(...args)),
-  expandTimelineSuccess: (...args) => dispatch(expandTimelineSuccess(...args)),
 });
 
 export default @connect(null, mapDispatchToProps)@injectIntl
@@ -338,15 +334,11 @@ class Status extends ImmutablePureComponent {
   }
 
   getDescendants() {
-    const { status, contextType } = this.props;
+    const { status } = this.props;
     api().get(`/api/v1/statuses/${status.get('id')}/context`)
       .then(({ data }) => {
         if (0 < data.descendants.length) {
           this.props.importFetchedStatuses(data.descendants);
-          this.props.expandTimelineSuccess(contextType, data.descendants);
-          if (contextType === 'home') {
-            this.props.submitMarkers();
-          }
         }
       })
       .catch(err => {
