@@ -339,6 +339,14 @@ class Status extends ImmutablePureComponent {
       .then(({ data }) => {
         if (0 < data.descendants.length) {
           this.props.importFetchedStatuses(data.descendants);
+          // workaround start: force rerender
+          this.setState({
+            replyText: ' ',
+          });
+          this.setState({
+            replyText: '',
+          });
+          // workaround end
         }
       })
       .catch(err => {
