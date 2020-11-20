@@ -11,7 +11,7 @@ import UploadButtonContainer from '../containers/upload_button_container';
 import { defineMessages, injectIntl } from 'react-intl';
 // import SpoilerButtonContainer from 'mastodon/features/compose/containers/spoiler_button_container';
 // import PrivacyDropdownContainer from 'mastodon/features/compose/containers/privacy_dropdown_container';
-import EmojiPickerDropdown from 'mastodon/features/compose/containers/emoji_picker_dropdown_container';
+import EmojiPickerDropdown from '../containers/emoji_picker_dropdown_container';
 // import PollFormContainer from 'mastodon/features/compose/containers/poll_form_container';
 import UploadFormContainer from '../containers/upload_form_container';
 // import WarningContainer from 'mastodon/features/compose/containers/warning_container';
@@ -249,7 +249,10 @@ class ComposeForm extends ImmutablePureComponent {
           // autoFocus={!showSearch && !isMobile(window.innerWidth)}
           autoFocus={false}
         >
-          <EmojiPickerDropdown onPickEmoji={this.handleEmojiPick} />
+          <EmojiPickerDropdown
+            onPickEmoji={this.handleEmojiPick}
+            onFocus={this.handleFocus}
+          />
           <div className='compose-form__modifiers'>
             {
               this.props.inReplyTo === this.props.ancestor.get('id') && (
@@ -262,12 +265,14 @@ class ComposeForm extends ImmutablePureComponent {
 
         <div className='compose-form__buttons-wrapper'>
           <div className='compose-form__buttons'>
-            <UploadButtonContainer />
+            <UploadButtonContainer
+              onFocus={this.handleFocus}
+            />
             {/*<PollButtonContainer />*/}
             {/*<PrivacyDropdownContainer />*/}
             {/*<SpoilerButtonContainer />*/}
           </div>
-          <div className='character-counter__wrapper'><CharacterCounter max={500} text={text} /></div>
+          <div className='character-counter__wrapper'><CharacterCounter max={500} text={(this.props.inReplyTo === this.props.ancestor.get('id')) ? text : ''} /></div>
         </div>
 
         <div className='compose-form__publish'>

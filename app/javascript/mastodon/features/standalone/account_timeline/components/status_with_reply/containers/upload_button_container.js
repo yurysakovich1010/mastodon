@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import UploadButton from 'mastodon/features/compose/components/upload_button';
+import UploadButton from '../components/upload_button';
 import { uploadCompose } from 'mastodon/actions/compose_in_reply';
 
 const mapStateToProps = state => ({

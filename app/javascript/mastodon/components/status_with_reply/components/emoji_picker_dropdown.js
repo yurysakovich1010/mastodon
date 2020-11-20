@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
-import { EmojiPicker as EmojiPickerAsync } from '../../ui/util/async-components';
+import { EmojiPicker as EmojiPickerAsync } from 'mastodon/features/ui/util/async-components';
 import Overlay from 'react-overlays/lib/Overlay';
 import classNames from 'classnames';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import detectPassiveEvents from 'detect-passive-events';
-import { buildCustomEmojis, categoriesFromEmojis } from '../../emoji/emoji';
+import { buildCustomEmojis, categoriesFromEmojis } from 'mastodon/features/emoji/emoji';
 
 const messages = defineMessages({
   emoji: { id: 'emoji_button.label', defaultMessage: 'Insert emoji' },
@@ -292,6 +292,7 @@ class EmojiPickerDropdown extends React.PureComponent {
     onSkinTone: PropTypes.func.isRequired,
     skinTone: PropTypes.number.isRequired,
     button: PropTypes.node,
+    onFocus: PropTypes.func.isRequired,
   };
 
   state = {
@@ -328,6 +329,7 @@ class EmojiPickerDropdown extends React.PureComponent {
   }
 
   onToggle = (e) => {
+    this.props.onFocus();
     if (!this.state.loading && (!e.key || e.key === 'Enter')) {
       if (this.state.active) {
         this.onHideDropdown();
