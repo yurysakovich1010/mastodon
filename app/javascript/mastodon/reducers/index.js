@@ -19,6 +19,7 @@ import blocks from './blocks';
 import reports from './reports';
 import contexts from './contexts';
 import compose from './compose';
+import compose_in_reply from './compose_in_reply';
 import search from './search';
 import media_attachments from './media_attachments';
 import notifications from './notifications';
@@ -59,6 +60,7 @@ const reducers = {
   reports,
   contexts,
   compose,
+  compose_in_reply,
   search,
   media_attachments,
   notifications,

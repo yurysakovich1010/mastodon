@@ -2321,51 +2321,40 @@ button.icon-button i.fa-retweet {
     &-box {
       border-radius: 0.25rem;
       overflow: hidden;
-
-      .textarea {
-        background-color: #ECECEC;
-        color: #454545;
-        width: calc(100% - 24px);
-        font-size: 16px;
-        line-height: 24px;
-        padding: 12px;
-        border: 0;
-        &:focus {
-          outline: 0;
+      .compose-form {
+        .compose-form__autosuggest-wrapper {
+          border: none;
         }
+        .autosuggest-textarea__textarea {
+          background: #ECECEC;
+          color: #454545;
+          min-height: 50px;
 
-        &:placeholder-shown + button {
-          display: none;
+          &::placeholder {
+            color: #757575;
+          }
         }
-      }
-      .emoji-picker-dropdown {
-        position: absolute;
-        top: 15px;
-        right: 0;
-      }
-      .btn-post {
-        position: absolute;
-        right: 56px;
-        bottom: 13px;
-        height: 30px;
-        border-radius: 14px;
-        background-color: #2040a4;
-        font-size: 12px;
-        line-height: 14px;
-        color: #FFFFFF;
-
-        &[disabled] {
-          opacity: 0.5;
+        .compose-form__modifiers {
+          background: #ECECEC;
+          .compose-form__uploads-wrapper {
+            background: #ECECEC;
+          }
         }
-      }
-      .display-name a {
-        text-decoration: none;
-        color: inherit;
-      }
-      .character-counter__wrapper {
-        position: absolute;
-        right: 18px;
-        bottom: 18px;
+        .compose-form__buttons-wrapper {
+          background: #ECECEC;
+          border: 1px solid #ECECEC;
+        }
+        .compose-form__publish {
+          .compose-form__publish-button-wrapper {
+            button {
+              height: 30px!important;
+              border-radius: 14px!important;
+              background-color: #2040a4!important;
+              font-size: 12px!important;
+              line-height: 14px!important;
+            }
+          }
+        }
       }
     }
   }
