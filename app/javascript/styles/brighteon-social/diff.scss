@@ -2336,8 +2336,10 @@ button.icon-button i.fa-retweet {
         }
         .compose-form__modifiers {
           background: #ECECEC;
+          padding: 5px;
           .compose-form__uploads-wrapper {
             background: #ECECEC;
+            padding: 0;
           }
         }
         .compose-form__buttons-wrapper {
