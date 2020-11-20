@@ -251,7 +251,11 @@ class ComposeForm extends ImmutablePureComponent {
         >
           <EmojiPickerDropdown onPickEmoji={this.handleEmojiPick} />
           <div className='compose-form__modifiers'>
-            <UploadFormContainer />
+            {
+              this.props.inReplyTo === this.props.ancestor.get('id') && (
+                <UploadFormContainer />
+              )
+            }
             {/*<PollFormContainer />*/}
           </div>
         </AutosuggestTextarea>
