@@ -28,13 +28,14 @@ class AccountSearchService < BaseService
     return @exact_match if defined?(@exact_match)
 
     match = begin
-      if options[:resolve]
-        ResolveAccountService.new.call(query)
-      elsif domain_is_local?
-        Account.find_local(query_username)
-      else
-        Account.find_remote(query_username, query_domain)
-      end
+      # if options[:resolve]
+      #   ResolveAccountService.new.call(query)
+      # elsif domain_is_local?
+      #   Account.find_local(query_username)
+      # else
+      #   Account.find_remote(query_username, query_domain)
+      # end
+      Account.find_local(query_username)
     end
 
     match = nil if !match.nil? && !account.nil? && options[:following] && !account.following?(match)
