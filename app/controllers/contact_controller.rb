@@ -20,7 +20,7 @@ class ContactController < ApplicationController
       render :index
     end
 
-    ContactMailer.new_contact(@contact.feedback).deliver_now
+    ContactMailer.new_contact(@saved.feedback).deliver_now
   end
 
   private
