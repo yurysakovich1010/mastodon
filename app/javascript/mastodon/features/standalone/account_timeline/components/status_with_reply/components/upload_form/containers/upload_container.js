@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Upload from 'mastodon/features/compose/components/upload';
+import Upload from '../components/upload';
 import { undoUploadCompose } from 'mastodon/actions/compose_in_reply';
 import { openModal } from 'mastodon/actions/modal';
 import { submitCompose } from 'mastodon/actions/compose_in_reply';
