@@ -102,7 +102,8 @@ class StatusActionBar extends ImmutablePureComponent {
 
   handleReplyClick = () => {
     if (me) {
-      this.props.onReply(this.props.status, this.context.router.history);
+      // this.props.onReply(this.props.status, this.context.router.history);
+      this.props.onReply(this.props.status, null);
     } else {
       this._openInteractionDialog('reply');
     }
@@ -142,11 +143,13 @@ class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleDeleteClick = () => {
-    this.props.onDelete(this.props.status, this.context.router.history);
+    // this.props.onDelete(this.props.status, this.context.router.history);
+    this.props.onDelete(this.props.status, null);
   }
 
   handleRedraftClick = () => {
-    this.props.onDelete(this.props.status, this.context.router.history, true);
+    // this.props.onDelete(this.props.status, this.context.router.history, true);
+    this.props.onDelete(this.props.status, null, true);
   }
 
   handlePinClick = () => {
@@ -154,11 +157,13 @@ class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleMentionClick = () => {
-    this.props.onMention(this.props.status.get('account'), this.context.router.history);
+    // this.props.onMention(this.props.status.get('account'), this.context.router.history);
+    this.props.onMention(this.props.status.get('account'), null);
   }
 
   handleDirectClick = () => {
-    this.props.onDirect(this.props.status.get('account'), this.context.router.history);
+    // this.props.onDirect(this.props.status.get('account'), this.context.router.history);
+    this.props.onDirect(this.props.status.get('account'), null);
   }
 
   handleMuteClick = () => {
@@ -198,7 +203,8 @@ class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleOpen = () => {
-    this.context.router.history.push(`/statuses/${this.props.status.get('id')}`);
+    // this.context.router.history.push(`/statuses/${this.props.status.get('id')}`);
+    window.location = `${window.location.href}/${this.props.status.get('id')}`;
   }
 
   handleEmbed = () => {

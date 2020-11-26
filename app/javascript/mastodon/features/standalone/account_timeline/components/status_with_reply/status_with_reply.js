@@ -17,7 +17,7 @@ import classNames from 'classnames';
 import Icon from 'mastodon/components/icon';
 import { displayMedia } from 'mastodon/initial_state';
 import api from 'mastodon/api';
-import StatusContainer from 'mastodon/containers/status_container';
+import StatusContainer from '../../containers/status_container';
 import { checkIfAndroid } from 'mastodon/is_mobile';
 import EmojiPickerDropdown from 'mastodon/features/compose/containers/emoji_picker_dropdown_container';
 import { debounce } from 'lodash';
