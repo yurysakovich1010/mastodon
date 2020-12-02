@@ -223,6 +223,9 @@ class EmojiPickerMenu extends React.PureComponent {
 
   render () {
     const { loading, style, intl, custom_emojis, skinTone, frequentlyUsedEmojis } = this.props;
+    if (style.top === 0) {
+      style.top = window.pageYOffset;
+    }
 
     if (loading) {
       return <div style={{ width: 299 }} />;
