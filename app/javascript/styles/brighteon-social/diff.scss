@@ -2348,12 +2348,43 @@ button.icon-button i.fa-retweet {
         }
         .compose-form__publish {
           .compose-form__publish-button-wrapper {
+            overflow: visible;
             button {
               height: 30px!important;
               border-radius: 14px!important;
               background-color: #2040a4!important;
               font-size: 12px!important;
               line-height: 14px!important;
+
+              @-webkit-keyframes pop {
+                0%, 100% {
+                  -webkit-transform: translateY(0);
+                }
+                50% {
+                  -webkit-transform: translateY(-25px);
+                }
+              }
+              @keyframes pop {
+                0%, 100% {
+                  transform: translateY(0);
+                }
+                50% {
+                  transform: translateY(-25px);
+                }
+              }
+
+              &.jumping {
+                -webkit-animation-duration: 1s;
+                animation-duration: 1s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+                -webkit-animation-timing-function: ease-in-out;
+                animation-timing-function: ease-in-out;
+                animation-iteration-count: infinite;
+                -webkit-animation-iteration-count: infinite;
+                -webkit-animation-name: pop;
+                animation-name: pop;
+              }
             }
           }
         }

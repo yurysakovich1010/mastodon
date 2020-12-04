@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import CharacterCounter from 'mastodon/features/compose/components/character_counter';
 import Button from 'mastodon/components/button';
 import ImmutablePropTypes from 'react-immutable-proptypes';
@@ -72,6 +73,10 @@ class ComposeForm extends ImmutablePureComponent {
     showSearch: false,
   };
 
+  state = {
+    jumping: false,
+  }
+
   handleChange = (e) => {
     // this.props.onChange(e.target.value);
     if (!this.props.inReplyTo) {
@@ -104,7 +109,19 @@ class ComposeForm extends ImmutablePureComponent {
     }
 
     this.props.closeComposeModal(); // for only account card dropdown actions and profile page dropdown actions
+    this.jumpSubmitButton();
     this.props.onSubmit(this.context.router ? this.context.router.history : null);
+  }
+
+  jumpSubmitButton = () => {
+    this.setState({
+      jumping: true,
+    });
+    setTimeout(() => {
+      this.setState({
+        jumping: false,
+      });
+    }, 2000);
   }
 
   onSuggestionsClearRequested = () => {
@@ -197,6 +214,7 @@ class ComposeForm extends ImmutablePureComponent {
 
   render () {
     const { intl, onPaste, showSearch, anyMedia } = this.props;
+    const { jumping } = this.state;
     const disabled = this.props.isSubmitting;
     const text     = [this.props.spoilerText, countableText(this.props.text)].join('');
     const disabledButton = disabled || this.props.isUploading || this.props.isChangingUpload || length(text) > 500 || (text.length !== 0 && text.trim().length === 0 && !anyMedia);
@@ -276,7 +294,7 @@ class ComposeForm extends ImmutablePureComponent {
         </div>
 
         <div className='compose-form__publish'>
-          <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={disabledButton} block /></div>
+          <div className='compose-form__publish-button-wrapper'><Button className={classNames({ jumping })} text={publishText} onClick={this.handleSubmit} disabled={disabledButton} block /></div>
         </div>
       </div>
     );
