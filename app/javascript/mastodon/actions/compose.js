@@ -154,6 +154,11 @@ export function submitCompose(routerHistory) {
         'Idempotency-Key': getState().getIn(['compose', 'idempotencyKey']),
       },
     }).then(function (response) {
+      // Yura start
+      if (window.location.pathname.slice(0, 2) === '/@') {
+        location = window.location;
+      }
+      // Yra end
       if (response.data.visibility === 'direct' && getState().getIn(['conversations', 'mounted']) <= 0 && routerHistory) {
         routerHistory.push('/timelines/direct');
       } else if (routerHistory && routerHistory.location.pathname === '/statuses/new' && window.history.state) {
