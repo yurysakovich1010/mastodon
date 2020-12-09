@@ -1337,7 +1337,8 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
 }
 
 .announcements {
-  min-height: 95px;
+  display: block;
+
   &__container {
     background-color: $black;
     color: $white;
