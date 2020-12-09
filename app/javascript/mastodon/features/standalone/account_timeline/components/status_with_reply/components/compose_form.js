@@ -194,6 +194,9 @@ class ComposeForm extends ImmutablePureComponent {
 
   setAutosuggestTextarea = (c) => {
     this.autosuggestTextarea = c;
+    if (this.props.passRefCb) {
+      this.props.passRefCb(c);
+    }
   }
 
   setSpoilerText = (c) => {

@@ -280,7 +280,12 @@ class Status extends ImmutablePureComponent {
   }
 
   handleReply = () => {
-    this.props.onReply(this.props.status);
+    // this.props.onReply(this.props.status);
+    this.replyTextareaRef.textarea.focus();
+  }
+
+  setTextareaRef = (c) => {
+    this.replyTextareaRef = c;
   }
 
   toggleShowAllReplies = () => {
@@ -638,7 +643,7 @@ class Status extends ImmutablePureComponent {
                   <div className='status__reply-box'>
                     {/*<textarea className='textarea' placeholder='Write a reply' rows='1' onChange={this.updateReply} value={this.state.replyText} ref={this.setReplyBox} onFocus={this.ensureShowReplyBox} />*/}
                     {/*<EmojiPickerDropdown onPickEmoji={this.handleEmojiPick} />*/}
-                    <ComposeFormContainer ancestor={this.props.status} getReplies={this.getDescendants} />
+                    <ComposeFormContainer passRefCb={this.setTextareaRef} ancestor={this.props.status} getReplies={this.getDescendants} />
 
                     {/*<button className='button btn-post' onClick={this.reply} disabled={this.state.replyText.length > 500}>Post</button>*/}
                     {/*<div className='character-counter__wrapper'><CharacterCounter max={500} text={this.state.replyText} /></div>*/}
