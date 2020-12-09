@@ -1336,28 +1336,32 @@ body .muted-hint a, .admin-wrapper .content .muted-hint a {
   color: $black;
 }
 
-.announcements__container {
-  background-color: $black;
-  color: $white;
-  width: 100%;
-  .announcements__item {
-    padding-right: 90px;
-    text-align: center;
-    display: block;
+.announcements {
+  min-height: 95px;
+  &__container {
+    background-color: $black;
+    color: $white;
+    width: 100%;
 
-    &__content {
-      display: inline-block;
-      width: calc(100% - 30px);
+    .announcements__item {
+      padding-right: 90px;
+      text-align: center;
+      display: block;
 
-      & + .icon-button {
-        color: $white;
-      }
+      &__content {
+        display: inline-block;
+        width: calc(100% - 30px);
 
-      p {
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
+        & + .icon-button {
+          color: $white;
+        }
+
+        p {
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
       }
     }
   }
