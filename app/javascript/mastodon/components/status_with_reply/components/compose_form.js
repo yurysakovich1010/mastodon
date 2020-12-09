@@ -145,11 +145,12 @@ class ComposeForm extends ImmutablePureComponent {
   }
 
   handleFocus = () => {
-    if (this.composeForm && !this.props.singleColumn) {
-      const { left, right } = this.composeForm.getBoundingClientRect();
-      if (left < 0 || right > (window.innerWidth || document.documentElement.clientWidth)) {
-        this.composeForm.scrollIntoView();
-      }
+    if (this.composeForm){
+      this.composeForm.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+      });
     }
     if (this.props.inReplyTo !== this.props.ancestor.get('id')) {
       this.props.replyCompose(this.props.ancestor);
@@ -230,7 +231,7 @@ class ComposeForm extends ImmutablePureComponent {
     }
 
     return (
-      <div className='compose-form'>
+      <div className='compose-form' ref={this.setRef}>
         {/*<WarningContainer />*/}
 
         {/*<ReplyIndicatorContainer />*/}
