@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import Avatar from '../../../components/avatar';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { makeGetAccount } from 'mastodon/selectors';
+import { approved } from 'mastodon/initial_state';
 
 const makeMapStateToProps = () => {
   const getAccount = makeGetAccount();
@@ -41,7 +42,12 @@ class ProfileBox extends ImmutablePureComponent {
           </a>
         </div>
         <div className='profile_box-body'>
-          <div className='d-flex justify-content-center'>{this.props.account.get('display_name_html')}</div>
+          <div className='d-flex justify-content-center align-items-center'>
+            {this.props.account.get('display_name_html')}
+            {approved && (
+              <i className='fa fa-check-circle ml2' />
+            )}
+          </div>
           <div className='d-flex justify-content-center'>@brighteon.social</div>
           <div className='d-flex justify-content-space-around mt2'>
             <div className='text-align-center'>

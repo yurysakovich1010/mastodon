@@ -47,6 +47,10 @@
   margin-bottom: 2rem !important;
 }
 
+.ml2 {
+  margin-left: 0.5rem !important;
+}
+
 .mr1 {
   margin-right: 0.25rem !important;
 }
@@ -201,4 +205,8 @@ h6 {
 
 .float-right {
   float: right;
+}
+
+.fg-color-theme {
+  color: $theme-color;
 }
