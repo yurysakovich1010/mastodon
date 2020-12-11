@@ -48,6 +48,10 @@ Rails.application.routes.draw do
     end
   end
 
+  devise_scope :user  do
+    get 'auth/auth/:provider/callback/from_js', to: 'auth/omniauth_callbacks#from_js'
+  end
+
   devise_for :users, path: 'auth', controllers: {
     omniauth_callbacks: 'auth/omniauth_callbacks',
     sessions:           'auth/sessions',

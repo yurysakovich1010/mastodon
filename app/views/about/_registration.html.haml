@@ -21,6 +21,8 @@
 
     .actions
       = f.button :button, sign_up_message, type: :submit, class: 'button button-primary button-signup', disabled: closed_registrations?
+    .actions
+      = link_to 'Sign In Through Brighteon', user_brighteon_omniauth_authorize_path, type: :submit, class: 'button button-primary button-brighteon'
 
   - if closed_registrations? && @instance_presenter.closed_registrations_message.present?
     .simple_form__overlay-area__overlay

@@ -7,7 +7,7 @@ module Omniauthable
   TEMP_EMAIL_REGEX  = /\A#{TEMP_EMAIL_PREFIX}/.freeze
 
   included do
-    devise :omniauthable
+    devise :omniauthable, omniauth_providers: %i[brighteon]
 
     def omniauth_providers
       Devise.omniauth_configs.keys
@@ -57,7 +57,7 @@ module Omniauthable
 
       user = User.new(user_params_from_auth(email, auth))
 
-      user.account.avatar_remote_url = auth.info.image if auth.info.image =~ /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/
+      # user.account.avatar_remote_url = auth.info.image if auth.info.image =~ /\A#{URI::DEFAULT_PARSER.make_regexp(%w(http https))}\z/
       user.skip_confirmation!
       user.save!
       user
@@ -71,6 +71,7 @@ module Omniauthable
         password: Devise.friendly_token[0, 20],
         agreement: true,
         external: true,
+        approval: true,
         account_attributes: {
           username: ensure_unique_username(auth.uid),
           display_name: auth.info.full_name || [auth.info.first_name, auth.info.last_name].join(' '),
