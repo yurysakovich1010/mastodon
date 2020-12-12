@@ -316,6 +316,9 @@ Rails.application.routes.draw do
 
         member do
           get :context
+          get :replies
+          get :reblogs
+          get :favourites
         end
       end
 

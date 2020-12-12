@@ -89,6 +89,8 @@ class StatusActionBar extends ImmutablePureComponent {
     scrollKey: PropTypes.string,
     intl: PropTypes.object.isRequired,
     showAllReplies: PropTypes.any,
+    onOpenReblogsModal: PropTypes.func.isRequired,
+    onOpenFavouritesModal: PropTypes.func.isRequired,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -231,6 +233,14 @@ class StatusActionBar extends ImmutablePureComponent {
     }
   }
 
+  handleOpenReblogsModal = () => {
+    this.props.onOpenReblogsModal(this.props.status);
+  }
+
+  handleOpenFavouritesModal = () => {
+    this.props.onOpenFavouritesModal(this.props.status);
+  }
+
   render () {
     const { status, relationship, intl, withDismiss, scrollKey } = this.props;
 
@@ -336,11 +346,11 @@ class StatusActionBar extends ImmutablePureComponent {
         {/*</div>*/}
         <div className='status__action-bar__counter'>
           <IconButton className={classNames('status__action-bar-button', { reblogPrivate })} disabled={!publicStatus && !reblogPrivate}  active={status.get('reblogged')} pressed={status.get('reblogged')} title={reblogTitle} icon='retweet' onClick={this.handleReblogClick} />
-          <span className='status__action-bar__counter__label' >{status.get('reblogs_count')}</span>
+          <span className='status__action-bar__counter__label' onClick={this.handleOpenReblogsModal}>{status.get('reblogs_count')} Boosts</span>
         </div>
         <div className='status__action-bar__counter'>
           <IconButton className='status__action-bar-button star-icon' animate active={status.get('favourited')} pressed={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='star' onClick={this.handleFavouriteClick} />
-          <span className='status__action-bar__counter__label' >{status.get('favourites_count')}</span>
+          <span className='status__action-bar__counter__label' onClick={this.handleOpenFavouritesModal}>{status.get('favourites_count')} Favorites</span>
         </div>
         {/*{shareButton}*/}
 

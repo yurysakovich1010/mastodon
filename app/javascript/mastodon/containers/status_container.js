@@ -210,6 +210,24 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
     dispatch(unblockDomain(domain));
   },
 
+  // inject Yura code start
+  onOpenRepliesModal (status) {
+    dispatch(openModal('REPLIES', {
+      status,
+    }));
+  },
+  onOpenReblogsModal (status) {
+    dispatch(openModal('REBLOGS', {
+      status,
+    }));
+  },
+  onOpenFavouritesModal (status) {
+    dispatch(openModal('FAVOURITES', {
+      status,
+    }));
+  },
+  // inject Yura code end
+
 });
 
 export default injectIntl(connect(makeMapStateToProps, mapDispatchToProps)(Status));

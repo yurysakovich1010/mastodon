@@ -90,6 +90,9 @@ class StatusActionBar extends ImmutablePureComponent {
     intl: PropTypes.object.isRequired,
     showAllReplies: PropTypes.any,
     toggleShowAllReplies: PropTypes.func.isRequired,
+    onOpenRepliesModal: PropTypes.func.isRequired,
+    onOpenReblogsModal: PropTypes.func.isRequired,
+    onOpenFavouritesModal: PropTypes.func.isRequired,
   };
 
   // Avoid checking props that are functions (and whose equality will always
@@ -236,6 +239,18 @@ class StatusActionBar extends ImmutablePureComponent {
     this.props.toggleShowAllReplies();
   }
 
+  handleOpenRepliesModal = () => {
+    this.props.onOpenRepliesModal(this.props.status);
+  }
+
+  handleOpenReblogsModal = () => {
+    this.props.onOpenReblogsModal(this.props.status);
+  }
+
+  handleOpenFavouritesModal = () => {
+    this.props.onOpenFavouritesModal(this.props.status);
+  }
+
   render () {
     const { status, relationship, intl, withDismiss, scrollKey } = this.props;
 
@@ -340,15 +355,15 @@ class StatusActionBar extends ImmutablePureComponent {
       <div className='status__action-bar'>
         <div className='status__action-bar__counter'>
           <IconButton className='status__action-bar-button' title={replyTitle} icon={status.get('in_reply_to_account_id') === status.getIn(['account', 'id']) ? 'reply' : replyIcon} onClick={this.handleReplyClick} />
-          <span className='status__action-bar__counter__label' >{status.get('replies_count')}</span>
+          <span className='status__action-bar__counter__label' onClick={this.handleOpenRepliesModal}>{status.get('replies_count')} Replies</span>
         </div>
         <div className='status__action-bar__counter'>
           <IconButton className={classNames('status__action-bar-button', { reblogPrivate })} disabled={!publicStatus && !reblogPrivate}  active={status.get('reblogged')} pressed={status.get('reblogged')} title={reblogTitle} icon='retweet' onClick={this.handleReblogClick} />
-          <span className='status__action-bar__counter__label' >{status.get('reblogs_count')}</span>
+          <span className='status__action-bar__counter__label' onClick={this.handleOpenReblogsModal}>{status.get('reblogs_count')} Boosts</span>
         </div>
         <div className='status__action-bar__counter'>
           <IconButton className='status__action-bar-button star-icon' animate active={status.get('favourited')} pressed={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='star' onClick={this.handleFavouriteClick} />
-          <span className='status__action-bar__counter__label' >{status.get('favourites_count')}</span>
+          <span className='status__action-bar__counter__label' onClick={this.handleOpenFavouritesModal}>{status.get('favourites_count')} Favorites</span>
         </div>
         {shareButton}
 

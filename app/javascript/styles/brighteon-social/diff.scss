@@ -1386,6 +1386,146 @@ button.icon-button i.fa-retweet {
   }
 }
 
+.status__action-bar__counter__label {
+  width: auto;
+  cursor: pointer;
+}
+
+.replies-modal {
+  background: #ffffff;
+  border: 1px solid #c0cdd9;
+  color: #000000;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 90vw;
+  width: 480px;
+  position: relative;
+  flex-direction: column;
+
+  &__container {
+    //
+  }
+
+  &__header {
+    padding: 1rem;
+    border-bottom: 1px solid #c0cdd9;
+  }
+
+  &__body {
+    padding: 1rem;
+  }
+
+  &__reply-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: inline-block;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  &__reply-item {
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__close {
+    cursor: pointer;
+  }
+}
+
+.reblogs-modal {
+  background: #ffffff;
+  border: 1px solid #c0cdd9;
+  color: #000000;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 90vw;
+  width: 480px;
+  position: relative;
+  flex-direction: column;
+
+  &__container {
+    //
+  }
+
+  &__header {
+    padding: 1rem;
+    border-bottom: 1px solid #c0cdd9;
+  }
+
+  &__body {
+    padding: 1rem;
+  }
+
+  &__reblog-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: inline-block;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  &__reblog-item {
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__close {
+    cursor: pointer;
+  }
+}
+
+.favourites-modal {
+  background: #ffffff;
+  border: 1px solid #c0cdd9;
+  color: #000000;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 90vw;
+  width: 480px;
+  position: relative;
+  flex-direction: column;
+
+  &__container {
+    //
+  }
+
+  &__header {
+    padding: 1rem;
+    border-bottom: 1px solid #c0cdd9;
+  }
+
+  &__body {
+    padding: 1rem;
+  }
+
+  &__favourite-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: inline-block;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  &__favourite-item {
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__close {
+    cursor: pointer;
+  }
+}
+
 // page by page
 
 .about, .home {

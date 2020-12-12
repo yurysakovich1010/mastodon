@@ -13,6 +13,10 @@ import AudioModal from './audio_modal';
 import ComposeModal from './compose_modal';
 import ConfirmationModal from './confirmation_modal';
 import FocalPointModal from './focal_point_modal';
+import RepliesModal from './replies_modal';
+import ReblogsModal from './reblogs_modal';
+import FavouritesModal from './favourites_modal';
+
 import {
   MuteModal,
   BlockModal,
@@ -37,6 +41,9 @@ const MODAL_COMPONENTS = {
   'LIST_EDITOR': ListEditor,
   'FOCAL_POINT': () => Promise.resolve({ default: FocalPointModal }),
   'LIST_ADDER':ListAdder,
+  'REPLIES': () => Promise.resolve({ default: RepliesModal }),
+  'REBLOGS': () => Promise.resolve({ default: ReblogsModal }),
+  'FAVOURITES': () => Promise.resolve({ default: FavouritesModal }),
 };
 
 export default class ModalRoot extends React.PureComponent {

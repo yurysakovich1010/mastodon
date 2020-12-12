@@ -5,8 +5,8 @@ class Api::V1::StatusesController < Api::BaseController
 
   before_action -> { authorize_if_got_token! :read, :'read:statuses' }, except: [:create, :destroy]
   before_action -> { doorkeeper_authorize! :write, :'write:statuses' }, only:   [:create, :destroy]
-  before_action :require_user!, except:  [:show, :context]
-  before_action :set_status, only:       [:show, :context]
+  before_action :require_user!, except:  [:show, :context, :replies, :reblogs, :favourites]
+  before_action :set_status, only:       [:show, :context, :replies, :reblogs, :favourites]
   before_action :set_thread, only:       [:create]
 
   override_rate_limit_headers :create, family: :statuses
@@ -32,6 +32,45 @@ class Api::V1::StatusesController < Api::BaseController
     statuses = [@status] + @context.ancestors + @context.descendants
 
     render json: @context, serializer: REST::ContextSerializer, relationships: StatusRelationshipsPresenter.new(statuses, current_user&.account_id)
+  end
+
+  def replies
+    descendants_results = @status.descendants(CONTEXT_LIMIT, current_account)
+    loaded_descendants  = cache_collection(descendants_results, Status)
+
+    @statuses = loaded_descendants
+
+    render json: @statuses,
+           each_serializer: REST::StatusSerializer,
+           relationships: StatusRelationshipsPresenter.new(@statuses, current_user&.account_id),
+           status: 200
+  end
+
+  def reblogs
+    reblogs = @status.reblogs
+    loaded_reblogs  = cache_collection(reblogs, Status)
+
+    @statuses = loaded_reblogs
+
+    render json: @statuses,
+           each_serializer: REST::StatusSerializer,
+           relationships: StatusRelationshipsPresenter.new(@statuses, current_user&.account_id),
+           status: 200
+  end
+
+  def favourites
+    favourites = Account
+        .includes(:favourites, :account_stat)
+        .references(:favourites)
+        .where(favourites: { status_id: @status.id })
+
+    loaded_favourites  = cache_collection(favourites, Account)
+
+    @statuses = loaded_favourites
+
+    render json: @statuses,
+           each_serializer: REST::AccountSerializer,
+           status: 200
   end
 
   def create
