@@ -149,7 +149,6 @@ class ComposeForm extends ImmutablePureComponent {
       this.composeForm.scrollIntoView({
         behavior: 'smooth',
         block: 'center',
-        inline: 'center',
       });
     }
     if (this.props.inReplyTo !== this.props.ancestor.get('id')) {
