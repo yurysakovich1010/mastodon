@@ -125,19 +125,19 @@ class ComposeForm extends ImmutablePureComponent {
   }
 
   onSuggestionsClearRequested = () => {
-    this.props.onClearSuggestions();
+    // this.props.onClearSuggestions();
   }
 
   onSuggestionsFetchRequested = (token) => {
-    this.props.onFetchSuggestions(token);
+    // this.props.onFetchSuggestions(token);
   }
 
   onSuggestionSelected = (tokenStart, token, value) => {
-    this.props.onSuggestionSelected(tokenStart, token, value, ['text']);
+    // this.props.onSuggestionSelected(tokenStart, token, value, ['text']);
   }
 
   onSpoilerSuggestionSelected = (tokenStart, token, value) => {
-    this.props.onSuggestionSelected(tokenStart, token, value, ['spoiler_text']);
+    // this.props.onSuggestionSelected(tokenStart, token, value, ['spoiler_text']);
   }
 
   handleChangeSpoilerText = (e) => {
