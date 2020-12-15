@@ -13,6 +13,8 @@ class ProcessMentionsService < BaseService
     @status  = status
     mentions = []
 
+    reply_treated_as_mention = false
+
     status.text = status.text.gsub(Account::MENTION_RE) do |match|
       username, domain = Regexp.last_match(1).split('@')
 
@@ -25,6 +27,7 @@ class ProcessMentionsService < BaseService
       end
 
       mentioned_account = Account.find_remote(username, domain)
+      reply_treated_as_mention = true unless @status.in_reply_to_account_id === mentioned_account.id
 
       if mention_undeliverable?(mentioned_account)
         begin
@@ -40,6 +43,15 @@ class ProcessMentionsService < BaseService
       mentions << mention if mention.save
 
       "@#{mentioned_account.acct}"
+    end
+
+    if !reply_treated_as_mention and @status.in_reply_to_account_id?
+      mentioned_account = Account.find_by(id: @status.in_reply_to_account_id)
+
+      unless mention_undeliverable?(mentioned_account)
+        mention = mentioned_account.mentions.new(status: status)
+        mentions << mention if mention.save
+      end
     end
 
     status.save!
