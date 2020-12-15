@@ -1696,8 +1696,12 @@ button.icon-button i.fa-retweet {
       @media screen and (max-width: 415px) {
         height: 100vh;
         min-height: 100vh; // fix firefox issue
+
+        & > * {
+          min-height: 100vh; // fix empty timeline view
+        }
       }
-      & > .columns-area--mobile {
+      & > * {
         height: auto;
         min-height: 100%;
         display: flex;
@@ -1705,10 +1709,12 @@ button.icon-button i.fa-retweet {
         & > .column {
           flex: 1;
         }
-      }
-      & > * {
-        min-height: 100%;
-        height: auto;
+        & > .react-swipeable-view-container {
+          flex: 1;
+          & > * {
+            height: 100%;
+          }
+        }
       }
     }
   }
