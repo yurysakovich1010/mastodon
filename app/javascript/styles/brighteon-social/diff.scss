@@ -1712,7 +1712,7 @@ button.icon-button i.fa-retweet {
         & > .react-swipeable-view-container {
           flex: 1;
           & > * {
-            height: 100%;
+            height: auto;
           }
         }
       }
