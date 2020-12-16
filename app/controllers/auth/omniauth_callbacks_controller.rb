@@ -30,4 +30,6 @@ class Auth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       auth_setup_path(missing_email: '1')
     end
   end
+
+  def from_js; end
 end

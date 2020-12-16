@@ -69,6 +69,9 @@ class Auth::SessionsController < Devise::SessionsController
       return root_path if config.strategy.redirect_at_sign_in
     end
 
+    # redirect_params = { client_id: ENV['BRIGHTEON_CLIENT_ID'], redirect_uri: stored_location_for(:user) }
+    # return "#{ENV['BRIGHTEON_AUTH_URL']}/logout?" + redirect_params.to_query
+
     super
   end
 

@@ -1567,6 +1567,10 @@ button.icon-button i.fa-retweet {
     background: #39b54a;
   }
 
+  .button.button-brighteon {
+    background-color: #e1423b;
+  }
+
   .simple_form .input.boolean label a,
   .simple_form .hint a {
     color: $white;
@@ -1772,6 +1776,16 @@ button.icon-button i.fa-retweet {
   .simple_form button {
     background-color: #00c642;
     text-transform: capitalize;
+  }
+
+  .simple_form.alternative-login {
+    h4 {
+      color: $white;
+    }
+
+    a.button-brighteon {
+        background-color: #e1423b;
+      }
   }
 }
 

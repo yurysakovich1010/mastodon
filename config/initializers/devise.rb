@@ -1,3 +1,5 @@
+require 'omniauth/brighteon'
+
 Warden::Manager.after_set_user except: :fetch do |user, warden|
   if user.session_active?(warden.cookies.signed['_session_id'] || warden.raw_session['auth_id'])
     session_id = warden.cookies.signed['_session_id'] || warden.raw_session['auth_id']
@@ -378,4 +380,6 @@ Devise.setup do |config|
     config.ldap_uid_conversion_search   = ENV.fetch('LDAP_UID_CONVERSION_SEARCH', '.,- ')
     config.ldap_uid_conversion_replace  = ENV.fetch('LDAP_UID_CONVERSION_REPLACE', '_')
   end
+
+  config.omniauth :brighteon, ENV['BRIGHTEON_CLIENT_ID'], nil, provider_ignores_state: true
 end
