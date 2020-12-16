@@ -26,8 +26,14 @@ class FavouritesModal extends React.PureComponent {
     const { status } = this.props;
     api().get(`/api/v1/statuses/${status.get('id')}/favourites`)
       .then(({ data }) => {
+        const uniqueFavourites = data.reduce((unique, favourite) => {
+          if (unique.findIndex(r => r.id === favourite.id) === -1) {
+            unique.push(favourite);
+          }
+          return unique;
+        }, []);
         this.setState({
-          favourites: data,
+          favourites: uniqueFavourites,
         });
       })
       .catch(err => {
@@ -41,7 +47,6 @@ class FavouritesModal extends React.PureComponent {
 
   render () {
     const { favourites } = this.state;
-    console.log('favourites', favourites);
 
     return (
       <div className='modal-root__modal favourites-modal'>

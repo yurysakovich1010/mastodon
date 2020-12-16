@@ -25,8 +25,15 @@ class RepliesModal extends React.PureComponent {
     const { status } = this.props;
     api().get(`/api/v1/statuses/${status.get('id')}/replies`)
       .then(({ data }) => {
+        const replies = data.map(reply => reply.account);
+        const uniqueReplies = replies.reduce((unique, reply) => {
+          if (unique.findIndex(r => r.id === reply.id) === -1) {
+            unique.push(reply);
+          }
+          return unique;
+        }, []);
         this.setState({
-          replies: data.map(reply => reply.account),
+          replies: uniqueReplies,
         });
       })
       .catch(err => {

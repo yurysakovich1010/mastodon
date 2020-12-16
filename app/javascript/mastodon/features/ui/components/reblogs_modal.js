@@ -25,8 +25,15 @@ class ReblogsModal extends React.PureComponent {
     const { status } = this.props;
     api().get(`/api/v1/statuses/${status.get('id')}/reblogs`)
       .then(({ data }) => {
+        const reblogs = data.map(reblog => reblog.account);
+        const uniqueReblogs = reblogs.reduce((unique, reblog) => {
+          if (unique.findIndex(r => r.id === reblog.id) === -1) {
+            unique.push(reblog);
+          }
+          return unique;
+        }, []);
         this.setState({
-          reblogs: data.map(reblog => reblog.account),
+          reblogs: uniqueReblogs,
         });
       })
       .catch(err => {

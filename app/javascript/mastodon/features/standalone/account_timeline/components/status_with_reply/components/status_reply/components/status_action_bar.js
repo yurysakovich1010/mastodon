@@ -240,7 +240,7 @@ class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleOpenReblogsModal = () => {
-    const  { status } = this.props;
+    const { status } = this.props;
     const count = status.get('reblogs_count');
     if (count > 0) {
       this.props.onOpenReblogsModal(status);
@@ -248,7 +248,7 @@ class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleOpenFavouritesModal = () => {
-    const  { status } = this.props;
+    const { status } = this.props;
     const count = status.get('favourites_count');
     if (count > 0) {
       this.props.onOpenFavouritesModal(status);
