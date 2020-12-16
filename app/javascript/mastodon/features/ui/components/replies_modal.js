@@ -57,9 +57,13 @@ class RepliesModal extends React.PureComponent {
           </div>
           <div className='replies-modal__body'>
             {replies.map(reply => (
-              <a href={reply.url} key={reply.id}>
+              <a
+                href={reply.url}
+                key={reply.id}
+                className='replies-modal__reply-item'
+              >
                 <div
-                  className='d-flex replies-modal__reply-item'
+                  className='d-flex'
                 >
                   <div
                     className='replies-modal__reply-avatar mr2'

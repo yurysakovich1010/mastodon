@@ -1430,6 +1430,8 @@ button.icon-button i.fa-retweet {
   }
 
   &__reply-item {
+    display: block;
+    outline: none;
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }
@@ -1479,6 +1481,8 @@ button.icon-button i.fa-retweet {
   }
 
   &__reblog-item {
+    display: block;
+    outline: none;
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }
@@ -1528,6 +1532,8 @@ button.icon-button i.fa-retweet {
   }
 
   &__favourite-item {
+    display: block;
+    outline: none;
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }

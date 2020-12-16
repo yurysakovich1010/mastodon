@@ -59,9 +59,13 @@ class FavouritesModal extends React.PureComponent {
           </div>
           <div className='favourites-modal__body'>
             {favourites.map(favourite => (
-              <a href={favourite.url} key={favourite.id}>
+              <a
+                href={favourite.url}
+                key={favourite.id}
+                className='favourites-modal__favourite-item'
+              >
                 <div
-                  className='d-flex favourites-modal__favourite-item'
+                  className='d-flex'
                 >
                   <div
                     className='favourites-modal__favourite-avatar mr2'
