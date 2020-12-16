@@ -339,11 +339,13 @@ class StatusNotification extends ImmutablePureComponent {
       const display_name_html = status.getIn(['account', 'display_name_html']);
       const inReplyTo = this.props.status.get('in_reply_to');
 
-      prepend = (
-        <div className='status__prepend'>
-          <strong>{display_name_html} replied to your <Link to={`/statuses/${inReplyTo.get('id')}`}>post</Link></strong>
-        </div>
-      );
+      if (inReplyTo) {
+        prepend = (
+          <div className='status__prepend'>
+            <strong>{display_name_html} replied to your <Link to={`/statuses/${inReplyTo.get('id')}`}>post</Link></strong>
+          </div>
+        );
+      }
     }
 
     if (status.get('media_attachments').size > 0) {
