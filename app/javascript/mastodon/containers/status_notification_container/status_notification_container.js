@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import Status from '../components/status';
-import Status from '../components/status_with_reply';
-import { makeGetAccount, makeGetStatus } from '../selectors';
+import StatusNotification from '../../components/status_notification';
+import { makeGetAccount, makeGetStatus } from 'mastodon/selectors';
 import {
   replyCompose,
   mentionCompose,
   directCompose,
-} from '../actions/compose';
+} from 'mastodon/actions/compose';
 import {
   reblog,
   favourite,
@@ -17,7 +16,7 @@ import {
   unbookmark,
   pin,
   unpin,
-} from '../actions/interactions';
+} from 'mastodon/actions/interactions';
 import {
   muteStatus,
   unmuteStatus,
@@ -25,22 +24,22 @@ import {
   hideStatus,
   revealStatus,
   toggleStatusCollapse,
-} from '../actions/statuses';
+} from 'mastodon/actions/statuses';
 import {
   unmuteAccount,
   unblockAccount,
-} from '../actions/accounts';
+} from 'mastodon/actions/accounts';
 import {
   blockDomain,
   unblockDomain,
-} from '../actions/domain_blocks';
-import { initMuteModal } from '../actions/mutes';
-import { initBlockModal } from '../actions/blocks';
-import { initReport } from '../actions/reports';
-import { openModal } from '../actions/modal';
+} from 'mastodon/actions/domain_blocks';
+import { initMuteModal } from 'mastodon/actions/mutes';
+import { initBlockModal } from 'mastodon/actions/blocks';
+import { initReport } from 'mastodon/actions/reports';
+import { openModal } from 'mastodon/actions/modal';
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
-import { boostModal, deleteModal, me } from '../initial_state';
-import { showAlertForError } from '../actions/alerts';
+import { boostModal, deleteModal, me } from 'mastodon/initial_state';
+import { showAlertForError } from 'mastodon/actions/alerts';
 
 const messages = defineMessages({
   deleteConfirm: { id: 'confirmations.delete.confirm', defaultMessage: 'Delete' },
@@ -56,7 +55,7 @@ const makeMapStateToProps = () => {
   const getStatus = makeGetStatus();
 
   const mapStateToProps = (state, props) => ({
-    statuses: state.get('statuses'),
+    // statuses: state.get('statuses'),
     status: getStatus(state, props),
     account: state.getIn(['accounts', me]),
   });
@@ -210,24 +209,6 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
     dispatch(unblockDomain(domain));
   },
 
-  // inject Yura code start
-  onOpenRepliesModal (status) {
-    dispatch(openModal('REPLIES', {
-      status,
-    }));
-  },
-  onOpenReblogsModal (status) {
-    dispatch(openModal('REBLOGS', {
-      status,
-    }));
-  },
-  onOpenFavouritesModal (status) {
-    dispatch(openModal('FAVOURITES', {
-      status,
-    }));
-  },
-  // inject Yura code end
-
 });
 
-export default injectIntl(connect(makeMapStateToProps, mapDispatchToProps)(Status));
+export default injectIntl(connect(makeMapStateToProps, mapDispatchToProps)(StatusNotification));

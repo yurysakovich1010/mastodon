@@ -5,7 +5,7 @@ import { HotKeys } from 'react-hotkeys';
 import PropTypes from 'prop-types';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { me } from 'mastodon/initial_state';
-import StatusWithoutReplyContainer from 'mastodon/containers/status_without_reply_container';
+import StatusNotificationContainer from 'mastodon/containers/status_notification_container';
 import AccountContainer from 'mastodon/containers/account_container';
 import FollowRequestContainer from '../containers/follow_request_container';
 import Icon from 'mastodon/components/icon';
@@ -158,7 +158,7 @@ class Notification extends ImmutablePureComponent {
 
   renderMention (notification) {
     return (
-      <StatusWithoutReplyContainer
+      <StatusNotificationContainer
         id={notification.get('status')}
         withDismiss
         hidden={this.props.hidden}
@@ -189,7 +189,7 @@ class Notification extends ImmutablePureComponent {
             </span>
           </div>
 
-          <StatusWithoutReplyContainer
+          <StatusNotificationContainer
             id={notification.get('status')}
             account={notification.get('account')}
             muted
@@ -221,7 +221,7 @@ class Notification extends ImmutablePureComponent {
             </span>
           </div>
 
-          <StatusWithoutReplyContainer
+          <StatusNotificationContainer
             id={notification.get('status')}
             account={notification.get('account')}
             muted
@@ -259,7 +259,7 @@ class Notification extends ImmutablePureComponent {
             </span>
           </div>
 
-          <StatusWithoutReplyContainer
+          <StatusNotificationContainer
             id={notification.get('status')}
             account={account}
             muted
