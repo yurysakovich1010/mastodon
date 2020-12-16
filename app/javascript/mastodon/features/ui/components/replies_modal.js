@@ -57,24 +57,25 @@ class RepliesModal extends React.PureComponent {
           </div>
           <div className='replies-modal__body'>
             {replies.map(reply => (
-              <div
-                className='d-flex replies-modal__reply-item'
-                key={reply.id}
-              >
+              <a href={reply.url} key={reply.id}>
                 <div
-                  className='replies-modal__reply-avatar mr2'
-                  style={{
-                    backgroundImage: `url(${reply.avatar})`,
-                  }}
-                />
-                <strong>
-                  { reply.username }
-                </strong>
-                <span> </span>
-                <span>
-                  @{ reply.acct }
-                </span>
-              </div>
+                  className='d-flex replies-modal__reply-item'
+                >
+                  <div
+                    className='replies-modal__reply-avatar mr2'
+                    style={{
+                      backgroundImage: `url(${reply.avatar})`,
+                    }}
+                  />
+                  <strong>
+                    { reply.username }
+                  </strong>
+                  <span> </span>
+                  <span>
+                    @{ reply.acct }
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
         </div>

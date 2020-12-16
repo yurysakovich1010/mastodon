@@ -57,24 +57,25 @@ class ReblogsModal extends React.PureComponent {
           </div>
           <div className='reblogs-modal__body'>
             {reblogs.map(reblog => (
-              <div
-                className='d-flex reblogs-modal__reblog-item'
-                key={reblog.id}
-              >
+              <a href={reblog.url} key={reblog.id}>
                 <div
-                  className='reblogs-modal__reblog-avatar mr2'
-                  style={{
-                    backgroundImage: `url(${reblog.avatar})`,
-                  }}
-                />
-                <strong>
-                  { reblog.username }
-                </strong>
-                <span> </span>
-                <span>
-                  @{ reblog.acct }
-                </span>
-              </div>
+                  className='d-flex reblogs-modal__reblog-item'
+                >
+                  <div
+                    className='reblogs-modal__reblog-avatar mr2'
+                    style={{
+                      backgroundImage: `url(${reblog.avatar})`,
+                    }}
+                  />
+                  <strong>
+                    { reblog.username }
+                  </strong>
+                  <span> </span>
+                  <span>
+                    @{ reblog.acct }
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
         </div>

@@ -1407,12 +1407,16 @@ button.icon-button i.fa-retweet {
   }
 
   &__header {
-    padding: 1rem;
     border-bottom: 1px solid #c0cdd9;
+    font-weight: bold;
+    padding: 1rem;
   }
 
   &__body {
     padding: 1rem;
+    & > a {
+      text-decoration: none;
+    }
   }
 
   &__reply-avatar {
@@ -1452,12 +1456,16 @@ button.icon-button i.fa-retweet {
   }
 
   &__header {
-    padding: 1rem;
     border-bottom: 1px solid #c0cdd9;
+    font-weight: bold;
+    padding: 1rem;
   }
 
   &__body {
     padding: 1rem;
+    & > a {
+      text-decoration: none;
+    }
   }
 
   &__reblog-avatar {
@@ -1497,12 +1505,16 @@ button.icon-button i.fa-retweet {
   }
 
   &__header {
-    padding: 1rem;
     border-bottom: 1px solid #c0cdd9;
+    font-weight: bold;
+    padding: 1rem;
   }
 
   &__body {
     padding: 1rem;
+    & > a {
+      text-decoration: none;
+    }
   }
 
   &__favourite-avatar {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import api from 'mastodon/api';
@@ -40,6 +41,7 @@ class FavouritesModal extends React.PureComponent {
 
   render () {
     const { favourites } = this.state;
+    console.log('favourites', favourites);
 
     return (
       <div className='modal-root__modal favourites-modal'>
@@ -57,24 +59,25 @@ class FavouritesModal extends React.PureComponent {
           </div>
           <div className='favourites-modal__body'>
             {favourites.map(favourite => (
-              <div
-                className='d-flex favourites-modal__favourite-item'
-                key={favourite.id}
-              >
+              <a href={favourite.url} key={favourite.id}>
                 <div
-                  className='favourites-modal__reply-avatar mr2'
-                  style={{
-                    backgroundImage: `url(${favourite.avatar})`,
-                  }}
-                />
-                <strong>
-                  { favourite.username }
-                </strong>
-                <span> </span>
-                <span>
-                  @{ favourite.acct }
-                </span>
-              </div>
+                  className='d-flex favourites-modal__favourite-item'
+                >
+                  <div
+                    className='favourites-modal__favourite-avatar mr2'
+                    style={{
+                      backgroundImage: `url(${favourite.avatar})`,
+                    }}
+                  />
+                  <strong>
+                    { favourite.username }
+                  </strong>
+                  <span> </span>
+                  <span>
+                    @{ favourite.acct }
+                  </span>
+                </div>
+              </a>
             ))}
           </div>
         </div>

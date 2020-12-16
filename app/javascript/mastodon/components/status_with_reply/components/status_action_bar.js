@@ -240,15 +240,27 @@ class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleOpenRepliesModal = () => {
-    this.props.onOpenRepliesModal(this.props.status);
+    const  { status } = this.props;
+    const count = status.get('replies_count');
+    if (count > 0) {
+      this.props.onOpenRepliesModal(status);
+    }
   }
 
   handleOpenReblogsModal = () => {
-    this.props.onOpenReblogsModal(this.props.status);
+    const  { status } = this.props;
+    const count = status.get('reblogs_count');
+    if (count > 0) {
+      this.props.onOpenReblogsModal(status);
+    }
   }
 
   handleOpenFavouritesModal = () => {
-    this.props.onOpenFavouritesModal(this.props.status);
+    const  { status } = this.props;
+    const count = status.get('favourites_count');
+    if (count > 0) {
+      this.props.onOpenFavouritesModal(status);
+    }
   }
 
   render () {
