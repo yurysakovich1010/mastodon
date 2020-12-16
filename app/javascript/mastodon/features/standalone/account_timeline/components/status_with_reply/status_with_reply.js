@@ -110,6 +110,9 @@ class Status extends ImmutablePureComponent {
     avatar: PropTypes.string,
     statusId: PropTypes.any,
     replyOrigin: PropTypes.any,
+    onOpenRepliesModal: PropTypes.func,
+    onOpenReblogsModal: PropTypes.func,
+    onOpenFavouritesModal: PropTypes.func,
   };
 
   // Avoid checking props that are functions (and whose equality will always

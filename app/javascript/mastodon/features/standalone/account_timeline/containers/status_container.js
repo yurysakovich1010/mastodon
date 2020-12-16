@@ -209,6 +209,21 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
     dispatch(unblockDomain(domain));
   },
 
+  onOpenRepliesModal (status) {
+    dispatch(openModal('REPLIES', {
+      status,
+    }));
+  },
+  onOpenReblogsModal (status) {
+    dispatch(openModal('REBLOGS', {
+      status,
+    }));
+  },
+  onOpenFavouritesModal (status) {
+    dispatch(openModal('FAVOURITES', {
+      status,
+    }));
+  },
 });
 
 export default injectIntl(connect(makeMapStateToProps, mapDispatchToProps)(Status));

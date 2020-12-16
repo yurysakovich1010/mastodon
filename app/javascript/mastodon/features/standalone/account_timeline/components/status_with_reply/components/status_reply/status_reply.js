@@ -95,6 +95,8 @@ class StatusReply extends ImmutablePureComponent {
     cacheMediaWidth: PropTypes.func,
     cachedMediaWidth: PropTypes.number,
     scrollKey: PropTypes.string,
+    onOpenReblogsModal: PropTypes.func,
+    onOpenFavouritesModal: PropTypes.func,
   };
 
   // Avoid checking props that are functions (and whose equality will always
