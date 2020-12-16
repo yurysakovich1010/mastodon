@@ -1389,6 +1389,9 @@ button.icon-button i.fa-retweet {
 .status__action-bar__counter__label {
   width: auto;
   cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .replies-modal {
