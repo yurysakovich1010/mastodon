@@ -1,4 +1,4 @@
-- proofs = account.identity_proofs.active
+- fields = account.fields
 
 .container
   .public-account-header{:class => ("inactive" if account.moved?)}
@@ -13,7 +13,7 @@
             .public-account-header__tabs__name
               %h1
                 = display_name(account, custom_emojify: true)
-                = fa_icon('check-circle', {class: 'fg-color-theme'}) unless proofs.empty?
+                = fa_icon('check-circle', {class: 'fg-color-theme'}) if !fields[0].nil? and fields[0].verified?
                 %small
                   = acct(account)
                   = fa_icon('lock') if account.locked?

@@ -39,7 +39,6 @@ class InitialStateSerializer < ActiveModel::Serializer
       store[:is_staff]          = object.current_account.user.staff?
       store[:trends]            = Setting.trends && object.current_account.user.setting_trends
       store[:crop_images]       = object.current_account.user.setting_crop_images
-      store[:approved]          = object.current_account.user.approved
     else
       store[:auto_play_gif] = Setting.auto_play_gif
       store[:display_media] = Setting.display_media

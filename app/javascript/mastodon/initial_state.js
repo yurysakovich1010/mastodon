@@ -25,6 +25,5 @@ export const usePendingItems = getMeta('use_pending_items');
 export const showTrends = getMeta('trends');
 export const title = getMeta('title');
 export const cropImages = getMeta('crop_images');
-export const approved = getMeta('approved');
 
 export default initialState;
